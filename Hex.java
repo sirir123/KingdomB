@@ -16,17 +16,23 @@ public class Hex{
     }
 
 
-    public void setpNum(int p){ }
+    public void setpNum(int p){ 
+        pNum = p;
+    }
 
     public Hex getHex(){ }
 
-    public Hex neighbor (int dir, int num){ }
+    public int getCol(){
+        return col;
+    }
 
-    public int getCol(){ }
+    public int getRow(){ 
+        return row;
+    }
 
-    public int getRow(){ }
-
-    public int getFree(){ }
+    public int getFree(){ 
+        return free;
+    }
 
     public int getSec(){ }
 }
