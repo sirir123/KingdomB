@@ -1,6 +1,21 @@
-public class Board{
+import java.util.Set;
+import java.util.HashSet;
+import java.util.*;
+import static java.lang.System.*;
 
-       public Hex neighbor (Hex h, int dir, int num){ // get hex?? in the board class?
+public class Board{
+    Section a, b, c, d;
+    HashSet <Hex> fullBoard = new HashSet <Hex>();
+
+    public Board(){ }
+
+    public board getBoard(){ }
+
+    public ArrayList<Section>() shuffle (){ }
+
+    public Board connect (ArrayList<Section> s){ }
+
+    public Hex neighbor (Hex h, int dir, int num){ 
         if (dir = 0) {
             if (h.getRow() - num >-1 && h.getCol() + num <= 10) {
                 // return hex w/ col + num and row - num
@@ -33,4 +48,5 @@ public class Board{
         }
         return null;
     }
+
 }

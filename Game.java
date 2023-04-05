@@ -1,12 +1,50 @@
-public class Game {
-    private int numPly;
+public class Game{
+    private int currPlayer = 0;
+    private ArrayList<Player>() players;
+    private ArrayList<Card>() deck;
+    private ArrayList<Card>() discard;
+    private int discTiles;
+    private Board bb;
+    private ScoreCard sc;
 
-    public Game() {
-        numPly = 2;
+    public Game (int amt){
+        bb = new Board(); // constructor
+        deck = new ArrayList<Card>();
+        discard = new ArrayList<Card>();
+        for (int i = 0; i < 5; i++){
+            for (int x = 0; x < 5; x++){
+                if (i = 0) { deck.add(new Card("des"));}
+                if (i = 1) { deck.add(new Card("for"));}
+                if (i = 2) { deck.add(new Card("flwr"));}
+                if (i = 3) { deck.add(new Card("cnyn"));}
+                if (i = 4) { deck.add(new Card ("grs"));}
+            }
+        }
+        for (int i = 0; i < amt; i++){
+            players.add(new Player());
+        }
+        sc = new ScoreCard(); // constructor
     }
 
-    public void setNumPly(int n) {
-        numPly = n;
+    public void setPly(int num){
+        currPlayer = num;
     }
 
+    public void discard(Card c){
+        discard.add(deck.remove(c));
+    }
+
+    public Card drawDeck(){
+        return deck.get(0);
+    }
+
+    public void nextTurn() {
+        for ( int i = 0; i < players.get(currPlayer).getAllTiles.size(); i++){
+            players.get(currPlayer).getAllTiles.get(i).statUnused();
+        }
+        players.get(currPlayer).discard (players.get(currPlayer).getChosen());
+        players.get(currPlayer).setChosen(drawDeck());
+        if (currPlayer < players.size()) { currPlayer++ ;} else { currPlayer = 0;}
+        
+    }
 }
