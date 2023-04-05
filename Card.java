@@ -1,5 +1,5 @@
 public class Card{
-    private String terr = ""; // grass, canyon, sand, flower, forest
+    private String terr = ""; // grs, cnyn, des, flwr, for
     
     public Card(String t){
         terr = t;
