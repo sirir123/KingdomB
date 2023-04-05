@@ -1,17 +1,17 @@
 public class Player{
     private int settlements=40;
     private int num;
+    private static int pNums = 0;
     private String color;
-    private String type;
+    private static ArrayList<String> colors = new ArrayList<String>("pink", "orange", "green", "aqua");
+    private Card chosen;
     private ArrayList<TileHex> tiles= new ArrayList<TileHex>();
     private ArrayList<Integer> points= new ArrayList<Integer>();
 
-    public Player(int n, String col){
-        num=n;
-        color=col;
-        type="null";
+    public Player(){
+        num = pNums;
+        color = colors.get(pNums++);
     }
-
     public int getSett(){
         return settlements;
     }
@@ -41,10 +41,12 @@ public class Player{
     }
 
     public void setChosen(Card c){
-        type=c.getTerr();
+        chosen = c;
     }
 
-
+    public Card getChosen(){
+        return chosen;
+    }
     
 
 }
