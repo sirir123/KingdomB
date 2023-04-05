@@ -10,20 +10,32 @@ import java.awt.event.MouseEvent;
 import java.util.*;
 
 public class KBPanel extends JPanel implements MouseListener {
-    private BufferedImage startScr, plyPick;
-    private int numPly;
+    private BufferedImage startScr, plyPick, mainScr;
+    private ArrayList<BufferedImage> plyRects;
+    private ArrayList<Player> plys;
+    private int firstPly, currPly; // stores who was first player and who is current
+
+    private int numPly; // number of players playing
     private boolean start, end;
     private Game gm;
 
     public KBPanel() {
-
+        plys = new ArrayList<>();
         numPly = 2;
         start = false;
+        end = false;
         gm = new Game();
+        plyRects = new ArrayList<>();
 
         try {
             startScr = ImageIO.read(KBPanel.class.getResource("/Pictures/startScreen.png"));
             plyPick = ImageIO.read(KBPanel.class.getResource("/Pictures/playerPick.png"));
+            mainScr = ImageIO.read(KBPanel.class.getResource("/Pictures/mainScreen.png"));
+
+            plyRects.add(ImageIO.read(KBPanel.class.getResource("/Pictures/KB_Player1.png")));
+            plyRects.add(ImageIO.read(KBPanel.class.getResource("/Pictures/KB_Player2.png")));
+            plyRects.add(ImageIO.read(KBPanel.class.getResource("/Pictures/KB_Player3.png")));
+            plyRects.add(ImageIO.read(KBPanel.class.getResource("/Pictures/KB_Player4.png")));
         } catch (Exception E) {
             System.out.println("Exception Error");
             return;
@@ -59,12 +71,19 @@ public class KBPanel extends JPanel implements MouseListener {
                 System.out.println("4");
                 numPly = 4;
             }
-
-            if (x >= 516 * (getWidth() / 1238.0) && x <= 730 * (getWidth() / 1238.0) && y >= 665 * (getHeight() / 889.0)
-                    && y <= 889 * (getHeight() / 889.0)) {
-                start = true;
-            }
         }
+
+        if (!start && x >= 516 * (getWidth() / 1238.0) && x <= 730 * (getWidth() / 1238.0)
+                && y >= 665 * (getHeight() / 889.0)
+                && y <= 734 * (getHeight() / 889.0)) {
+            start = true;
+            for (int i = 2; i < numPly; i++) {
+                plys.add(new Player());
+            }
+            firstPly = (int) Math.floor(Math.random() * 4);
+            currPly = firstPly;
+        }
+
         repaint();
     }
 
@@ -77,12 +96,12 @@ public class KBPanel extends JPanel implements MouseListener {
     public void paint(Graphics g) {
         System.out.println("Dimensions: (" + getWidth() + ", " + getHeight() + ")");
         if (!start) {
+
             drawStartScreen(g);
-        }
-        if (end) {
+        } else if (end) {
 
         } else { // rest of game
-
+            g.drawImage(mainScr, 0, 0, getWidth(), getHeight(), null);
         }
 
     }
@@ -109,7 +128,9 @@ public class KBPanel extends JPanel implements MouseListener {
     }
 
     public void drawPlayers(Graphics g) {
+        for (int i = 0; i < numPly; i++) {
 
+        }
     }
 
     public void drawBoard(Graphics g) {
