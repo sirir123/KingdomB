@@ -6,6 +6,12 @@ public class Player{
     private ArrayList<TileHex> tiles= new ArrayList<TileHex>();
     private ArrayList<Integer> points= new ArrayList<Integer>();
 
+    public Player(int n, String col){
+        num=n;
+        color=col;
+        type="null";
+    }
+
     public int getSett(){
         return settlements;
     }
