@@ -35,4 +35,8 @@ public class Hex{
     }
 
     public int getSec(){ }
+
+    public String getType(){
+        return type;
+    }
 }
