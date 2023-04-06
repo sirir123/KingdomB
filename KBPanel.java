@@ -12,7 +12,7 @@ import java.util.*;
 public class KBPanel extends JPanel implements MouseListener {
     private BufferedImage startScr, plyPick, mainScr;
     private ArrayList<BufferedImage> plyRects;
-    private ArrayList<Player> plys;
+    // private ArrayList<Player> plys;
     private int firstPly, currPly; // stores who was first player and who is current
 
     private int numPly; // number of players playing
@@ -20,11 +20,11 @@ public class KBPanel extends JPanel implements MouseListener {
     private Game gm;
 
     public KBPanel() {
-        plys = new ArrayList<>();
+        // plys = new ArrayList<>();
         numPly = 2;
         start = false;
         end = false;
-        gm = new Game();
+
         plyRects = new ArrayList<>();
 
         try {
@@ -77,11 +77,12 @@ public class KBPanel extends JPanel implements MouseListener {
                 && y >= 665 * (getHeight() / 889.0)
                 && y <= 734 * (getHeight() / 889.0)) {
             start = true;
-            for (int i = 2; i < numPly; i++) {
-                plys.add(new Player());
-            }
-            firstPly = (int) Math.floor(Math.random() * 4);
-            currPly = firstPly;
+            gm = new Game(numPly);
+            // for (int i = 2; i < numPly; i++) {
+            // plys.add(new Player());
+            // }
+            // firstPly = (int) Math.floor(Math.random() * 4);
+            // currPly = firstPly;
         }
 
         repaint();
