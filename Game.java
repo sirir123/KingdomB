@@ -1,3 +1,4 @@
+import java.util.*;
 import java.util.ArrayList;
 
 public class Game {
@@ -35,7 +36,7 @@ public class Game {
         for (int i = 0; i < amt; i++) {
             players.add(new Player());
         }
-        sc = new ScoreCard(); // constructor
+
     }
 
     public void setPly(int num) {
@@ -46,8 +47,28 @@ public class Game {
         discard.add(deck.remove(c));
     }
 
+    public void shuffleDeck() {
+        Collections.shuffle(deck);
+    }
+
+    public void replaceDeck() {
+        deck.addAll(discard);
+        discard.clear();
+        deck.shuffleDeck();
+    }
+
     public Card drawDeck() {
         return deck.get(0);
+    }
+
+    public void shuffleDeck() {
+        Collections.shuffle(deck);
+    }
+
+    public void replaceDeck() {
+        deck.addAll(discard);
+        discard.clear();
+        deck.shuffleDeck();
     }
 
     public void nextTurn() {
