@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Game{
     private int currPlayer = 0;
     private ArrayList<Player>() players;
@@ -32,6 +34,16 @@ public class Game{
 
     public void discard(Card c){
         discard.add(deck.remove(c));
+    }
+
+    public void shuffleDeck(){
+        Collections.shuffle(deck);
+    }
+
+    public void replaceDeck(){
+        deck.addAll(discard);
+        discard.clear();
+        deck.shuffleDeck();
     }
 
     public Card drawDeck(){
