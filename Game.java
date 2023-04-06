@@ -8,7 +8,6 @@ public class Game {
     private ArrayList<Card> discard;
     private int discTiles;
     private Board bb;
-    private ScoreCard sc;
 
     public Game(int amt) {
         bb = new Board(); // constructor
@@ -44,7 +43,8 @@ public class Game {
     }
 
     public void discard(Card c) {
-        discard.add(deck.remove(c));
+        discard.add(deck.get(c));
+        deck.remove(c);
     }
 
     public void shuffleDeck() {
@@ -61,19 +61,9 @@ public class Game {
         return deck.get(0);
     }
 
-    public void shuffleDeck() {
-        Collections.shuffle(deck);
-    }
-
-    public void replaceDeck() {
-        deck.addAll(discard);
-        discard.clear();
-        deck.shuffleDeck();
-    }
-
     public void nextTurn() {
-        for (int i = 0; i < players.get(currPlayer).getAllTiles.size(); i++) {
-            players.get(currPlayer).getAllTiles.get(i).statUnused();
+        for (int i = 0; i < players.get(currPlayer).getAllTiles().size(); i++) {
+            players.get(currPlayer).getAllTiles().get(i).statUnused();
         }
         players.get(currPlayer).discard(players.get(currPlayer).getChosen());
         players.get(currPlayer).setChosen(drawDeck());
