@@ -74,9 +74,9 @@ public class Game {
         for (int i = 0; i < players.get(currPlayer).getAllTiles().size(); i++) { // set tiles to unused
             players.get(currPlayer).getAllTiles().get(i).statUnused();
         }
-        players.get(currPlayer).discard(players.get(currPlayer).getChosen()); // discard + draw
-        players.get(currPlayer).settlements = players.get(currPlayer).settlements - 3; // update settlements
-        if (currPlayer < players.size() - 1) { // change curr player
+        discard(players.get(currPlayer).getChosen()); // discard + draw 
+        players.get(currPlayer).settlements = players.get(currPlayer).settlements -3; // update settlements 
+        if (currPlayer < players.size()  - 1) { // change curr player
             currPlayer++;
         } else {
             currPlayer = 0;
