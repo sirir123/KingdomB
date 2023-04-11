@@ -15,11 +15,21 @@ public class Game {
         discard = new ArrayList<Card>();
         for (int i = 0; i < 5; i++) {
             for (int x = 0; x < 5; x++) {
-                if (i == 0) { deck.add(new Card("des")); }
-                if (i == 1) { deck.add(new Card("for")); }
-                if (i == 2) { deck.add(new Card("flwr")); }
-                if (i == 3) { deck.add(new Card("cnyn")); }
-                if (i == 4) { deck.add(new Card("grs")); }
+                if (i == 0) {
+                    deck.add(new Card("des"));
+                }
+                if (i == 1) {
+                    deck.add(new Card("for"));
+                }
+                if (i == 2) {
+                    deck.add(new Card("flwr"));
+                }
+                if (i == 3) {
+                    deck.add(new Card("cnyn"));
+                }
+                if (i == 4) {
+                    deck.add(new Card("grs"));
+                }
             }
         }
         for (int i = 0; i < amt; i++) {
@@ -52,9 +62,10 @@ public class Game {
     }
 
     public Card drawDeck() {
-        if (deck.size() <1 ){
-        deck = Collections.shuffle(discard);
-        discard = new ArrayList<Card>();
+        if (deck.size() < 1) {
+            deck = discard;
+            Collections.shuffle(discard);
+            discard = new ArrayList<Card>();
         }
         return deck.get(0);
     }
@@ -63,9 +74,9 @@ public class Game {
         for (int i = 0; i < players.get(currPlayer).getAllTiles().size(); i++) { // set tiles to unused
             players.get(currPlayer).getAllTiles().get(i).statUnused();
         }
-        players.get(currPlayer).discard(players.get(currPlayer).getChosen()); // discard + draw 
-        players.get(currPlayer).settlements = players.get(currPlayer).settlements -3; // update settlements 
-        if (currPlayer < players.size()  - 1) { // change curr player
+        players.get(currPlayer).discard(players.get(currPlayer).getChosen()); // discard + draw
+        players.get(currPlayer).settlements = players.get(currPlayer).settlements - 3; // update settlements
+        if (currPlayer < players.size() - 1) { // change curr player
             currPlayer++;
         } else {
             currPlayer = 0;
