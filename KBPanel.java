@@ -11,10 +11,8 @@ import java.util.*;
 
 public class KBPanel extends JPanel implements MouseListener {
     private BufferedImage startScr, plyPick, mainScr;
-    private BufferedImage lordCd;
+    private BufferedImage lordCd, workCd, discCd, castCd;
     private ArrayList<BufferedImage> plyRects;
-    // private ArrayList<Player> plys;
-    private int firstPly, currPly; // stores who was first player and who is current
 
     private int numPly; // number of players playing
     private boolean start, end;
@@ -37,6 +35,11 @@ public class KBPanel extends JPanel implements MouseListener {
             plyRects.add(ImageIO.read(KBPanel.class.getResource("/Pictures/KB_Player2.png")));
             plyRects.add(ImageIO.read(KBPanel.class.getResource("/Pictures/KB_Player3.png")));
             plyRects.add(ImageIO.read(KBPanel.class.getResource("/Pictures/KB_Player4.png")));
+
+            lordCd = ImageIO.read(KBPanel.class.getResource("/Pictures/mainScreen.png"));
+            workCd = ImageIO.read(KBPanel.class.getResource("/Pictures/mainScreen.png"));
+            discCd = ImageIO.read(KBPanel.class.getResource("/Pictures/mainScreen.png"));
+            castCd = ImageIO.read(KBPanel.class.getResource("/Pictures/mainScreen.png"));
         } catch (Exception E) {
             System.out.println("Exception Error");
             return;
