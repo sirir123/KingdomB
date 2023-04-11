@@ -47,8 +47,8 @@ public class Game {
     }
 
     public void discard(Card c) {
-        discard.add(deck.get(c)); // issue w/ get
-        deck.remove(c);
+        discard.add(players.get(currPlayer).getChosen());
+        players.get(currPlayer).setChosen(drawDeck());
     }
 
     public void shuffleDeck() {
@@ -58,7 +58,7 @@ public class Game {
     public void replaceDeck() {
         deck.addAll(discard);
         discard.clear();
-        deck.shuffleDeck(); // doesn't exist
+        shuffleDeck();
     }
 
     public Card drawDeck() {
