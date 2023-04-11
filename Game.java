@@ -38,12 +38,16 @@ public class Game {
 
     }
 
+    public int getNumPly() {
+        return players.size();
+    }
+
     public void setPly(int num) {
         currPlayer = num;
     }
 
     public void discard(Card c) {
-        discard.add(deck.get(c));
+        discard.add(deck.get(c)); // issue w/ get
         deck.remove(c);
     }
 
@@ -54,7 +58,7 @@ public class Game {
     public void replaceDeck() {
         deck.addAll(discard);
         discard.clear();
-        deck.shuffleDeck();
+        deck.shuffleDeck(); // doesn't exist
     }
 
     public Card drawDeck() {
@@ -65,7 +69,7 @@ public class Game {
         for (int i = 0; i < players.get(currPlayer).getAllTiles().size(); i++) {
             players.get(currPlayer).getAllTiles().get(i).statUnused();
         }
-        players.get(currPlayer).discard(players.get(currPlayer).getChosen());
+        players.get(currPlayer).discard(players.get(currPlayer).getChosen()); // doesn't exist
         players.get(currPlayer).setChosen(drawDeck());
         if (currPlayer < players.size()) {
             currPlayer++;
