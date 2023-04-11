@@ -77,12 +77,14 @@ public class KBPanel extends JPanel implements MouseListener {
                 && y >= 665 * (getHeight() / 889.0)
                 && y <= 734 * (getHeight() / 889.0)) {
             start = true;
-            gm = new Game(numPly);
+
             // for (int i = 2; i < numPly; i++) {
             // plys.add(new Player());
             // }
             // firstPly = (int) Math.floor(Math.random() * 4);
             // currPly = firstPly;
+            repaint();
+            gm = new Game(numPly);
         }
 
         repaint();
@@ -95,7 +97,9 @@ public class KBPanel extends JPanel implements MouseListener {
     }
 
     public void paint(Graphics g) {
+        g.drawRect(0, 0, getWidth(), getHeight());
         System.out.println("Dimensions: (" + getWidth() + ", " + getHeight() + ")");
+        System.out.println("Start: " + start);
         if (!start) {
 
             drawStartScreen(g);
