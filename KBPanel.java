@@ -11,6 +11,7 @@ import java.util.*;
 
 public class KBPanel extends JPanel implements MouseListener {
     private BufferedImage startScr, plyPick, mainScr;
+    private BufferedImage lordCd;
     private ArrayList<BufferedImage> plyRects;
     // private ArrayList<Player> plys;
     private int firstPly, currPly; // stores who was first player and who is current
@@ -107,6 +108,9 @@ public class KBPanel extends JPanel implements MouseListener {
 
         } else { // rest of game
             g.drawImage(mainScr, 0, 0, getWidth(), getHeight(), null);
+            drawPlayers(g);
+            // drawing cards
+
         }
 
     }
@@ -134,7 +138,28 @@ public class KBPanel extends JPanel implements MouseListener {
 
     public void drawPlayers(Graphics g) {
         for (int i = 0; i < numPly; i++) {
-
+            switch (i) {
+                case 0:
+                    g.drawImage(plyRects.get(0), (int) (835 * (getWidth() / 1238.0)),
+                            (int) (81 * (getHeight() / 889.0)), (int) (330 * (getWidth() / 1238.0)),
+                            (int) (180 * (getHeight() / 889.0)), null);
+                    break;
+                case 1:
+                    g.drawImage(plyRects.get(0), (int) (835 * (getWidth() / 1238.0)),
+                            (int) (265 * (getHeight() / 889.0)), (int) (330 * (getWidth() / 1238.0)),
+                            (int) (180 * (getHeight() / 889.0)), null);
+                    break;
+                case 2:
+                    g.drawImage(plyRects.get(0), (int) (835 * (getWidth() / 1238.0)),
+                            (int) (450 * (getHeight() / 889.0)), (int) (330 * (getWidth() / 1238.0)),
+                            (int) (180 * (getHeight() / 889.0)), null);
+                    break;
+                case 3:
+                    g.drawImage(plyRects.get(0), (int) (835 * (getWidth() / 1238.0)),
+                            (int) (635 * (getHeight() / 889.0)), (int) (330 * (getWidth() / 1238.0)),
+                            (int) (180 * (getHeight() / 889.0)), null);
+                    break;
+            }
         }
     }
 
