@@ -1,19 +1,16 @@
 import java.util.ArrayList;
 
 public class Player {
-    private int settlements = 40; // dont need color or num
-    private static int pNums = 0; // what does this do?
+    public int settlements = 40;
     private Card chosen;
     private ArrayList<TileHex> tiles = new ArrayList<TileHex>();
     private ArrayList<Integer> points = new ArrayList<Integer>();
 
     public Player() {
-
+        ArrayList<TileHex> tiles = new ArrayList<TileHex>();
+        ArrayList<Integer> points = new ArrayList<Integer>();
     }
 
-    public int getSett() {
-        return settlements;
-    }
 
     public ArrayList<TileHex> getAllTiles() {
         return tiles;
