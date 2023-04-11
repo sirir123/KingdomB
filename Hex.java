@@ -4,7 +4,7 @@ public class Hex {
     private String type;
     private int col, row, sec;
     protected int pNum;
-    private int occ; // int for who is occupying -1 empty, 0-3 player
+    private int occ; // int for who is occupying -1 empty, 0-3 player, tileHex 4
     private ArrayList<Hex> neighbors;
 
     public Hex(String t, int c, int r, int s) {
@@ -12,13 +12,16 @@ public class Hex {
         col = c;
         row = r;
         sec = s;
-        // free = true;
+        occ = -1;
         neighbors = new ArrayList<Hex>();
-        // instantiate neighbors
     }
 
     public void setpNum(int p) {
         pNum = p;
+    }
+
+    public setNeighbors (int dir, Hex h){
+        neighbors.set(dir, h);
     }
 
     public Hex getHex() {

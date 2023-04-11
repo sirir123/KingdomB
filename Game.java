@@ -64,7 +64,7 @@ public class Game {
     public Card drawDeck() {
         if (deck.size() < 1) {
             deck = discard;
-            Collections.shuffle(discard);
+            Collections.shuffle(deck);
             discard = new ArrayList<Card>();
         }
         return deck.get(0);

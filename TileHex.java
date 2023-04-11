@@ -6,6 +6,7 @@ public class TileHex extends Hex {
         amount = 2;
         setpNum(-1);
         status = 0;
+        occ = 4;
     }
 
     public void statStill() {
