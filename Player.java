@@ -3,8 +3,8 @@ import java.util.ArrayList;
 public class Player {
     public int settlements = 40;
     private Card chosen;
-    private ArrayList<TileHex> tiles = new ArrayList<TileHex>();
-    private ArrayList<Integer> points = new ArrayList<Integer>();
+    private ArrayList<TileHex> tiles;
+    private ArrayList<Integer> points;
 
     public Player() {
         ArrayList<TileHex> tiles = new ArrayList<TileHex>();
