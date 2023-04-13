@@ -75,7 +75,7 @@ public class Game {
             players.get(currPlayer).getAllTiles().get(i).statUnused();
         }
         discard(players.get(currPlayer).getChosen()); // discard + draw 
-        players.get(currPlayer).settlements = players.get(currPlayer).settlements -3; // update settlements 
+        players.get(currPlayer).setSettlements(players.get(currPlayer).getSettlements() - 3); // update settlements
         if (currPlayer < players.size()  - 1) { // change curr player
             currPlayer++;
         } else {

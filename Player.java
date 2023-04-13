@@ -1,47 +1,34 @@
 import java.util.ArrayList;
 
 public class Player {
-    public int settlements = 40;
+    private int settlements = 40;
     private Card chosen;
-    private ArrayList<TileHex> tiles = new ArrayList<TileHex>();
-    private ArrayList<Integer> points = new ArrayList<Integer>();
+    private ArrayList<TileHex> tiles;
+    private ArrayList<Integer> points;
 
     public Player() {
         ArrayList<TileHex> tiles = new ArrayList<TileHex>();
         ArrayList<Integer> points = new ArrayList<Integer>();
     }
 
+    public int getSettlements () { return settlements;}
 
-    public ArrayList<TileHex> getAllTiles() {
-        return tiles;
-    }
+    public void setSettlements(int x) { settlements = x;}
 
-    public TileHex getTile(int num) {
-        return tiles.get(num);
-    }
+    public ArrayList<TileHex> getAllTiles() { return tiles; }
 
-    public void addTile(TileHex t) {
-        tiles.add(t);
-    }
+    public TileHex getTile(int num) { return tiles.get(num); }
 
-    public void addPoints(int num) {
-        points.add(num);
-    }
+    public void addTile(TileHex t) { tiles.add(t); }
 
-    public ArrayList<Integer> getAllPoints() {
-        return points;
-    }
+    public void addPoints(int num) { points.add(num); }
 
-    public Integer getPoint(int num) {
-        return points.get(num);
-    }
+    public ArrayList<Integer> getAllPoints() { return points;}
 
-    public void setChosen(Card c) {
-        chosen = c;
-    }
+    public Integer getPoint(int num) { return points.get(num); }
 
-    public Card getChosen() {
-        return chosen;
-    }
+    public void setChosen(Card c) { chosen = c; }
+
+    public Card getChosen() { return chosen; }
 
 }
