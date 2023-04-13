@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.image.*;
 import javax.imageio.ImageIO;
+import javax.sql.rowset.serial.SerialRef;
 import javax.swing.*;
 import java.io.*;
 import java.awt.event.MouseListener;
@@ -36,10 +37,10 @@ public class KBPanel extends JPanel implements MouseListener {
             plyRects.add(ImageIO.read(KBPanel.class.getResource("/Pictures/KB_Player3.png")));
             plyRects.add(ImageIO.read(KBPanel.class.getResource("/Pictures/KB_Player4.png")));
 
-            lordCd = ImageIO.read(KBPanel.class.getResource("/Pictures/mainScreen.png"));
-            workCd = ImageIO.read(KBPanel.class.getResource("/Pictures/mainScreen.png"));
-            discCd = ImageIO.read(KBPanel.class.getResource("/Pictures/mainScreen.png"));
-            castCd = ImageIO.read(KBPanel.class.getResource("/Pictures/mainScreen.png"));
+            lordCd = ImageIO.read(KBPanel.class.getResource("/Pictures/cardLord.png"));
+            workCd = ImageIO.read(KBPanel.class.getResource("/Pictures/cardWorker.png"));
+            discCd = ImageIO.read(KBPanel.class.getResource("/Pictures/cardDiscoverer.png"));
+            castCd = ImageIO.read(KBPanel.class.getResource("/Pictures/cardCastle.png"));
         } catch (Exception E) {
             System.out.println("Exception Error");
             return;
@@ -140,25 +141,27 @@ public class KBPanel extends JPanel implements MouseListener {
     }
 
     public void drawPlayers(Graphics g) {
+        g.setFont(new Font("SansSerif", Font.BOLD, (int) (15 * (getWidth() / 1238.0) * (getHeight() / 889.0))));
         for (int i = 0; i < numPly; i++) {
             switch (i) {
                 case 0:
                     g.drawImage(plyRects.get(0), (int) (835 * (getWidth() / 1238.0)),
                             (int) (81 * (getHeight() / 889.0)), (int) (330 * (getWidth() / 1238.0)),
                             (int) (180 * (getHeight() / 889.0)), null);
+                    g.drawString("40", 895, 143);
                     break;
                 case 1:
-                    g.drawImage(plyRects.get(0), (int) (835 * (getWidth() / 1238.0)),
+                    g.drawImage(plyRects.get(1), (int) (835 * (getWidth() / 1238.0)),
                             (int) (265 * (getHeight() / 889.0)), (int) (330 * (getWidth() / 1238.0)),
                             (int) (180 * (getHeight() / 889.0)), null);
                     break;
                 case 2:
-                    g.drawImage(plyRects.get(0), (int) (835 * (getWidth() / 1238.0)),
+                    g.drawImage(plyRects.get(2), (int) (835 * (getWidth() / 1238.0)),
                             (int) (450 * (getHeight() / 889.0)), (int) (330 * (getWidth() / 1238.0)),
                             (int) (180 * (getHeight() / 889.0)), null);
                     break;
                 case 3:
-                    g.drawImage(plyRects.get(0), (int) (835 * (getWidth() / 1238.0)),
+                    g.drawImage(plyRects.get(3), (int) (835 * (getWidth() / 1238.0)),
                             (int) (635 * (getHeight() / 889.0)), (int) (330 * (getWidth() / 1238.0)),
                             (int) (180 * (getHeight() / 889.0)), null);
                     break;
