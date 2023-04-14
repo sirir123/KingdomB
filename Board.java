@@ -56,4 +56,15 @@ public class Board {
         return null;
     }
 
+    public int score (Player p){ return 0; }
+    public int lords (Player p){ return 0; }
+    public int workers (Player p){ return 0;}
+    public int discoverers (Player p){return 0; }
+    public int castle (Player p){return 0; }
+    
+    public void boatT(Player p, Hex exist, Hex water){ }
+    public void paddockT(Player p, Hex exist, Hex next){ }
+    public void oracleT(Player p, Hex next){ }
+    public void farmT(Player p, Hex grass){ }
+
 }
