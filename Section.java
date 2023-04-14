@@ -15,7 +15,10 @@ public class Section {
         // blah blah blah
         int tempC;
         for (int i = 0; i < hx.size(); i++) {
-            // hexes.add()
+            for (int j = 0; j < hx.get(0).size(); j++) {
+                // hexes.add(new Hex());
+            }
+
         }
     }
 }
