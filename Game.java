@@ -8,8 +8,13 @@ public class Game {
     private ArrayList<Card> discard;
     private int discTiles;
     private Board bb;
+    private Section board1;
+    private Section board2;
+    private Section board3;
+    private Section board4;
 
     public Game(int amt) {
+        players = new ArrayList<>();
         bb = new Board(); // constructor
         deck = new ArrayList<Card>();
         discard = new ArrayList<Card>();
@@ -35,7 +40,12 @@ public class Game {
         for (int i = 0; i < amt; i++) {
             players.add(new Player());
         }
+        // setting up the boards
 
+    }
+
+    public Player getPlayer(int n) {
+        return players.get(n);
     }
 
     public int getNumPly() {
@@ -74,9 +84,9 @@ public class Game {
         for (int i = 0; i < players.get(currPlayer).getAllTiles().size(); i++) { // set tiles to unused
             players.get(currPlayer).getAllTiles().get(i).statUnused();
         }
-        discard(players.get(currPlayer).getChosen()); // discard + draw 
+        discard(players.get(currPlayer).getChosen()); // discard + draw
         players.get(currPlayer).setSettlements(players.get(currPlayer).getSettlements() - 3); // update settlements
-        if (currPlayer < players.size()  - 1) { // change curr player
+        if (currPlayer < players.size() - 1) { // change curr player
             currPlayer++;
         } else {
             currPlayer = 0;

@@ -109,7 +109,7 @@ public class KBPanel extends JPanel implements MouseListener {
 
             drawStartScreen(g);
         } else if (end) {
-
+            // nada
         } else { // rest of game
             g.drawImage(mainScr, 0, 0, getWidth(), getHeight(), null);
             drawPlayers(g);
@@ -148,22 +148,31 @@ public class KBPanel extends JPanel implements MouseListener {
                     g.drawImage(plyRects.get(0), (int) (835 * (getWidth() / 1238.0)),
                             (int) (81 * (getHeight() / 889.0)), (int) (330 * (getWidth() / 1238.0)),
                             (int) (180 * (getHeight() / 889.0)), null);
-                    g.drawString("40", 895, 143);
+                    // if (gm != null)
+                    // System.out.println("" + (gm.getPlayer(0).getSettlements()));
+                    g.drawString("" + (gm.getPlayer(0).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
+                            (int) (143 * (getHeight() / 889.0)));
                     break;
                 case 1:
                     g.drawImage(plyRects.get(1), (int) (835 * (getWidth() / 1238.0)),
                             (int) (265 * (getHeight() / 889.0)), (int) (330 * (getWidth() / 1238.0)),
                             (int) (180 * (getHeight() / 889.0)), null);
+                    g.drawString("" + (gm.getPlayer(1).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
+                            (int) (328 * (getHeight() / 889.0)));
                     break;
                 case 2:
                     g.drawImage(plyRects.get(2), (int) (835 * (getWidth() / 1238.0)),
                             (int) (450 * (getHeight() / 889.0)), (int) (330 * (getWidth() / 1238.0)),
                             (int) (180 * (getHeight() / 889.0)), null);
+                    g.drawString("" + (gm.getPlayer(2).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
+                            (int) (512 * (getHeight() / 889.0)));
                     break;
                 case 3:
                     g.drawImage(plyRects.get(3), (int) (835 * (getWidth() / 1238.0)),
                             (int) (635 * (getHeight() / 889.0)), (int) (330 * (getWidth() / 1238.0)),
                             (int) (180 * (getHeight() / 889.0)), null);
+                    g.drawString("" + (gm.getPlayer(3).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
+                            (int) (696 * (getHeight() / 889.0)));
                     break;
             }
         }
