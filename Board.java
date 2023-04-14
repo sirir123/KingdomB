@@ -58,7 +58,7 @@ public class Board {
 
     public int score (Player p){ return 0; }
     public int lords (Player p){ return 0; }
-    public void workers (Player p){ return 0;}
+    public int workers (Player p){ return 0;}
     public int discoverers (Player p){return 0; }
     public int castle (Player p){return 0; }
     
