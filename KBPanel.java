@@ -17,7 +17,7 @@ public class KBPanel extends JPanel implements MouseListener {
 
     private int numPly; // number of players playing
     private boolean start, end;
-    private Game gm;
+    private Game gm = new Game(-1);
 
     public KBPanel() {
         // plys = new ArrayList<>();
