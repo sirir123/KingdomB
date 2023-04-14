@@ -149,8 +149,6 @@ public class KBPanel extends JPanel implements MouseListener {
                         g.drawImage(plyRects.get(0), (int) (835 * (getWidth() / 1238.0)),
                                 (int) (81 * (getHeight() / 889.0)), (int) (330 * (getWidth() / 1238.0)),
                                 (int) (180 * (getHeight() / 889.0)), null);
-                        // if (gm != null)
-                        // System.out.println("" + (gm.getPlayer(0).getSettlements()));
                         g.drawString("" + (gm.getPlayer(0).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
                                 (int) (143 * (getHeight() / 889.0)));
                         break;
