@@ -10,8 +10,13 @@ public class Section {
         hexes = new HashSet<>();
     }
 
-    private Section(ArrayList<String> hx) { // give list of numbers, create tiles w/ correct nums and neighbors
+    private Section(ArrayList<ArrayList<String>> hx) { // give list of numbers, create tiles w/ correct nums and
+                                                       // neighbors
         // blah blah blah
+        int tempC;
+        for (int i = 0; i < hx.size(); i++) {
+            // hexes.add()
+        }
     }
 }
 

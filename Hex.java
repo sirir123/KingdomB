@@ -16,11 +16,19 @@ public class Hex {
         neighbors = new ArrayList<Hex>();
     }
 
+    public Hex(String t, int c, int r) {
+        type = t;
+        col = c;
+        row = r;
+        occ = -1;
+        neighbors = new ArrayList<Hex>();
+    }
+
     public void setpNum(int p) {
         pNum = p;
     }
 
-    public void setNeighbors (int dir, Hex h){
+    public void setNeighbors(int dir, Hex h) {
         neighbors.set(dir, h);
     }
 
