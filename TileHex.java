@@ -1,7 +1,7 @@
 public class TileHex extends Hex {
     private int amount, status;
 
-    public TileHex(String t, int c, int r, int s) {
+    public TileHex(String t, int c, int r, int s) { // title, column, row, section
         super(t, c, r, s);
         amount = 2;
         setpNum(-1);
