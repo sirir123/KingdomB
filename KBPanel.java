@@ -14,6 +14,7 @@ public class KBPanel extends JPanel implements MouseListener {
     private BufferedImage startScr, plyPick, mainScr;
     private BufferedImage lordCd, workCd, discCd, castCd;
     private ArrayList<BufferedImage> plyRects;
+    private ArrayList<BoardImage> boards;
 
     private int numPly; // number of players playing
     private boolean start, end;
@@ -26,6 +27,7 @@ public class KBPanel extends JPanel implements MouseListener {
         end = false;
 
         plyRects = new ArrayList<>();
+        boards = new ArrayList<>();
 
         try {
             startScr = ImageIO.read(KBPanel.class.getResource("/Pictures/startScreen.png"));
@@ -37,10 +39,18 @@ public class KBPanel extends JPanel implements MouseListener {
             plyRects.add(ImageIO.read(KBPanel.class.getResource("/Pictures/KB_Player3.png")));
             plyRects.add(ImageIO.read(KBPanel.class.getResource("/Pictures/KB_Player4.png")));
 
+            // cards
             lordCd = ImageIO.read(KBPanel.class.getResource("/Pictures/cardLord.png"));
             workCd = ImageIO.read(KBPanel.class.getResource("/Pictures/cardWorker.png"));
             discCd = ImageIO.read(KBPanel.class.getResource("/Pictures/cardDiscoverer.png"));
             castCd = ImageIO.read(KBPanel.class.getResource("/Pictures/cardCastle.png"));
+
+            // boards
+            boards.add(new BoardImage(0, ImageIO.read(KBPanel.class.getResource("/Pictures/boardBoat.png"))));
+            boards.add(new BoardImage(1, ImageIO.read(KBPanel.class.getResource("/Pictures/boardGrass.png"))));
+            boards.add(new BoardImage(2, ImageIO.read(KBPanel.class.getResource("/Pictures/boardHorse.png"))));
+            boards.add(new BoardImage(3, ImageIO.read(KBPanel.class.getResource("/Pictures/boardOracle.png"))));
+            Collections.shuffle(boards, new Random());
         } catch (Exception E) {
             System.out.println("Exception Error");
             return;
@@ -90,6 +100,7 @@ public class KBPanel extends JPanel implements MouseListener {
             // currPly = firstPly;
             repaint();
             gm = new Game(numPly);
+
         }
 
         repaint();
@@ -103,8 +114,8 @@ public class KBPanel extends JPanel implements MouseListener {
 
     public void paint(Graphics g) {
         g.drawRect(0, 0, getWidth(), getHeight());
-        System.out.println("Dimensions: (" + getWidth() + ", " + getHeight() + ")");
-        System.out.println("Start: " + start);
+        // System.out.println("Dimensions: (" + getWidth() + ", " + getHeight() + ")");
+        // System.out.println("Start: " + start);
         if (!start) {
 
             drawStartScreen(g);
@@ -114,7 +125,21 @@ public class KBPanel extends JPanel implements MouseListener {
             g.drawImage(mainScr, 0, 0, getWidth(), getHeight(), null);
             drawPlayers(g);
             // drawing cards
+            g.drawImage(lordCd, (int) (82 * (getWidth() / 1238.0)), (int) (84 * (getHeight() / 889.0)),
+                    (int) (120 * (getWidth() / 1238.0)), (int) (173 * (getHeight() / 889.0)), null);
+            g.drawImage(workCd, (int) (81 * (getWidth() / 1238.0)), (int) (286 * (getHeight() / 889.0)),
+                    (int) (120 * (getWidth() / 1238.0)), (int) (173 * (getHeight() / 889.0)), null);
+            g.drawImage(discCd, (int) (81 * (getWidth() / 1238.0)), (int) (488 * (getHeight() / 889.0)),
+                    (int) (120 * (getWidth() / 1238.0)), (int) (173 * (getHeight() / 889.0)), null);
 
+            // drawing info
+            g.setColor(Color.white);
+            g.drawString("" + gm.getDeckSize(true), (int) (131 * (getWidth() / 1238.0)),
+                    (int) (733 * (getHeight() / 889.0)));
+            g.drawString("" + gm.getDeckSize(false), (int) (167 * (getWidth() / 1238.0)),
+                    (int) (761 * (getHeight() / 889.0)));
+            g.setFont(new Font("SansSerif", Font.BOLD, (int) (10 * (getWidth() / 1238.0) * (getHeight() / 889.0))));
+            g.drawString("" + gm.discTiles, (int) (176 * (getWidth() / 1238.0)), (int) (782 * (getHeight() / 889.0)));
         }
 
     }
