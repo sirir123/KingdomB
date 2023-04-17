@@ -3,16 +3,21 @@ import java.util.HashSet;
 import java.util.*;
 import static java.lang.System.*;
 
+import java.awt.image.BufferedImage;
+
 public class Section {
     private Set<Hex> hexes;
+    private BoardImage img;
 
     private Section() {
         hexes = new HashSet<>();
     }
 
-    private Section(ArrayList<ArrayList<String>> hx, int s) { // give list of numbers, create tiles w/ correct nums and
+    private Section(BoardImage i, ArrayList<ArrayList<String>> hx, int s) { // give list of numbers, create tiles
+                                                                            // w/ correct nums and
         // neighbors
         // blah blah blah
+        img = i;
         int tempC;
         for (int r = 0; r < hx.size(); r++) {
             if (r % 2 == 0)
@@ -20,6 +25,7 @@ public class Section {
             else
                 tempC = 1;
             for (int j = 0; j < hx.get(0).size(); j++) {
+
                 hexes.add(new Hex(hx.get(r).get(j), tempC, r, s));
                 tempC += 2;
             }

@@ -1,17 +1,16 @@
+import java.awt.image.BufferedImage;
 import java.util.*;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 
 public class Game {
     private int currPlayer = 0;
     private ArrayList<Player> players;
     private ArrayList<Card> deck;
     private ArrayList<Card> discard;
-    private int discTiles;
+    public int discTiles;
     private Board bb;
-    private Section board1;
-    private Section board2;
-    private Section board3;
-    private Section board4;
+    private ArrayList<Section> boards;
 
     public Game(int amt) {
         players = new ArrayList<>();
@@ -41,7 +40,22 @@ public class Game {
             players.add(new Player());
         }
         // setting up the boards
+    }
 
+    public void setBoards(ArrayList<BoardImage> imgs) {
+        ArrayList<BoardImage> tempList = imgs;
+        for (int i = 0; i < boards.size(); i++) {
+            BoardImage tempImage = tempList.remove(0);
+            if (tempImage.type == 0) { // boat
+
+            } else if (tempImage.type == 0) { // grass
+
+            } else if (tempImage.type == 0) { // horse
+
+            } else if (tempImage.type == 0) { // oracle
+
+            }
+        }
     }
 
     public Player getPlayer(int n) {
@@ -54,6 +68,13 @@ public class Game {
 
     public void setPly(int num) {
         currPlayer = num;
+    }
+
+    public int getDeckSize(boolean notDisc) { // the size of each deck, true is reg, false is discarded deck
+        if (notDisc)
+            return deck.size();
+        else
+            return discard.size();
     }
 
     public void discard(Card c) {
