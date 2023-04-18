@@ -43,17 +43,61 @@ public class Game {
     }
 
     public void setBoards(ArrayList<BoardImage> imgs) {
+        String[][] hexMapBoat = { { "grs", "grs", "for", "for", "for", "wat", "grs", "for", "for", "flwr" },
+                { "grs", "flwr", "for", "for", "wat", "grs", "for", "for", "flwr", "flwr" },
+                { "grs", "flwr", "flwr", "for", "wat", "grs", "grs", "flwr", "flwr", "flwr" },
+                { "flwr", "flwr", "for", "for", "wat", "grs", "mt", "flwr", "des", "des" },
+                { "cnyn", "flwr", "cas", "for", "wat", "grs", "des", "des", "des", "des" },
+                { "cnyn", "cnyn", "for", "wat", "grs", "grs", "mt", "mt", "des", "des" },
+                { "cnyn", "cnyn", "wat", "wat", "wat", "grs", "des", "des", "des", "cnyn" },
+                { "wat", "wat", "grs", "grs", "wat", "wat", "ti", "cnyn", "mt", "cnyn" },
+                { "wat", "des", "cas", "grs", "wat", "mt", "wat", "cnyn", "cnyn", "cnyn" },
+                { "wat", "des", "des", "wat", "wat", "wat", "wat", "cnyn", "cnyn", "cnyn" } };
+
+        String[][] hexMapGrass = { { "des", "des", "cnyn", "wat", "wat", "for", "for", "for", "grs", "grs" },
+                { "des", "cas", "cnyn", "wat", "for", "for", "for", "ti", "grs", "grs" },
+                { "cnyn", "cnyn", "cnyn", "flwr", "flwr", "flwr", "for", "cnyn", "flwr", "flwr" },
+                { "cnyn", "cnyn", "flwr", "flwr", "wat", "des", "des", "cnyn", "cnyn", "flwr" },
+                { "cnyn", "grs", "grs", "wat", "flwr", "flwr", "des", "des", "cnyn", "cnyn" },
+                { "grs", "grs", "ti", "flwr", "wat", "flwr", "wat", "des", "des", "cnyn" },
+                { "grs", "grs", "grs", "for", "flwr", "flwr", "wat", "wat", "des", "des" },
+                { "grs", "grs", "for", "for", "mt", "wat", "wat", "wat", "des", "wat" },
+                { "grs", "mt", "for", "for", "wat", "wat", "wat", "wat", "wat", "wat" },
+                { "for", "for", "for", "wat", "wat", "wat", "wat", "wat", "wat", "wat" } };
+
+        String[][] hexMapHorse = { { "cnyn", "cnyn", "cnyn", "des", "des", "wat", "des", "des", "des", "des" },
+                { "mt", "mt", "cnyn", "des", "des", "wat", "des", "des", "des", "des" },
+                { "mt", "mt", "cnyn", "mt", "mt", "wat", "des", "des", "ti", "flwr" },
+                { "mt", "cnyn", "mt", "mt", "wat", "mt", "des", "flwr", "flwr", "flwr" },
+                { "cnyn", "cnyn", "for", "for", "wat", "mt", "mt", "cnyn", "flwr", "flwr" },
+                { "cnyn", "for", "for", "wat", "cnyn", "cnyn", "cnyn", "flwr", "flwr", "flwr" },
+                { "cnyn", "ti", "for", "for", "wat", "flwr", "flwr", "flwr", "flwr", "flwr" },
+                { "grs", "grs", "for", "wat", "grs", "cas", "grs", "flwr", "grs", "flwr" },
+                { "grs", "grs", "for", "for", "wat", "grs", "grs", "grs", "grs", "for" },
+                { "grs", "grs", "for", "for", "wat", "grs", "grs", "grs", "for", "for" } };
+
+        String[][] hexMapOracle = { { "grs", "grs", "grs", "for", "for", "wat", "grs", "for", "for", "for" },
+                { "grs", "grs", "grs", "cas", "for", "wat", "grs", "for", "for", "for" },
+                { "grs", "flwr", "flwr", "grs", "for", "for", "wat", "grs", "grs", "for" },
+                { "flwr", "flwr", "cnyn", "grs", "for", "wat", "flwr", "ti", "for", "for" },
+                { "flwr", "flwr", "flwr", "cnyn", "cnyn", "wat", "flwr", "flwr", "wat", "wat" },
+                { "mt", "mt", "cnyn", "grs", "grs", "wat", "wat", "wat", "des", "des" },
+                { "cnyn", "cnyn", "cnyn", "mt", "grs", "flwr", "flwr", "flwr", "des", "des" },
+                { "cnyn", "cnyn", "cas", "des", "mt", "des", "flwr", "flwr", "cnyn", "cnyn" },
+                { "wat", "wat", "wat", "des", "des", "des", "des", "mt", "cnyn", "cnyn" },
+                { "wat", "wat", "wat", "wat", "des", "des", "des", "des", "des", "cnyn" } };
+
         ArrayList<BoardImage> tempList = imgs;
-        for (int i = 0; i < boards.size(); i++) {
+        for (int i = 0; i < 4; i++) {
             BoardImage tempImage = tempList.remove(0);
             if (tempImage.type == 0) { // boat
-
+                boards.add(new Section(tempImage, hexMapBoat, 0));
             } else if (tempImage.type == 0) { // grass
-
+                boards.add(new Section(tempImage, hexMapGrass, 0));
             } else if (tempImage.type == 0) { // horse
-
+                boards.add(new Section(tempImage, hexMapHorse, 0));
             } else if (tempImage.type == 0) { // oracle
-
+                boards.add(new Section(tempImage, hexMapOracle, 0));
             }
         }
     }
