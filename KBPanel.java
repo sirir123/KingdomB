@@ -276,10 +276,18 @@ public class KBPanel extends JPanel implements MouseListener {
         ArrayList<Section> tempSet = gm.getBoards();
         // System.out.println("SIZE: " + tempSet.size());
         if (tempSet != null && tempSet.size() > 0)
-            g.drawImage(tempSet.get(0).getImage(), 244, 255, 279, 238, null);
-        g.drawImage(tempSet.get(1).getImage(), 242 + 279 - 11, 255, 279, 238, null);
-        g.drawImage(tempSet.get(2).getImage(), 244, 254 + 237 - 5, 279, 238, null);
-        g.drawImage(tempSet.get(3).getImage(), 242 + 279 - 11, 254 + 237 - 5, 279, 238, null);
+            g.drawImage(tempSet.get(0).getImage(), (int) (244 * (getWidth() / 1238.0)),
+                    (int) (255 * (getHeight() / 889.0)), (int) (279 * (getWidth() / 1238.0)),
+                    (int) (238 * (getHeight() / 889.0)), null);
+        g.drawImage(tempSet.get(1).getImage(), (int) ((242 + 279 - 11) * (getWidth() / 1238.0)),
+                (int) (255 * (getHeight() / 889.0)), (int) (279 * (getWidth() / 1238.0)),
+                (int) (238 * (getHeight() / 889.0)), null);
+        g.drawImage(tempSet.get(2).getImage(), (int) (244 * (getWidth() / 1238.0)),
+                (int) ((254 + 237 - 5) * (getHeight() / 889.0)),
+                (int) (279 * (getWidth() / 1238.0)), (int) (238 * (getHeight() / 889.0)), null);
+        g.drawImage(tempSet.get(3).getImage(), (int) ((242 + 279 - 11) * (getWidth() / 1238.0)),
+                (int) ((254 + 237 - 5) * (getHeight() / 889.0)), (int) (279 * (getWidth() / 1238.0)),
+                (int) (238 * (getHeight() / 889.0)), null);
     }
 
     public void drawSettlements(Graphics g) {
