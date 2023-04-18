@@ -7,13 +7,13 @@ import java.awt.image.BufferedImage;
 
 public class Section {
     private Set<Hex> hexes;
-    private BoardImage img;
+    private BoardImage IMG;
 
     Section(BoardImage i, String[][] hx, int s) { // give list of numbers, create tiles
         // w/ correct nums and
         // neighbors
         // blah blah blah
-        img = i;
+        IMG = i;
         int tempC;
         for (int r = 0; r < hx.length; r++) {
             if (r % 2 == 0)
@@ -27,6 +27,10 @@ public class Section {
             }
 
         }
+    }
+
+    public BufferedImage getImage() {
+        return IMG.img;
     }
 }
 
