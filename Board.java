@@ -14,9 +14,9 @@ public class Board {
         return null;
     }
 
-    public ArrayList<Section> shuffle() {
-        return null;
-    }
+    // public ArrayList<Section> shuffle() { // dunno if necessary
+    // return null;
+    // }
 
     public Board connect(ArrayList<Section> s) {
         return null;
@@ -56,15 +56,36 @@ public class Board {
         return null;
     }
 
-    public int score (Player p){ return 0; }
-    public int lords (Player p){ return 0; }
-    public int workers (Player p){ return 0;}
-    public int discoverers (Player p){return 0; }
-    public int castle (Player p){return 0; }
-    
-    public void boatT(Player p, Hex exist, Hex water){ }//get existing settlement and move to water
-    public void paddockT(Player p, Hex exist, Hex next){ }//get existing settlement and jump 2 hexes straight line
-    public void oracleT(Player p, Hex next){ }//place new settlement on terrain as current card
-    public void farmT(Player p, Hex grass){ }//place new settlement on grass hex
+    public int score(Player p) {
+        return 0;
+    }
+
+    public int lords(Player p) {
+        return 0;
+    }
+
+    public int workers(Player p) {
+        return 0;
+    }
+
+    public int discoverers(Player p) {
+        return 0;
+    }
+
+    public int castle(Player p) {
+        return 0;
+    }
+
+    public void boatT(Player p, Hex exist, Hex water) {
+    }// get existing settlement and move to water
+
+    public void paddockT(Player p, Hex exist, Hex next) {
+    }// get existing settlement and jump 2 hexes straight line
+
+    public void oracleT(Player p, Hex next) {
+    }// place new settlement on terrain as current card
+
+    public void farmT(Player p, Hex grass) {
+    }// place new settlement on grass hex
 
 }
