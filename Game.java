@@ -5,7 +5,7 @@ import javax.imageio.ImageIO;
 
 public class Game {
     private int currPlayer = 0;
-    private ArrayList<Player> players;
+    public ArrayList<Player> players;
     private ArrayList<Card> deck;
     private ArrayList<Card> discard;
     public int discTiles;
@@ -46,6 +46,9 @@ public class Game {
         return boards;
     }
 
+    public int getCurrPlayer(){
+        return currPlayer;
+    }
     public void setBoards(ArrayList<BoardImage> imgs) {
         String[][] hexMapBoat = { { "grs", "grs", "for", "for", "for", "wat", "grs", "for", "for", "flwr" },
                 { "grs", "flwr", "for", "for", "wat", "grs", "for", "for", "flwr", "flwr" },
