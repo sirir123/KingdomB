@@ -46,6 +46,10 @@ public class Game {
         return boards;
     }
 
+    public int getCurrPlayer() {
+        return currPlayer;
+    }
+
     public void setBoards(ArrayList<BoardImage> imgs) {
         String[][] hexMapBoat = { { "grs", "grs", "for", "for", "for", "wat", "grs", "for", "for", "flwr" },
                 { "grs", "flwr", "for", "for", "wat", "grs", "for", "for", "flwr", "flwr" },

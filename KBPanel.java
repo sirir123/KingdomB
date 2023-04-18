@@ -18,6 +18,7 @@ public class KBPanel extends JPanel implements MouseListener {
 
     private int numPly; // number of players playing
     private boolean start, end;
+    private boolean help = false;
     private Game gm = new Game(-1);
 
     public KBPanel() {
@@ -100,8 +101,12 @@ public class KBPanel extends JPanel implements MouseListener {
             // currPly = firstPly;
             repaint();
             gm = new Game(numPly);
-
-        }
+            gm.shuffleDeck();
+            for ( int i = 0; i < numPly; i++){ 
+                gm.getPlayer(i).setChosen(gm.drawDeck());
+            }
+        } if (start && x >= 767 && x <=816 && y <= 133 && y>= 95 ){ help = true; repaint(); }
+        // cancel out instructions if ( help )
 
         repaint();
     }
@@ -140,6 +145,7 @@ public class KBPanel extends JPanel implements MouseListener {
                     (int) (761 * (getHeight() / 889.0)));
             g.setFont(new Font("SansSerif", Font.BOLD, (int) (10 * (getWidth() / 1238.0) * (getHeight() / 889.0))));
             g.drawString("" + gm.discTiles, (int) (176 * (getWidth() / 1238.0)), (int) (782 * (getHeight() / 889.0)));
+            if (help){ g.drawImage(workCd, 800, 800, 900, 900, null); }
         }
 
     }
@@ -176,6 +182,9 @@ public class KBPanel extends JPanel implements MouseListener {
                                 (int) (180 * (getHeight() / 889.0)), null);
                         g.drawString("" + (gm.getPlayer(0).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
                                 (int) (143 * (getHeight() / 889.0)));
+                        if (gm.getCurrPlayer() == 0) { g.drawImage(castCd, 936, 284, 1030-934, 236-92, null); }
+
+                        // if (gm.getCurrPlayer() == 0) { g.drawImage(castCd, 936, 94, 1030-934, 236-92, null); }
                         break;
                     case 1:
                         g.drawImage(plyRects.get(1), (int) (835 * (getWidth() / 1238.0)),
@@ -183,6 +192,7 @@ public class KBPanel extends JPanel implements MouseListener {
                                 (int) (180 * (getHeight() / 889.0)), null);
                         g.drawString("" + (gm.getPlayer(1).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
                                 (int) (328 * (getHeight() / 889.0)));
+                        if (gm.getCurrPlayer() == 1) { g.drawImage(castCd, 936, 286, 1030-934, 423-286, null); }
                         break;
                     case 2:
                         g.drawImage(plyRects.get(2), (int) (835 * (getWidth() / 1238.0)),
@@ -201,7 +211,6 @@ public class KBPanel extends JPanel implements MouseListener {
                 }
             }
         }
-
     }
 
     public void drawBoard(Graphics g) {
