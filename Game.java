@@ -139,7 +139,7 @@ public class Game {
     public Card drawDeck() {
         if (deck.size() < 1) {
             deck = discard;
-            Collections.shuffle(deck);
+            shuffleDeck();
             discard = new ArrayList<Card>();
         }
         return deck.get(0);
