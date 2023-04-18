@@ -10,6 +10,7 @@ public class Section {
     private BoardImage IMG;
 
     Section(BoardImage i, String[][] hx, int s) { // give list of numbers, create tiles
+        hexes = new HashSet<>();
         // w/ correct nums and
         // neighbors
         // blah blah blah

@@ -40,6 +40,8 @@ public class Game {
             players.add(new Player());
         }
         // setting up the boards
+        boards = new ArrayList<>();
+
     }
 
     public ArrayList<Section> getBoards() {
@@ -51,6 +53,7 @@ public class Game {
     }
 
     public void setBoards(ArrayList<BoardImage> imgs) {
+        System.out.println("I HATE");
         String[][] hexMapBoat = { { "grs", "grs", "for", "for", "for", "wat", "grs", "for", "for", "flwr" },
                 { "grs", "flwr", "for", "for", "wat", "grs", "for", "for", "flwr", "flwr" },
                 { "grs", "flwr", "flwr", "for", "wat", "grs", "grs", "flwr", "flwr", "flwr" },
@@ -100,11 +103,11 @@ public class Game {
             BoardImage tempImage = tempList.remove(0);
             if (tempImage.type == 0) { // boat
                 boards.add(new Section(tempImage, hexMapBoat, 0));
-            } else if (tempImage.type == 0) { // grass
+            } else if (tempImage.type == 1) { // grass
                 boards.add(new Section(tempImage, hexMapGrass, 0));
-            } else if (tempImage.type == 0) { // horse
+            } else if (tempImage.type == 2) { // horse
                 boards.add(new Section(tempImage, hexMapHorse, 0));
-            } else if (tempImage.type == 0) { // oracle
+            } else if (tempImage.type == 3) { // oracle
                 boards.add(new Section(tempImage, hexMapOracle, 0));
             }
         }
