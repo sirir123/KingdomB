@@ -32,6 +32,17 @@ public class Section {
     public BufferedImage getImage() {
         return IMG.img;
     }
+
+    public void multiply(int x, int y) {
+        for (Hex hx : hexes) {
+            hx.setCoords(hx.getCol() * x, hx.getRow() * y);
+        }
+    }
+
+    public Set<Hex> getHexes() {
+        return hexes;
+    }
+
 }
 
 // spaces: des, for, flwr, cnyn, grs, mt, wat, ti(H,O,G,B), cas

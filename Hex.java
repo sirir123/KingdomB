@@ -24,12 +24,22 @@ public class Hex {
         neighbors = new ArrayList<Hex>();
     }
 
+    public void setCoords(int c, int r) {
+        col = c;
+        row = r;
+    }
+
     public void setpNum(int p) {
         pNum = p;
     }
 
     public void setNeighbors(int dir, Hex h) {
         neighbors.set(dir, h);
+    }
+
+    public void multiply(int x, int y) {
+        setCoords(col * x, row * y);
+
     }
 
     public Hex getHex() {

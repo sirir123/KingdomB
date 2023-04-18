@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 public class Game {
-    private int currPlayer = 0;
+    private int currPlayer = 0; // should be random
     private ArrayList<Player> players;
     private ArrayList<Card> deck;
     private ArrayList<Card> discard;
@@ -104,6 +104,7 @@ public class Game {
                 boards.add(new Section(tempImage, hexMapOracle, 0));
             }
         }
+
     }
 
     public Player getPlayer(int n) {

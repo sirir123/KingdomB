@@ -5,9 +5,11 @@ import static java.lang.System.*;
 
 public class Board {
     Section a, b, c, d;
-    HashSet<Hex> fullBoard = new HashSet<Hex>();
+    Set<Hex> fullBoard;
 
     public Board() {
+        fullBoard = new HashSet<Hex>();
+
     }
 
     public Board getBoard() {
@@ -19,6 +21,27 @@ public class Board {
     // }
 
     public Board connect(ArrayList<Section> s) {
+        for (Section sec : s) {
+            for (Hex hx : sec.getHexes()) {
+                switch (hx.getSec()) {
+                    case 0:
+                        fullBoard.add(hx);
+                        break;
+                    case 1:
+                        hx.multiply(2, 1);
+                        fullBoard.add(hx);
+                        break;
+                    case 2:
+                        hx.multiply(1, 2);
+                        fullBoard.add(hx);
+                        break;
+                    case 3:
+                        hx.multiply(2, 2);
+                        fullBoard.add(hx);
+                        break;
+                }
+            }
+        }
         return null;
     }
 
