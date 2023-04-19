@@ -9,14 +9,19 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.util.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
-public class KBPanel extends JPanel implements MouseListener {
+public class KBPanel extends JPanel implements MouseListener, Runnable {
     private BufferedImage startScr, plyPick, mainScr;
     private BufferedImage lordCd, workCd, discCd, castCd;
     private BufferedImage tFlwr, tGrs, tDes, tFor, tCnyn;
     private BufferedImage infoUp, buttonX;
     private ArrayList<BufferedImage> plyRects;
     private ArrayList<BoardImage> boards;
+    boolean download = false;
+    String home = System.getProperty("user.home");
+    File out = new File(home+"/Downloads/KingdomBuilderInstructions.pdf"); 
 
     private int numPly; // number of players playing
     private boolean start, end;
@@ -118,10 +123,10 @@ public class KBPanel extends JPanel implements MouseListener {
             }
             gm.setBoards(boards);
         }
-        if (start && x >= 767 && x <= 816 && y <= 133 && y >= 95) {
+        if (start && x >= 767 && x <= 816 && y <= 133 && y >= 95) { 
             help = !help;
             repaint();
-        }
+        } if (help && x>= 253 && x <= 400 && y>= 690 && y <= 718 ){ run(); }
         // if (start && help && x >= 754 && x <= 795 && y <= 306 && y >= 276) {
         // help = false;
         // repaint();
@@ -134,6 +139,28 @@ public class KBPanel extends JPanel implements MouseListener {
                               // without it
         super.addNotify();
         requestFocus();
+    }
+
+    public void run() {
+        try{
+            URL url = new URL("https://rules.queen-games.com/kingdom-builder_en.pdf");
+            HttpURLConnection http =(HttpURLConnection)url.openConnection();
+            BufferedInputStream in = new BufferedInputStream(http.getInputStream());
+            FileOutputStream fos = new FileOutputStream(this.out);
+            BufferedOutputStream bout = new BufferedOutputStream(fos, 1024);
+            byte[] buffer = new byte[1024];
+            int read = 0;
+            while((read = in.read(buffer, 0, 1024))>= 0){
+                bout.write(buffer, 0, read);
+            }
+            Desktop.getDesktop().open(out);
+            bout.close();
+            in.close();
+            //🦧
+        }       
+        catch(IOException ex){
+            ex.printStackTrace();
+        }
     }
 
     public void paint(Graphics g) {
@@ -173,8 +200,8 @@ public class KBPanel extends JPanel implements MouseListener {
                 // System.out.println("fuck");
                 g.setColor(new Color(55, 24, 18, 95));
                 g.fillRect(0, 0, getWidth(), getHeight());
-                g.drawImage(infoUp, 224, 237, 810 - 224, 742 - 237, null);
-                g.drawImage(buttonX, 761, 92, 809 - 761, 135 - 92, null);
+                g.drawImage(infoUp, (int) (getWidth()/ 5.5), (int) (getHeight()/3.8), 810 - 220, 742 - 229, null);
+                g.drawImage(buttonX, (int) (getWidth()/1.625), (int) (getHeight()/9.73), 809 - 761, 135 - 92, null);
             }
 
         }
