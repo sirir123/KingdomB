@@ -268,8 +268,6 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                         if (gm.getCurrPlayer() == 0) {
                             g.drawImage(getTerrImage(gm.getPlayer(gm.getCurrPlayer()).getChosen().getTerr()), 927, 97,
                                     1030 - 934, 236 - 92, null);
-                        } else {
-                            // g.drawImage(castCd, 927, 97,1030 - 934, 236 - 92, null);
                         }
                         break;
                     case 1:
@@ -280,10 +278,9 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                 (int) (328 * (getHeight() / 889.0)));
 
                         if (gm.getCurrPlayer() == 1) {
-                            g.drawImage(castCd, 927, 279, 1030 - 934, 236 - 92, null);
-                        } else {
-                            // g.drawImage(castCd, 927, 279, 1030 - 934, 236 - 92, null);
-                        }
+                            g.drawImage(getTerrImage(gm.getPlayer(gm.getCurrPlayer()).getChosen().getTerr()), 927, 279,
+                                    1030 - 934, 236 - 92, null);
+                        } // hi
                         break;
                     case 2:
                         g.drawImage(plyRects.get(2), (int) (835 * (getWidth() / 1238.0)),
@@ -293,7 +290,8 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                 (int) (512 * (getHeight() / 889.0)));
 
                         if (gm.getCurrPlayer() == 2) {
-                            g.drawImage(castCd, 927, 462, 1030 - 934, 236 - 92, null);
+                            g.drawImage(getTerrImage(gm.getPlayer(gm.getCurrPlayer()).getChosen().getTerr()), 927, 462,
+                                    1030 - 934, 236 - 92, null);
                         }
                         break;
                     case 3:
@@ -304,7 +302,8 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                 (int) (696 * (getHeight() / 889.0)));
 
                         if (gm.getCurrPlayer() == 3) {
-                            g.drawImage(castCd, 927, 650, 1030 - 934, 236 - 92, null);
+                            g.drawImage(getTerrImage(gm.getPlayer(gm.getCurrPlayer()).getChosen().getTerr()), 927, 650,
+                                    1030 - 934, 236 - 92, null);
                         }
                         break;
                 }
