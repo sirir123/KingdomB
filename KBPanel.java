@@ -269,8 +269,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                             g.drawImage(getTerrImage(gm.getPlayer(gm.getCurrPlayer()).getChosen().getTerr()), 927, 97,
                                     1030 - 934, 236 - 92, null);
                         } else {
-                            g.drawImage(castCd, 927, 97,
-                                    1030 - 934, 236 - 92, null);
+                            // g.drawImage(castCd, 927, 97,1030 - 934, 236 - 92, null);
                         }
                         break;
                     case 1:
@@ -283,7 +282,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                         if (gm.getCurrPlayer() == 1) {
                             g.drawImage(castCd, 927, 279, 1030 - 934, 236 - 92, null);
                         } else {
-                            g.drawImage(castCd, 927, 279, 1030 - 934, 236 - 92, null);
+                            // g.drawImage(castCd, 927, 279, 1030 - 934, 236 - 92, null);
                         }
                         break;
                     case 2:
