@@ -21,7 +21,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
     private ArrayList<BoardImage> boards;
     boolean download = false;
     String home = System.getProperty("user.home");
-    File out = new File(home+"/Downloads/KingdomBuilderInstructions.pdf"); 
+    File out = new File(home + "/Downloads/KingdomBuilderInstructions.pdf");
 
     private int numPly; // number of players playing
     private boolean start, end;
@@ -123,10 +123,13 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             }
             gm.setBoards(boards);
         }
-        if (start && x >= 767 && x <= 816 && y <= 133 && y >= 95) { 
+        if (start && x >= 767 && x <= 816 && y <= 133 && y >= 95) {
             help = !help;
             repaint();
-        } if (help && x>= 253 && x <= 400 && y>= 690 && y <= 718 ){ run(); }
+        }
+        if (help && x >= 253 && x <= 400 && y >= 690 && y <= 718) {
+            run();
+        }
         // if (start && help && x >= 754 && x <= 795 && y <= 306 && y >= 276) {
         // help = false;
         // repaint();
@@ -142,23 +145,22 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
     }
 
     public void run() {
-        try{
+        try {
             URL url = new URL("https://rules.queen-games.com/kingdom-builder_en.pdf");
-            HttpURLConnection http =(HttpURLConnection)url.openConnection();
+            HttpURLConnection http = (HttpURLConnection) url.openConnection();
             BufferedInputStream in = new BufferedInputStream(http.getInputStream());
             FileOutputStream fos = new FileOutputStream(this.out);
             BufferedOutputStream bout = new BufferedOutputStream(fos, 1024);
             byte[] buffer = new byte[1024];
             int read = 0;
-            while((read = in.read(buffer, 0, 1024))>= 0){
+            while ((read = in.read(buffer, 0, 1024)) >= 0) {
                 bout.write(buffer, 0, read);
             }
             Desktop.getDesktop().open(out);
             bout.close();
             in.close();
-            //🦧
-        }       
-        catch(IOException ex){
+            // 🦧
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -200,8 +202,11 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 // System.out.println("fuck");
                 g.setColor(new Color(55, 24, 18, 95));
                 g.fillRect(0, 0, getWidth(), getHeight());
-                g.drawImage(infoUp, (int) (getWidth()/ 5.5), (int) (getHeight()/3.8), 810 - 220, 742 - 229, null);
-                g.drawImage(buttonX, (int) (getWidth()/1.625), (int) (getHeight()/9.73), 809 - 761, 135 - 92, null);
+                g.drawImage(infoUp, (int) (223 * (getWidth() / 1238.0)), (int) (238 * (getHeight() / 889.0)),
+                        (int) ((810 - 220) * (getWidth() / 1238.0)),
+                        (int) ((742 - 229) * (getHeight() / 889.0)), null);
+                g.drawImage(buttonX, (int) (763 * (getWidth() / 1238.0)), (int) (95 * (getHeight() / 889.0)), 809 - 761,
+                        135 - 92, null);
             }
 
         }
@@ -259,8 +264,12 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                 (int) (180 * (getHeight() / 889.0)), null);
                         g.drawString("" + (gm.getPlayer(0).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
                                 (int) (143 * (getHeight() / 889.0)));
+
                         if (gm.getCurrPlayer() == 0) {
-                            g.drawImage(getTerrImage(gm.getPlayer(gm.getCurrPlayer()).getChosen().getTerr()), 936, 94,
+                            g.drawImage(getTerrImage(gm.getPlayer(gm.getCurrPlayer()).getChosen().getTerr()), 927, 97,
+                                    1030 - 934, 236 - 92, null);
+                        } else {
+                            g.drawImage(castCd, 927, 97,
                                     1030 - 934, 236 - 92, null);
                         }
                         break;
@@ -270,8 +279,11 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                 (int) (180 * (getHeight() / 889.0)), null);
                         g.drawString("" + (gm.getPlayer(1).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
                                 (int) (328 * (getHeight() / 889.0)));
+
                         if (gm.getCurrPlayer() == 1) {
-                            g.drawImage(castCd, 936, 281, 1030 - 934, 236 - 92, null);
+                            g.drawImage(castCd, 927, 279, 1030 - 934, 236 - 92, null);
+                        } else {
+                            g.drawImage(castCd, 927, 279, 1030 - 934, 236 - 92, null);
                         }
                         break;
                     case 2:
@@ -280,8 +292,9 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                 (int) (180 * (getHeight() / 889.0)), null);
                         g.drawString("" + (gm.getPlayer(2).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
                                 (int) (512 * (getHeight() / 889.0)));
+
                         if (gm.getCurrPlayer() == 2) {
-                            g.drawImage(castCd, 936, 468, 1030 - 934, 236 - 92, null);
+                            g.drawImage(castCd, 927, 462, 1030 - 934, 236 - 92, null);
                         }
                         break;
                     case 3:
@@ -290,8 +303,9 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                 (int) (180 * (getHeight() / 889.0)), null);
                         g.drawString("" + (gm.getPlayer(3).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
                                 (int) (696 * (getHeight() / 889.0)));
+
                         if (gm.getCurrPlayer() == 3) {
-                            g.drawImage(castCd, 936, 656, 1030 - 934, 236 - 92, null);
+                            g.drawImage(castCd, 927, 650, 1030 - 934, 236 - 92, null);
                         }
                         break;
                 }
