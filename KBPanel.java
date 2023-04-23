@@ -13,7 +13,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class KBPanel extends JPanel implements MouseListener, Runnable {
-    private BufferedImage startScr, plyPick, mainScr;
+    private BufferedImage startScr, plyPick, mainScr, startTile;
     private BufferedImage lordCd, workCd, discCd, castCd;
     private BufferedImage tFlwr, tGrs, tDes, tFor, tCnyn;
     private BufferedImage infoUp, buttonX;
@@ -68,6 +68,8 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             boards.add(new BoardImage(2, ImageIO.read(KBPanel.class.getResource("/Pictures/boardHorse.png"))));
             boards.add(new BoardImage(3, ImageIO.read(KBPanel.class.getResource("/Pictures/boardOracle.png"))));
             Collections.shuffle(boards, new Random());
+
+            startTile = ImageIO.read(KBPanel.class.getResource("pictures/startTile.png"));
 
         } catch (Exception E) {
             System.out.println("Exception Error");
@@ -207,8 +209,9 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 g.drawImage(infoUp, (int) (223 * (getWidth() / 1238.0)), (int) (238 * (getHeight() / 889.0)),
                         (int) ((810 - 220) * (getWidth() / 1238.0)),
                         (int) ((742 - 229) * (getHeight() / 889.0)), null);
-                g.drawImage(buttonX, (int) (763 * (getWidth() / 1238.0)), (int) (95 * (getHeight() / 889.0)), 809 - 761,
-                        135 - 92, null);
+                g.drawImage(buttonX, (int) (762 * (getWidth() / 1238.0)), (int) (90 * (getHeight() / 889.0)),
+                        (int) (46 * (getWidth() / 1238.0)),
+                        (int) (46 * (getWidth() / 1238.0)), null);
             }
 
         }
@@ -324,6 +327,16 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                         break;
                 }
             }
+
+            if (gm.startPlayer == 0) {
+                g.drawImage(startTile, 850, 150, 85, 75, null);
+            } else if (gm.startPlayer == 1) {
+                g.drawImage(startTile, 850, 330, 85, 75, null);
+            } else if (gm.startPlayer == 2) {
+                g.drawImage(startTile, 850, 510, 85, 75, null);
+            } else if (gm.startPlayer == 3) {
+                g.drawImage(startTile, 850, 700, 85, 75, null);
+            }
         }
     }
 
@@ -347,5 +360,12 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
     public void drawSettlements(Graphics g) {
 
+    }
+
+    public boolean intpoint_inside_circle(int x, int y, intPoint center, int rad) {
+        int dist = (int) (Math.sqrt(Math.pow(x = center.x, 2) + Math.pow(y - center.y, 2)));
+        if (dist <= rad)
+            return true;
+        return false;
     }
 }

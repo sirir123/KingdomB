@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 public class Game {
-    private int currPlayer;// should be random
+    private int currPlayer;
+    public int startPlayer;// should be random
     private ArrayList<Player> players;
     private ArrayList<Card> deck;
     private ArrayList<Card> discard;
@@ -14,6 +15,7 @@ public class Game {
 
     public Game(int amt) {
         currPlayer = (int) (Math.random() * amt);
+        startPlayer = currPlayer;
         players = new ArrayList<>();
         bb = new Board(); // constructor
         deck = new ArrayList<Card>();
