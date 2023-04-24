@@ -206,6 +206,13 @@ public class Game {
     }// get existing settlement and move to water
 
     public void paddockT(Player p, Hex exist, Hex next) {
+        if(exist.getFree()==(players.indexOf(p)) && next.getFree()==-1){
+            //check if next is 2 hexes away in a straight line
+            exist.setOcc(-1);
+            exist.setpNum(-1);
+            next.setOcc(players.indexOf(p));
+            next.setpNum(players.indexOf(p));
+        }
     }// get existing settlement and jump 2 hexes straight line
 
     public void oracleT(Player p, Hex next) {
