@@ -385,19 +385,102 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         // width 30
         // height 30?
 
-        int x = 240;
+        // int x = 240;
+        System.out.println("(" + (gm.avaliable.get(0).getCol()) + ", " + gm.avaliable.get(0).getRow() + ")");
+        // g.drawImage(colPink, 230 + (27 * (int) (gm.avaliable.get(0).getCol())),
+        // 250 + (int) (26 + (23 * (gm.avaliable.get(0).getRow()))), 30, 29, null);
 
-        for (Hex hx : gm.avaliable) {
-            System.out.println("(" + hx.getRow() + ", " + hx.getCol() + ")");
-            if (hx.getCol() % 2 == 0) {
-                x = 251;
+        if (gm.avaliable.get(0).getCol() <= 19) {
+            if (gm.avaliable.get(0).getRow() < 9) {
+                if (gm.avaliable.get(0).getRow() % 2 == 0) {
+                    g.drawImage(colPink, 240 + 13 * (gm.avaliable.get(0).getCol() / 2),
+                            255 + 23 * gm.avaliable.get(0).getRow(), 29, 30, null);
+                } else {
+                    System.out.println("odd");
+                }
+
             } else {
-                x = 240;
+                if (gm.avaliable.get(0).getRow() % 2 == 0) {
+                    g.drawImage(colPink, 243 + 13 * (gm.avaliable.get(0).getRow() / 2),
+                            257 + 23 * gm.avaliable.get(0).getCol(), 29, 30, null);
+                } else {
+                    System.out.println("odd");
+                }
+            }
+        } else if (gm.avaliable.get(0).getCol() >= 20) {
+            if (gm.avaliable.get(0).getRow() < 9) {
+                if (gm.avaliable.get(0).getRow() % 2 == 0) {
+                    g.drawImage(colPink, 508 + 13 * (gm.avaliable.get(0).getRow() / 2),
+                            255 + 23 * gm.avaliable.get(0).getCol(), 29, 30, null);
+                } else {
+                    System.out.println("odd");
+                }
+            } else {
+                if (gm.avaliable.get(0).getRow() % 2 == 0) {
+                    g.drawImage(colPink, 511 + 13 * (gm.avaliable.get(0).getRow() / 2),
+                            257 + 23 * gm.avaliable.get(0).getCol(), 29, 30, null);
+                } else {
+                    System.out.println("odd");
+                }
 
             }
-            int y = 257;
-            g.drawImage(colPink, x + (27 * (int) (hx.getCol())), y + (int) (26 + (23 * (hx.getRow()))), 30, 29, null);
         }
+
+        // g.drawImage(colPink, 240, 255, 30, 29, null);
+        // g.drawImage(colPink, 240 + 13 * 1, 255 + 23 * 1, 29, 30, null);
+        // g.drawImage(colPink, 240 + 13 * 2, 255 + 23 * 2, 29, 30, null);
+        // g.drawImage(colPink, 240 + 13 * 3, 255 + 23 * 3, 29, 30, null);
+        // g.drawImage(colPink, 240 + 13 * 4, 255 + 23 * 4, 29, 30, null);
+        // g.drawImage(colPink, 240 + 13 * 5, 255 + 23 * 5, 29, 30, null);
+        // g.drawImage(colPink, 240 + 13 * 6, 255 + 23 * 6, 29, 30, null);
+        // g.drawImage(colPink, 240 + 13 * 7, 255 + 23 * 7, 29, 30, null);
+        // g.drawImage(colPink, 240 + 13 * 8, 255 + 23 * 8, 29, 30, null);
+        // g.drawImage(colPink, 240 + 13 * 9, 255 + 23 * 9, 29, 30, null);
+
+        // g.drawImage(colPink, 508 + 13 * 0, 255 + 23 * 0, 29, 30, null);
+        // g.drawImage(colPink, 508 + 13 * 1, 255 + 23 * 1, 29, 30, null);
+        // g.drawImage(colPink, 508 + 13 * 2, 255 + 23 * 2, 29, 30, null);
+        // g.drawImage(colPink, 508 + 13 * 3, 255 + 23 * 3, 29, 30, null);
+        // g.drawImage(colPink, 508 + 13 * 4, 255 + 23 * 4, 29, 30, null);
+        // g.drawImage(colPink, 508 + 13 * 5, 255 + 23 * 5, 29, 30, null);
+        // g.drawImage(colPink, 508 + 13 * 6, 255 + 23 * 6, 29, 30, null);
+        // g.drawImage(colPink, 508 + 13 * 7, 255 + 23 * 7, 29, 30, null);
+        // g.drawImage(colPink, 508 + 13 * 8, 255 + 23 * 8, 29, 30, null);
+        // g.drawImage(colPink, 508 + 13 * 9, 255 + 23 * 9, 29, 30, null);
+
+        // g.drawImage(colPink, 243 + 13 * 10, 257 + 23 * 10, 29, 30, null);
+        // g.drawImage(colPink, 243 + 13 * 11, 257 + 23 * 11, 29, 30, null);
+        // g.drawImage(colPink, 243 + 13 * 12, 257 + 23 * 12, 29, 30, null);
+        // g.drawImage(colPink, 243 + 13 * 13, 257 + 23 * 13, 29, 30, null);
+        // g.drawImage(colPink, 243 + 13 * 14, 257 + 23 * 14, 29, 30, null);
+        // g.drawImage(colPink, 243 + 13 * 15, 257 + 23 * 15, 29, 30, null);
+        // g.drawImage(colPink, 243 + 13 * 16, 257 + 23 * 16, 29, 30, null);
+        // g.drawImage(colPink, 243 + 13 * 17, 257 + 23 * 17, 29, 30, null);
+        // g.drawImage(colPink, 243 + 13 * 18, 257 + 23 * 18, 29, 30, null);
+        // g.drawImage(colPink, 243 + 13 * 19, 257 + 23 * 19, 29, 30, null);
+
+        // g.drawImage(colPink, 511 + 13 * 10, 257 + 23 * 10, 29, 30, null);
+        // g.drawImage(colPink, 511 + 13 * 11, 257 + 23 * 11, 29, 30, null);
+        // g.drawImage(colPink, 511 + 13 * 12, 257 + 23 * 12, 29, 30, null);
+        // g.drawImage(colPink, 511 + 13 * 13, 257 + 23 * 13, 29, 30, null);
+        // g.drawImage(colPink, 511 + 13 * 14, 257 + 23 * 14, 29, 30, null);
+        // g.drawImage(colPink, 511 + 13 * 15, 257 + 23 * 15, 29, 30, null);
+        // g.drawImage(colPink, 511 + 13 * 16, 257 + 23 * 16, 29, 30, null);
+        // g.drawImage(colPink, 511 + 13 * 17, 257 + 23 * 17, 29, 30, null);
+        // g.drawImage(colPink, 511 + 13 * 18, 257 + 23 * 18, 29, 30, null);
+        // g.drawImage(colPink, 511 + 13 * 19, 257 + 23 * 19, 29, 30, null);
+        // for (Hex hx : gm.avaliable) {
+        // System.out.println("(" + hx.getRow() + ", " + hx.getCol() + ")");
+        // if (hx.getCol() % 2 == 0) {
+        // x = 251;
+        // } else {
+        // x = 240;
+
+        // }
+        // int y = 257;
+        // g.drawImage(colPink, x + (27 * (int) (hx.getCol())), y + (int) (26 + (23 *
+        // (hx.getRow()))), 30, 29, null);
+        // }
         // for (int i = 0; i < 20; i++) {
         // for (int j = 0; j < 20; j++) {
 
