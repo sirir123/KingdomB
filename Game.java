@@ -6,6 +6,10 @@ import javax.imageio.ImageIO;
 public class Game {
     private int currPlayer;
     public int startPlayer;// should be random
+
+    public int state; // 0 terrain card, 1 tiles
+    public ArrayList<Hex> avaliable;
+
     private ArrayList<Player> players;
     private ArrayList<Card> deck;
     private ArrayList<Card> discard;
@@ -56,7 +60,7 @@ public class Game {
     }
 
     public void setBoards(ArrayList<BoardImage> imgs) {
-        System.out.println("I HATE");
+        // System.out.println("I HATE");
         String[][] hexMapBoat = { { "grs", "grs", "for", "for", "for", "wat", "grs", "for", "for", "flwr" },
                 { "grs", "flwr", "for", "for", "wat", "grs", "for", "for", "flwr", "flwr" },
                 { "grs", "flwr", "flwr", "for", "wat", "grs", "grs", "flwr", "flwr", "flwr" },
@@ -171,5 +175,23 @@ public class Game {
         } else {
             currPlayer = 0;
         }
+    }
+
+    public void updateAvaliable() {
+        avaliable = new ArrayList();
+        if (state == 0) {
+            for (Section sec : boards) {
+                for (Hex hx : sec.getHexes()) {
+                    if (hx.getType().equals(players.get(currPlayer).getChosen().getTerr())) {
+                        avaliable.add(hx);
+                    }
+                }
+            }
+
+        } else if (state == 1) {
+
+        }
+        System.out.println("Size: " + avaliable.size());
+        // System.out.println(avaliable.toString());
     }
 }

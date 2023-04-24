@@ -17,6 +17,8 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
     private BufferedImage lordCd, workCd, discCd, castCd;
     private BufferedImage tFlwr, tGrs, tDes, tFor, tCnyn;
     private BufferedImage infoUp, buttonX;
+    private BufferedImage currCol;
+    private BufferedImage colPink;
     private ArrayList<BufferedImage> plyRects;
     private ArrayList<BoardImage> boards;
     boolean download = false;
@@ -57,10 +59,12 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             tGrs = ImageIO.read(KBPanel.class.getResource("pictures/meadow.png"));//
             tCnyn = ImageIO.read(KBPanel.class.getResource("pictures/canyon.png"));//
             tDes = ImageIO.read(KBPanel.class.getResource("pictures/desert.png"));//
-            tFlwr = ImageIO.read(KBPanel.class.getResource("pictures/flower.png"));//
+            tFor = ImageIO.read(KBPanel.class.getResource("pictures/forest.png"));//
 
             infoUp = ImageIO.read(KBPanel.class.getResource("pictures/helpPopUp.png"));
             buttonX = ImageIO.read(KBPanel.class.getResource("pictures/buttonX.png"));
+
+            currCol = ImageIO.read(KBPanel.class.getResource("pictures/currentColor.png"));
 
             // boards
             boards.add(new BoardImage(0, ImageIO.read(KBPanel.class.getResource("/Pictures/boardBoat.png"))));
@@ -70,6 +74,8 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             Collections.shuffle(boards, new Random());
 
             startTile = ImageIO.read(KBPanel.class.getResource("pictures/startTile.png"));
+
+            colPink = ImageIO.read(KBPanel.class.getResource("pictures/colorPink.png"));
 
         } catch (Exception E) {
             System.out.println("Exception Error");
@@ -97,13 +103,13 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         System.out.println("loc is(" + x + ", " + y + ")");
         if (!help && !start && y >= 569 * (getHeight() / 889.0) && y <= 624 * (getHeight() / 889.0)) {
             if (x >= 654 * (getWidth() / 1238.0) && x <= 690 * (getWidth() / 1238.0)) { // for start screen
-                System.out.println("2");
+                // System.out.println("2");
                 numPly = 2;
             } else if (x >= 744 * (getWidth() / 1238.0) && x <= 782 * (getWidth() / 1238.0)) {
-                System.out.println("3");
+                // System.out.println("3");
                 numPly = 3;
             } else if (x >= 833 * (getWidth() / 1238.0) && x <= 869 * (getWidth() / 1238.0)) {
-                System.out.println("4");
+                // System.out.println("4");
                 numPly = 4;
             }
         }
@@ -120,18 +126,20 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             // currPly = firstPly;
             repaint();
             gm = new Game(numPly);
-            System.out.println(getWidth() + "+" + getHeight());
+            // System.out.println(getWidth() + "+" + getHeight());
             gm.shuffleDeck();
             for (int i = 0; i < numPly; i++) {
                 gm.getPlayer(i).setChosen(gm.drawDeck());
             }
             gm.setBoards(boards);
+            gm.updateAvaliable();
         }
-        if (start && x >= 767 && x <= 816 && y <= 133 && y >= 95) {
+        if (start && intpoint_inside_circle(x, y, new intPoint(785, 110), 25)) {
             help = !help;
             repaint();
         }
-        if (help && x >= 253 && x <= 400 && y >= 690 && y <= 718) {
+        if (help && x >= 253 * (getWidth() / 1238.0) && x <= 400 * (getWidth() / 1238.0)
+                && y >= 690 * (getHeight() / 889.0) && y <= 718 * (getHeight() / 889.0)) {
             run();
         }
         // if (start && help && x >= 754 && x <= 795 && y <= 306 && y >= 276) {
@@ -213,7 +221,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                         (int) (46 * (getWidth() / 1238.0)),
                         (int) (46 * (getWidth() / 1238.0)), null);
             }
-
+            drawShaders(g);
         }
 
     }
@@ -262,80 +270,94 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         g.setFont(new Font("SansSerif", Font.BOLD, (int) (15 * (getWidth() / 1238.0) * (getHeight() / 889.0))));
         if (gm != null) {
 
-            System.out.println("Curr: " + gm.getCurrPlayer());
-            System.out.println("Type: " + gm.getPlayer(gm.getCurrPlayer()).getChosen().getTerr());
+            // System.out.println("Curr: " + gm.getCurrPlayer());
+            // System.out.println("Type: " +
+            // gm.getPlayer(gm.getCurrPlayer()).getChosen().getTerr());
             for (int i = 0; i < numPly; i++) {
                 switch (i) {
                     case 0:
                         g.drawImage(plyRects.get(0), (int) (835 * (getWidth() / 1238.0)),
                                 (int) (81 * (getHeight() / 889.0)), (int) (330 * (getWidth() / 1238.0)),
                                 (int) (180 * (getHeight() / 889.0)), null);
-                        g.drawString("" + (gm.getPlayer(0).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
-                                (int) (143 * (getHeight() / 889.0)));
 
                         if (gm.getCurrPlayer() == 0) {
+                            g.drawImage(currCol, (int) (835 * (getWidth() / 1238.0)),
+                                    (int) (81 * (getHeight() / 889.0)), (int) (318 * (getWidth() / 1238.0)),
+                                    (int) (168 * (getHeight() / 889.0)), null);
                             g.drawImage(getTerrImage(gm.getPlayer(gm.getCurrPlayer()).getChosen().getTerr()),
                                     (int) (getWidth() / 1.335), (int) (getHeight() / 9.53),
                                     (int) ((1030 - 934) * (getWidth() / 1250.0)),
                                     (int) ((236 - 92) * (getHeight() / 896.0)), null);
                         }
+                        g.drawString("" + (gm.getPlayer(0).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
+                                (int) (143 * (getHeight() / 889.0)));
                         break;
                     case 1:
                         g.drawImage(plyRects.get(1), (int) (835 * (getWidth() / 1238.0)),
                                 (int) (265 * (getHeight() / 889.0)), (int) (330 * (getWidth() / 1238.0)),
                                 (int) (180 * (getHeight() / 889.0)), null);
-                        g.drawString("" + (gm.getPlayer(1).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
-                                (int) (328 * (getHeight() / 889.0)));
 
                         if (gm.getCurrPlayer() == 1) {
+                            g.drawImage(currCol, (int) (835 * (getWidth() / 1238.0)),
+                                    (int) (265 * (getHeight() / 889.0)), (int) (318 * (getWidth() / 1238.0)),
+                                    (int) (168 * (getHeight() / 889.0)), null);
                             g.drawImage(getTerrImage(gm.getPlayer(gm.getCurrPlayer()).getChosen().getTerr()),
                                     (int) (getWidth() / 1.335), (int) (getHeight() / 3.17),
                                     (int) ((1030 - 934) * (getWidth() / 1250.0)),
                                     (int) ((236 - 92) * (getHeight() / 896.0)), null);
 
                         } // hi
+                        g.drawString("" + (gm.getPlayer(1).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
+                                (int) (328 * (getHeight() / 889.0)));
+
                         break;
                     case 2:
                         g.drawImage(plyRects.get(2), (int) (835 * (getWidth() / 1238.0)),
                                 (int) (450 * (getHeight() / 889.0)), (int) (330 * (getWidth() / 1238.0)),
                                 (int) (180 * (getHeight() / 889.0)), null);
-                        g.drawString("" + (gm.getPlayer(2).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
-                                (int) (512 * (getHeight() / 889.0)));
 
                         if (gm.getCurrPlayer() == 2) {
+                            g.drawImage(currCol, (int) (835 * (getWidth() / 1238.0)),
+                                    (int) (450 * (getHeight() / 889.0)), (int) (318 * (getWidth() / 1238.0)),
+                                    (int) (168 * (getHeight() / 889.0)), null);
                             g.drawImage(getTerrImage(gm.getPlayer(gm.getCurrPlayer()).getChosen().getTerr()),
                                     (int) (getWidth() / 1.335), (int) (getHeight() / 1.92),
                                     (int) ((1030 - 934) * (getWidth() / 1250.0)),
                                     (int) ((236 - 92) * (getHeight() / 896.0)), null);
 
                         }
+                        g.drawString("" + (gm.getPlayer(2).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
+                                (int) (512 * (getHeight() / 889.0)));
                         break;
                     case 3:
                         g.drawImage(plyRects.get(3), (int) (835 * (getWidth() / 1238.0)),
                                 (int) (635 * (getHeight() / 889.0)), (int) (330 * (getWidth() / 1238.0)),
                                 (int) (180 * (getHeight() / 889.0)), null);
-                        g.drawString("" + (gm.getPlayer(3).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
-                                (int) (696 * (getHeight() / 889.0)));
 
                         if (gm.getCurrPlayer() == 3) {
+                            g.drawImage(currCol, (int) (835 * (getWidth() / 1238.0)),
+                                    (int) (635 * (getHeight() / 889.0)), (int) (318 * (getWidth() / 1238.0)),
+                                    (int) (168 * (getHeight() / 889.0)), null);
                             g.drawImage(getTerrImage(gm.getPlayer(gm.getCurrPlayer()).getChosen().getTerr()),
                                     (int) (getWidth() / 1.335), (int) (getHeight() / 1.366),
                                     (int) ((1030 - 934) * (getWidth() / 1250.0)),
                                     (int) ((236 - 92) * (getHeight() / 896.0)), null);
 
                         }
+                        g.drawString("" + (gm.getPlayer(3).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
+                                (int) (696 * (getHeight() / 889.0)));
                         break;
                 }
             }
 
             if (gm.startPlayer == 0) {
-                g.drawImage(startTile, 850, 150, 85, 75, null);
+                g.drawImage(startTile, 850, 150, 85, 70, null);
             } else if (gm.startPlayer == 1) {
-                g.drawImage(startTile, 850, 330, 85, 75, null);
+                g.drawImage(startTile, 850, 330, 85, 70, null);
             } else if (gm.startPlayer == 2) {
-                g.drawImage(startTile, 850, 510, 85, 75, null);
+                g.drawImage(startTile, 850, 510, 85, 70, null);
             } else if (gm.startPlayer == 3) {
-                g.drawImage(startTile, 850, 700, 85, 75, null);
+                g.drawImage(startTile, 850, 700, 85, 70, null);
             }
         }
     }
@@ -358,14 +380,68 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 (int) (238 * (getHeight() / 889.0)), null);
     }
 
+    public void drawShaders(Graphics g) {
+        // start 241, 255
+        // width 30
+        // height 30?
+
+        int x = 240;
+
+        for (Hex hx : gm.avaliable) {
+            System.out.println("(" + hx.getRow() + ", " + hx.getCol() + ")");
+            if (hx.getCol() % 2 == 0) {
+                x = 251;
+            } else {
+                x = 240;
+
+            }
+            int y = 257;
+            g.drawImage(colPink, x + (27 * (int) (hx.getCol())), y + (int) (26 + (23 * (hx.getRow()))), 30, 29, null);
+        }
+        // for (int i = 0; i < 20; i++) {
+        // for (int j = 0; j < 20; j++) {
+
+        // g.drawImage(colPink, x, y, 26, 29, null);
+        // x += 27;
+        // }
+        // if (i % 2 == 0) {
+        // x = 251;
+        // } else {
+        // x = 240;
+
+        // }
+
+        // y += 23.25;
+        // }
+    }
+
     public void drawSettlements(Graphics g) {
 
     }
 
     public boolean intpoint_inside_circle(int x, int y, intPoint center, int rad) {
-        int dist = (int) (Math.sqrt(Math.pow(x = center.x, 2) + Math.pow(y - center.y, 2)));
+        // System.out.println("please-----");
+        int dist = (int) (Math.sqrt(Math.pow(x - center.x, 2) + Math.pow(y - center.y, 2)));
+        // System.out.println(rad + " vs. " + dist);
         if (dist <= rad)
             return true;
         return false;
+    }
+
+    public boolean intpoint_inside_hexagon(int x, int y, intPoint square, intPoint triangleUp, intPoint triangleDown) {
+        return false;
+    }
+
+    public boolean intpoint_inside_trigon(int x, int y, intPoint a, intPoint b, intPoint c) {
+        int as_x = x - a.x;
+        int as_y = y - a.y;
+
+        boolean s_ab = (b.x - a.x) * as_y - (b.y - a.y) * as_x > 0;
+
+        if ((c.x - a.x) * as_y - (c.y - a.y) * as_x > 0 == s_ab)
+            return false;
+        if ((c.x - b.x) * (y - b.y) - (c.y - b.y) * (x - b.x) > 0 != s_ab)
+            return false;
+        return true;
     }
 }

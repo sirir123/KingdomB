@@ -65,4 +65,8 @@ public class Hex {
     public String getType() {
         return type;
     }
+
+    public String toString() {
+        return type + ": (" + row + ", " + col + ")";
+    }
 }
