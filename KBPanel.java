@@ -291,6 +291,11 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                         }
                         g.drawString("" + (gm.getPlayer(0).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
                                 (int) (143 * (getHeight() / 889.0)));
+
+                        if (gm.getCurrPlayer() == 0) {
+                            g.drawImage(getTerrImage(gm.getPlayer(gm.getCurrPlayer()).getChosen().getTerr()), (int) (938 * (getWidth()/1250.0)),(int) ( 96* (getHeight()/896.0)),
+                            (int) ((1030 - 934) * (getWidth()/1250.0)), (int) ((236 - 92) * (getHeight()/896.0)), null);
+                        }
                         break;
                     case 1:
                         g.drawImage(plyRects.get(1), (int) (835 * (getWidth() / 1238.0)),
@@ -310,6 +315,11 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                         g.drawString("" + (gm.getPlayer(1).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
                                 (int) (328 * (getHeight() / 889.0)));
 
+                        if (gm.getCurrPlayer() == 1) {
+                            g.drawImage(getTerrImage(gm.getPlayer(gm.getCurrPlayer()).getChosen().getTerr()), (int) (938 * (getWidth()/1250.0)),(int) ( 283* (getHeight()/896.0)), 
+                            (int) ((1030 - 934) * (getWidth()/1250.0)), (int) ((236 - 92) * (getHeight()/896.0)), null);
+
+                        } // hi
                         break;
                     case 2:
                         g.drawImage(plyRects.get(2), (int) (835 * (getWidth() / 1238.0)),
@@ -328,6 +338,12 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                         }
                         g.drawString("" + (gm.getPlayer(2).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
                                 (int) (512 * (getHeight() / 889.0)));
+
+                        if (gm.getCurrPlayer() == 2) {
+                            g.drawImage(getTerrImage(gm.getPlayer(gm.getCurrPlayer()).getChosen().getTerr()), (int) (938 * (getWidth()/1250.0)),(int) ( 469* (getHeight()/896.0)), 
+                            (int) ((1030 - 934) * (getWidth()/1250.0)), (int) ((236 - 92) * (getHeight()/896.0)), null);
+
+                        }
                         break;
                     case 3:
                         g.drawImage(plyRects.get(3), (int) (835 * (getWidth() / 1238.0)),
@@ -346,6 +362,10 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                         }
                         g.drawString("" + (gm.getPlayer(3).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
                                 (int) (696 * (getHeight() / 889.0)));
+
+                        if (gm.getCurrPlayer() == 3) {
+                            g.drawImage(getTerrImage(gm.getPlayer(gm.getCurrPlayer()).getChosen().getTerr()), (int) (938 * (getWidth()/1250.0)),(int) ( 656* (getHeight()/896.0)), (int) ((1030 - 934) * (getWidth()/1250.0)), (int) ((236 - 92) * (getHeight()/896.0)), null);
+                        }
                         break;
                 }
             }
