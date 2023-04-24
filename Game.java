@@ -194,4 +194,42 @@ public class Game {
         System.out.println("Size: " + avaliable.size());
         // System.out.println(avaliable.toString());
     }
+
+    public void boatT(Player p, Hex exist, Hex water) {
+        if(exist.getFree()==(players.indexOf(p)) && water.getFree()==-1){//checks if existing hex is occupied by the player & if water hex is free
+            //check adjacency of chosen water hex!!!
+            water.setOcc(players.indexOf(p));
+            exist.setOcc(-1);
+            exist.setpNum(-1);
+            water.setpNum(players.indexOf(p));
+        }
+    }// get existing settlement and move to water
+
+    public void paddockT(Player p, Hex exist, Hex next) {
+        if(exist.getFree()==(players.indexOf(p)) && next.getFree()==-1){
+            //check if next is 2 hexes away in a straight line
+            exist.setOcc(-1);
+            exist.setpNum(-1);
+            next.setOcc(players.indexOf(p));
+            next.setpNum(players.indexOf(p));
+        }
+    }// get existing settlement and jump 2 hexes straight line
+
+    public void oracleT(Player p, Hex next) {
+        if(next.getFree()==-1 && p.getSettlements()>0 && p.getType()==next.getType()){//check if next hex is free & if player has settlements to place & if next's terr is same as chosen terr
+            //check adjacency of chosen hex!!!
+            next.setOcc(players.indexOf(p));
+            next.setpNum(players.indexOf(p));
+            p.useSettlement();
+        }
+    }// place new settlement on terrain as current card
+
+    public void farmT(Player p, Hex grass) {
+        if(grass.getFree()==-1 && p.getSettlements()>0 && "grs"==grass.getType()){//check if grass is free & if player has settlements & if grass is grass
+            //check adjacency of chosen grass hex!!!
+            grass.setOcc(players.indexOf(p));
+            grass.setpNum(players.indexOf(p));
+            p.useSettlement();
+        }
+    }// place new settlement on grass hex
 }

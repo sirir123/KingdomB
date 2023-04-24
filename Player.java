@@ -31,4 +31,8 @@ public class Player {
 
     public Card getChosen() { return chosen; }
 
+    public String getType() {return "" + chosen + ""; }
+
+    public void useSettlement(){ settlements--; }//use one settlement
+
 }
