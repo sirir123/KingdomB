@@ -14,10 +14,11 @@ public class Game {
     private ArrayList<Card> deck;
     private ArrayList<Card> discard;
     public int discTiles;
-    private Board bb;
+    public Board bb;
     private ArrayList<Section> boards;
 
     public Game(int amt) {
+        bb = new Board();
         currPlayer = (int) (Math.random() * amt);
         startPlayer = currPlayer;
         players = new ArrayList<>();
@@ -109,16 +110,16 @@ public class Game {
         for (int i = 0; i < 4; i++) {
             BoardImage tempImage = tempList.remove(0);
             if (tempImage.type == 0) { // boat
-                boards.add(new Section(tempImage, hexMapBoat, 0));
+                boards.add(new Section(tempImage, hexMapBoat, i));
             } else if (tempImage.type == 1) { // grass
-                boards.add(new Section(tempImage, hexMapGrass, 0));
+                boards.add(new Section(tempImage, hexMapGrass, i));
             } else if (tempImage.type == 2) { // horse
-                boards.add(new Section(tempImage, hexMapHorse, 0));
+                boards.add(new Section(tempImage, hexMapHorse, i));
             } else if (tempImage.type == 3) { // oracle
-                boards.add(new Section(tempImage, hexMapOracle, 0));
+                boards.add(new Section(tempImage, hexMapOracle, i));
             }
         }
-
+        bb.connect(boards);
     }
 
     public Player getPlayer(int n) {
@@ -178,13 +179,13 @@ public class Game {
     }
 
     public void updateAvaliable() {
+        System.out.println("update");
         avaliable = new ArrayList();
+        System.out.println("BB: " + bb.getHxs().toString());
         if (state == 0) {
-            for (Section sec : boards) {
-                for (Hex hx : sec.getHexes()) {
-                    if (hx.getType().equals(players.get(currPlayer).getChosen().getTerr())) {
-                        avaliable.add(hx);
-                    }
+            for (Hex hx : bb.getHxs()) {
+                if (hx.getType().equals(players.get(currPlayer).getChosen().getTerr())) {
+                    avaliable.add(hx);
                 }
             }
 
@@ -196,8 +197,9 @@ public class Game {
     }
 
     public void boatT(Player p, Hex exist, Hex water) {
-        if(exist.getFree()==(players.indexOf(p)) && water.getFree()==-1){//checks if existing hex is occupied by the player & if water hex is free
-            //check adjacency of chosen water hex!!!
+        if (exist.getFree() == (players.indexOf(p)) && water.getFree() == -1) {// checks if existing hex is occupied by
+                                                                               // the player & if water hex is free
+            // check adjacency of chosen water hex!!!
             water.setOcc(players.indexOf(p));
             exist.setOcc(-1);
             exist.setpNum(-1);
@@ -206,8 +208,8 @@ public class Game {
     }// get existing settlement and move to water
 
     public void paddockT(Player p, Hex exist, Hex next) {
-        if(exist.getFree()==(players.indexOf(p)) && next.getFree()==-1){
-            //check if next is 2 hexes away in a straight line
+        if (exist.getFree() == (players.indexOf(p)) && next.getFree() == -1) {
+            // check if next is 2 hexes away in a straight line
             exist.setOcc(-1);
             exist.setpNum(-1);
             next.setOcc(players.indexOf(p));
@@ -216,8 +218,12 @@ public class Game {
     }// get existing settlement and jump 2 hexes straight line
 
     public void oracleT(Player p, Hex next) {
-        if(next.getFree()==-1 && p.getSettlements()>0 && p.getType()==next.getType()){//check if next hex is free & if player has settlements to place & if next's terr is same as chosen terr
-            //check adjacency of chosen hex!!!
+        if (next.getFree() == -1 && p.getSettlements() > 0 && p.getType() == next.getType()) {// check if next hex is
+                                                                                              // free & if player has
+                                                                                              // settlements to place &
+                                                                                              // if next's terr is same
+                                                                                              // as chosen terr
+            // check adjacency of chosen hex!!!
             next.setOcc(players.indexOf(p));
             next.setpNum(players.indexOf(p));
             p.useSettlement();
@@ -225,8 +231,10 @@ public class Game {
     }// place new settlement on terrain as current card
 
     public void farmT(Player p, Hex grass) {
-        if(grass.getFree()==-1 && p.getSettlements()>0 && "grs"==grass.getType()){//check if grass is free & if player has settlements & if grass is grass
-            //check adjacency of chosen grass hex!!!
+        if (grass.getFree() == -1 && p.getSettlements() > 0 && "grs" == grass.getType()) {// check if grass is free & if
+                                                                                          // player has settlements & if
+                                                                                          // grass is grass
+            // check adjacency of chosen grass hex!!!
             grass.setOcc(players.indexOf(p));
             grass.setpNum(players.indexOf(p));
             p.useSettlement();

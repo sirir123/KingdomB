@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Hex {
     private String type;
     private int col, row, sec;
-    protected int pNum;//-1 is none, 0-3 players
+    protected int pNum;// -1 is none, 0-3 players
     protected int occ; // int for who is occupying -1 empty, 0-3 player, tileHex 4
     private ArrayList<Hex> neighbors;
 
@@ -37,14 +37,14 @@ public class Hex {
         neighbors.set(dir, h);
     }
 
-    public void setOcc(int num){
-        if(5>num && num>-2){//makes sure occupying -1 empty, 0-3 player, tileHex 4
-        occ=num;
+    public void setOcc(int num) {
+        if (5 > num && num > -2) {// makes sure occupying -1 empty, 0-3 player, tileHex 4
+            occ = num;
         }
     }
 
     public void multiply(int x, int y) {
-        setCoords(col * x, row * y);
+        setCoords(col + x, row + y);
 
     }
 
@@ -73,6 +73,6 @@ public class Hex {
     }
 
     public String toString() {
-        return type + ": (" + row + ", " + col + ")";
+        return type + ": (" + row + ", " + col + ") " + sec;
     }
 }

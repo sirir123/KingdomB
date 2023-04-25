@@ -20,10 +20,16 @@ public class Board {
     // return null;
     // }
 
+    public Set<Hex> getHxs() {
+        return fullBoard;
+    }
+
     public Board connect(ArrayList<Section> s) {
-        for (Section sec : s) {
-            for (Hex hx : sec.getHexes()) {
-                switch (hx.getSec()) {
+        System.out.println("connect");
+
+        for (int i = 0; i < s.size(); i++) {
+            for (Hex hx : s.get(i).getHexes()) {
+                switch (i) {
                     case 0:
                         fullBoard.add(hx);
                         break;
@@ -37,6 +43,30 @@ public class Board {
                         break;
                     case 3:
                         hx.multiply(2, 2);
+                        fullBoard.add(hx);
+                        break;
+                }
+            }
+        }
+
+        for (Section sec : s) {
+            // System.out.println("SEC: " + sec.getHexes());
+            for (Hex hx : sec.getHexes()) {
+                // System.out.println("SEC: ");
+                switch (hx.getSec()) {
+                    case 0:
+                        fullBoard.add(hx);
+                        break;
+                    case 1:
+                        hx.multiply(18, 0);
+                        fullBoard.add(hx);
+                        break;
+                    case 2:
+                        hx.multiply(0, 9);
+                        fullBoard.add(hx);
+                        break;
+                    case 3:
+                        hx.multiply(18, 9);
                         fullBoard.add(hx);
                         break;
                 }
