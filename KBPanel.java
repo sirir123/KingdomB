@@ -55,16 +55,16 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             discCd = ImageIO.read(KBPanel.class.getResource("/Pictures/cardDiscoverer.png"));
             castCd = ImageIO.read(KBPanel.class.getResource("/Pictures/cardCastle.png"));
 
-            tFlwr = ImageIO.read(KBPanel.class.getResource("pictures/flower.png"));//
-            tGrs = ImageIO.read(KBPanel.class.getResource("pictures/meadow.png"));//
-            tCnyn = ImageIO.read(KBPanel.class.getResource("pictures/canyon.png"));//
-            tDes = ImageIO.read(KBPanel.class.getResource("pictures/desert.png"));//
-            tFor = ImageIO.read(KBPanel.class.getResource("pictures/forest.png"));//
+            tFlwr = ImageIO.read(KBPanel.class.getResource("/Pictures/flower.png"));//
+            tGrs = ImageIO.read(KBPanel.class.getResource("/Pictures/meadow.png"));//
+            tCnyn = ImageIO.read(KBPanel.class.getResource("/Pictures/canyon.png"));//
+            tDes = ImageIO.read(KBPanel.class.getResource("/Pictures/desert.png"));//
+            tFor = ImageIO.read(KBPanel.class.getResource("/Pictures/forest.png"));//
 
-            infoUp = ImageIO.read(KBPanel.class.getResource("pictures/helpPopUp.png"));
-            buttonX = ImageIO.read(KBPanel.class.getResource("pictures/buttonX.png"));
+            infoUp = ImageIO.read(KBPanel.class.getResource("/Pictures/helpPopUp.png"));
+            buttonX = ImageIO.read(KBPanel.class.getResource("/Pictures/buttonX.png"));
 
-            currCol = ImageIO.read(KBPanel.class.getResource("pictures/currentColor.png"));
+            currCol = ImageIO.read(KBPanel.class.getResource("/Pictures/currentColor.png"));
 
             // boards
             boards.add(new BoardImage(0, ImageIO.read(KBPanel.class.getResource("/Pictures/boardBoat.png"))));
@@ -73,9 +73,9 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             boards.add(new BoardImage(3, ImageIO.read(KBPanel.class.getResource("/Pictures/boardOracle.png"))));
             Collections.shuffle(boards, new Random());
 
-            startTile = ImageIO.read(KBPanel.class.getResource("pictures/startTile.png"));
+            startTile = ImageIO.read(KBPanel.class.getResource("/Pictures/startTile.png"));
 
-            colPink = ImageIO.read(KBPanel.class.getResource("pictures/colorPink.png"));
+            colPink = ImageIO.read(KBPanel.class.getResource("/Pictures/colorPink.png"));
 
         } catch (Exception E) {
             System.out.println("Exception Error");
