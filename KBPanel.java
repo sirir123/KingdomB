@@ -16,6 +16,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
     private BufferedImage startScr, plyPick, mainScr, startTile;
     private BufferedImage lordCd, workCd, discCd, castCd;
     private BufferedImage tFlwr, tGrs, tDes, tFor, tCnyn;
+    private BufferedImage sOrcl, sHrse, sFrm, sBt, orcl, hrse, frm, bt;
     private BufferedImage infoUp, buttonX;
     private BufferedImage currCol;
     private BufferedImage colPink;
@@ -61,10 +62,21 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             tDes = ImageIO.read(KBPanel.class.getResource("pictures/desert.png"));//
             tFor = ImageIO.read(KBPanel.class.getResource("pictures/forest.png"));//
 
-            infoUp = ImageIO.read(KBPanel.class.getResource("pictures/helpPopUp.png"));
-            buttonX = ImageIO.read(KBPanel.class.getResource("pictures/buttonX.png"));
+            sOrcl = ImageIO.read(KBPanel.class.getResource("pictures/oracle shaded.png")); // what?
+            sHrse = ImageIO.read(KBPanel.class.getResource("pictures/horse shaded.png"));
+            sFrm = ImageIO.read(KBPanel.class.getResource("pictures/farm shaded.png"));
+            sBt = ImageIO.read(KBPanel.class.getResource("pictures/boat shaded.png"));
+            orcl = ImageIO.read(KBPanel.class.getResource("pictures/oracle.png"));
+            hrse = ImageIO.read(KBPanel.class.getResource("pictures/horse.png"));
+            frm = ImageIO.read(KBPanel.class.getResource("pictures/farm.png"));
+            bt = ImageIO.read(KBPanel.class.getResource("pictures/boat.png"));
 
-            currCol = ImageIO.read(KBPanel.class.getResource("pictures/currentColor.png"));
+            // sHrse = (1040, 93) 54 50, sOrcl = ()
+
+            infoUp = ImageIO.read(KBPanel.class.getResource("/Pictures/helpPopUp.png"));
+            buttonX = ImageIO.read(KBPanel.class.getResource("/Pictures/buttonX.png"));
+
+            currCol = ImageIO.read(KBPanel.class.getResource("/Pictures/currentColor.png"));
 
             // boards
             boards.add(new BoardImage(0, ImageIO.read(KBPanel.class.getResource("/Pictures/boardBoat.png"))));
@@ -73,9 +85,9 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             boards.add(new BoardImage(3, ImageIO.read(KBPanel.class.getResource("/Pictures/boardOracle.png"))));
             Collections.shuffle(boards, new Random());
 
-            startTile = ImageIO.read(KBPanel.class.getResource("pictures/startTile.png"));
+            startTile = ImageIO.read(KBPanel.class.getResource("/Pictures/startTile.png"));
 
-            colPink = ImageIO.read(KBPanel.class.getResource("pictures/colorPink.png"));
+            colPink = ImageIO.read(KBPanel.class.getResource("/Pictures/colorPink.png"));
 
         } catch (Exception E) {
             System.out.println("Exception Error");
@@ -91,6 +103,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
     }
 
     public void mouseEntered(MouseEvent e) {
+
     }
 
     public void mouseExited(MouseEvent e) {
@@ -142,12 +155,11 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         if (help && x >= 253 * (getWidth() / 1238.0) && x <= 400 * (getWidth() / 1238.0)
                 && y >= 690 * (getHeight() / 889.0) && y <= 718 * (getHeight() / 889.0)) {
             run();
-        }
-        // if (start && help && x >= 754 && x <= 795 && y <= 306 && y >= 276) {
-        // help = false;
-        // repaint();
-        // }
+        } // if (!help && start && x <= 603 * (getWidth() /1250.0) && x>= 473 *
+          // (getWidth()/1250.0) && y <= 134 * (getHeight()/896.0) && y >= 98 *
+          // (getHeight() / 896.0)){
 
+        // }
         repaint();
     }
 
@@ -222,7 +234,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                         (int) (46 * (getWidth() / 1238.0)),
                         (int) (46 * (getWidth() / 1238.0)), null);
             }
-            drawShaders(g);
+            // drawShaders(g);
         }
 
     }
@@ -280,6 +292,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                         g.drawImage(plyRects.get(0), (int) (835 * (getWidth() / 1238.0)),
                                 (int) (81 * (getHeight() / 889.0)), (int) (330 * (getWidth() / 1238.0)),
                                 (int) (180 * (getHeight() / 889.0)), null);
+                        g.drawImage(sOrcl, 1033, 90, 69, 62, null);
 
                         if (gm.getCurrPlayer() == 0) {
                             g.drawImage(currCol, (int) (835 * (getWidth() / 1238.0)),
