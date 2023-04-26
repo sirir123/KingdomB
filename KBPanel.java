@@ -292,7 +292,6 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                         g.drawImage(plyRects.get(0), (int) (835 * (getWidth() / 1238.0)),
                                 (int) (81 * (getHeight() / 889.0)), (int) (330 * (getWidth() / 1238.0)),
                                 (int) (180 * (getHeight() / 889.0)), null);
-                        g.drawImage(sOrcl, 1033, 90, 69, 62, null);
 
                         if (gm.getCurrPlayer() == 0) {
                             g.drawImage(currCol, (int) (835 * (getWidth() / 1238.0)),
