@@ -62,14 +62,15 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             tDes = ImageIO.read(KBPanel.class.getResource("pictures/desert.png"));//
             tFor = ImageIO.read(KBPanel.class.getResource("pictures/forest.png"));//
 
-            sOrcl = ImageIO.read(KBPanel.class.getResource("pictures/oracle shaded.png")); // what?
-            sHrse = ImageIO.read(KBPanel.class.getResource("pictures/horse shaded.png"));
-            sFrm = ImageIO.read(KBPanel.class.getResource("pictures/farm shaded.png"));
-            sBt = ImageIO.read(KBPanel.class.getResource("pictures/boat shaded.png"));
-            orcl = ImageIO.read(KBPanel.class.getResource("pictures/oracle.png"));
-            hrse = ImageIO.read(KBPanel.class.getResource("pictures/horse.png"));
-            frm = ImageIO.read(KBPanel.class.getResource("pictures/farm.png"));
-            bt = ImageIO.read(KBPanel.class.getResource("pictures/boat.png"));
+            // sOrcl = ImageIO.read(KBPanel.class.getResource("pictures/oracle
+            // shaded.png")); // what?
+            // sHrse = ImageIO.read(KBPanel.class.getResource("pictures/horse shaded.png"));
+            // sFrm = ImageIO.read(KBPanel.class.getResource("pictures/farm shaded.png"));
+            // sBt = ImageIO.read(KBPanel.class.getResource("pictures/boat shaded.png"));
+            // orcl = ImageIO.read(KBPanel.class.getResource("pictures/oracle.png"));
+            // hrse = ImageIO.read(KBPanel.class.getResource("pictures/horse.png"));
+            // frm = ImageIO.read(KBPanel.class.getResource("pictures/farm.png"));
+            // bt = ImageIO.read(KBPanel.class.getResource("pictures/boat.png"));
 
             // sHrse = (1040, 93) 54 50, sOrcl = ()
 
@@ -145,26 +146,22 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 gm.getPlayer(i).setChosen(gm.drawDeck());
             }
             gm.setBoards(boards);
-            gm.updateAvaliable();
+            // gm.updateAvaliable();
         }
 
-        if (start && intpoint_inside_circle(x, y, new intPoint(785, 110), 25)) {
+        if (start && intpoint_inside_circle(x, y, new intPoint(877, 124), 25)) {
             help = !help;
             repaint();
         }
-        if (help && x >= 253 * (getWidth() / 1238.0) && x <= 400 * (getWidth() / 1238.0)
-                && y >= 690 * (getHeight() / 889.0) && y <= 718 * (getHeight() / 889.0)) {
+        if (start && help && x >= 576 && x <= 819
+                && y >= 719 && y <= 797) {
             run();
-        } // if (!help && start && x <= 603 * (getWidth() /1250.0) && x>= 473 *
-          // (getWidth()/1250.0) && y <= 134 * (getHeight()/896.0) && y >= 98 *
-          // (getHeight() / 896.0)){
+        }
 
-        // }
         repaint();
     }
 
-    public void addNotify() { // tbh idk what this does I just always have it and am paranoid its not working
-                              // without it
+    public void addNotify() {
         super.addNotify();
         requestFocus();
     }
@@ -204,12 +201,9 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             g.drawImage(mainScr, 0, 0, getWidth(), getHeight(), null);
             drawPlayers(g);
             // drawing cards
-            g.drawImage(lordCd, (int) (82 * (getWidth() / 1238.0)), (int) (84 * (getHeight() / 889.0)),
-                    (int) (120 * (getWidth() / 1238.0)), (int) (173 * (getHeight() / 889.0)), null);
-            g.drawImage(workCd, (int) (81 * (getWidth() / 1238.0)), (int) (286 * (getHeight() / 889.0)),
-                    (int) (120 * (getWidth() / 1238.0)), (int) (173 * (getHeight() / 889.0)), null);
-            g.drawImage(discCd, (int) (81 * (getWidth() / 1238.0)), (int) (488 * (getHeight() / 889.0)),
-                    (int) (120 * (getWidth() / 1238.0)), (int) (173 * (getHeight() / 889.0)), null);
+            g.drawImage(lordCd, 82, 84, 120, 173, null);
+            g.drawImage(workCd, 81, 286, 120, 173, null);
+            g.drawImage(discCd, 81, 488, 120, 173, null);
 
             // drawing info
             g.setColor(Color.white);
@@ -224,38 +218,31 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             drawBoard(g);
 
             if (help) {
-                // System.out.println("fuck");
                 g.setColor(new Color(55, 24, 18, 95));
                 g.fillRect(0, 0, getWidth(), getHeight());
-                g.drawImage(infoUp, (int) (223 * (getWidth() / 1238.0)), (int) (238 * (getHeight() / 889.0)),
-                        (int) ((810 - 220) * (getWidth() / 1238.0)),
-                        (int) ((742 - 229) * (getHeight() / 889.0)), null);
-                g.drawImage(buttonX, (int) (762 * (getWidth() / 1238.0)), (int) (90 * (getHeight() / 889.0)),
-                        (int) (46 * (getWidth() / 1238.0)),
-                        (int) (46 * (getWidth() / 1238.0)), null);
+                g.drawImage(infoUp, 255, 266, 900 - 255, 801 - 266, null);
+                g.drawImage(buttonX, 854, 100, 50, 50, null);
             }
-            // drawShaders(g);
+            drawShaders(g);
         }
 
     }
 
     public void drawStartScreen(Graphics g) {
-        g.drawImage(startScr, 0, 0, getWidth(), getHeight(), null);
+        // System.out.println("(" + getWidth() + ", " + getHeight() + ")");
+        g.drawImage(startScr, 0, 0, getWidth(),
+                getHeight(), null);
+
         // shows how many players choosen
         switch (numPly) {
             case 2:
-                g.drawImage(plyPick, (int) (654 * (getWidth() / 1238.0)), (int) (569 * (getHeight() / 889.0)),
-                        (int) (37 * (getWidth() / 1238.0)), (int) (55 * (getHeight() / 889.0)), null);
+                g.drawImage(plyPick, 733, 623, 42, 52, null);
                 break;
             case 3:
-                g.drawImage(plyPick, (int) (744 * (getWidth() / 1238.0)), (int) (569 * (getHeight() / 889.0)),
-                        (int) (37 * (getWidth() / 1238.0)), (int) (55 * (getHeight() / 889.0)), null);
-                // g.drawImage(plyPick, 744, 569, 37, 55, null);
+                g.drawImage(plyPick, 834, 623, 42, 52, null);
                 break;
             case 4:
-                g.drawImage(plyPick, (int) (833 * (getWidth() / 1238.0)), (int) (569 * (getHeight() / 889.0)),
-                        (int) (37 * (getWidth() / 1238.0)), (int) (55 * (getHeight() / 889.0)), null);
-                // g.drawImage(plyPick, 833, 569, 37, 55, null);
+                g.drawImage(plyPick, 935, 623, 42, 52, null);
                 break;
         }
     }
@@ -283,16 +270,13 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         g.setFont(new Font("SansSerif", Font.BOLD, (int) (15 * (getWidth() / 1238.0) * (getHeight() / 889.0))));
         if (gm != null) {
 
-            // System.out.println("Curr: " + gm.getCurrPlayer());
-            // System.out.println("Type: " +
-            // gm.getPlayer(gm.getCurrPlayer()).getChosen().getTerr());
             for (int i = 0; i < numPly; i++) {
                 switch (i) {
                     case 0:
                         g.drawImage(plyRects.get(0), (int) (835 * (getWidth() / 1238.0)),
                                 (int) (81 * (getHeight() / 889.0)), (int) (330 * (getWidth() / 1238.0)),
                                 (int) (180 * (getHeight() / 889.0)), null);
-                        g.drawImage(sOrcl, 1033, 90, 69, 62, null);
+                        g.drawImage(sOrcl, 1033, 90, 69, 62, null); // hi
 
                         if (gm.getCurrPlayer() == 0) {
                             g.drawImage(currCol, (int) (835 * (getWidth() / 1238.0)),
@@ -410,87 +394,21 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         // System.out.println("SIZE: " + tempSet.size());
         if (tempSet != null && tempSet.size() > 0)
             g.drawImage(tempSet.get(0).getImage(), (int) (244 * (getWidth() / 1238.0)),
-                    (int) (255 * (getHeight() / 889.0)), (int) (279 * (getWidth() / 1238.0)),
+                    (int) (254 * (getHeight() / 889.0)), (int) (279 * (getWidth() / 1238.0)),
                     (int) (238 * (getHeight() / 889.0)), null);
-        g.drawImage(tempSet.get(1).getImage(), (int) ((242 + 279 - 11) * (getWidth() / 1238.0)),
-                (int) (255 * (getHeight() / 889.0)), (int) (279 * (getWidth() / 1238.0)),
+        g.drawImage(tempSet.get(1).getImage(), (int) ((244 + 279 - 11) * (getWidth() / 1238.0)),
+                (int) (254 * (getHeight() / 889.0)), (int) (279 * (getWidth() / 1238.0)),
                 (int) (238 * (getHeight() / 889.0)), null);
         g.drawImage(tempSet.get(2).getImage(), (int) (244 * (getWidth() / 1238.0)),
                 (int) ((254 + 237 - 5) * (getHeight() / 889.0)),
                 (int) (279 * (getWidth() / 1238.0)), (int) (238 * (getHeight() / 889.0)), null);
-        g.drawImage(tempSet.get(3).getImage(), (int) ((242 + 279 - 11) * (getWidth() / 1238.0)),
+        g.drawImage(tempSet.get(3).getImage(), (int) ((244 + 279 - 11) * (getWidth() / 1238.0)),
                 (int) ((254 + 237 - 5) * (getHeight() / 889.0)), (int) (279 * (getWidth() / 1238.0)),
                 (int) (238 * (getHeight() / 889.0)), null);
     }
 
     public void drawShaders(Graphics g) {
-        // start 241, 255
-        // width 30
-        // height 30?
-
-        // int x = 240;
-
-        // g.drawImage(colPink, 230 + (27 * (int) (gm.avaliable.get(0).getCol())),
-        // 250 + (int) (26 + (23 * (gm.avaliable.get(0).getRow()))), 30, 29, null);
-        // System.out.println("START");
-        System.out.println(gm.avaliable.toString());
-        for (Hex hx : gm.avaliable) {
-            // System.out.println("(" + (hx.getCol()) + ", " + hx.getRow() + ")");
-            if (hx.getRow() % 2 == 0) {
-                // System.out.println("even: " + hx.getCol() / 2);
-                g.drawImage(colPink, 235 + (29 * (hx.getCol() / 2)),
-                        255 + 23 * hx.getRow(), 29, 30, null);
-            } else {
-                // System.out.println("odd: " + ((hx.getCol() - 1) / 2));
-                g.drawImage(colPink, 253 + (30 * ((hx.getCol() - 1)) / 2),
-                        255 + 23 * hx.getRow(), 29, 30, null);
-            }
-        }
-
-        // g.drawImage(colPink, 240, 255, 30, 29, null);
-        // g.drawImage(colPink, 240 + 13 * 1, 255 + 23 * 1, 29, 30, null);
-        // g.drawImage(colPink, 240 + 13 * 2, 255 + 23 * 2, 29, 30, null);
-        // g.drawImage(colPink, 240 + 13 * 3, 255 + 23 * 3, 29, 30, null);
-        // g.drawImage(colPink, 240 + 13 * 4, 255 + 23 * 4, 29, 30, null);
-        // g.drawImage(colPink, 240 + 13 * 5, 255 + 23 * 5, 29, 30, null);
-        // g.drawImage(colPink, 240 + 13 * 6, 255 + 23 * 6, 29, 30, null);
-        // g.drawImage(colPink, 240 + 13 * 7, 255 + 23 * 7, 29, 30, null);
-        // g.drawImage(colPink, 240 + 13 * 8, 255 + 23 * 8, 29, 30, null);
-        // g.drawImage(colPink, 240 + 13 * 9, 255 + 23 * 9, 29, 30, null);
-
-        // g.drawImage(colPink, 508 + 13 * 0, 255 + 23 * 0, 29, 30, null);
-        // g.drawImage(colPink, 508 + 13 * 1, 255 + 23 * 1, 29, 30, null);
-        // g.drawImage(colPink, 508 + 13 * 2, 255 + 23 * 2, 29, 30, null);
-        // g.drawImage(colPink, 508 + 13 * 3, 255 + 23 * 3, 29, 30, null);
-        // g.drawImage(colPink, 508 + 13 * 4, 255 + 23 * 4, 29, 30, null);
-        // g.drawImage(colPink, 508 + 13 * 5, 255 + 23 * 5, 29, 30, null);
-        // g.drawImage(colPink, 508 + 13 * 6, 255 + 23 * 6, 29, 30, null);
-        // g.drawImage(colPink, 508 + 13 * 7, 255 + 23 * 7, 29, 30, null);
-        // g.drawImage(colPink, 508 + 13 * 8, 255 + 23 * 8, 29, 30, null);
-        // g.drawImage(colPink, 508 + 13 * 9, 255 + 23 * 9, 29, 30, null);
-
-        // g.drawImage(colPink, 243 + 13 * 10, 257 + 23 * 10, 29, 30, null);
-        // g.drawImage(colPink, 243 + 13 * 11, 257 + 23 * 11, 29, 30, null);
-        // g.drawImage(colPink, 243 + 13 * 12, 257 + 23 * 12, 29, 30, null);
-        // g.drawImage(colPink, 243 + 13 * 13, 257 + 23 * 13, 29, 30, null);
-        // g.drawImage(colPink, 243 + 13 * 14, 257 + 23 * 14, 29, 30, null);
-        // g.drawImage(colPink, 243 + 13 * 15, 257 + 23 * 15, 29, 30, null);
-        // g.drawImage(colPink, 243 + 13 * 16, 257 + 23 * 16, 29, 30, null);
-        // g.drawImage(colPink, 243 + 13 * 17, 257 + 23 * 17, 29, 30, null);
-        // g.drawImage(colPink, 243 + 13 * 18, 257 + 23 * 18, 29, 30, null);
-        // g.drawImage(colPink, 243 + 13 * 19, 257 + 23 * 19, 29, 30, null);
-
-        // g.drawImage(colPink, 511 + 13 * 10, 257 + 23 * 10, 29, 30, null);
-        // g.drawImage(colPink, 511 + 13 * 11, 257 + 23 * 11, 29, 30, null);
-        // g.drawImage(colPink, 511 + 13 * 12, 257 + 23 * 12, 29, 30, null);
-        // g.drawImage(colPink, 511 + 13 * 13, 257 + 23 * 13, 29, 30, null);
-        // g.drawImage(colPink, 511 + 13 * 14, 257 + 23 * 14, 29, 30, null);
-        // g.drawImage(colPink, 511 + 13 * 15, 257 + 23 * 15, 29, 30, null);
-        // g.drawImage(colPink, 511 + 13 * 16, 257 + 23 * 16, 29, 30, null);
-        // g.drawImage(colPink, 511 + 13 * 17, 257 + 23 * 17, 29, 30, null);
-        // g.drawImage(colPink, 511 + 13 * 18, 257 + 23 * 18, 29, 30, null);
-        // g.drawImage(colPink, 511 + 13 * 19, 257 + 23 * 19, 29, 30, null);
-        // for (Hex hx : gm.avaliable) {
+        System.out.println("hello");
     }
 
     public void drawSettlements(Graphics g) {
@@ -506,20 +424,39 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         return false;
     }
 
-    public boolean intpoint_inside_hexagon(int x, int y, intPoint square, intPoint triangleUp, intPoint triangleDown) {
-        return false;
-    }
+    // public int[] findCircle(int x, int y){
+    // int[] cds = new int[2];
+    // for(int i = 0; i < 20; i++){
+    // for(int j = 0; j < 20; j++){
+    // if(intpoint_inside_circle(x, y, )){
 
-    public boolean intpoint_inside_trigon(int x, int y, intPoint a, intPoint b, intPoint c) {
-        int as_x = x - a.x;
-        int as_y = y - a.y;
+    // }
+    // if(i %2 == 0){
+    // cds[0] =
+    // }else{
 
-        boolean s_ab = (b.x - a.x) * as_y - (b.y - a.y) * as_x > 0;
+    // }
+    // }
+    // }
+    // return null;
+    // }
 
-        if ((c.x - a.x) * as_y - (c.y - a.y) * as_x > 0 == s_ab)
-            return false;
-        if ((c.x - b.x) * (y - b.y) - (c.y - b.y) * (x - b.x) > 0 != s_ab)
-            return false;
-        return true;
-    }
+    // public boolean intpoint_inside_hexagon(int x, int y, intPoint square,
+    // intPoint triangleUp, intPoint triangleDown) {
+    // return false;
+    // }
+
+    // public boolean intpoint_inside_trigon(int x, int y, intPoint a, intPoint b,
+    // intPoint c) {
+    // int as_x = x - a.x;
+    // int as_y = y - a.y;
+
+    // boolean s_ab = (b.x - a.x) * as_y - (b.y - a.y) * as_x > 0;
+
+    // if ((c.x - a.x) * as_y - (c.y - a.y) * as_x > 0 == s_ab)
+    // return false;
+    // if ((c.x - b.x) * (y - b.y) - (c.y - b.y) * (x - b.x) > 0 != s_ab)
+    // return false;
+    // return true;
+    // }
 }
