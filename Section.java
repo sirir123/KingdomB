@@ -7,10 +7,12 @@ import java.awt.image.BufferedImage;
 
 public class Section {
     private Set<Hex> hexes;
+    private Hex[][] hexMap;
     private BoardImage IMG;
 
     Section(BoardImage i, String[][] hx, int s) { // give list of numbers, create tiles
         hexes = new HashSet<>();
+        hexMap = new Hex[hx.length][hx[0].length];
         // w/ correct nums and
         // neighbors
         // blah blah blah
@@ -22,12 +24,23 @@ public class Section {
             else
                 tempC = 1;
             for (int j = 0; j < hx[0].length; j++) {
-
+                hexMap[r][j] = new Hex(hx[r][j], tempC, r, s);
                 hexes.add(new Hex(hx[r][j], tempC, r, s));
                 tempC += 2;
             }
 
         }
+        System.out.println();
+        System.out.println();
+        for (Hex[] hxs : hexMap) {
+            for (Hex h : hxs) {
+                System.out.print(h.toString() + ", ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+        System.out.println();
+        // System.out.println("Hex Map: " + hexMap.toString());
     }
 
     public BufferedImage getImage() {

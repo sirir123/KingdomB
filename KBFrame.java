@@ -8,8 +8,8 @@ import java.awt.image.*;
 import javax.imageio.ImageIO;
 
 public class KBFrame extends JFrame {// hi
-    final int WIDTH = 1250;
-    final int HEIGHT = 924;
+    final int WIDTH = 1400;
+    final int HEIGHT = 1002;
     private BufferedImage icon;
 
     public KBFrame(String framename) {
@@ -18,14 +18,14 @@ public class KBFrame extends JFrame {// hi
         setSize(WIDTH, HEIGHT);
         add(new KBPanel());
         setVisible(true);
-        try{
-            icon= ImageIO.read(KBPanel.class.getResource("/Pictures/icon.jpg"));
+        setResizable(false);
+        try {
+            icon = ImageIO.read(KBPanel.class.getResource("/Pictures/icon.jpg"));
+        } catch (Exception E) {
+            System.out.println("Exception Error");
+            E.printStackTrace();
+            return;
         }
-        catch(Exception E) {
-			System.out.println("Exception Error");
-			E.printStackTrace();
-			return;
-		}
-		setIconImage(icon);
+        setIconImage(icon);
     }
 }
