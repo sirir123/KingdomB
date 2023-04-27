@@ -7,7 +7,8 @@ public class Player {
     private ArrayList<Integer> points;
 
     public Player() {
-        ArrayList<TileHex> tiles = new ArrayList<TileHex>();
+        tiles = new ArrayList<TileHex>();
+
         ArrayList<Integer> points = new ArrayList<Integer>();
     }
 
