@@ -177,4 +177,46 @@ public class Game {
         }
     }
 
+    public void boatT(Player p, Hex exist, Hex water, int num) {//int is index of chosen token
+        if (exist.getFree() == (players.indexOf(p)) && water.getFree() == -1 && (p.getTile(num)).getType().equals("boat") && (p.getTile(num)).getStat() == 1) {
+            // check adjacency of chosen water hex!!!
+            water.setOcc(players.indexOf(p));
+            exist.setOcc(-1);
+            exist.setpNum(-1);
+            water.setpNum(players.indexOf(p));
+            p.getTile(num).statUsed();
+        }
+    }// get existing settlement and move to water
+
+    public void paddockT(Player p, Hex exist, Hex next, int num) {
+        if (exist.getFree() == (players.indexOf(p)) && next.getFree() == -1 && (p.getTile(num)).getType().equals("paddock") && (p.getTile(num)).getStat() == 1) {
+            // check if next is 2 hexes away in a straight line
+            exist.setOcc(-1);
+            exist.setpNum(-1);
+            next.setOcc(players.indexOf(p));
+            next.setpNum(players.indexOf(p));
+            p.getTile(num).statUsed();
+        }
+    }// get existing settlement and jump 2 hexes straight line
+
+    public void oracleT(Player p, Hex next, int num) {
+        if (next.getFree() == -1 && p.getSettlements() > 0 && p.getType() == next.getType() && (p.getTile(num)).getType().equals("oracle") && (p.getTile(num)).getStat() == 1) {
+            // check adjacency of chosen hex!!!
+            next.setOcc(players.indexOf(p));
+            next.setpNum(players.indexOf(p));
+            p.useSettlement();
+            p.getTile(num).statUsed();
+        }
+    }// place new settlement on terrain as current card
+
+    public void farmT(Player p, Hex grass, int num) {
+        if (grass.getFree() == -1 && p.getSettlements() > 0 && "grs" == grass.getType() && (p.getTile(num)).getType().equals("farm") && (p.getTile(num)).getStat() == 1) {
+            // check adjacency of chosen grass hex!!!
+            grass.setOcc(players.indexOf(p));
+            grass.setpNum(players.indexOf(p));
+            p.useSettlement();
+            p.getTile(num).statUsed();
+        }
+    }// place new settlement on grass hex
+
 }
