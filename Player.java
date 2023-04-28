@@ -20,7 +20,7 @@ public class Player {
 
     public TileHex getTile(int num) { return tiles.get(num); }
 
-    public void addTile(TileHex t) { tiles.add(t); }
+    public void addTile(TileHex t) { t.statUsed(); tiles.add(t); }
 
     public void addPoints(int num) { points.add(num); }
 
