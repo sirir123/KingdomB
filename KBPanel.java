@@ -56,21 +56,20 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             discCd = ImageIO.read(KBPanel.class.getResource("/Pictures/cardDiscoverer.png"));
             castCd = ImageIO.read(KBPanel.class.getResource("/Pictures/cardCastle.png"));
 
-            // tFlwr = ImageIO.read(KBPanel.class.getResource("pictures/flower.png"));//
-            // tGrs = ImageIO.read(KBPanel.class.getResource("pictures/meadow.png"));//
-            // tCnyn = ImageIO.read(KBPanel.class.getResource("pictures/canyon.png"));//
-            // tDes = ImageIO.read(KBPanel.class.getResource("pictures/desert.png"));//
-            // tFor = ImageIO.read(KBPanel.class.getResource("pictures/forest.png"));//
+            tFlwr = ImageIO.read(KBPanel.class.getResource("pictures/flower.png"));//
+            tGrs = ImageIO.read(KBPanel.class.getResource("pictures/meadow.png"));//
+            tCnyn = ImageIO.read(KBPanel.class.getResource("pictures/canyon.png"));//
+            tDes = ImageIO.read(KBPanel.class.getResource("pictures/desert.png"));//
+            tFor = ImageIO.read(KBPanel.class.getResource("pictures/forest.png"));//
 
-            // sOrcl = ImageIO.read(KBPanel.class.getResource("pictures/oracle
-            // shaded.png")); // what?
-            // sHrse = ImageIO.read(KBPanel.class.getResource("pictures/horse shaded.png"));
-            // sFrm = ImageIO.read(KBPanel.class.getResource("pictures/farm shaded.png"));
-            // sBt = ImageIO.read(KBPanel.class.getResource("pictures/boat shaded.png"));
-            // orcl = ImageIO.read(KBPanel.class.getResource("pictures/oracle.png"));
-            // hrse = ImageIO.read(KBPanel.class.getResource("pictures/horse.png"));
-            // frm = ImageIO.read(KBPanel.class.getResource("pictures/farm.png"));
-            // bt = ImageIO.read(KBPanel.class.getResource("pictures/boat.png"));
+            sOrcl = ImageIO.read(KBPanel.class.getResource("pictures/oracleshaded.png")); // what?
+            sHrse = ImageIO.read(KBPanel.class.getResource("pictures/horse shaded.png"));
+            sFrm = ImageIO.read(KBPanel.class.getResource("pictures/farm shaded.png"));
+            sBt = ImageIO.read(KBPanel.class.getResource("pictures/boat shaded.png"));
+            orcl = ImageIO.read(KBPanel.class.getResource("pictures/oracle.png"));
+            hrse = ImageIO.read(KBPanel.class.getResource("pictures/horse.png"));
+            frm = ImageIO.read(KBPanel.class.getResource("pictures/farm.png"));
+            bt = ImageIO.read(KBPanel.class.getResource("pictures/boat.png"));
 
             // sHrse = (1040, 93) 54 50, sOrcl = ()
 
@@ -86,8 +85,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             boards.add(new BoardImage(3, ImageIO.read(KBPanel.class.getResource("/Pictures/boardOracle.png"))));
             Collections.shuffle(boards, new Random());
 
-            // startTile =
-            // ImageIO.read(KBPanel.class.getResource("/Pictures/startTile.png"));
+            startTile = ImageIO.read(KBPanel.class.getResource("/Pictures/startTile.png"));
 
             colPink = ImageIO.read(KBPanel.class.getResource("/Pictures/colorPink.png"));
 
