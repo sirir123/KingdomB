@@ -9,7 +9,7 @@ public class Player {
     public Player() {
         tiles = new ArrayList<TileHex>();
 
-        ArrayList<Integer> points = new ArrayList<Integer>();
+        points = new ArrayList<Integer>();
     }
 
     public int getSettlements () { return settlements;}
