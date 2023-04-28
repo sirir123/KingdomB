@@ -29,6 +29,12 @@ public class TileHex extends Hex {
         return status;
     }
 
+    public void minusAmount(){
+        if(amount>0){
+        amount--;
+        }
+    }
+
     public int getAmount() {
         return amount;
     }

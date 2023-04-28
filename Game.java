@@ -178,24 +178,26 @@ public class Game {
     }
 
     public void boatT(Player p, Hex exist, Hex water, int num) {//int is index of chosen token
-        if (exist.getFree() == (players.indexOf(p)) && water.getFree() == -1 && (p.getTile(num)).getType().equals("boat") && (p.getTile(num)).getStat() == 1) {
+        if (exist.getFree() == (players.indexOf(p)) && water.getFree() == -1 && (p.getTile(num)).getType().equals("boat") && (p.getTile(num)).getStat() == 1 && water.getType().equals("wat")) {
             // check adjacency of chosen water hex!!!
             water.setOcc(players.indexOf(p));
             exist.setOcc(-1);
             exist.setpNum(-1);
             water.setpNum(players.indexOf(p));
             p.getTile(num).statUsed();
+            System.out.println("player" + players.indexOf(p) + "used boatT");
         }
     }// get existing settlement and move to water
 
     public void paddockT(Player p, Hex exist, Hex next, int num) {
-        if (exist.getFree() == (players.indexOf(p)) && next.getFree() == -1 && (p.getTile(num)).getType().equals("paddock") && (p.getTile(num)).getStat() == 1 && next.getType()!="wat" && next.getType()!="mt") {
+        if (exist.getFree() == (players.indexOf(p)) && next.getFree() == -1 && (p.getTile(num)).getType().equals("paddock") && (p.getTile(num)).getStat() == 1 && !next.getType().equals("wat") && !next.getType().equals("mt")) {
             // check if next is 2 hexes away in a straight line
             exist.setOcc(-1);
             exist.setpNum(-1);
             next.setOcc(players.indexOf(p));
             next.setpNum(players.indexOf(p));
             p.getTile(num).statUsed();
+            System.out.println("player" + players.indexOf(p) + "used paddockT");
         }
     }// get existing settlement and jump 2 hexes straight line
 
@@ -206,6 +208,7 @@ public class Game {
             next.setpNum(players.indexOf(p));
             p.useSettlement();
             p.getTile(num).statUsed();
+            System.out.println("player" + players.indexOf(p) + "used oracleT");
         }
     }// place new settlement on terrain as current card
 
@@ -216,6 +219,16 @@ public class Game {
             grass.setpNum(players.indexOf(p));
             p.useSettlement();
             p.getTile(num).statUsed();
+            System.out.println("player" + players.indexOf(p) + "used farmT");
         }
     }// place new settlement on grass hex
+
+    public void collectTile(TileHex adj, Hex touch){
+        //check adjacency
+        if(adj.getAmount()>0 && touch.getFree()>-1){
+            players.get(touch.getFree()).addTile(adj);
+            adj.minusAmount();
+            System.out.println("player " + touch.getFree() + "collected tile:" + adj.getType());
+        }
+    }
 }
