@@ -189,7 +189,7 @@ public class Game {
     }// get existing settlement and move to water
 
     public void paddockT(Player p, Hex exist, Hex next, int num) {
-        if (exist.getFree() == (players.indexOf(p)) && next.getFree() == -1 && (p.getTile(num)).getType().equals("paddock") && (p.getTile(num)).getStat() == 1) {
+        if (exist.getFree() == (players.indexOf(p)) && next.getFree() == -1 && (p.getTile(num)).getType().equals("paddock") && (p.getTile(num)).getStat() == 1 && next.getType()!="wat" && next.getType()!="mt") {
             // check if next is 2 hexes away in a straight line
             exist.setOcc(-1);
             exist.setpNum(-1);
@@ -218,5 +218,4 @@ public class Game {
             p.getTile(num).statUsed();
         }
     }// place new settlement on grass hex
-
 }
