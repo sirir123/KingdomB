@@ -144,12 +144,12 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             for (int i = 0; i < numPly; i++) {
                 gm.getPlayer(i).setChosen(gm.drawDeck());
             }
-            //TileHex test = new TileHex("farm", 0, 0, 0);
-           // gm.getPlayer(0).addTile(test);
-            //test.statUnused();
-           // TileHex test2 = new TileHex("oracle", 0, 0, 0);
-           // gm.getPlayer(0).addTile(test2);
-           // gm.getPlayer(1).addTile(new TileHex ("horse", 0, 0, 0));
+            // TileHex test = new TileHex("farm", 0, 0, 0);
+            // gm.getPlayer(0).addTile(test);
+            // test.statUnused();
+            // TileHex test2 = new TileHex("oracle", 0, 0, 0);
+            // gm.getPlayer(0).addTile(test2);
+            // gm.getPlayer(1).addTile(new TileHex ("horse", 0, 0, 0));
 
             gm.setBoards(boards);
             // gm.updateAvaliable();
@@ -279,14 +279,30 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
     }
 
     public BufferedImage getTileImage(String t) {
-        if (t.equals("farm")) { return frm; }
-        if (t.equals("boat")) { return bt; }
-        if (t.equals("oracle")) { return orcl; }
-        if (t.equals("horse")) { return hrse; }
-        if (t.equals("shfarm")) { return sFrm; }
-        if (t.equals("shboat")) { return sBt; }
-        if (t.equals("shoracle")) { return sOrcl; }
-        if (t.equals("shhorse")) { return sHrse; }
+        if (t.equals("farm")) {
+            return frm;
+        }
+        if (t.equals("boat")) {
+            return bt;
+        }
+        if (t.equals("oracle")) {
+            return orcl;
+        }
+        if (t.equals("horse")) {
+            return hrse;
+        }
+        if (t.equals("shfarm")) {
+            return sFrm;
+        }
+        if (t.equals("shboat")) {
+            return sBt;
+        }
+        if (t.equals("shoracle")) {
+            return sOrcl;
+        }
+        if (t.equals("shhorse")) {
+            return sHrse;
+        }
 
         return null;
     }
@@ -301,6 +317,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                         g.drawImage(plyRects.get(0), (int) (835 * (getWidth() / 1238.0)),
                                 (int) (81 * (getHeight() / 889.0)), (int) (330 * (getWidth() / 1238.0)),
                                 (int) (180 * (getHeight() / 889.0)), null);
+                        g.drawImage(sOrcl, 1033, 90, 69, 62, null); // ouch
 
                         if (gm.getCurrPlayer() == 0) {
                             g.drawImage(currCol, (int) (835 * (getWidth() / 1238.0)),
@@ -310,43 +327,57 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                     (int) (getWidth() / 1.335), (int) (getHeight() / 9.53),
                                     (int) ((1030 - 934) * (getWidth() / 1250.0)),
                                     (int) ((236 - 92) * (getHeight() / 896.0)), null);
-                            for (int x = 0; x < gm.getPlayer(0).getAllTiles().size(); x ++){
-                                if (gm.getPlayer(0).getTile(x).getStat() == 1){
-                                    if (x < 2){ 
-                                        g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 1167 + (x * 61), 105,54, 50, null);
-                                    } else if ( x<4){
-                                        g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 1045 + (x * 61), 160,54, 50, null);
-                                    } else{
-                                        g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 923 + (x * 61), 215,54, 50, null);
+                            for (int x = 0; x < gm.getPlayer(0).getAllTiles().size(); x++) {
+                                if (gm.getPlayer(0).getTile(x).getStat() == 1) {
+                                    if (x < 2) {
+                                        g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 1167 + (x * 61),
+                                                105, 54, 50, null);
+                                    } else if (x < 4) {
+                                        g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 1045 + (x * 61),
+                                                160, 54, 50, null);
+                                    } else {
+                                        g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 923 + (x * 61),
+                                                215, 54, 50, null);
                                     }
-                            } else if (gm.getPlayer(0).getTile(x).getStat() == 2){
-                                    if (x < 2){ 
-                                       g.drawImage(getTileImage("sh" + gm.getPlayer(0).getTile(x).getType()), 1167 + (x * 61), 105,54, 50, null);
-                                    } else if ( x<4){
-                                        g.drawImage(getTileImage("sh" + gm.getPlayer(0).getTile(x).getType()), 1045 + (x * 61), 160,54, 50, null);
-                                    } else{
-                                    g.drawImage(getTileImage("sh" + gm.getPlayer(0).getTile(x).getType()), 923 + (x * 61), 215,54, 50, null);
+                                } else if (gm.getPlayer(0).getTile(x).getStat() == 2) {
+                                    if (x < 2) {
+                                        g.drawImage(getTileImage("sh" + gm.getPlayer(0).getTile(x).getType()),
+                                                1167 + (x * 61), 105, 54, 50, null);
+                                    } else if (x < 4) {
+                                        g.drawImage(getTileImage("sh" + gm.getPlayer(0).getTile(x).getType()),
+                                                1045 + (x * 61), 160, 54, 50, null);
+                                    } else {
+                                        g.drawImage(getTileImage("sh" + gm.getPlayer(0).getTile(x).getType()),
+                                                923 + (x * 61), 215, 54, 50, null);
                                     }
                                 }
-                                        
+
                             }
-                } 
-                    if (gm.getCurrPlayer() != 0){
-                        for (int x = 0; x < gm.getPlayer(0).getAllTiles().size(); x ++){
-                                if (x < 2){ 
-                                    g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 1167 + (x * 61), 105,54, 50, null);
-                                } else if ( x<4){
-                                    g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 1045 + (x * 61), 160,54, 50, null);
-                                } else{
-                                g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 923 + (x * 61), 215,54, 50, null);
-                                } 
                         }
-                     }
-                       
+                        if (gm.getCurrPlayer() != 0) {
+                            for (int x = 0; x < gm.getPlayer(0).getAllTiles().size(); x++) {
+                                if (x < 2) {
+                                    g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 1167 + (x * 61),
+                                            105, 54, 50, null);
+                                } else if (x < 4) {
+                                    g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 1045 + (x * 61),
+                                            160, 54, 50, null);
+                                } else {
+                                    g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 923 + (x * 61), 215,
+                                            54, 50, null);
+                                }
+                            }
+                        }
+
                         g.drawString("" + (gm.getPlayer(0).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
                                 (int) (143 * (getHeight() / 889.0)));
 
-                        
+                        if (gm.getCurrPlayer() == 0) {
+                            g.drawImage(getTerrImage(gm.getPlayer(gm.getCurrPlayer()).getChosen().getTerr()),
+                                    (int) (938 * (getWidth() / 1250.0)), (int) (96 * (getHeight() / 896.0)),
+                                    (int) ((1030 - 934) * (getWidth() / 1250.0)),
+                                    (int) ((236 - 92) * (getHeight() / 896.0)), null);
+                        }
                         break;
                     case 1:
                         g.drawImage(plyRects.get(1), (int) (835 * (getWidth() / 1238.0)),
@@ -362,40 +393,49 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                     (int) ((1030 - 934) * (getWidth() / 1250.0)),
                                     (int) ((236 - 92) * (getHeight() / 896.0)), null);
 
-                            for (int x = 0; x < gm.getPlayer(1).getAllTiles().size(); x ++){
-                                if (gm.getPlayer(0).getTile(x).getStat() == 1){
-                                    if (x < 2){ 
-                                        g.drawImage(getTileImage(gm.getPlayer(1).getTile(x).getType()), 1167 + (x * 61), 307,54, 50, null);
-                                    } else if ( x<4){
-                                        g.drawImage(getTileImage(gm.getPlayer(1).getTile(x).getType()), 1045 + (x * 61), 363,54, 50, null);
-                                    } else{
-                                    g.drawImage(getTileImage(gm.getPlayer(1).getTile(x).getType()), 923 + (x * 61), 417,54, 50, null);
+                            for (int x = 0; x < gm.getPlayer(1).getAllTiles().size(); x++) {
+                                if (gm.getPlayer(0).getTile(x).getStat() == 1) {
+                                    if (x < 2) {
+                                        g.drawImage(getTileImage(gm.getPlayer(1).getTile(x).getType()), 1167 + (x * 61),
+                                                307, 54, 50, null);
+                                    } else if (x < 4) {
+                                        g.drawImage(getTileImage(gm.getPlayer(1).getTile(x).getType()), 1045 + (x * 61),
+                                                363, 54, 50, null);
+                                    } else {
+                                        g.drawImage(getTileImage(gm.getPlayer(1).getTile(x).getType()), 923 + (x * 61),
+                                                417, 54, 50, null);
                                     }
-                            } else if (gm.getPlayer(0).getTile(x).getStat() == 2){
-                                if (x < 2){ 
-                                    g.drawImage(getTileImage("sh" + gm.getPlayer(1).getTile(x).getType()), 1167 + (x * 61), 307,54, 50, null);
-                                } else if ( x<4){
-                                    g.drawImage(getTileImage("sh" + gm.getPlayer(1).getTile(x).getType()), 1045 + (x * 61), 363,54, 50, null);
-                                } else{
-                                g.drawImage(getTileImage("sh" + gm.getPlayer(1).getTile(x).getType()), 923 + (x * 61), 417,54, 50, null);
+                                } else if (gm.getPlayer(0).getTile(x).getStat() == 2) {
+                                    if (x < 2) {
+                                        g.drawImage(getTileImage("sh" + gm.getPlayer(1).getTile(x).getType()),
+                                                1167 + (x * 61), 307, 54, 50, null);
+                                    } else if (x < 4) {
+                                        g.drawImage(getTileImage("sh" + gm.getPlayer(1).getTile(x).getType()),
+                                                1045 + (x * 61), 363, 54, 50, null);
+                                    } else {
+                                        g.drawImage(getTileImage("sh" + gm.getPlayer(1).getTile(x).getType()),
+                                                923 + (x * 61), 417, 54, 50, null);
+                                    }
                                 }
-                                }           
                             }
 
-                        } 
+                        }
                         g.drawString("" + (gm.getPlayer(1).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
                                 (int) (328 * (getHeight() / 889.0)));
-                        
-                        if (gm.getCurrPlayer() != 1){
-                           for (int x = 0; x < gm.getPlayer(1).getAllTiles().size(); x ++){
-                                if (x < 2){ 
-                                    g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 1167 + (x * 61), 307,54, 50, null);
-                                } else if ( x<4){
-                                    g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 1045 + (x * 61), 363,54, 50, null);
-                                } else{
-                                g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 923 + (x * 61), 417,54, 50, null);
+
+                        if (gm.getCurrPlayer() != 1) {
+                            for (int x = 0; x < gm.getPlayer(1).getAllTiles().size(); x++) {
+                                if (x < 2) {
+                                    g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 1167 + (x * 61),
+                                            307, 54, 50, null);
+                                } else if (x < 4) {
+                                    g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 1045 + (x * 61),
+                                            363, 54, 50, null);
+                                } else {
+                                    g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 923 + (x * 61), 417,
+                                            54, 50, null);
                                 }
-                            } 
+                            }
                         }
                         break;
                     case 2:
@@ -412,38 +452,46 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                     (int) ((1030 - 934) * (getWidth() / 1250.0)),
                                     (int) ((236 - 92) * (getHeight() / 896.0)), null);
 
-                        
-                            for (int x = 0; x < gm.getPlayer(2).getAllTiles().size(); x ++){
-                                if (gm.getPlayer(0).getTile(x).getStat() == 1){
-                                    if (x < 2){ 
-                                        g.drawImage(getTileImage(gm.getPlayer(2).getTile(x).getType()), 1167 + (x * 61), 510,54, 50, null);
-                                    } else if ( x<4){
-                                        g.drawImage(getTileImage(gm.getPlayer(2).getTile(x).getType()), 1045 + (x * 61), 565,54, 50, null);
-                                    } else{
-                                    g.drawImage(getTileImage(gm.getPlayer(2).getTile(x).getType()), 923 + (x * 61), 619,54, 50, null);
+                            for (int x = 0; x < gm.getPlayer(2).getAllTiles().size(); x++) {
+                                if (gm.getPlayer(0).getTile(x).getStat() == 1) {
+                                    if (x < 2) {
+                                        g.drawImage(getTileImage(gm.getPlayer(2).getTile(x).getType()), 1167 + (x * 61),
+                                                510, 54, 50, null);
+                                    } else if (x < 4) {
+                                        g.drawImage(getTileImage(gm.getPlayer(2).getTile(x).getType()), 1045 + (x * 61),
+                                                565, 54, 50, null);
+                                    } else {
+                                        g.drawImage(getTileImage(gm.getPlayer(2).getTile(x).getType()), 923 + (x * 61),
+                                                619, 54, 50, null);
                                     }
-                            } else if (gm.getPlayer(0).getTile(x).getStat() == 2){
-                                if (x < 2){ 
-                                    g.drawImage(getTileImage("sh" + gm.getPlayer(2).getTile(x).getType()), 1167 + (x * 61), 510,54, 50, null);
-                                } else if ( x<4){
-                                    g.drawImage(getTileImage("sh" + gm.getPlayer(2).getTile(x).getType()), 1045 + (x * 61), 565,54, 50, null);
-                                } else{
-                                g.drawImage(getTileImage("sh" + gm.getPlayer(2).getTile(x).getType()), 923 + (x * 61), 619,54, 50, null);
+                                } else if (gm.getPlayer(0).getTile(x).getStat() == 2) {
+                                    if (x < 2) {
+                                        g.drawImage(getTileImage("sh" + gm.getPlayer(2).getTile(x).getType()),
+                                                1167 + (x * 61), 510, 54, 50, null);
+                                    } else if (x < 4) {
+                                        g.drawImage(getTileImage("sh" + gm.getPlayer(2).getTile(x).getType()),
+                                                1045 + (x * 61), 565, 54, 50, null);
+                                    } else {
+                                        g.drawImage(getTileImage("sh" + gm.getPlayer(2).getTile(x).getType()),
+                                                923 + (x * 61), 619, 54, 50, null);
+                                    }
                                 }
-                            }           
-                    }
-                }
+                            }
+                        }
                         g.drawString("" + (gm.getPlayer(2).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
                                 (int) (512 * (getHeight() / 889.0)));
-                        
-                        if (gm.getCurrPlayer() != 2){
-                        for (int x = 0; x < gm.getPlayer(2).getAllTiles().size(); x ++){
-                                if (x < 2){ 
-                                    g.drawImage(getTileImage(gm.getPlayer(2).getTile(x).getType()), 1167 + (x * 61), 510,54, 50, null);
-                                } else if ( x<4){
-                                    g.drawImage(getTileImage(gm.getPlayer(2).getTile(x).getType()), 1045 + (x * 61), 565,54, 50, null);
-                                } else{
-                                g.drawImage(getTileImage(gm.getPlayer(2).getTile(x).getType()), 923 + (x * 61), 619,54, 50, null);
+
+                        if (gm.getCurrPlayer() != 2) {
+                            for (int x = 0; x < gm.getPlayer(2).getAllTiles().size(); x++) {
+                                if (x < 2) {
+                                    g.drawImage(getTileImage(gm.getPlayer(2).getTile(x).getType()), 1167 + (x * 61),
+                                            510, 54, 50, null);
+                                } else if (x < 4) {
+                                    g.drawImage(getTileImage(gm.getPlayer(2).getTile(x).getType()), 1045 + (x * 61),
+                                            565, 54, 50, null);
+                                } else {
+                                    g.drawImage(getTileImage(gm.getPlayer(2).getTile(x).getType()), 923 + (x * 61), 619,
+                                            54, 50, null);
                                 }
                             }
                         }
@@ -461,38 +509,47 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                     (int) (getWidth() / 1.335), (int) (getHeight() / 1.366),
                                     (int) ((1030 - 934) * (getWidth() / 1250.0)),
                                     (int) ((236 - 92) * (getHeight() / 896.0)), null);
-                            for (int x = 0; x < gm.getPlayer(3).getAllTiles().size(); x ++){
-                                if (gm.getPlayer(0).getTile(x).getStat() == 1){
-                                    if (x < 2){ 
-                                        g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 1167 + (x * 61), 711,54, 50, null);
-                                    } else if ( x<4){
-                                        g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 1045 + (x * 61), 768,54, 50, null);
-                                    } else{
-                                    g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 923 + (x * 61), 822,54, 50, null);
+                            for (int x = 0; x < gm.getPlayer(3).getAllTiles().size(); x++) {
+                                if (gm.getPlayer(0).getTile(x).getStat() == 1) {
+                                    if (x < 2) {
+                                        g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 1167 + (x * 61),
+                                                711, 54, 50, null);
+                                    } else if (x < 4) {
+                                        g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 1045 + (x * 61),
+                                                768, 54, 50, null);
+                                    } else {
+                                        g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 923 + (x * 61),
+                                                822, 54, 50, null);
                                     }
-                            } else if (gm.getPlayer(0).getTile(x).getStat() == 3){
-                                if (x < 2){ 
-                                    g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 1167 + (x * 61), 711,54, 50, null);
-                                } else if ( x<4){
-                                    g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 1045 + (x * 61), 768,54, 50, null);
-                                } else{
-                                g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 923 + (x * 61), 822,54, 50, null);
+                                } else if (gm.getPlayer(0).getTile(x).getStat() == 3) {
+                                    if (x < 2) {
+                                        g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 1167 + (x * 61),
+                                                711, 54, 50, null);
+                                    } else if (x < 4) {
+                                        g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 1045 + (x * 61),
+                                                768, 54, 50, null);
+                                    } else {
+                                        g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 923 + (x * 61),
+                                                822, 54, 50, null);
+                                    }
                                 }
-                            }           
-                    }
-                }
+                            }
+                        }
                         g.drawString("" + (gm.getPlayer(3).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
                                 (int) (696 * (getHeight() / 889.0)));
-                        if (gm.getCurrPlayer() != 3){
-                                for (int x = 0; x < gm.getPlayer(3).getAllTiles().size(); x ++){
-                                    if (x < 2){ 
-                                        g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 1167 + (x * 61), 711,54, 50, null);
-                                    } else if ( x<4){
-                                        g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 1045 + (x * 61), 768,54, 50, null);
-                                    } else{
-                                    g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 923 + (x * 61), 822,54, 50, null);
-                                    }
+                        if (gm.getCurrPlayer() != 3) {
+                            for (int x = 0; x < gm.getPlayer(3).getAllTiles().size(); x++) {
+                                if (x < 2) {
+                                    g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 1167 + (x * 61),
+                                            711, 54, 50, null);
+                                } else if (x < 4) {
+                                    g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 1045 + (x * 61),
+                                            768, 54, 50, null);
+                                } else {
+                                    g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 923 + (x * 61), 822,
+                                            54, 50, null);
                                 }
+                            }
                         }
                         break;
                 }
