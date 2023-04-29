@@ -16,6 +16,7 @@ public class KBFrame extends JFrame {// hi
         super(framename);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
+        setLocationRelativeTo(null);//finally centered this bitch
         add(new KBPanel());
         setVisible(true);
         setResizable(false);
@@ -23,7 +24,7 @@ public class KBFrame extends JFrame {// hi
         try {
             icon = ImageIO.read(KBPanel.class.getResource("/Pictures/icon.jpg"));
         } catch (Exception E) {
-            System.out.println("Exception Error");
+            System.out.println("Exception Error in frame");
             E.printStackTrace();
             return;
         }

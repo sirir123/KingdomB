@@ -90,7 +90,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             colPink = ImageIO.read(KBPanel.class.getResource("/Pictures/colorPink.png"));
 
         } catch (Exception E) {
-            System.out.println("Exception Error");
+            System.out.println("Exception Error in panel");
             return;
         }
         addMouseListener(this);
@@ -212,9 +212,9 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             g.drawImage(mainScr, 0, 0, getWidth(), getHeight(), null);
             drawPlayers(g);
             // drawing cards
-            g.drawImage(lordCd, 82, 84, 120, 173, null);
-            g.drawImage(workCd, 81, 286, 120, 173, null);
-            g.drawImage(discCd, 81, 488, 120, 173, null);
+            g.drawImage(lordCd, 93, 93, 133, 186, null);
+            g.drawImage(workCd, 91, 311, 133, 186, null);
+            g.drawImage(discCd, 91, 529, 133, 186, null);
 
             // drawing info
             g.setColor(Color.white);
@@ -499,13 +499,13 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             }
 
             if (gm.startPlayer == 0) {
-                g.drawImage(startTile, 850, 150, 85, 70, null); // ouch
+                g.drawImage(startTile, 955, 170, 85, 70, null); // ouch
             } else if (gm.startPlayer == 1) {
-                g.drawImage(startTile, 850, 330, 85, 70, null); // ouch
+                g.drawImage(startTile, 955, 370, 85, 70, null); // ouch
             } else if (gm.startPlayer == 2) {
-                g.drawImage(startTile, 850, 510, 85, 70, null); // ouch
+                g.drawImage(startTile, 955, 570, 85, 70, null); // ouch
             } else if (gm.startPlayer == 3) {
-                g.drawImage(startTile, 850, 700, 85, 70, null); // ouch
+                g.drawImage(startTile, 955, 770, 85, 70, null); // ouch
             }
         }
     }
