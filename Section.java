@@ -7,12 +7,14 @@ import java.awt.image.BufferedImage;
 
 public class Section {
     private Set<Hex> hexes;
+    private Set<Hex> tileHexes;
     private Hex[][] hexMap;
     private BoardImage IMG;
 
     Section(BoardImage i, String[][] hx, int s) { // give list of numbers, create tiles
         hexes = new HashSet<>();
         hexMap = new Hex[hx.length][hx[0].length];
+        tileHexes = new HashSet<>();
         // w/ correct nums and
         // neighbors
         // blah blah blah
@@ -23,34 +25,37 @@ public class Section {
                 tempC = 0;
             else
                 tempC = 1;
+
             for (int j = 0; j < hx[0].length; j++) {
-                hexMap[r][j] = new Hex(hx[r][j], tempC, r, s);
-                hexes.add(new Hex(hx[r][j], tempC, r, s));
+                Hex tempHex = new Hex(hx[r][j], tempC, r, s);
+
+                hexes.add(tempHex);
+                hexMap[r][j] = tempHex;
+
+                if (hx[r][j].equals("tiH") || hx[r][j].equals("tiO") || hx[r][j].equals("tiG")
+                        || hx[r][j].equals("tiB")) {
+                    tileHexes.add(tempHex);
+                }
+
                 tempC += 2;
             }
 
         }
-        System.out.println();
-        System.out.println();
-        for (Hex[] hxs : hexMap) {
-            for (Hex h : hxs) {
-                System.out.print(h.toString() + ", ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-        System.out.println();
+        // System.out.println();
+        // System.out.println();
+        // for (Hex[] hxs : hexMap) {
+        // for (Hex h : hxs) {
+        // System.out.print(h.toString() + ", ");
+        // }
+        // System.out.println();
+        // }
+        // System.out.println();
+        // System.out.println();
         // System.out.println("Hex Map: " + hexMap.toString());
     }
 
     public BufferedImage getImage() {
         return IMG.img;
-    }
-
-    public void multiply(int x, int y) {
-        for (Hex hx : hexes) {
-            hx.setCoords(hx.getCol() * x, hx.getRow() * y);
-        }
     }
 
     public Set<Hex> getHexes() {

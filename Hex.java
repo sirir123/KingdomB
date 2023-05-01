@@ -5,6 +5,9 @@ public class Hex {
     private int col, row, sec;
     protected int pNum;// -1 is none, 0-3 players
     protected int occ; // int for who is occupying -1 empty, 0-3 player, tileHex 4
+
+    private int amount, status;
+
     private ArrayList<Hex> neighbors;
 
     public Hex(String t, int c, int r, int s) {
@@ -13,7 +16,16 @@ public class Hex {
         row = r;
         sec = s;
         occ = -1;
+        pNum = -1;
         neighbors = new ArrayList<Hex>();
+
+        amount = -1;
+        status = -1;
+
+        if (t.equals("tiH") || t.equals("tiO") || t.equals("tiG") || t.equals("tiB")) {
+            amount = 2;
+            status = 0;
+        }
     }
 
     public Hex(String t, int c, int r) {
@@ -21,6 +33,7 @@ public class Hex {
         col = c;
         row = r;
         occ = -1;
+        pNum = -1;
         neighbors = new ArrayList<Hex>();
     }
 
@@ -33,6 +46,10 @@ public class Hex {
         pNum = p;
     }
 
+    public int getpNum() {
+        return pNum;
+    }
+
     public void setNeighbors(int dir, Hex h) {
         neighbors.set(dir, h);
     }
@@ -43,7 +60,7 @@ public class Hex {
         }
     }
 
-    public void multiply(int x, int y) {
+    public void update(int x, int y) {
         setCoords(col + x, row + y);
 
     }
@@ -65,11 +82,45 @@ public class Hex {
     }
 
     public int getSec() {
-        return -1;
+        return sec;
     }
 
     public String getType() {
         return type;
+    }
+
+    public int getAmound() {
+        return amount;
+    }
+
+    public void statStill() {
+        status = 0;
+    }
+
+    public void statUnused() {
+        status = 1;
+    }
+
+    public void statUsed() {
+        status = 2;
+    }
+
+    public void statDiscard() {
+        status = 3;
+    }
+
+    public int getStat() {
+        return status;
+    }
+
+    public void minusAmount() {
+        if (amount > 0) {
+            amount--;
+        }
+    }
+
+    public int getAmount() {
+        return amount;
     }
 
     public String toString() {

@@ -17,10 +17,10 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
     private BufferedImage lordCd, workCd, discCd, castCd;
     private BufferedImage tFlwr, tGrs, tDes, tFor, tCnyn;
     private BufferedImage sOrcl, sHrse, sFrm, sBt, orcl, hrse, frm, bt;
-    private BufferedImage infoUp, buttonX;
+    private BufferedImage infoUp, buttonX, darken;
     private BufferedImage currCol;
-    private BufferedImage colPink;
-    private ArrayList<BufferedImage> plyRects;
+    private BufferedImage colWhite;
+    private ArrayList<BufferedImage> plyRects, settColors;
     private ArrayList<BoardImage> boards;
     boolean download = false;
     String home = System.getProperty("user.home");
@@ -38,6 +38,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         end = false;
 
         plyRects = new ArrayList<>();
+        settColors = new ArrayList<>();
         boards = new ArrayList<>();
 
         try {
@@ -62,7 +63,10 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             tDes = ImageIO.read(KBPanel.class.getResource("pictures/desert.png"));//
             tFor = ImageIO.read(KBPanel.class.getResource("pictures/forest.png"));//
 
-            sOrcl = ImageIO.read(KBPanel.class.getResource("pictures/shOracle.png")); // what?
+            darken = ImageIO.read(KBPanel.class.getResource("pictures/dark.png"));//
+
+            sOrcl = ImageIO.read(KBPanel.class.getResource("pictures/shOracle.png")); //
+
             sHrse = ImageIO.read(KBPanel.class.getResource("pictures/shHorse.png"));
             sFrm = ImageIO.read(KBPanel.class.getResource("pictures/shFarm.png"));
             sBt = ImageIO.read(KBPanel.class.getResource("pictures/shBoat.png"));
@@ -85,9 +89,14 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             boards.add(new BoardImage(3, ImageIO.read(KBPanel.class.getResource("/Pictures/boardOracle.png"))));
             Collections.shuffle(boards, new Random());
 
-            startTile = ImageIO.read(KBPanel.class.getResource("/Pictures/startTile.png"));
+            // startTile =
+            // ImageIO.read(KBPanel.class.getResource("/Pictures/startTile.png"));
+            settColors.add(ImageIO.read(KBPanel.class.getResource("/Pictures/settPink.png")));
+            settColors.add(ImageIO.read(KBPanel.class.getResource("/Pictures/settOrg.png")));
+            settColors.add(ImageIO.read(KBPanel.class.getResource("/Pictures/settGreen.png")));
+            settColors.add(ImageIO.read(KBPanel.class.getResource("/Pictures/settBlue.png")));
 
-            colPink = ImageIO.read(KBPanel.class.getResource("/Pictures/colorPink.png"));
+            colWhite = ImageIO.read(KBPanel.class.getResource("/Pictures/colorWhite.png"));
 
         } catch (Exception E) {
             System.out.println("Exception Error in panel");
@@ -152,7 +161,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             // gm.getPlayer(1).addTile(new TileHex ("horse", 0, 0, 0));
 
             gm.setBoards(boards);
-            // gm.updateAvaliable();
+            gm.updateAvaliable(true);
         }
 
         if (start && intpoint_inside_circle(x, y, new intPoint(877, 124), 25)) {
@@ -167,6 +176,10 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         if (start && !help && x >= 258 && x <= 897 && y >= 267 && y <= 787) {
             int[] cds = findCircle(x, y);
             System.out.println("LOC: (" + cds[0] + ", " + cds[1] + ")");
+            if (gm.placed < 3 && gm.avaliable(cds[1], cds[0])) {
+                // System.out.println("AVALIABLE");
+                gm.placed++;
+            }
         }
 
         repaint();
@@ -236,6 +249,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             }
 
             drawShaders(g);
+            drawSettlements(g);
         }
 
     }
@@ -569,10 +583,9 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
     public void drawBoard(Graphics g) {
         ArrayList<Section> tempSet = gm.getBoards();
         // System.out.println("SIZE: " + tempSet.size());
-        if (tempSet != null && tempSet.size() > 0)
-            g.drawImage(tempSet.get(0).getImage(), (int) (244 * (getWidth() / 1238.0)),
-                    (int) (254 * (getHeight() / 889.0)), (int) (279 * (getWidth() / 1238.0)),
-                    (int) (238 * (getHeight() / 889.0)), null);
+        g.drawImage(tempSet.get(0).getImage(), (int) (244 * (getWidth() / 1238.0)),
+                (int) (254 * (getHeight() / 889.0)), (int) (279 * (getWidth() / 1238.0)),
+                (int) (238 * (getHeight() / 889.0)), null);
         g.drawImage(tempSet.get(1).getImage(), (int) ((244 + 279 - 11) * (getWidth() / 1238.0)),
                 (int) (254 * (getHeight() / 889.0)), (int) (279 * (getWidth() / 1238.0)),
                 (int) (238 * (getHeight() / 889.0)), null);
@@ -586,18 +599,79 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
     public void drawShaders(Graphics g) {
         // System.out.println("hello");
-        for (int j = 0; j < 20; j++) {
-            for (int i = 0; i < 20; i++) {
-                // if(j % 2 == 0)g.drawImage(colPink, (int)(271 + 30*i) , (int)(279 + 25*j), 30,
-                // 31, null);
-                // else g.drawImage(colPink, (int)(286 + 30*i) , (int)(279 + 25*j), 30, 31,
-                // null);
+        if (gm.placed < 3) {
+            for (Hex hx : gm.avaliable) {
+                // System.out.println("hex -- (" + hx.getRow() + ", " + hx.getCol() + ")");
+                if (hx.getRow() % 2 == 0) {
+                    g.drawImage(colWhite, (int) (271 + 30 * (hx.getCol() / 2)), (int) (279 + 25 * hx.getRow()), 30, 31,
+                            null);
+                } else {
+                    g.drawImage(colWhite, (int) (285 + 30 * ((hx.getCol() - 1) / 2)), (int) (279 + 25 * hx.getRow()),
+                            30, 31,
+                            null);
+                }
             }
         }
+
+        if (gm.placed < 3) {
+            g.drawImage(darken, 684, 100, 150, 45, null);
+        }
+
     }
 
     public void drawSettlements(Graphics g) {
+        for (Hex hx : gm.bb.getHexes()) {
+            // System.out.println("hex -- (" + hx.getRow() + ", " + hx.getCol() + ")");
+            if (hx.getpNum() != -1) {
+                switch (gm.getCurrPlayer()) {
+                    case 0:
+                        if (hx.getRow() % 2 == 0) {
+                            g.drawImage(settColors.get(0), (int) (276 + 30 * (hx.getCol() / 2)),
+                                    (int) (284 + 25 * hx.getRow()), 20, 20,
+                                    null);
+                        } else {
+                            g.drawImage(settColors.get(0), (int) (290 + 30 * ((hx.getCol() - 1) / 2)),
+                                    (int) (284 + 25 * hx.getRow()), 20, 20,
+                                    null);
+                        }
+                        break;
+                    case 1:
+                        if (hx.getRow() % 2 == 0) {
+                            g.drawImage(settColors.get(1), (int) (276 + 30 * (hx.getCol() / 2)),
+                                    (int) (284 + 25 * hx.getRow()), 20, 20,
+                                    null);
+                        } else {
+                            g.drawImage(settColors.get(1), (int) (290 + 30 * ((hx.getCol() - 1) / 2)),
+                                    (int) (284 + 25 * hx.getRow()), 20, 20,
+                                    null);
+                        }
+                        break;
+                    case 2:
+                        if (hx.getRow() % 2 == 0) {
+                            g.drawImage(settColors.get(2), (int) (276 + 30 * (hx.getCol() / 2)),
+                                    (int) (284 + 25 * hx.getRow()), 20, 20,
+                                    null);
+                        } else {
+                            g.drawImage(settColors.get(2), (int) (290 + 30 * ((hx.getCol() - 1) / 2)),
+                                    (int) (284 + 25 * hx.getRow()), 20, 20,
+                                    null);
+                        }
+                        break;
+                    case 3:
+                        if (hx.getRow() % 2 == 0) {
+                            g.drawImage(settColors.get(3), (int) (276 + 30 * (hx.getCol() / 2)),
+                                    (int) (284 + 25 * hx.getRow()), 20, 20,
+                                    null);
+                        } else {
+                            g.drawImage(settColors.get(3), (int) (290 + 30 * ((hx.getCol() - 1) / 2)),
+                                    (int) (284 + 25 * hx.getRow()), 20, 20,
+                                    null);
+                        }
+                        break;
+                }
+            }
 
+        }
     }
 
     public boolean intpoint_inside_circle(int x, int y, intPoint center, int rad) {
