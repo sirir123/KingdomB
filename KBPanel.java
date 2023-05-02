@@ -89,8 +89,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             boards.add(new BoardImage(3, ImageIO.read(KBPanel.class.getResource("/Pictures/boardOracle.png"))));
             Collections.shuffle(boards, new Random());
 
-            // startTile =
-            // ImageIO.read(KBPanel.class.getResource("/Pictures/startTile.png"));
+            startTile = ImageIO.read(KBPanel.class.getResource("/Pictures/startTile.png"));
             settColors.add(ImageIO.read(KBPanel.class.getResource("/Pictures/settPink.png")));
             settColors.add(ImageIO.read(KBPanel.class.getResource("/Pictures/settOrg.png")));
             settColors.add(ImageIO.read(KBPanel.class.getResource("/Pictures/settGreen.png")));
