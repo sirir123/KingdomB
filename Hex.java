@@ -6,7 +6,7 @@ public class Hex {
     protected int pNum;// -1 is none, 0-3 players
     protected int occ; // int for who is occupying -1 empty, 0-3 player, tileHex 4
 
-    private int amount, status;
+    private int amount, status;//status 0-3
 
     private ArrayList<Hex> neighbors;
 
@@ -25,6 +25,7 @@ public class Hex {
         if (t.equals("tiH") || t.equals("tiO") || t.equals("tiG") || t.equals("tiB")) {
             amount = 2;
             status = 0;
+            occ = 4;
         }
     }
 
@@ -87,10 +88,6 @@ public class Hex {
 
     public String getType() {
         return type;
-    }
-
-    public int getAmound() {
-        return amount;
     }
 
     public void statStill() {

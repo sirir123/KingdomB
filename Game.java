@@ -219,8 +219,8 @@ public class Game {
     }
 
     public void boatT(Player p, Hex exist, Hex water, int num) {// int is index of chosen token
-        if (exist.getFree() == (players.indexOf(p)) && water.getFree() == -1
-                && (p.getTile(num)).getType().equals("boat") && (p.getTile(num)).getStat() == 1
+        if (exist.getFree() == players.indexOf(p) && water.getFree() == -1
+                && p.getTile(num).getType().equals("boat") && p.getTile(num).getStat() == 1
                 && water.getType().equals("wat")) {
             // check adjacency of chosen water hex!!!
             water.setOcc(players.indexOf(p));
@@ -232,11 +232,11 @@ public class Game {
         }
     }// get existing settlement and move to water
 
-    public void paddockT(Player p, Hex exist, Hex next, int num) {
-        if (exist.getFree() == (players.indexOf(p)) && next.getFree() == -1
-                && (p.getTile(num)).getType().equals("paddock") && (p.getTile(num)).getStat() == 1
+    public void paddockT(Player p, Hex exist, Hex next, int num) { // check if next is 2 hexes away in a straight line(c:4, -4, -2, +2, 0 & r: 0, -2, +2)
+        if(((exist.getCol()-next.getCol()==4 || exist.getCol()-next.getCol()==-4) && exist.getRow()-next.getRow()==0) || ((exist.getCol()-next.getCol()==2 || exist.getCol()-next.getCol()==-2) && exist.getRow()-next.getRow()==-2) || ((exist.getCol()-next.getCol()==2 || exist.getCol()-next.getCol()==-2) && exist.getRow()-next.getRow()==2)){
+        if (exist.getFree() == players.indexOf(p) && next.getFree() == -1
+                && p.getTile(num).getType().equals("paddock") && p.getTile(num).getStat() == 1
                 && !next.getType().equals("wat") && !next.getType().equals("mt")) {
-            // check if next is 2 hexes away in a straight line
             exist.setOcc(-1);
             exist.setpNum(-1);
             next.setOcc(players.indexOf(p));
@@ -244,11 +244,12 @@ public class Game {
             p.getTile(num).statUsed();
             System.out.println("player" + players.indexOf(p) + "used paddockT");
         }
+    }
     }// get existing settlement and jump 2 hexes straight line
 
     public void oracleT(Player p, Hex next, int num) {
         if (next.getFree() == -1 && p.getSettlements() > 0 && p.getType() == next.getType()
-                && (p.getTile(num)).getType().equals("oracle") && (p.getTile(num)).getStat() == 1) {
+                && p.getTile(num).getType().equals("oracle") && p.getTile(num).getStat() == 1) {
             // check adjacency of chosen hex!!!
             next.setOcc(players.indexOf(p));
             next.setpNum(players.indexOf(p));
@@ -260,7 +261,7 @@ public class Game {
 
     public void farmT(Player p, Hex grass, int num) {
         if (grass.getFree() == -1 && p.getSettlements() > 0 && "grs" == grass.getType()
-                && (p.getTile(num)).getType().equals("farm") && (p.getTile(num)).getStat() == 1) {
+                && p.getTile(num).getType().equals("farm") && p.getTile(num).getStat() == 1) {
             // check adjacency of chosen grass hex!!!
             grass.setOcc(players.indexOf(p));
             grass.setpNum(players.indexOf(p));
@@ -270,12 +271,20 @@ public class Game {
         }
     }// place new settlement on grass hex
 
-    public void collectTile(Hex adj, Hex touch) {
-        // check adjacency
-        if (adj.getAmount() > 0 && touch.getFree() > -1) {
-            players.get(touch.getFree()).addTile(adj);
+    public void collectTile(Hex adj, Hex t) {
+        if(checkAdj(adj, t)){
+        if (adj.getAmount() > 0 && t.getFree() > -1 && (t.getType().equals("tiH") || t.getType().equals("tiO") || t.getType().equals("tiG") || t.getType().equals("tiB"))) {
+            players.get(t.getFree()).addTile(adj);
             adj.minusAmount();
-            System.out.println("player " + touch.getFree() + "collected tile:" + adj.getType());
+            System.out.println("player " + t.getFree() + "collected tile:" + adj.getType());
         }
+    }
+    }
+
+    public boolean checkAdj(Hex a, Hex b){
+        if(a.getCol()-b.getCol()>-3 && a.getCol()-b.getCol()<3 && a.getRow()-b.getRow()>-2 && a.getRow()-b.getRow()<2){
+            return true;
+        }
+        return false;
     }
 }
