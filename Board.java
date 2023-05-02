@@ -23,12 +23,12 @@ public class Board {
             // System.out.println("SECTION: " + sec.getHexes().toString());
             // System.out.println();
             for (Hex hx : sec.getHexes()) {
-                // System.out.println("Hex: " + hx.getSec());
+                // System.out.println("Hex: " + hx.getType());
                 // System.out.println();
                 if (hx.getType().equals("tiH") || hx.getType().equals("tiO") || hx.getType().equals("tiG")
                         || hx.getType().equals("tiB")) {
                     fullTiles.add(hx);
-                    System.out.println("IDK PLEASE WORK: " + fullTiles.get(0).getAmount());
+                    // System.out.println("IDK PLEASE WORK: " + fullTiles.get(0).getAmount());
                 }
                 switch (hx.getSec()) {
                     case 0:

@@ -596,11 +596,16 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 (int) ((254 + 237 - 5) * (getHeight() / 889.0)), (int) (279 * (getWidth() / 1238.0)),
                 (int) (238 * (getHeight() / 889.0)), null);
 
+        System.out.println(gm.bb.fullTiles.size());
+        g.setFont(new Font("SansSerif", Font.BOLD, (int) (8 * (getWidth() / 1238.0) * (getHeight() / 889.0))));
+        g.setColor(new Color(148, 56, 3));
         for (Hex hx : gm.bb.fullTiles) {
             if (hx.getRow() % 2 == 0) {
-                g.drawString("1", (int) (271 + 30 * (hx.getCol() / 2)), (int) (279 + 25 * hx.getRow()));
+                g.drawString("" + hx.getAmount(), (int) (13 + 271 + 30 * (hx.getCol() / 2)),
+                        (int) (31 + 279 + 25 * hx.getRow()));
             } else {
-                g.drawString("2", (int) (285 + 30 * ((hx.getCol() - 1) / 2)), (int) (279 + 25 * hx.getRow()));
+                g.drawString("" + hx.getAmount(), (int) (13 + 285 + 30 * ((hx.getCol() - 1) / 2)),
+                        (int) (31 + 279 + 25 * hx.getRow()));
             }
         }
     }
