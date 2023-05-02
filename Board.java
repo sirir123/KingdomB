@@ -4,9 +4,9 @@ import java.util.*;
 import static java.lang.System.*;
 
 public class Board {
-    Section a, b, c, d;
-    Set<Hex> fullBoard;
-    ArrayList<Hex> fullTiles;
+    public Section a, b, c, d;
+    public Set<Hex> fullBoard;
+    public ArrayList<Hex> fullTiles;
 
     public Board() {
         fullBoard = new HashSet<Hex>();
