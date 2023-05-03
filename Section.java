@@ -41,17 +41,30 @@ public class Section {
             }
 
         }
-        // System.out.println();
-        // System.out.println();
-        // for (Hex[] hxs : hexMap) {
-        // for (Hex h : hxs) {
-        // System.out.print(h.toString() + ", ");
-        // }
-        // System.out.println();
-        // }
-        // System.out.println();
-        // System.out.println();
-        // System.out.println("Hex Map: " + hexMap.toString());
+    }
+
+    public void setNeighbors() {
+        for (Hex hx : hexes) {
+            for (Hex h : hexes) {
+                if (hx.getCol() - 1 == h.getCol()) {
+                    if (hx.getRow() - 1 == h.getRow()) {
+                        hx.setNeighbors(0, h);
+                    } else if (hx.getRow() + 1 == h.getRow()) {
+                        hx.setNeighbors(4, h);
+                    }
+                } else if (hx.getCol() + 1 == h.getCol()) {
+                    if (hx.getRow() - 1 == h.getRow()) {
+                        hx.setNeighbors(1, h);
+                    } else if (hx.getRow() + 1 == h.getRow()) {
+                        hx.setNeighbors(3, h);
+                    }
+                } else if (hx.getCol() - 2 == h.getCol()) {
+                    hx.setNeighbors(5, h);
+                } else if (hx.getCol() + 2 == h.getCol()) {
+                    hx.setNeighbors(2, h);
+                }
+            }
+        }
     }
 
     public BufferedImage getImage() {

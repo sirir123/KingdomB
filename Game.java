@@ -8,7 +8,7 @@ public class Game {
     public int startPlayer;// should be random
 
     public int state; // 0 terrain card, 1 tiles
-    public ArrayList<Hex> avaliable;
+    public HashSet<Hex> avaliable;
     public int placed;
 
     private ArrayList<Player> players;
@@ -55,21 +55,36 @@ public class Game {
     }
 
     public void updateAvaliable(boolean terrain) {
-        avaliable = new ArrayList<Hex>();
+        avaliable = new HashSet<Hex>();
         if (terrain) {
-
-            for (Hex hx : bb.getHexes()) {
-                if (hx.getpNum() == -1 && hx.getType().equals(players.get(currPlayer).getChosen().getTerr())) {
-                    avaliable.add(hx);
+            if (players.get(currPlayer).getSettlements() < 40) {
+                for (Hex hx : bb.fullBoard) {
+                    if (hx.getpNum() == currPlayer) {
+                        System.out.println("Neighbors: " + hx.getNeighbors().toString());
+                        for (Hex h : hx.getNeighbors()) {
+                            if (h.getType().equals(players.get(currPlayer).getChosen().getTerr())) {
+                                avaliable.add(h);
+                            }
+                        }
+                    }
                 }
             }
+            if (avaliable.size() < 1) {
+                for (Hex hx : bb.getHexes()) {
+                    if (hx.getpNum() == -1 && hx.getType().equals(players.get(currPlayer).getChosen().getTerr())) {
+                        avaliable.add(hx);
+                    }
+                }
+            }
+
         }
+
         // System.out.println("BOARD: " + bb.getHexes().size());
         // System.out.println("AVALAIABLE: " + avaliable.size());
     }
 
     public void updateAvaliable() {
-        ArrayList<Hex> tempAvaliable = new ArrayList<Hex>();
+        HashSet<Hex> tempAvaliable = new HashSet<Hex>();
         for (Hex hx : avaliable) {
             if (hx.getpNum() == -1) {
                 tempAvaliable.add(hx);
@@ -88,6 +103,7 @@ public class Game {
                 return true;
             }
         }
+        updateAvaliable();
         return false;
     }
 
@@ -210,6 +226,7 @@ public class Game {
             players.get(currPlayer).getAllTiles().get(i).statUnused();
         }
         discard(players.get(currPlayer).getChosen()); // discard + draw
+        placed = 0;
         players.get(currPlayer).setSettlements(players.get(currPlayer).getSettlements() - 3); // update settlements
         if (currPlayer < players.size() - 1) { // change curr player
             currPlayer++;
@@ -232,19 +249,25 @@ public class Game {
         }
     }// get existing settlement and move to water
 
-    public void paddockT(Player p, Hex exist, Hex next, int num) { // check if next is 2 hexes away in a straight line(c:4, -4, -2, +2, 0 & r: 0, -2, +2)
-        if(((exist.getCol()-next.getCol()==4 || exist.getCol()-next.getCol()==-4) && exist.getRow()-next.getRow()==0) || ((exist.getCol()-next.getCol()==2 || exist.getCol()-next.getCol()==-2) && exist.getRow()-next.getRow()==-2) || ((exist.getCol()-next.getCol()==2 || exist.getCol()-next.getCol()==-2) && exist.getRow()-next.getRow()==2)){
-        if (exist.getFree() == players.indexOf(p) && next.getFree() == -1
-                && p.getTile(num).getType().equals("paddock") && p.getTile(num).getStat() == 1
-                && !next.getType().equals("wat") && !next.getType().equals("mt")) {
-            exist.setOcc(-1);
-            exist.setpNum(-1);
-            next.setOcc(players.indexOf(p));
-            next.setpNum(players.indexOf(p));
-            p.getTile(num).statUsed();
-            System.out.println("player" + players.indexOf(p) + "used paddockT");
+    public void paddockT(Player p, Hex exist, Hex next, int num) { // check if next is 2 hexes away in a straight
+                                                                   // line(c:4, -4, -2, +2, 0 & r: 0, -2, +2)
+        if (((exist.getCol() - next.getCol() == 4 || exist.getCol() - next.getCol() == -4)
+                && exist.getRow() - next.getRow() == 0)
+                || ((exist.getCol() - next.getCol() == 2 || exist.getCol() - next.getCol() == -2)
+                        && exist.getRow() - next.getRow() == -2)
+                || ((exist.getCol() - next.getCol() == 2 || exist.getCol() - next.getCol() == -2)
+                        && exist.getRow() - next.getRow() == 2)) {
+            if (exist.getFree() == players.indexOf(p) && next.getFree() == -1
+                    && p.getTile(num).getType().equals("paddock") && p.getTile(num).getStat() == 1
+                    && !next.getType().equals("wat") && !next.getType().equals("mt")) {
+                exist.setOcc(-1);
+                exist.setpNum(-1);
+                next.setOcc(players.indexOf(p));
+                next.setpNum(players.indexOf(p));
+                p.getTile(num).statUsed();
+                System.out.println("player" + players.indexOf(p) + "used paddockT");
+            }
         }
-    }
     }// get existing settlement and jump 2 hexes straight line
 
     public void oracleT(Player p, Hex next, int num) {
@@ -272,17 +295,19 @@ public class Game {
     }// place new settlement on grass hex
 
     public void collectTile(Hex adj, Hex t) {
-        if(checkAdj(adj, t)){
-        if (adj.getAmount() > 0 && t.getFree() > -1 && (t.getType().equals("tiH") || t.getType().equals("tiO") || t.getType().equals("tiG") || t.getType().equals("tiB"))) {
-            players.get(t.getFree()).addTile(adj);
-            adj.minusAmount();
-            System.out.println("player " + t.getFree() + "collected tile:" + adj.getType());
+        if (checkAdj(adj, t)) {
+            if (adj.getAmount() > 0 && t.getFree() > -1 && (t.getType().equals("tiH") || t.getType().equals("tiO")
+                    || t.getType().equals("tiG") || t.getType().equals("tiB"))) {
+                players.get(t.getFree()).addTile(adj);
+                adj.minusAmount();
+                System.out.println("player " + t.getFree() + "collected tile:" + adj.getType());
+            }
         }
     }
-    }
 
-    public boolean checkAdj(Hex a, Hex b){
-        if(a.getCol()-b.getCol()>-3 && a.getCol()-b.getCol()<3 && a.getRow()-b.getRow()>-2 && a.getRow()-b.getRow()<2){
+    public boolean checkAdj(Hex a, Hex b) {
+        if (a.getCol() - b.getCol() > -3 && a.getCol() - b.getCol() < 3 && a.getRow() - b.getRow() > -2
+                && a.getRow() - b.getRow() < 2) {
             return true;
         }
         return false;

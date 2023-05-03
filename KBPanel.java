@@ -135,29 +135,26 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             }
         }
 
+        if (start && !help && x >= 258 && x <= 897 && y >= 267 && y <= 787) {
+            int[] cds = findCircle(x, y);
+            System.out.println("LOC: (" + cds[0] + ", " + cds[1] + ")");
+            if (gm.placed < 3 && gm.avaliable(cds[1], cds[0])) {
+                // System.out.println("AVALIABLE");
+                gm.placed++;
+
+            }
+        }
+
         if (!help && !start && x >= 516 * (getWidth() / 1238.0) && x <= 730 * (getWidth() / 1238.0)
                 && y >= 665 * (getHeight() / 889.0)
                 && y <= 734 * (getHeight() / 889.0)) {
             start = true;
-
-            // for (int i = 2; i < numPly; i++) {
-            // plys.add(new Player());
-            // }
-            // firstPly = (int) Math.floor(Math.random() * 4);
-            // currPly = firstPly;
             repaint();
             gm = new Game(numPly);
-            // System.out.println(getWidth() + "+" + getHeight());
             gm.shuffleDeck();
             for (int i = 0; i < numPly; i++) {
                 gm.getPlayer(i).setChosen(gm.drawDeck());
             }
-            // TileHex test = new TileHex("farm", 0, 0, 0);
-            // gm.getPlayer(0).addTile(test);
-            // test.statUnused();
-            // TileHex test2 = new TileHex("oracle", 0, 0, 0);
-            // gm.getPlayer(0).addTile(test2);
-            // gm.getPlayer(1).addTile(new TileHex ("horse", 0, 0, 0));
 
             gm.setBoards(boards);
             gm.updateAvaliable(true);
@@ -172,13 +169,9 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             run();
         }
 
-        if (start && !help && x >= 258 && x <= 897 && y >= 267 && y <= 787) {
-            int[] cds = findCircle(x, y);
-            System.out.println("LOC: (" + cds[0] + ", " + cds[1] + ")");
-            if (gm.placed < 3 && gm.avaliable(cds[1], cds[0])) {
-                // System.out.println("AVALIABLE");
-                gm.placed++;
-            }
+        if (gm.placed >= 3 && x >= 683 && x <= 827 && y >= 105 && y <= 143) {
+            System.out.println("hi");
+            gm.nextTurn();
         }
 
         repaint();
@@ -635,7 +628,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         for (Hex hx : gm.bb.getHexes()) {
             // System.out.println("hex -- (" + hx.getRow() + ", " + hx.getCol() + ")");
             if (hx.getpNum() != -1) {
-                switch (gm.getCurrPlayer()) {
+                switch (hx.getpNum()) {
                     case 0:
                         if (hx.getRow() % 2 == 0) {
                             g.drawImage(settColors.get(0), (int) (276 + 30 * (hx.getCol() / 2)),
@@ -717,23 +710,4 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         }
         return cds;
     }
-
-    // public boolean intpoint_inside_hexagon(int x, int y, intPoint square,
-    // intPoint triangleUp, intPoint triangleDown) {
-    // return false;
-    // }
-
-    // public boolean intpoint_inside_trigon(int x, int y, intPoint a, intPoint b,
-    // intPoint c) {
-    // int as_x = x - a.x;
-    // int as_y = y - a.y;
-
-    // boolean s_ab = (b.x - a.x) * as_y - (b.y - a.y) * as_x > 0;
-
-    // if ((c.x - a.x) * as_y - (c.y - a.y) * as_x > 0 == s_ab)
-    // return false;
-    // if ((c.x - b.x) * (y - b.y) - (c.y - b.y) * (x - b.x) > 0 != s_ab)
-    // return false;
-    // return true;
-    // }
 }

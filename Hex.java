@@ -6,7 +6,7 @@ public class Hex {
     protected int pNum;// -1 is none, 0-3 players
     protected int occ; // int for who is occupying -1 empty, 0-3 player, tileHex 4
 
-    private int amount, status;//status 0-3
+    private int amount, status;// status 0-3
 
     private ArrayList<Hex> neighbors;
 
@@ -64,6 +64,10 @@ public class Hex {
     public void update(int x, int y) {
         setCoords(col + x, row + y);
 
+    }
+
+    public ArrayList<Hex> getNeighbors() {
+        return neighbors;
     }
 
     public Hex getHex() {
