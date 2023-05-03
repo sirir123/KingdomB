@@ -142,6 +142,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 // System.out.println("AVALIABLE");
                 gm.placed++;
                 gm.updateAvaliable(true);
+                //gm.collectTile();
                 repaint();
             }
 

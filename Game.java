@@ -242,7 +242,6 @@ public class Game {
         if (exist.getFree() == players.indexOf(p) && water.getFree() == -1
                 && p.getTile(num).getType().equals("tiB") && p.getTile(num).getStat() == 1
                 && water.getType().equals("wat")) {
-            // check adjacency of chosen water hex!!!
             water.setOcc(players.indexOf(p));
             exist.setOcc(-1);
             exist.setpNum(-1);
@@ -274,9 +273,8 @@ public class Game {
     }// get existing settlement and jump 2 hexes straight line
 
     public void oracleT(Player p, Hex next, int num) {
-        if (next.getFree() == -1 && p.getSettlements() > 0 && p.getType() == next.getType()
+        if (next.getFree() == -1 && p.getSettlements() > 0 && p.getType().equals(next.getType())
                 && p.getTile(num).getType().equals("tiO") && p.getTile(num).getStat() == 1) {
-            // check adjacency of chosen hex!!!
             next.setOcc(players.indexOf(p));
             next.setpNum(players.indexOf(p));
             p.useSettlement();
@@ -286,9 +284,8 @@ public class Game {
     }// place new settlement on terrain as current card
 
     public void farmT(Player p, Hex grass, int num) {
-        if (grass.getFree() == -1 && p.getSettlements() > 0 && "grs" == grass.getType()
+        if (grass.getFree() == -1 && p.getSettlements() > 0 && "grs".equals(grass.getType())
                 && p.getTile(num).getType().equals("tiG") && p.getTile(num).getStat() == 1) {
-            // check adjacency of chosen grass hex!!!
             grass.setOcc(players.indexOf(p));
             grass.setpNum(players.indexOf(p));
             p.useSettlement();
@@ -297,23 +294,23 @@ public class Game {
         }
     }// place new settlement on grass hex
 
-    public void collectTile(Hex adj, Hex t) {
-        if (checkAdj(adj, t)) {
-            if (adj.getAmount() > 0 && t.getFree() > -1 && (adj.getType().equals("tiH") || adj.getType().equals("tiO")
-                    || adj.getType().equals("tiG") || adj.getType().equals("tiB"))) {
-                players.get(t.getFree()).addTile(adj);
-                adj.statUnused();
-                adj.minusAmount();
-                System.out.println("player " + t.getFree() + "collected tile:" + adj.getType());
-            }
+    public void collectTile() {
+        for(int i=0; i< bb.fullTiles.size() ;i++){
+            for(int p=0; p<bb.fullTiles.get(i).getNeighbors().size(); p++){
+                 if(bb.fullTiles.get(i).getNeighbors().get(p).getpNum()>-1){
+                    if (bb.fullTiles.get(i).getAmount() > 0) {
+                        Hex t=bb.fullTiles.get(i).getNeighbors().get(p);
+                        Hex adj=bb.fullTiles.get(i);
+                        players.get(t.getpNum()).addTile(adj);
+                        adj.minusAmount();
+                        System.out.println("player " + t.getpNum() + "collected tile:" + adj.getType());
+            
         }
     }
+    //System.out.println("!" + p);
+    }
 
-    public boolean checkAdj(Hex a, Hex b) {
-        if (a.getCol() - b.getCol() > -3 && a.getCol() - b.getCol() < 3 && a.getRow() - b.getRow() > -2
-                && a.getRow() - b.getRow() < 2) {
-            return true;
-        }
-        return false;
+    
+}
     }
 }
