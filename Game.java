@@ -240,7 +240,7 @@ public class Game {
 
     public void boatT(Player p, Hex exist, Hex water, int num) {// int is index of chosen token
         if (exist.getFree() == players.indexOf(p) && water.getFree() == -1
-                && p.getTile(num).getType().equals("boat") && p.getTile(num).getStat() == 1
+                && p.getTile(num).getType().equals("tiB") && p.getTile(num).getStat() == 1
                 && water.getType().equals("wat")) {
             // check adjacency of chosen water hex!!!
             water.setOcc(players.indexOf(p));
@@ -261,7 +261,7 @@ public class Game {
                 || ((exist.getCol() - next.getCol() == 2 || exist.getCol() - next.getCol() == -2)
                         && exist.getRow() - next.getRow() == 2)) {
             if (exist.getFree() == players.indexOf(p) && next.getFree() == -1
-                    && p.getTile(num).getType().equals("paddock") && p.getTile(num).getStat() == 1
+                    && p.getTile(num).getType().equals("tiH") && p.getTile(num).getStat() == 1
                     && !next.getType().equals("wat") && !next.getType().equals("mt")) {
                 exist.setOcc(-1);
                 exist.setpNum(-1);
@@ -275,7 +275,7 @@ public class Game {
 
     public void oracleT(Player p, Hex next, int num) {
         if (next.getFree() == -1 && p.getSettlements() > 0 && p.getType() == next.getType()
-                && p.getTile(num).getType().equals("oracle") && p.getTile(num).getStat() == 1) {
+                && p.getTile(num).getType().equals("tiO") && p.getTile(num).getStat() == 1) {
             // check adjacency of chosen hex!!!
             next.setOcc(players.indexOf(p));
             next.setpNum(players.indexOf(p));
@@ -287,7 +287,7 @@ public class Game {
 
     public void farmT(Player p, Hex grass, int num) {
         if (grass.getFree() == -1 && p.getSettlements() > 0 && "grs" == grass.getType()
-                && p.getTile(num).getType().equals("farm") && p.getTile(num).getStat() == 1) {
+                && p.getTile(num).getType().equals("tiG") && p.getTile(num).getStat() == 1) {
             // check adjacency of chosen grass hex!!!
             grass.setOcc(players.indexOf(p));
             grass.setpNum(players.indexOf(p));
