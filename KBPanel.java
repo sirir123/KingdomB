@@ -171,14 +171,10 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             run();
         }
 
-        if (start && !help && x >= 258 && x <= 897 && y >= 267 && y <= 787) {
-            int[] cds = findCircle(x, y);
-            System.out.println("LOC: (" + cds[0] + ", " + cds[1] + ")");
-            if (gm.placed < 3 && gm.avaliable(cds[1], cds[0])) {
-                // System.out.println("AVALIABLE");
-                gm.placed++;
-            }
-        } 
+        if (gm.placed >= 3 && x >= 683 && x <= 827 && y >= 105 && y <= 143) {
+            System.out.println("hi");
+            gm.nextTurn();
+        }
 
         repaint();
     }
@@ -245,11 +241,11 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 g.drawImage(infoUp, 255, 266, 900 - 255, 801 - 266, null);
                 g.drawImage(buttonX, 854, 100, 50, 50, null);
             }
-            if (!help){
+
+            if (!help) {
                 drawShaders(g);
                 drawSettlements(g);
-            } 
-        }
+            }
 
         }
 
@@ -385,6 +381,13 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
                         g.drawString("" + (gm.getPlayer(0).getSettlements()), (int) (895 * (getWidth() / 1238.0)),
                                 (int) (143 * (getHeight() / 889.0)));
+
+                        if (gm.getCurrPlayer() == 0) {
+                            g.drawImage(getTerrImage(gm.getPlayer(gm.getCurrPlayer()).getChosen().getTerr()),
+                                    (int) (938 * (getWidth() / 1250.0)), (int) (96 * (getHeight() / 896.0)),
+                                    (int) ((1030 - 934) * (getWidth() / 1250.0)),
+                                    (int) ((236 - 92) * (getHeight() / 896.0)), null);
+                        }
                         break;
                     case 1:
                         g.drawImage(plyRects.get(1), (int) (835 * (getWidth() / 1238.0)),
@@ -401,7 +404,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                     (int) ((236 - 92) * (getHeight() / 896.0)), null);
 
                             for (int x = 0; x < gm.getPlayer(1).getAllTiles().size(); x++) {
-                                if (gm.getPlayer(1).getTile(x).getStat() == 1) {
+                                if (gm.getPlayer(0).getTile(x).getStat() == 1) {
                                     if (x < 2) {
                                         g.drawImage(getTileImage(gm.getPlayer(1).getTile(x).getType()), 1167 + (x * 61),
                                                 307, 54, 50, null);
@@ -460,7 +463,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                     (int) ((236 - 92) * (getHeight() / 896.0)), null);
 
                             for (int x = 0; x < gm.getPlayer(2).getAllTiles().size(); x++) {
-                                if (gm.getPlayer(2).getTile(x).getStat() == 1) {
+                                if (gm.getPlayer(0).getTile(x).getStat() == 1) {
                                     if (x < 2) {
                                         g.drawImage(getTileImage(gm.getPlayer(2).getTile(x).getType()), 1167 + (x * 61),
                                                 510, 54, 50, null);
@@ -517,7 +520,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                     (int) ((1030 - 934) * (getWidth() / 1250.0)),
                                     (int) ((236 - 92) * (getHeight() / 896.0)), null);
                             for (int x = 0; x < gm.getPlayer(3).getAllTiles().size(); x++) {
-                                if (gm.getPlayer(3).getTile(x).getStat() == 1) {
+                                if (gm.getPlayer(0).getTile(x).getStat() == 1) {
                                     if (x < 2) {
                                         g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 1167 + (x * 61),
                                                 711, 54, 50, null);
