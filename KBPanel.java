@@ -606,7 +606,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
     public void drawShaders(Graphics g) {
         // System.out.println("hello");
-        if (gm.placed <3) {
+        if (gm.placed < 3) {
             for (Hex hx : gm.avaliable) {
                 // System.out.println("hex -- (" + hx.getRow() + ", " + hx.getCol() + ")");
                 if (hx.getRow() % 2 == 0) {
