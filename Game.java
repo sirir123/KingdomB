@@ -214,11 +214,10 @@ public class Game {
 
     public Card drawDeck() {
         if (deck.size() < 1) {
-            deck = discard;
-            shuffleDeck();
-            discard = new ArrayList<Card>();
+            replaceDeck();
         }
-        return deck.get(0);
+        return deck.remove(0);
+
     }
 
     public void nextTurn() {

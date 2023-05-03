@@ -285,28 +285,28 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
     }
 
     public BufferedImage getTileImage(String t) {
-        if (t.equals("farm")) {
+        if (t.equals("tiG")) {//tiG is farm
             return frm;
         }
-        if (t.equals("boat")) {
+        if (t.equals("tiB")) {//tiB is boat
             return bt;
         }
-        if (t.equals("oracle")) {
+        if (t.equals("tiO")) {//tiO is oracle
             return orcl;
         }
-        if (t.equals("horse")) {
+        if (t.equals("tiH")) {//tiH is horse or paddock
             return hrse;
         }
-        if (t.equals("shfarm")) {
+        if (t.equals("shtiG")) {
             return sFrm;
         }
-        if (t.equals("shboat")) {
+        if (t.equals("shtiB")) {
             return sBt;
         }
-        if (t.equals("shoracle")) {
+        if (t.equals("shtiO")) {
             return sOrcl;
         }
-        if (t.equals("shhorse")) {
+        if (t.equals("shtiH")) {
             return sHrse;
         }
 
