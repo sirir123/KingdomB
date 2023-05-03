@@ -299,9 +299,10 @@ public class Game {
 
     public void collectTile(Hex adj, Hex t) {
         if (checkAdj(adj, t)) {
-            if (adj.getAmount() > 0 && t.getFree() > -1 && (t.getType().equals("tiH") || t.getType().equals("tiO")
-                    || t.getType().equals("tiG") || t.getType().equals("tiB"))) {
+            if (adj.getAmount() > 0 && t.getFree() > -1 && (adj.getType().equals("tiH") || adj.getType().equals("tiO")
+                    || adj.getType().equals("tiG") || adj.getType().equals("tiB"))) {
                 players.get(t.getFree()).addTile(adj);
+                adj.statUnused();
                 adj.minusAmount();
                 System.out.println("player " + t.getFree() + "collected tile:" + adj.getType());
             }
