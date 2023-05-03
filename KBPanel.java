@@ -141,8 +141,10 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             if (gm.placed < 3 && gm.avaliable(cds[1], cds[0])) {
                 // System.out.println("AVALIABLE");
                 gm.placed++;
-
+                gm.updateAvaliable(true);
+                repaint();
             }
+
         }
 
         if (!help && !start && x >= 516 * (getWidth() / 1238.0) && x <= 730 * (getWidth() / 1238.0)
@@ -240,8 +242,11 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 g.drawImage(buttonX, 854, 100, 50, 50, null);
             }
 
-            drawShaders(g);
-            drawSettlements(g);
+            if (!help) {
+                drawShaders(g);
+                drawSettlements(g);
+            }
+
         }
 
     }
@@ -285,16 +290,16 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
     }
 
     public BufferedImage getTileImage(String t) {
-        if (t.equals("tiG")) {//tiG is farm
+        if (t.equals("tiG")) {// tiG is farm
             return frm;
         }
-        if (t.equals("tiB")) {//tiB is boat
+        if (t.equals("tiB")) {// tiB is boat
             return bt;
         }
-        if (t.equals("tiO")) {//tiO is oracle
+        if (t.equals("tiO")) {// tiO is oracle
             return orcl;
         }
-        if (t.equals("tiH")) {//tiH is horse or paddock
+        if (t.equals("tiH")) {// tiH is horse or paddock
             return hrse;
         }
         if (t.equals("shtiG")) {

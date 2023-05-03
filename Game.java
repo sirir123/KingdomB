@@ -55,32 +55,30 @@ public class Game {
     }
 
     public void updateAvaliable(boolean terrain) {
+        System.out.println("update");
         avaliable = new HashSet<Hex>();
-        if (terrain) {
-            if (players.get(currPlayer).getSettlements() < 40) {
-                for (Hex hx : bb.fullBoard) {
-                    if (hx.getpNum() == currPlayer) {
-                        System.out.println("Neighbors: " + hx.getNeighbors().toString());
-                        for (Hex h : hx.getNeighbors()) {
-                            if (h.getType().equals(players.get(currPlayer).getChosen().getTerr())) {
-                                avaliable.add(h);
-                            }
-                        }
-                    }
-                }
-            }
-            if (avaliable.size() < 1) {
-                for (Hex hx : bb.getHexes()) {
-                    if (hx.getpNum() == -1 && hx.getType().equals(players.get(currPlayer).getChosen().getTerr())) {
-                        avaliable.add(hx);
-                    }
-                }
-            }
+        // if (terrain) {
 
+        if (players.get(currPlayer).getPlaced().size() >= 1) {
+            System.out.println("update1");
+            for (Hex hx : players.get(currPlayer).getPlaced()) {
+                System.out.println("Neighbors: " + hx.getNeighbors().toString());
+                for (Hex h : hx.getNeighbors()) {
+                    if (h != null && h.getpNum() == -1
+                            && h.getType().equals(players.get(currPlayer).getChosen().getTerr())) {
+                        avaliable.add(h);
+                    }
+                }
+            }
         }
 
-        // System.out.println("BOARD: " + bb.getHexes().size());
-        // System.out.println("AVALAIABLE: " + avaliable.size());
+        if (avaliable.size() < 1) {
+            for (Hex hx : bb.getHexes()) {
+                if (hx.getType().equals(players.get(currPlayer).getChosen().getTerr()) && hx.getpNum() == -1) {
+                    avaliable.add(hx);
+                }
+            }
+        }
     }
 
     public void updateAvaliable() {
@@ -96,14 +94,19 @@ public class Game {
     }
 
     public boolean avaliable(int r, int c) {
-        for (Hex hx : avaliable) {
-            if (hx.getRow() == r && hx.getCol() == c) {
-                bb.updateHex(r, c, currPlayer);
-                updateAvaliable();
-                return true;
+        if (avaliable != null) {
+            for (Hex hx : avaliable) {
+                if (hx.getRow() == r && hx.getCol() == c) {
+                    bb.updateHex(r, c, currPlayer);
+                    players.get(currPlayer).addPlaced(hx);
+                    players.get(currPlayer).setSettlements(players.get(currPlayer).getSettlements() - 1);
+                    // updateAvaliable(true);
+                    return true;
+                }
             }
         }
-        updateAvaliable();
+
+        // updateAvaliable(true);
         return false;
     }
 
@@ -226,12 +229,13 @@ public class Game {
         }
         discard(players.get(currPlayer).getChosen()); // discard + draw
         placed = 0;
-        players.get(currPlayer).setSettlements(players.get(currPlayer).getSettlements() - 3); // update settlements
+        // update settlements
         if (currPlayer < players.size() - 1) { // change curr player
             currPlayer++;
         } else {
             currPlayer = 0;
         }
+        updateAvaliable(true);
     }
 
     public void boatT(Player p, Hex exist, Hex water, int num) {// int is index of chosen token

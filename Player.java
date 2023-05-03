@@ -5,10 +5,11 @@ public class Player {
     private Card chosen;
     private ArrayList<Hex> tiles;
     private ArrayList<Integer> points;
+    private ArrayList<Hex> placed;
 
     public Player() {
         tiles = new ArrayList<Hex>();
-
+        placed = new ArrayList<>();
         points = new ArrayList<Integer>();
     }
 
@@ -31,6 +32,14 @@ public class Player {
     public void addTile(Hex t) {
         t.statUsed();
         tiles.add(t);
+    }
+
+    public void addPlaced(Hex t) {
+        placed.add(t);
+    }
+
+    public ArrayList<Hex> getPlaced() {
+        return placed;
     }
 
     public void addPoints(int num) {

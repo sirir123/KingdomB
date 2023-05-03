@@ -50,6 +50,7 @@ public class Board {
                 }
             }
         }
+        setNeighbors();
     }
 
     public void updateHex(int r, int c, int ply) {
@@ -58,6 +59,33 @@ public class Board {
                 hx.setpNum(ply);
             }
         }
+    }
+
+    public void setNeighbors() {
+        System.out.println("Start");
+        for (Hex hx : fullBoard) {
+            for (Hex h : fullBoard) {
+                if (hx.getCol() - 1 == h.getCol()) {
+                    if (hx.getRow() - 1 == h.getRow()) {
+                        hx.setNeighbors(0, h);
+                    } else if (hx.getRow() + 1 == h.getRow()) {
+                        hx.setNeighbors(4, h);
+                    }
+                } else if (hx.getCol() + 1 == h.getCol()) {
+                    if (hx.getRow() - 1 == h.getRow()) {
+                        hx.setNeighbors(1, h);
+                    } else if (hx.getRow() + 1 == h.getRow()) {
+                        hx.setNeighbors(3, h);
+                    }
+                } else if (hx.getCol() - 2 == h.getCol() && hx.getRow() == h.getRow()) {
+                    hx.setNeighbors(5, h);
+                } else if (hx.getCol() + 2 == h.getCol() && hx.getRow() == h.getRow()) {
+                    hx.setNeighbors(2, h);
+                }
+            }
+            System.out.println(hx.toString() + ": " + hx.getNeighbors().toString());
+        }
+        System.out.println("End");
     }
 
 }

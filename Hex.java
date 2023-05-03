@@ -18,6 +18,9 @@ public class Hex {
         occ = -1;
         pNum = -1;
         neighbors = new ArrayList<Hex>();
+        for (int i = 0; i < 6; i++) {
+            neighbors.add(null);
+        }
 
         amount = -1;
         status = -1;
@@ -36,6 +39,9 @@ public class Hex {
         occ = -1;
         pNum = -1;
         neighbors = new ArrayList<Hex>();
+        for (int i = 0; i < 6; i++) {
+            neighbors.add(null);
+        }
     }
 
     public void setCoords(int c, int r) {
