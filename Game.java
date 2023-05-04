@@ -298,53 +298,33 @@ public class Game {
         for(int i=0; i< bb.fullTiles.size() ;i++){
             for(int p=0; p < bb.fullTiles.get(i).getNeighbors().size(); p++){
                     if(bb.fullTiles.get(i).getNeighbors().get(p).getpNum()>-1){
-                        if(players.get(bb.fullTiles.get(i).getNeighbors().get(p).getpNum()).getAllTiles().size()!=0){
-                        for(int b=0; b<players.get(bb.fullTiles.get(i).getNeighbors().get(p).getpNum()).getAllTiles().size(); b++){
-                         if(!players.get(bb.fullTiles.get(i).getNeighbors().get(p).getpNum()).getAllTiles().get(b).getType().equals(bb.fullTiles.get(i).getType())) { 
+                        Hex t=bb.fullTiles.get(i).getNeighbors().get(p);
+                        Hex adj=bb.fullTiles.get(i);
+                        if(players.get(adj.getNeighbors().get(p).getpNum()).getAllTiles().size()!=0){
+                         for(int b=0; b<players.get(adj.getNeighbors().get(p).getpNum()).getAllTiles().size(); b++) { 
                            // System.out.println("IM GONNA END IT ALL");
-                        if(true){
-                            if (bb.fullTiles.get(i).getAmount() > 0) {
+                        if(adj.getAmount() > 0  && players.get(adj.getNeighbors().get(p).getpNum()).getAllTiles().indexOf(adj)!=-1){
+                                int q=players.get(t.getpNum()).getAllTiles().indexOf(adj);//index of multiple tile
+                            if (adj.getCol()!=players.get(t.getpNum()).getAllTiles().get(q).getCol() && adj.getRow()!=players.get(t.getpNum()).getAllTiles().get(q).getRow()) {
                                 //System.out.println("!"+ p);
-                                Hex t=bb.fullTiles.get(i).getNeighbors().get(p);
-                                Hex adj=bb.fullTiles.get(i);
                                 players.get(t.getpNum()).addTile(adj);
                                 adj.minusAmount();
-                                System.out.println("player " + t.getpNum() + " collected tile: " + adj.getType());//
+                                System.out.println("player " + t.getpNum() + " collected tile: " + adj.getType());
                     }  
         }
     }
-}
+
 }
 
-                        if(players.get(bb.fullTiles.get(i).getNeighbors().get(p).getpNum()).getAllTiles().size()==0){
-                    if(bb.fullTiles.get(i).getNeighbors().get(p).getpNum()>-1){
-                        if (bb.fullTiles.get(i).getAmount() > 0) {
-                            //System.out.println("!"+ p);
-                            Hex t=bb.fullTiles.get(i).getNeighbors().get(p);
-                            Hex adj=bb.fullTiles.get(i);
+                        if(players.get(t.getpNum()).getAllTiles().size()==0 || players.get(adj.getNeighbors().get(p).getpNum()).getAllTiles().indexOf(adj)==-1){
+                        if (adj.getAmount() > 0) {
                             players.get(t.getpNum()).addTile(adj);
                             adj.minusAmount();
-                            System.out.println("player " + t.getpNum() + " collected tile: " + adj.getType());//
-                    }  
-                }
-
-     
-     
+                            System.out.println("player " + t.getpNum() + " collected tile: " + adj.getType());
+                    }      
            }
-
-
-        }
-
-
-    
-
-    
+        }   
 }
-
-
-
-
-
     }
 }
 }
