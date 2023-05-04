@@ -28,7 +28,6 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
     int xtemp;
     int ytemp;
 
-    
     boolean download = false;
     String home = System.getProperty("user.home");
     File out = new File(home + "/Downloads/KingdomBuilderInstructions.pdf");
@@ -179,70 +178,105 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             run();
         }
         // in tile selction mode, players can now choose tiles
-        if (x >= 531 && x <= 676 && y >= 106 && y <= 146 && (gm.placed == 0 || gm.placed>3) && gm.getPlayer(gm.getCurrPlayer()).getAllTiles().size() != 0){
+        if (x >= 531 && x <= 676 && y >= 106 && y <= 146 && (gm.placed == 0 || gm.placed > 3)
+                && gm.getPlayer(gm.getCurrPlayer()).getAllTiles().size() != 0) {
             tileSel = !tileSel;
-            xtemp = x;
-            ytemp = y;
             System.out.println("tilesel true");
         }
-        if (gm.getCurrPlayer() == 0 && tileSel && x >= 1154 && x <= 1296 && x >= 92 && x <= 266){
-            System.out.println("work0" + xtemp + " " + ytemp);
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 130), 52)){ tileInPlay = 0; }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 130), 52)){ tileInPlay = 1; }
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 183), 52)){ tileInPlay = 2; }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 183), 52)){ tileInPlay = 3; } 
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 236), 52)){ tileInPlay = 4;}
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 236), 52)){ tileInPlay = 5; }
+        if (gm.getCurrPlayer() == 0 && tileSel && x >= 1154 && x <= 1296 && y >= 92 && y <= 266){
+            System.out.println("work0");
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 130), 45)){ tileInPlay = 0; }
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 130), 45)){ tileInPlay = 1; }
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 183), 45)){ tileInPlay = 2; }
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 183), 45)){ tileInPlay = 3; } 
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 236), 45)){ tileInPlay = 4;}
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 236), 45)){ tileInPlay = 5; }
             System.out.println("tile in play:" + tileInPlay);
 
-        }if (gm.getCurrPlayer() == 1 && tileSel && x >= 1154 && x <= 1296 && x >= 92 && x <= 266){
+        }if (gm.getCurrPlayer() == 1 && tileSel && x >= 1154 && x <= 1296 && y >= 297 && y <= 691){
             System.out.println("work1");
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 329), 52)){ tileInPlay = 0; }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 329), 52)){ tileInPlay = 1; }
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 385), 52)){ tileInPlay = 2; }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 385), 52)){ tileInPlay = 3; }
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 441), 52)){ tileInPlay = 4;}
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 441), 52)){ tileInPlay = 5; }
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 329), 45)){ tileInPlay = 0; }
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 329), 45)){ tileInPlay = 1; }
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 385), 45)){ tileInPlay = 2; }
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 385), 45)){ tileInPlay = 3; }
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 441), 45)){ tileInPlay = 4;}
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 441), 45)){ tileInPlay = 5; }
             System.out.println("tile in play:" + tileInPlay);
-        }if (gm.getCurrPlayer() == 2 && tileSel&& x >= 1160 && x <= 1293 && x >= 296 && x <= 465){
+        }if (gm.getCurrPlayer() == 2 && tileSel&& x >= 1154 && x <= 1295 && y >= 498 && y <= 672){
             System.out.println("work2");
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 532), 52)){ tileInPlay = 0; }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 532), 52)){ tileInPlay = 1; }
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 586), 52)){ tileInPlay = 2; }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 586), 52)){ tileInPlay = 3; }
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 642), 52)){ tileInPlay = 4;}
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 642), 52)){ tileInPlay = 5; }
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 532), 45)){ tileInPlay = 0; }
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 532), 45)){ tileInPlay = 1; }
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 586), 45)){ tileInPlay = 2; }
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 586), 45)){ tileInPlay = 3; }
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 642), 45)){ tileInPlay = 4;}
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 642), 45)){ tileInPlay = 5; }
             System.out.println("tile in play:" + tileInPlay);
 
-        }if (gm.getCurrPlayer() == 3 && tileSel&& x >= 1154 && x <= 1296 && x >= 92 && x <= 266){
+        }if (gm.getCurrPlayer() == 3 && tileSel&& x >= 1154 && x <= 1296 && y >= 700 && y <= 873){
             System.out.println("work3");
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 735), 52)){ tileInPlay = 0; }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 735), 52)){ tileInPlay = 1; }
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 788), 52)){ tileInPlay = 2; }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 788), 52)){ tileInPlay = 3; }
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 842), 52)){ tileInPlay = 4;}
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 842), 52)){ tileInPlay = 5; }
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 735), 45)){ tileInPlay = 0; }
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 735), 45)){ tileInPlay = 1; }
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 788), 45)){ tileInPlay = 2; }
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 788), 45)){ tileInPlay = 3; }
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 842), 45)){ tileInPlay = 4;}
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 842), 45)){ tileInPlay = 5; }
             System.out.println("tile in play:" + tileInPlay);
 
         }
         // find the new coordinates of 
        // call find circle on the clicking coordinates and pass them in to get an array with the coordinates of the hex, find that from the board and pass that hex into the action methods. call the action methods based on the location clicked and what number tile that should be. if its greater than the tiles user has, shouldnt do anything. 
-      if (tileSel && gm.getPlayer(gm.getCurrPlayer()).getAllTiles() != null && tileInPlay >-1 && tileInPlay < gm.getPlayer(gm.getCurrPlayer()).getAllTiles().size()){
+      if (tileSel && gm.getPlayer(gm.getCurrPlayer()).getAllTiles() != null && tileInPlay >-1 && tileInPlay < gm.getPlayer(gm.getCurrPlayer()).getAllTiles().size() && x >= 271 && x<= 894 && y >= 280 && y <= 797){
              if (gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiB")){
-                System.out.println("CALLED BOAT");
                 for ( int i = 0; i < 2; i ++){
                     int[] cds = findCircle(x, y);
                     Hex temp = null;
-                    for ( Hex hx: gm.bb.getHexes()){
-                        if (hx.getRow() == cds[1] && hx.getCol() == cds[2]){
+                     for ( Hex hx: gm.bb.getHexes()){
+                        if (hx.getRow() == cds[0] && hx.getCol() == cds[1]){
                             temp = hx;
                         }
                     }
                    tileTemps.add(temp);
             }
             gm.boatT(gm.getPlayer(gm.getCurrPlayer()), tileTemps.get(0), tileTemps.get(1), tileInPlay );
+            System.out.println("boat chosen: " + tileTemps.get(0) + " + " + tileTemps.get(1));
             tileTemps = new ArrayList<Hex>();
+       } if (gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiG")){
+            int[] cds = findCircle(x, y);
+            Hex temp = null;
+            for ( Hex hx: gm.bb.getHexes()){
+                if (hx.getRow() == cds[0] && hx.getCol() == cds[1]){
+                    temp = hx;
+                }
+            }
+            
+            gm.farmT(gm.getPlayer(gm.getCurrPlayer()), temp, tileInPlay);
+            System.out.println("farm  chosen: " + temp);
+       } if (gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiH")){
+            for ( int i = 0; i < 2; i ++){
+                int[] cds = findCircle(x, y);
+                Hex temp = null;
+                 for ( Hex hx: gm.bb.getHexes()){
+                    if (hx.getRow() == cds[0] && hx.getCol() == cds[1]){
+                        temp = hx;
+                    }
+                }
+               tileTemps.add(temp);
+        }
+        gm.paddockT(gm.getPlayer(gm.getCurrPlayer()), tileTemps.get(0), tileTemps.get(1), tileInPlay);
+        System.out.println("horse chosen: " + tileTemps.get(0) + " + " + tileTemps.get(1));
+        tileTemps = new ArrayList<Hex>();
+       } if (gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiO")){
+        int[] cds = findCircle(x, y);
+        Hex temp = null;
+        for ( Hex hx: gm.bb.getHexes()){
+            if (hx.getRow() == cds[0] && hx.getCol() == cds[1]){
+                temp = hx;
+            }
+        }
+        gm.farmT(gm.getPlayer(gm.getCurrPlayer()), temp, tileInPlay);
+        System.out.println("oracle chosen: " + temp);
        }
+       
     }
 
 
@@ -250,9 +284,9 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             System.out.println("hi");
             gm.nextTurn();
         }
-       
+
         repaint();
-       
+
     }
 
     public void addNotify() {

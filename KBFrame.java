@@ -16,7 +16,7 @@ public class KBFrame extends JFrame {// hi
         super(framename);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
-        setLocationRelativeTo(null);//finally centered this bitch
+        setLocationRelativeTo(null);// finally centered this bitch
         add(new KBPanel());
         setVisible(true);
         setResizable(false);
