@@ -49,6 +49,15 @@ public class Hex {
         row = r;
     }
 
+    public int indexNeigh(String name){//index of string in neighbors
+        for(int i=0; i<neighbors.size(); i++){
+            if(neighbors.get(i).getType().equals(name)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public void setpNum(int p) {
         pNum = p;
     }

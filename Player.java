@@ -30,7 +30,7 @@ public class Player {
     }
 
     public void addTile(Hex t) {
-        t.statUsed();
+        t.statStill();
         tiles.add(t);
     }
 

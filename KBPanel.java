@@ -425,7 +425,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                         g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 923 + (x * 61),
                                                 215, 54, 50, null);
                                     }
-                                } else if (gm.getPlayer(0).getTile(x).getStat() == 2) {
+                                } else if (gm.getPlayer(0).getTile(x).getStat() == 2 || gm.getPlayer(0).getTile(x).getStat() == 0) {
                                     if (x < 2) {
                                         g.drawImage(getTileImage("sh" + gm.getPlayer(0).getTile(x).getType()),
                                                 1167 + (x * 61), 105, 54, 50, null);
@@ -485,7 +485,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                         g.drawImage(getTileImage(gm.getPlayer(1).getTile(x).getType()), 923 + (x * 61),
                                                 417, 54, 50, null);
                                     }
-                                } else if (gm.getPlayer(1).getTile(x).getStat() == 2) {
+                                } else if (gm.getPlayer(1).getTile(x).getStat() == 2 || gm.getPlayer(1).getTile(x).getStat() == 0) {
                                     if (x < 2) {
                                         g.drawImage(getTileImage("sh" + gm.getPlayer(1).getTile(x).getType()),
                                                 1167 + (x * 61), 307, 54, 50, null);
@@ -544,7 +544,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                         g.drawImage(getTileImage(gm.getPlayer(2).getTile(x).getType()), 923 + (x * 61),
                                                 619, 54, 50, null);
                                     }
-                                } else if (gm.getPlayer(2).getTile(x).getStat() == 2) {
+                                } else if (gm.getPlayer(2).getTile(x).getStat() == 2 || gm.getPlayer(2).getTile(x).getStat() == 0) {
                                     if (x < 2) {
                                         g.drawImage(getTileImage("sh" + gm.getPlayer(2).getTile(x).getType()),
                                                 1167 + (x * 61), 510, 54, 50, null);
@@ -601,15 +601,15 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                         g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 923 + (x * 61),
                                                 822, 54, 50, null);
                                     }
-                                } else if (gm.getPlayer(3).getTile(x).getStat() == 2) {
+                                } else if (gm.getPlayer(3).getTile(x).getStat() == 2 || gm.getPlayer(3).getTile(x).getStat() == 0) {
                                     if (x < 2) {
-                                        g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 1167 + (x * 61),
+                                        g.drawImage(getTileImage("sh" + gm.getPlayer(3).getTile(x).getType()), 1167 + (x * 61),
                                                 711, 54, 50, null);
                                     } else if (x < 4) {
-                                        g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 1045 + (x * 61),
+                                        g.drawImage(getTileImage("sh" + gm.getPlayer(3).getTile(x).getType()), 1045 + (x * 61),
                                                 768, 54, 50, null);
                                     } else {
-                                        g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 923 + (x * 61),
+                                        g.drawImage(getTileImage("sh" + gm.getPlayer(3).getTile(x).getType()), 923 + (x * 61),
                                                 822, 54, 50, null);
                                     }
                                 }
