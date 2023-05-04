@@ -63,23 +63,23 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             discCd = ImageIO.read(KBPanel.class.getResource("/Pictures/cardDiscoverer.png"));
             castCd = ImageIO.read(KBPanel.class.getResource("/Pictures/cardCastle.png"));
 
-            tFlwr = ImageIO.read(KBPanel.class.getResource("pictures/flower.png"));//
-            tGrs = ImageIO.read(KBPanel.class.getResource("pictures/meadow.png"));//
-            tCnyn = ImageIO.read(KBPanel.class.getResource("pictures/canyon.png"));//
-            tDes = ImageIO.read(KBPanel.class.getResource("pictures/desert.png"));//
-            tFor = ImageIO.read(KBPanel.class.getResource("pictures/forest.png"));//
+            tFlwr = ImageIO.read(KBPanel.class.getResource("/Pictures/flower.png"));//
+            tGrs = ImageIO.read(KBPanel.class.getResource("/Pictures/meadow.png"));//
+            tCnyn = ImageIO.read(KBPanel.class.getResource("/Pictures/canyon.png"));//
+            tDes = ImageIO.read(KBPanel.class.getResource("/Pictures/desert.png"));//
+            tFor = ImageIO.read(KBPanel.class.getResource("Pictures/forest.png"));//
 
-            darken = ImageIO.read(KBPanel.class.getResource("pictures/dark.png"));//
+            darken = ImageIO.read(KBPanel.class.getResource("/Pictures/dark.png"));//
 
-            sOrcl = ImageIO.read(KBPanel.class.getResource("pictures/shOracle.png")); //
+            sOrcl = ImageIO.read(KBPanel.class.getResource("/Pictures/shOracle.png")); //
 
-            sHrse = ImageIO.read(KBPanel.class.getResource("pictures/shHorse.png"));
-            sFrm = ImageIO.read(KBPanel.class.getResource("pictures/shFarm.png"));
-            sBt = ImageIO.read(KBPanel.class.getResource("pictures/shBoat.png"));
-            orcl = ImageIO.read(KBPanel.class.getResource("pictures/tOracle.png"));
-            hrse = ImageIO.read(KBPanel.class.getResource("pictures/tHorse.png"));
-            frm = ImageIO.read(KBPanel.class.getResource("pictures/tFarm.png"));
-            bt = ImageIO.read(KBPanel.class.getResource("pictures/tBoat.png"));
+            sHrse = ImageIO.read(KBPanel.class.getResource("/Pictures/shHorse.png"));
+            sFrm = ImageIO.read(KBPanel.class.getResource("/Pictures/shFarm.png"));
+            sBt = ImageIO.read(KBPanel.class.getResource("/Pictures/shBoat.png"));
+            orcl = ImageIO.read(KBPanel.class.getResource("/Pictures/tOracle.png"));
+            hrse = ImageIO.read(KBPanel.class.getResource("/Pictures/tHorse.png"));
+            frm = ImageIO.read(KBPanel.class.getResource("/Pictures/tFarm.png"));
+            bt = ImageIO.read(KBPanel.class.getResource("/Pictures/tBoat.png"));
 
             // sHrse = (1040, 93) 54 50, sOrcl = ()
 
