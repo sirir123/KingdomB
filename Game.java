@@ -239,15 +239,13 @@ public class Game {
     }
 
     public void boatT(Player p, Hex exist, Hex water, int num) {// int is index of chosen token
-        if (exist.getFree() == players.indexOf(p) && water.getFree() == -1
+        if (exist.getpNum() == players.indexOf(p) && water.getpNum() == -1
                 && p.getTile(num).getType().equals("tiB") && p.getTile(num).getStat() == 1
                 && water.getType().equals("wat")) {
-            water.setOcc(players.indexOf(p));
-            exist.setOcc(-1);
             exist.setpNum(-1);
             water.setpNum(players.indexOf(p));
             p.getTile(num).statUsed();
-            System.out.println("player" + players.indexOf(p) + "used boatT");
+            System.out.println("player " + players.indexOf(p) + " used boatT");
         }
     }// get existing settlement and move to water
 
@@ -259,38 +257,34 @@ public class Game {
                         && exist.getRow() - next.getRow() == -2)
                 || ((exist.getCol() - next.getCol() == 2 || exist.getCol() - next.getCol() == -2)
                         && exist.getRow() - next.getRow() == 2)) {
-            if (exist.getFree() == players.indexOf(p) && next.getFree() == -1
+            if (exist.getpNum() == players.indexOf(p) && next.getpNum() == -1
                     && p.getTile(num).getType().equals("tiH") && p.getTile(num).getStat() == 1
                     && !next.getType().equals("wat") && !next.getType().equals("mt")) {
-                exist.setOcc(-1);
                 exist.setpNum(-1);
-                next.setOcc(players.indexOf(p));
                 next.setpNum(players.indexOf(p));
                 p.getTile(num).statUsed();
-                System.out.println("player" + players.indexOf(p) + "used paddockT");
+                System.out.println("player " + players.indexOf(p) + " used paddockT");
             }
         }
     }// get existing settlement and jump 2 hexes straight line
 
     public void oracleT(Player p, Hex next, int num) {
-        if (next.getFree() == -1 && p.getSettlements() > 0 && p.getType().equals(next.getType())
+        if (next.getpNum() == -1 && p.getSettlements() > 0 && p.getType().equals(next.getType())
                 && p.getTile(num).getType().equals("tiO") && p.getTile(num).getStat() == 1) {
-            next.setOcc(players.indexOf(p));
             next.setpNum(players.indexOf(p));
             p.useSettlement();
             p.getTile(num).statUsed();
-            System.out.println("player" + players.indexOf(p) + "used oracleT");
+            System.out.println("player " + players.indexOf(p) + " used oracleT");
         }
     }// place new settlement on terrain as current card
 
     public void farmT(Player p, Hex grass, int num) {
-        if (grass.getFree() == -1 && p.getSettlements() > 0 && "grs".equals(grass.getType())
+        if (grass.getpNum() == -1 && p.getSettlements() > 0 && "grs".equals(grass.getType())
                 && p.getTile(num).getType().equals("tiG") && p.getTile(num).getStat() == 1) {
-            grass.setOcc(players.indexOf(p));
             grass.setpNum(players.indexOf(p));
             p.useSettlement();
             p.getTile(num).statUsed();
-            System.out.println("player" + players.indexOf(p) + "used farmT");
+            System.out.println("player " + players.indexOf(p) + " used farmT");
         }
     }// place new settlement on grass hex
 
