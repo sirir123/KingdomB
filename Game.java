@@ -296,21 +296,55 @@ public class Game {
 
     public void collectTile() {
         for(int i=0; i< bb.fullTiles.size() ;i++){
-            for(int p=0; p<bb.fullTiles.get(i).getNeighbors().size(); p++){
-                 if(bb.fullTiles.get(i).getNeighbors().get(p).getpNum()>-1){
-                    if (bb.fullTiles.get(i).getAmount() > 0) {
-                        Hex t=bb.fullTiles.get(i).getNeighbors().get(p);
-                        Hex adj=bb.fullTiles.get(i);
-                        players.get(t.getpNum()).addTile(adj);
-                        adj.minusAmount();
-                        System.out.println("player " + t.getpNum() + "collected tile:" + adj.getType());
-            
+            for(int p=0; p < bb.fullTiles.get(i).getNeighbors().size(); p++){
+                    if(bb.fullTiles.get(i).getNeighbors().get(p).getpNum()>-1){
+                        if(players.get(bb.fullTiles.get(i).getNeighbors().get(p).getpNum()).getAllTiles().size()!=0){
+                        for(int b=0; b<players.get(bb.fullTiles.get(i).getNeighbors().get(p).getpNum()).getAllTiles().size(); b++){
+                         if(!players.get(bb.fullTiles.get(i).getNeighbors().get(p).getpNum()).getAllTiles().get(b).getType().equals(bb.fullTiles.get(i).getType())) { 
+                           // System.out.println("IM GONNA END IT ALL");
+                        if(true){
+                            if (bb.fullTiles.get(i).getAmount() > 0) {
+                                //System.out.println("!"+ p);
+                                Hex t=bb.fullTiles.get(i).getNeighbors().get(p);
+                                Hex adj=bb.fullTiles.get(i);
+                                players.get(t.getpNum()).addTile(adj);
+                                adj.minusAmount();
+                                System.out.println("player " + t.getpNum() + " collected tile: " + adj.getType());//
+                    }  
         }
     }
-    //System.out.println("!" + p);
-    }
+}
+}
+
+                        if(players.get(bb.fullTiles.get(i).getNeighbors().get(p).getpNum()).getAllTiles().size()==0){
+                    if(bb.fullTiles.get(i).getNeighbors().get(p).getpNum()>-1){
+                        if (bb.fullTiles.get(i).getAmount() > 0) {
+                            //System.out.println("!"+ p);
+                            Hex t=bb.fullTiles.get(i).getNeighbors().get(p);
+                            Hex adj=bb.fullTiles.get(i);
+                            players.get(t.getpNum()).addTile(adj);
+                            adj.minusAmount();
+                            System.out.println("player " + t.getpNum() + " collected tile: " + adj.getType());//
+                    }  
+                }
+
+     
+     
+           }
+
+
+        }
+
+
+    
 
     
 }
+
+
+
+
+
     }
+}
 }

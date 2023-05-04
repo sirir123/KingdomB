@@ -145,7 +145,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 // System.out.println("AVALIABLE");
                 gm.placed++;
                 gm.updateAvaliable(true);
-                //gm.collectTile();
+                gm.collectTile();
                 repaint();
             }
 
@@ -567,7 +567,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                         g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 923 + (x * 61),
                                                 822, 54, 50, null);
                                     }
-                                } else if (gm.getPlayer(3).getTile(x).getStat() == 3) {
+                                } else if (gm.getPlayer(3).getTile(x).getStat() == 2) {
                                     if (x < 2) {
                                         g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 1167 + (x * 61),
                                                 711, 54, 50, null);
