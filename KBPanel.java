@@ -178,7 +178,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             run();
         }
         // in tile selction mode, players can now choose tiles
-        if (x >= 531 && x <= 676 && y >= 106 && y <= 146 && (gm.placed == 0 || gm.placed > 3)
+        if (x >= 531 && x <= 676 && y >= 106 && y <= 146 && (gm.placed == 0 || gm.placed >= 3)
                 && gm.getPlayer(gm.getCurrPlayer()).getAllTiles().size() != 0) {
             tileSel = !tileSel;
             System.out.println("tilesel true");
@@ -231,7 +231,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                     int[] cds = findCircle(x, y);
                     Hex temp = null;
                      for ( Hex hx: gm.bb.getHexes()){
-                        if (hx.getRow() == cds[0] && hx.getCol() == cds[1]){
+                        if (hx.getRow() == cds[1] && hx.getCol() == cds[0]){
                             temp = hx;
                         }
                     }
@@ -244,11 +244,11 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             int[] cds = findCircle(x, y);
             Hex temp = null;
             for ( Hex hx: gm.bb.getHexes()){
-                if (hx.getRow() == cds[0] && hx.getCol() == cds[1]){
+                if (hx.getRow() == cds[1] && hx.getCol() == cds[0]){
                     temp = hx;
                 }
             }
-            
+            System.out.println(" "+ temp);
             gm.farmT(gm.getPlayer(gm.getCurrPlayer()), temp, tileInPlay);
             System.out.println("farm  chosen: " + temp);
        } if (gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiH")){
@@ -256,7 +256,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 int[] cds = findCircle(x, y);
                 Hex temp = null;
                  for ( Hex hx: gm.bb.getHexes()){
-                    if (hx.getRow() == cds[0] && hx.getCol() == cds[1]){
+                    if (hx.getRow() == cds[1] && hx.getCol() == cds[0]){
                         temp = hx;
                     }
                 }
@@ -269,7 +269,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         int[] cds = findCircle(x, y);
         Hex temp = null;
         for ( Hex hx: gm.bb.getHexes()){
-            if (hx.getRow() == cds[0] && hx.getCol() == cds[1]){
+            if (hx.getRow() == cds[1] && hx.getCol() == cds[0]){
                 temp = hx;
             }
         }
@@ -283,6 +283,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         if (gm.placed >= 3 && x >= 683 && x <= 827 && y >= 105 && y <= 143) {
             System.out.println("hi");
             gm.nextTurn();
+            tileSel = false;
         }
 
         repaint();
@@ -355,6 +356,8 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             if (!help) {
                 drawShaders(g);
                 drawSettlements(g);
+            } if (tileSel){
+               g.drawImage(plyPick, 531, 105, 143, 39, null);
             }
 
         }
