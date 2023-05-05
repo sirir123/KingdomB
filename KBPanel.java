@@ -185,41 +185,41 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         }
         if (gm.getCurrPlayer() == 0 && tileSel && x >= 1154 && x <= 1296 && y >= 92 && y <= 266){
             System.out.println("work0");
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 130), 45)){ tileInPlay = 0; }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 130), 45)){ tileInPlay = 1; }
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 183), 45)){ tileInPlay = 2; }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 183), 45)){ tileInPlay = 3; } 
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 236), 45)){ tileInPlay = 4;}
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 236), 45)){ tileInPlay = 5; }
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 130), 23)){ tileInPlay = 0; }
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 130), 23)){ tileInPlay = 1; }
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 183), 23)){ tileInPlay = 2; }
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 183), 23)){ tileInPlay = 3; } 
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 236), 23)){ tileInPlay = 4;}
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 236), 23)){ tileInPlay = 5; }
             System.out.println("tile in play:" + tileInPlay);
 
         }if (gm.getCurrPlayer() == 1 && tileSel && x >= 1154 && x <= 1296 && y >= 297 && y <= 691){
             System.out.println("work1");
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 329), 45)){ tileInPlay = 0; }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 329), 45)){ tileInPlay = 1; }
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 385), 45)){ tileInPlay = 2; }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 385), 45)){ tileInPlay = 3; }
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 441), 45)){ tileInPlay = 4;}
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 441), 45)){ tileInPlay = 5; }
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 329), 23)){ tileInPlay = 0; }
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 329), 23)){ tileInPlay = 1; }
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 382), 23)){ tileInPlay = 2; }
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 382), 23)){ tileInPlay = 3; }
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 435), 23)){ tileInPlay = 4;}
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 435), 23)){ tileInPlay = 5; }
             System.out.println("tile in play:" + tileInPlay);
         }if (gm.getCurrPlayer() == 2 && tileSel&& x >= 1154 && x <= 1295 && y >= 498 && y <= 672){
             System.out.println("work2");
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 532), 45)){ tileInPlay = 0; }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 532), 45)){ tileInPlay = 1; }
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 586), 45)){ tileInPlay = 2; }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 586), 45)){ tileInPlay = 3; }
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 642), 45)){ tileInPlay = 4;}
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 642), 45)){ tileInPlay = 5; }
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 532), 23)){ tileInPlay = 0; }
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 532), 23)){ tileInPlay = 1; }
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 585), 23)){ tileInPlay = 2; }
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 585), 23)){ tileInPlay = 3; }
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 638), 23)){ tileInPlay = 4;}
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 638), 23)){ tileInPlay = 5; }
             System.out.println("tile in play:" + tileInPlay);
 
         }if (gm.getCurrPlayer() == 3 && tileSel&& x >= 1154 && x <= 1296 && y >= 700 && y <= 873){
             System.out.println("work3");
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 735), 45)){ tileInPlay = 0; }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 735), 45)){ tileInPlay = 1; }
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 788), 45)){ tileInPlay = 2; }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 788), 45)){ tileInPlay = 3; }
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 842), 45)){ tileInPlay = 4;}
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 842), 45)){ tileInPlay = 5; }
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 735), 23)){ tileInPlay = 0; }
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 735), 23)){ tileInPlay = 1; }
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 788), 23)){ tileInPlay = 2; }
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 788), 23)){ tileInPlay = 3; }
+            if (intpoint_inside_circle(x, y, new intPoint(1194, 841), 23)){ tileInPlay = 4;}
+            if (intpoint_inside_circle(x, y, new intPoint(1255, 841), 23)){ tileInPlay = 5; }
             System.out.println("tile in play:" + tileInPlay);
 
         }
@@ -300,7 +300,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 temp = hx;
             }
         }
-        gm.farmT(gm.getPlayer(gm.getCurrPlayer()), temp, tileInPlay);
+        gm.oracleT(gm.getPlayer(gm.getCurrPlayer()), temp, tileInPlay);
         System.out.println("oracle chosen: " + temp);
        }
        
@@ -384,7 +384,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 drawShaders(g);
                 drawSettlements(g);
             } if (tileSel){
-               g.drawImage(plyPick, 531, 105, 143, 39, null);
+               g.drawImage(plyPick, 522, 102, 157, 42, null);
             }
 
         }

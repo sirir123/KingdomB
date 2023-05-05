@@ -285,7 +285,7 @@ public class Game {
     }// get existing settlement and jump 2 hexes straight line
 
     public void oracleT(Player p, Hex next, int num) {
-        if (next.getpNum() == -1 && p.getSettlements() > 0 && p.getChosen().toString().equals(next.getType())
+        if (next.getpNum() == -1 && p.getSettlements() > 0 && p.getChosen().getTerr().equals(next.getType())
                 && p.getTile(num).getType().equals("tiO") && p.getTile(num).getStat() == 1) {
             next.setpNum(players.indexOf(p));
             p.useSettlement();
