@@ -246,7 +246,7 @@ public class Game {
 
                     if((exist.indexNeigh("tiG")!=-1 || exist.indexNeigh("tiO")!=-1 || exist.indexNeigh("tiH")!=-1 || exist.indexNeigh("tiB")!=-1) 
                     || (water.indexNeigh("tiG")!=-1 || water.indexNeigh("tiO")!=-1 || water.indexNeigh("tiH")!=-1 || water.indexNeigh("tiB")!=-1)){
-                            checkTile(exist, water);
+                            //checkTile(exist, water);
                             }
 
              exist.setpNum(-1);
@@ -270,7 +270,7 @@ public class Game {
 
                         if((exist.indexNeigh("tiG")!=-1 || exist.indexNeigh("tiO")!=-1 || exist.indexNeigh("tiH")!=-1 || exist.indexNeigh("tiB")!=-1) 
                         || (next.indexNeigh("tiG")!=-1 || next.indexNeigh("tiO")!=-1 || next.indexNeigh("tiH")!=-1 || next.indexNeigh("tiB")!=-1)){
-                                checkTile(exist, next);
+                                //checkTile(exist, next);
                                 }
 
                 exist.setpNum(-1);
