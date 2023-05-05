@@ -227,7 +227,9 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
        // call find circle on the clicking coordinates and pass them in to get an array with the coordinates of the hex, find that from the board and pass that hex into the action methods. call the action methods based on the location clicked and what number tile that should be. if its greater than the tiles user has, shouldnt do anything. 
       if (tileSel && gm.getPlayer(gm.getCurrPlayer()).getAllTiles() != null && tileInPlay >-1 && tileInPlay < gm.getPlayer(gm.getCurrPlayer()).getAllTiles().size() && x >= 271 && x<= 894 && y >= 280 && y <= 797){
              if (gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiB")){
-                for ( int i = 0; i < 2; i ++){
+                if (xtemp == 0 && ytemp == 0){
+                    xtemp = x;
+                    ytemp = y;
                     int[] cds = findCircle(x, y);
                     Hex temp = null;
                      for ( Hex hx: gm.bb.getHexes()){
@@ -236,10 +238,21 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                         }
                     }
                    tileTemps.add(temp);
-            }
-            gm.boatT(gm.getPlayer(gm.getCurrPlayer()), tileTemps.get(0), tileTemps.get(1), tileInPlay );
-            System.out.println("boat chosen: " + tileTemps.get(0) + " + " + tileTemps.get(1));
-            tileTemps = new ArrayList<Hex>();
+                } else {
+                    int[] cds = findCircle(x, y);
+                    Hex temp = null;
+                     for ( Hex hx: gm.bb.getHexes()){
+                        if (hx.getRow() == cds[1] && hx.getCol() == cds[0]){
+                            temp = hx;
+                        }
+                    }
+                   tileTemps.add(temp);
+                }
+                if (tileTemps.size() == 2){
+                    gm.boatT(gm.getPlayer(gm.getCurrPlayer()), tileTemps.get(0), tileTemps.get(1), tileInPlay );
+                    System.out.println("boat chosen: " + tileTemps.get(0) + " + " + tileTemps.get(1));
+                    tileTemps = new ArrayList<Hex>();
+                }
        } if (gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiG")){
             int[] cds = findCircle(x, y);
             Hex temp = null;
@@ -252,19 +265,33 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             gm.farmT(gm.getPlayer(gm.getCurrPlayer()), temp, tileInPlay);
             System.out.println("farm  chosen: " + temp);
        } if (gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiH")){
-            for ( int i = 0; i < 2; i ++){
-                int[] cds = findCircle(x, y);
-                Hex temp = null;
-                 for ( Hex hx: gm.bb.getHexes()){
-                    if (hx.getRow() == cds[1] && hx.getCol() == cds[0]){
-                        temp = hx;
-                    }
+        if (xtemp == 0 && ytemp == 0){
+            xtemp = x;
+            ytemp = y;
+            int[] cds = findCircle(x, y);
+            Hex temp = null;
+             for ( Hex hx: gm.bb.getHexes()){
+                if (hx.getRow() == cds[1] && hx.getCol() == cds[0]){
+                    temp = hx;
                 }
-               tileTemps.add(temp);
+            }
+           tileTemps.add(temp);
+        } else {
+            int[] cds = findCircle(x, y);
+            Hex temp = null;
+             for ( Hex hx: gm.bb.getHexes()){
+                if (hx.getRow() == cds[1] && hx.getCol() == cds[0]){
+                    temp = hx;
+                }
+            }
+           tileTemps.add(temp);
         }
-        gm.paddockT(gm.getPlayer(gm.getCurrPlayer()), tileTemps.get(0), tileTemps.get(1), tileInPlay);
+        
+        if (tileTemps.size() == 2){
+            gm.paddockT(gm.getPlayer(gm.getCurrPlayer()), tileTemps.get(0), tileTemps.get(1), tileInPlay);
         System.out.println("horse chosen: " + tileTemps.get(0) + " + " + tileTemps.get(1));
         tileTemps = new ArrayList<Hex>();
+        }
        } if (gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiO")){
         int[] cds = findCircle(x, y);
         Hex temp = null;
