@@ -282,10 +282,11 @@ public class Game {
     }// get existing settlement and jump 2 hexes straight line
 
     public void oracleT(Player p, Hex next, int num) {
-        if (next.getpNum() == -1 && p.getSettlements() > 0 && p.getType().equals(next.getType())
+        if (next.getpNum() == -1 && p.getSettlements() > 0 && p.getChosen().toString().equals(next.getType())
                 && p.getTile(num).getType().equals("tiO") && p.getTile(num).getStat() == 1) {
             next.setpNum(players.indexOf(p));
             p.useSettlement();
+            collectTile();
             p.getTile(num).statUsed();
             System.out.println("player " + players.indexOf(p) + " used oracleT");
         }
@@ -296,6 +297,7 @@ public class Game {
                 && p.getTile(num).getType().equals("tiG") && p.getTile(num).getStat() == 1) {
             grass.setpNum(players.indexOf(p));
             p.useSettlement();
+            collectTile();
             p.getTile(num).statUsed();
             System.out.println("player " + players.indexOf(p) + " used farmT");
         }
@@ -361,8 +363,9 @@ public class Game {
             if(two!=null){
                 if(one==null){
                     if(two.getAmount()>0){
-                    players.get(hx.getpNum()).addTile(two);;
-                    two.minusAmount();
+                    //players.get(hx.getpNum()).addTile(two);;
+                    //two.minusAmount();
+                    collectTile();
                     }
                 }
                 if(one!=two){
@@ -371,8 +374,9 @@ public class Game {
                         discTiles++;
                     }
                     if(two.getAmount()>0){
-                        players.get(hx.getpNum()).addTile(two);
-                        two.minusAmount();
+                        // players.get(hx.getpNum()).addTile(two);
+                        // two.minusAmount();
+                        collectTile();
                         }
                 }
             }
