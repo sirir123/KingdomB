@@ -246,6 +246,7 @@ public class Game {
 
                     if((exist.indexNeigh("tiG")!=-1 || exist.indexNeigh("tiO")!=-1 || exist.indexNeigh("tiH")!=-1 || exist.indexNeigh("tiB")!=-1) 
                     || (water.indexNeigh("tiG")!=-1 || water.indexNeigh("tiO")!=-1 || water.indexNeigh("tiH")!=-1 || water.indexNeigh("tiB")!=-1)){
+                            System.out.println("FUCK THIS");
                             //checkTile(exist, water);
                             }
 
@@ -270,11 +271,13 @@ public class Game {
 
                         if((exist.indexNeigh("tiG")!=-1 || exist.indexNeigh("tiO")!=-1 || exist.indexNeigh("tiH")!=-1 || exist.indexNeigh("tiB")!=-1) 
                         || (next.indexNeigh("tiG")!=-1 || next.indexNeigh("tiO")!=-1 || next.indexNeigh("tiH")!=-1 || next.indexNeigh("tiB")!=-1)){
+                            System.out.println("FUCK THIS");
                                 //checkTile(exist, next);
                                 }
 
                 exist.setpNum(-1);
                 next.setpNum(players.indexOf(p));
+                
                 p.getTile(num).statUsed();
                 System.out.println("player " + players.indexOf(p) + " used paddockT");
             }
@@ -343,16 +346,16 @@ public class Game {
             Hex two=null;
             
             for(int i=0; i<hx.getNeighbors().size();i++){
-                if(hx.getNeighbors().get(i).getType().equals("tiH") || hx.getType().equals("tiO") || hx.getType().equals("tiG") || hx.getType().equals("tiB")){
+                if(hx.getNeighbors().get(i).getType().equals("tiH") || hx.getNeighbors().get(i).getType().equals("tiO") || hx.getNeighbors().get(i).getType().equals("tiG") || hx.getNeighbors().get(i).getType().equals("tiB")){
                     one=hx.getNeighbors().get(i);//tile neighbor of hex 1
                 }
             }
             for(int i=0; i<next.getNeighbors().size();i++){
-                if(next.getType().equals("tiH") || next.getType().equals("tiO") || next.getType().equals("tiG") || next.getType().equals("tiB")){
+                if(next.getNeighbors().get(i).getType().equals("tiH") || next.getNeighbors().get(i).getType().equals("tiO") || next.getNeighbors().get(i).getType().equals("tiG") || next.getNeighbors().get(i).getType().equals("tiB")){
                     two=next.getNeighbors().get(i);//tile neighbor of hex 2
                 }
             }
-            
+            System.out.println(one + " " + two);
 
             if(one!=null && two==null){
                 if(players.get(hx.getpNum()).getAllTiles().size()>0){
@@ -379,6 +382,9 @@ public class Game {
                         collectTile();
                         }
                 }
+            }
+            else if(one==null && two==null){
+                System.out.println(" check tile not working");
             }
 
 

@@ -743,7 +743,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
     public void drawShaders(Graphics g) {
         // System.out.println("hello");
-        if (gm.placed < 3) {
+        if (gm.placed < 3 && !tileSel) {
             for (Hex hx : gm.avaliable) {
                 // System.out.println("hex -- (" + hx.getRow() + ", " + hx.getCol() + ")");
                 if (hx.getRow() % 2 == 0) {
@@ -756,7 +756,8 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 }
             }
         }
-
+        
+        shadeUseT(g);
         if (gm.placed < 3) {
             g.drawImage(darken, 684, 100, 150, 45, null);
         }
@@ -848,5 +849,14 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             }
         }
         return cds;
+    }
+
+    public void shadeUseT(Graphics b){
+        if(gm.getPlayer(gm.getCurrPlayer()).getAllTiles().size()==0){
+            b.drawImage(darken, 520, 100, 150, 45, null);
+        }
+        else if((gm.placed==1 || gm.placed==2) || gm.getPlayer(gm.getCurrPlayer()).getAllTiles().get(0).getStat()==0){
+            b.drawImage(darken, 520, 100, 150, 45, null);
+        }
     }
 }
