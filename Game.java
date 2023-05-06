@@ -84,6 +84,65 @@ public class Game {
         }
     }
 
+    public void updateAvaliable(String type){
+        System.out.println("update: " + type);
+        avaliable = new HashSet<Hex>();
+        if(type == "tiH"){
+            System.out.println("HORSY");
+        }else if(type == "tiO"){
+            System.out.println("OraclY");
+            // if (terrain) {
+
+            if (players.get(currPlayer).getPlaced().size() >= 1) {
+
+                for (Hex hx : players.get(currPlayer).getPlaced()) {
+
+                    for (Hex h : hx.getNeighbors()) {
+                        if (h != null && h.getpNum() == -1
+                                && h.getType().equals(players.get(currPlayer).getChosen().getTerr())) {
+                            avaliable.add(h);
+                        }
+                    }
+                }
+            }
+
+            if (avaliable.size() < 1) {
+                for (Hex hx : bb.getHexes()) {
+                    if (hx.getType().equals(players.get(currPlayer).getChosen().getTerr()) && hx.getpNum() == -1) {
+                        avaliable.add(hx);
+                    }
+                }
+            }
+            System.out.println("AVA: " + avaliable.toString());
+        }else if(type == "tiG"){
+            // if (terrain) {
+                System.out.println("grasY");
+            if (players.get(currPlayer).getPlaced().size() >= 1) {
+
+                for (Hex hx : players.get(currPlayer).getPlaced()) {
+
+                    for (Hex h : hx.getNeighbors()) {
+                        if (h != null && h.getpNum() == -1
+                                && h.getType().equals("grs")) {
+                            avaliable.add(h);
+                        }
+                    }
+                }
+            }
+
+            if (avaliable.size() < 1) {
+                for (Hex hx : bb.getHexes()) {
+                    if (hx.getType().equals("grs") && hx.getpNum() == -1) {
+                        avaliable.add(hx);
+                    }
+                }
+            }
+            System.out.println("AVA: " + avaliable.toString());
+        }else if(type == "tiB"){
+            System.out.println("Boaty");
+        }
+    }
+
     public void updateAvaliable() {
         HashSet<Hex> tempAvaliable = new HashSet<Hex>();
         for (Hex hx : avaliable) {
