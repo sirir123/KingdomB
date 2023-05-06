@@ -18,17 +18,11 @@ public class Board {
     }
 
     public void connect(ArrayList<Section> secs) {
-        // System.out.println("connect");
         for (Section sec : secs) {
-            // System.out.println("SECTION: " + sec.getHexes().toString());
-            // System.out.println();
             for (Hex hx : sec.getHexes()) {
-                // System.out.println("Hex: " + hx.getType());
-                // System.out.println();
                 if (hx.getType().equals("tiH") || hx.getType().equals("tiO") || hx.getType().equals("tiG")
                         || hx.getType().equals("tiB")) {
                     fullTiles.add(hx);
-                    // System.out.println("IDK PLEASE WORK: " + fullTiles.get(0).getAmount());
                 }
                 switch (hx.getSec()) {
                     case 0:
@@ -62,7 +56,6 @@ public class Board {
     }
 
     public void setNeighbors() {
-        System.out.println("Start");
         for (Hex hx : fullBoard) {
             for (Hex h : fullBoard) {
                 if (hx.getCol() - 1 == h.getCol()) {
@@ -83,9 +76,7 @@ public class Board {
                     hx.setNeighbors(2, h);
                 }
             }
-            System.out.println(hx.toString() + ": " + hx.getNeighbors().toString());
         }
-        System.out.println("End");
     }
 
 }
