@@ -307,26 +307,14 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 }
                 if (tileTemps.size() == 2) {
                     gm.boatT(gm.getPlayer(gm.getCurrPlayer()), tileTemps.get(0), tileTemps.get(1), tileInPlay);
+                    tileInPlay = -1;
                     System.out.println("boat chosen: " + tileTemps.get(0) + " + " + tileTemps.get(1));
                     tileTemps = new ArrayList<Hex>();
                 }
             }
-            if (gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiG")) {
-                int[] cds = findCircle(x, y);
-                Hex temp = null;
-                for (Hex hx : gm.bb.getHexes()) {
-                    if (hx.getRow() == cds[1] && hx.getCol() == cds[0]) {
-                        temp = hx;
-                    }
-                }
-                System.out.println(" " + temp);
-                gm.farmT(gm.getPlayer(gm.getCurrPlayer()), temp, tileInPlay);
-                System.out.println("farm  chosen: " + temp);
-            }
-            if (gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiH")) {
-                if (xtemp == 0 && ytemp == 0) {
-                    xtemp = x;
-                    ytemp = y;
+
+            if (tileInPlay != -1) {
+                if (gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiG")) {
                     int[] cds = findCircle(x, y);
                     Hex temp = null;
                     for (Hex hx : gm.bb.getHexes()) {
@@ -334,8 +322,46 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                             temp = hx;
                         }
                     }
-                    tileTemps.add(temp);
-                } else {
+                    System.out.println(" " + temp);
+                    gm.farmT(gm.getPlayer(gm.getCurrPlayer()), temp, tileInPlay);
+                    tileInPlay = -1;
+                    System.out.println("farm  chosen: " + temp);
+                }
+            }
+            if (tileInPlay != -1) {
+                if (gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiH")) {
+                    if (xtemp == 0 && ytemp == 0) {
+                        xtemp = x;
+                        ytemp = y;
+                        int[] cds = findCircle(x, y);
+                        Hex temp = null;
+                        for (Hex hx : gm.bb.getHexes()) {
+                            if (hx.getRow() == cds[1] && hx.getCol() == cds[0]) {
+                                temp = hx;
+                            }
+                        }
+                        tileTemps.add(temp);
+                    } else {
+                        int[] cds = findCircle(x, y);
+                        Hex temp = null;
+                        for (Hex hx : gm.bb.getHexes()) {
+                            if (hx.getRow() == cds[1] && hx.getCol() == cds[0]) {
+                                temp = hx;
+                            }
+                        }
+                        tileTemps.add(temp);
+                    }
+
+                    if (tileTemps.size() == 2) {
+                        gm.paddockT(gm.getPlayer(gm.getCurrPlayer()), tileTemps.get(0), tileTemps.get(1), tileInPlay);
+                        tileInPlay = -1;
+                        System.out.println("horse chosen: " + tileTemps.get(0) + " + " + tileTemps.get(1));
+                        tileTemps = new ArrayList<Hex>();
+                    }
+                }
+            }
+            if (tileInPlay != -1) {
+                if (gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiO")) {
                     int[] cds = findCircle(x, y);
                     Hex temp = null;
                     for (Hex hx : gm.bb.getHexes()) {
@@ -343,27 +369,12 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                             temp = hx;
                         }
                     }
-                    tileTemps.add(temp);
+                    gm.oracleT(gm.getPlayer(gm.getCurrPlayer()), temp, tileInPlay);
+                    tileInPlay = -1;
+                    System.out.println("oracle chosen: " + temp);
                 }
 
-                if (tileTemps.size() == 2) {
-                    gm.paddockT(gm.getPlayer(gm.getCurrPlayer()), tileTemps.get(0), tileTemps.get(1), tileInPlay);
-                    System.out.println("horse chosen: " + tileTemps.get(0) + " + " + tileTemps.get(1));
-                    tileTemps = new ArrayList<Hex>();
-                }
             }
-            if (gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiO")) {
-                int[] cds = findCircle(x, y);
-                Hex temp = null;
-                for (Hex hx : gm.bb.getHexes()) {
-                    if (hx.getRow() == cds[1] && hx.getCol() == cds[0]) {
-                        temp = hx;
-                    }
-                }
-                gm.oracleT(gm.getPlayer(gm.getCurrPlayer()), temp, tileInPlay);
-                System.out.println("oracle chosen: " + temp);
-            }
-
         }
 
         if (gm.placed >= 3 && x >= 683 && x <= 827 && y >= 105 && y <= 143) {
@@ -443,13 +454,18 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 drawShaders(g);
                 drawSettlements(g);
             }
-            if (tileSel) {
-                g.drawImage(plyPick, 522, 102, 157, 42, null);
+            boolean outline = true;
+            for (int i = 0; i < gm.getPlayer(gm.getCurrPlayer()).getAllTiles().size(); i++) {
+                if (gm.getPlayer(gm.getCurrPlayer()).getAllTiles().get(i).getStat() == 2 && !tileSel) {
+                    outline = false;
+                } else {
+                    outline = true;
+                }
             }
             shadeUseT(g);
 
-            if (gm.placed < 3) {
-                g.drawImage(darken, 684, 100, 150, 45, null);
+            if (tileSel && outline) {
+                g.drawImage(plyPick, 522, 102, 157, 42, null);
             }
         }
 
@@ -784,8 +800,11 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 }
             }
         }
-
-    }
+        
+        shadeUseT(g);
+        if (gm.placed < 3 ) {
+            g.drawImage(darken, 684, 100, 150, 45, null);
+        }
 
     public void drawSettlements(Graphics g) {
         for (Hex hx : gm.bb.getHexes()) {

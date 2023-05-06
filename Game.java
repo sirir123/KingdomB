@@ -11,6 +11,8 @@ public class Game {
     public HashSet<Hex> avaliable;
     public int placed;
 
+    private boolean disc;//this is for tile actions u can ignore
+
     private ArrayList<Player> players;
     private ArrayList<Card> deck;
     private ArrayList<Card> discard;
@@ -27,6 +29,7 @@ public class Game {
         bb = new Board(); // constructor
         deck = new ArrayList<Card>();
         discard = new ArrayList<Card>();
+        disc=false;//this is for tile actions u can ignore
         placed = 0;
         for (int i = 0; i < 5; i++) {
             for (int x = 0; x < 5; x++) {
@@ -243,16 +246,19 @@ public class Game {
         if (exist.getpNum() == players.indexOf(p) && water.getpNum() == -1
                 && p.getTile(num).getType().equals("tiB") && p.getTile(num).getStat() == 1
                 && water.getType().equals("wat")) {
-
-                    if((exist.indexNeigh("tiG")!=-1 || exist.indexNeigh("tiO")!=-1 || exist.indexNeigh("tiH")!=-1 || exist.indexNeigh("tiB")!=-1) 
-                    || (water.indexNeigh("tiG")!=-1 || water.indexNeigh("tiO")!=-1 || water.indexNeigh("tiH")!=-1 || water.indexNeigh("tiB")!=-1)){
+                    
+                    if((exist.indexNeigh("tiG") || exist.indexNeigh("tiO") || exist.indexNeigh("tiH") || exist.indexNeigh("tiB")) 
+                    || (water.indexNeigh("tiG") || water.indexNeigh("tiO") || water.indexNeigh("tiH") || water.indexNeigh("tiB"))){
                             System.out.println("FUCK THIS");
-                            //checkTile(exist, water);
+                            checkTile(exist, water);
                             }
 
              exist.setpNum(-1);
             water.setpNum(players.indexOf(p));
-            p.getTile(num).statUsed();
+            if(!disc){
+                p.getTile(num).statUsed();
+                }
+            disc=false;
             System.out.println("player " + players.indexOf(p) + " used boatT");
         }
     }// get existing settlement and move to water
@@ -268,17 +274,19 @@ public class Game {
             if (exist.getpNum() == players.indexOf(p) && next.getpNum() == -1
                     && p.getTile(num).getType().equals("tiH") && p.getTile(num).getStat() == 1
                     && !next.getType().equals("wat") && !next.getType().equals("mt")) {
-
-                        if((exist.indexNeigh("tiG")!=-1 || exist.indexNeigh("tiO")!=-1 || exist.indexNeigh("tiH")!=-1 || exist.indexNeigh("tiB")!=-1) 
-                        || (next.indexNeigh("tiG")!=-1 || next.indexNeigh("tiO")!=-1 || next.indexNeigh("tiH")!=-1 || next.indexNeigh("tiB")!=-1)){
-                            System.out.println("FUCK THIS");
-                                //checkTile(exist, next);
+                       
+                        if((exist.indexNeigh("tiG") || exist.indexNeigh("tiO") || exist.indexNeigh("tiH") || exist.indexNeigh("tiB")) 
+                        || (next.indexNeigh("tiG") || next.indexNeigh("tiO") || next.indexNeigh("tiH") || next.indexNeigh("tiB"))){
+                                System.out.println("FUCK THIS");
+                                checkTile(exist, next);
                                 }
 
                 exist.setpNum(-1);
                 next.setpNum(players.indexOf(p));
-                
+                if(!disc){
                 p.getTile(num).statUsed();
+                }
+                disc=false;
                 System.out.println("player " + players.indexOf(p) + " used paddockT");
             }
         }
@@ -344,42 +352,62 @@ public class Game {
         public void checkTile(Hex hx, Hex next){
             Hex one=null;
             Hex two=null;
-            
+            int occurance=0;
+
+            if(hx.indexNeigh("tiG") || hx.indexNeigh("tiO") || hx.indexNeigh("tiH") || hx.indexNeigh("tiB")){
             for(int i=0; i<hx.getNeighbors().size();i++){
                 if(hx.getNeighbors().get(i).getType().equals("tiH") || hx.getNeighbors().get(i).getType().equals("tiO") || hx.getNeighbors().get(i).getType().equals("tiG") || hx.getNeighbors().get(i).getType().equals("tiB")){
                     one=hx.getNeighbors().get(i);//tile neighbor of hex 1
                 }
             }
-            for(int i=0; i<next.getNeighbors().size();i++){
-                if(next.getNeighbors().get(i).getType().equals("tiH") || next.getNeighbors().get(i).getType().equals("tiO") || next.getNeighbors().get(i).getType().equals("tiG") || next.getNeighbors().get(i).getType().equals("tiB")){
-                    two=next.getNeighbors().get(i);//tile neighbor of hex 2
+            
+    
+
+            if((next.indexNeigh("tiG") || next.indexNeigh("tiO") || next.indexNeigh("tiH") || next.indexNeigh("tiB"))){
+            for(int p=0; p<next.getNeighbors().size();p++){
+                if(next.getNeighbors().get(p).getType().equals("tiH") || next.getNeighbors().get(p).getType().equals("tiO") || next.getNeighbors().get(p).getType().equals("tiG") || next.getNeighbors().get(p).getType().equals("tiB")){
+                    two=next.getNeighbors().get(p);//tile neighbor of hex 2
                 }
             }
-            System.out.println(one + " " + two);
+        }
+            //System.out.println(one + " " + two);
 
             if(one!=null && two==null){
                 if(players.get(hx.getpNum()).getAllTiles().size()>0){
+                    for(int i=0; i<one.getNeighbors().size();i++){
+                        if(one.getNeighbors().get(i).getpNum()==hx.getpNum())
+                        occurance++;
+                }
+                if(occurance==1){
                     players.get(hx.getpNum()).getAllTiles().remove(one);
                     discTiles++;
+                    disc=true;
                 }
+            }
             }
             if(two!=null){
                 if(one==null){
                     if(two.getAmount()>0){
-                    //players.get(hx.getpNum()).addTile(two);;
-                    //two.minusAmount();
-                    collectTile();
+                    players.get(hx.getpNum()).addTile(two);;
+                    two.minusAmount();
                     }
                 }
                 if(one!=two){
                     if(players.get(hx.getpNum()).getAllTiles().size()>0){
+                        for(int i=0; i<one.getNeighbors().size();i++){
+                            if(one.getNeighbors().get(i).getpNum()==hx.getpNum())
+                            occurance++;
+                    }
+                    if(occurance==1){
                         players.get(hx.getpNum()).getAllTiles().remove(one);
                         discTiles++;
+                        disc=true;
+                    }
                     }
                     if(two.getAmount()>0){
-                        // players.get(hx.getpNum()).addTile(two);
-                        // two.minusAmount();
-                        collectTile();
+                        players.get(hx.getpNum()).addTile(two);
+                        two.minusAmount();
+                        //collectTile();
                         }
                 }
             }
@@ -393,6 +421,7 @@ public class Game {
 
 
 
+        
 
-
+}
 }
