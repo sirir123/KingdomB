@@ -383,13 +383,24 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             if (!help) {
                 drawShaders(g);
                 drawSettlements(g);
-            } if (tileSel){
-               g.drawImage(plyPick, 522, 102, 157, 42, null);
+            } 
+            boolean outline = true;
+            for ( int i = 0; i < gm.getPlayer(gm.getCurrPlayer()).getAllTiles().size(); i++){
+                if (gm.getPlayer(gm.getCurrPlayer()).getAllTiles().get(i).getStat() == 2){
+                    outline = false;
+                } else {
+                    outline =true;
+                }
+            }
+
+            if (tileSel && outline){
+                g.drawImage(plyPick, 522, 102, 157, 42, null);
+            }
             }
 
         }
 
-    }
+    
 
     public void drawStartScreen(Graphics g) {
         // System.out.println("(" + getWidth() + ", " + getHeight() + ")");
@@ -758,7 +769,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         }
         
         shadeUseT(g);
-        if (gm.placed < 3) {
+        if (gm.placed < 3 ) {
             g.drawImage(darken, 684, 100, 150, 45, null);
         }
 
