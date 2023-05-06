@@ -400,7 +400,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             } 
             boolean outline = true;
             for ( int i = 0; i < gm.getPlayer(gm.getCurrPlayer()).getAllTiles().size(); i++){
-                if (gm.getPlayer(gm.getCurrPlayer()).getAllTiles().get(i).getStat() == 2){
+                if (gm.getPlayer(gm.getCurrPlayer()).getAllTiles().get(i).getStat() == 2 && !tileSel){
                     outline = false;
                 } else {
                     outline =true;
