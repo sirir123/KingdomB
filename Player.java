@@ -38,6 +38,10 @@ public class Player {
         placed.add(t);
     }
 
+    public void removePlaced(Hex t) {
+        placed.remove(t);
+    }
+
     public ArrayList<Hex> getPlaced() {
         return placed;
     }

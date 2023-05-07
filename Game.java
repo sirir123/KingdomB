@@ -10,6 +10,8 @@ public class Game {
     public int state; // 0 terrain card, 1 tiles
     public HashSet<Hex> avaliable;
     public int placed;
+    public int stat; //for boat and horse, -1 not used, 0 tile picked, 1 org picked, then back to -1
+    public Hex org; //storing org tile picked when boat or horse
 
     private boolean disc;// this is for tile actions u can ignore
 
@@ -30,6 +32,8 @@ public class Game {
         discard = new ArrayList<Card>();
         disc = false;// this is for tile actions u can ignore
         placed = 0;
+        stat = -1;
+        //org = new Hex();
         for (int i = 0; i < 5; i++) {
             for (int x = 0; x < 5; x++) {
                 if (i == 0) {
@@ -94,12 +98,36 @@ public class Game {
         }   
     }
 
-    public void updateAvaliable(String type, Hex tile){
+    public void updateAvaliable(String type, Hex tile, Hex org){
         System.out.println("update: " + type);
         avaliable = new HashSet<Hex>();
         if(tile.getStat() == 1){
                 if(type == "tiH"){
-                System.out.println("HORSY");
+                System.out.println("HORSY"  );
+                if(org ==  null){
+                    for(Hex hx: players.get(currPlayer).getPlaced()){
+                        avaliable.add(hx);
+                    }    
+                }else{
+                    for(Hex hx: players.get(currPlayer).getPlaced()){
+                        if(hx.getCol() == org.getCol() - 2 && hx.getRow() == org.getRow()-2){
+                            avaliable.add(hx);
+                        }else if (hx.getCol() == org.getCol() + 2 && hx.getRow() == org.getRow() - 2){
+                            avaliable.add(hx);
+                        }else if (hx.getCol() == org.getCol() + 4 && hx.getRow() == org.getRow()){
+                            avaliable.add(hx);
+                        }else if (hx.getCol() == org.getCol() + 2 && hx.getRow() == org.getRow() + 2){
+                            avaliable.add(hx);
+                        }else if (hx.getCol() == org.getCol() - 2 && hx.getRow() == org.getRow() + 2){
+                            avaliable.add(hx);
+                        }else if (hx.getCol() == org.getCol() && hx.getRow() == org.getRow() - 4){
+                            avaliable.add(hx);
+                        }
+                    }
+                }
+                
+                
+
             }else if(type == "tiO"){
                 System.out.println("OraclY");
                 // if (terrain) {
@@ -186,7 +214,11 @@ public class Game {
     public boolean avaliable(int r, int c, Hex tile) {
         if (avaliable != null) {
             for (Hex hx : avaliable) {
-                if (hx.getRow() == r && hx.getCol() == c && tile.getStat() == 1) {
+                if ((stat == -1 || stat == 1 ) && hx.getRow() == r && hx.getCol() == c && tile.getStat() == 1) {
+                    if(stat == 1){
+                        org.setpNum(-1);
+                        players.get(currPlayer).removePlaced(hx);
+                    }
                     bb.updateHex(r, c, currPlayer);
                     players.get(currPlayer).addPlaced(hx);
                     players.get(currPlayer).setSettlements(players.get(currPlayer).getSettlements() - 1);
@@ -194,6 +226,8 @@ public class Game {
                     tile.statUsed();
                 
                     return true;
+                }else if(stat == 0 && hx.getRow() == r && hx.getCol() == c && tile.getStat() == 1){
+                    org = hx;
                 }
             }
         }

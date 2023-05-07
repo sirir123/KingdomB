@@ -148,7 +148,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         if (start && !help && x >= 258 && x <= 897 && y >= 267 && y <= 787) {
             int[] cds = findCircle(x, y);
             System.out.println("LOC: (" + cds[0] + ", " + cds[1] + ") AND " + tileSel);
-            if (tileSel && (gm.placed == 3 || gm.placed == 0) && gm.avaliable(cds[1], cds[0], gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay))) {
+            if ((gm.stat == -1 || gm.stat == 1) && tileSel && (gm.placed == 3 || gm.placed == 0) && gm.avaliable(cds[1], cds[0], gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay))) {
                 System.out.println("AVALIABLE");
                 //gm.updateAvaliable(true);
                 gm.updateAvaliable(false);
@@ -159,7 +159,20 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                     tileInPlay = -1;
                 } 
                 repaint();
-            }else if (gm.placed < 3 && gm.avaliable(cds[1], cds[0])) {
+            }else if(tileSel && gm.stat == 0 && (gm.placed == 3 || gm.placed == 0) && gm.avaliable(cds[1], cds[0], gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay))){
+                System.out.println("stage 2");
+                gm.stat = 1;
+                gm.updateAvaliable(gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType(), gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay), gm.org);
+            }else if(tileSel && gm.stat == 1 && (gm.placed == 3 || gm.placed == 0) && gm.avaliable(cds[1], cds[0], gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay))){
+                gm.stat = -1;
+                gm.updateAvaliable(false);
+                gm.collectTile();
+                if(!gm.tilesAvaliable()){
+                    gm.updateAvaliable(true);
+                    tileSel =false;
+                    tileInPlay = -1;
+                } 
+            }else if ((gm.stat == -1) && gm.placed < 3 && gm.avaliable(cds[1], cds[0])) {
                 // System.out.println("AVALIABLE");
                 
                 gm.placed++;
@@ -229,7 +242,13 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 tileInPlay = 5;
             }
             System.out.println("tile in play:" + tileInPlay);
-            gm.updateAvaliable(gm.getPlayer(0).getTile(tileInPlay).getType(), gm.getPlayer(0).getTile(tileInPlay));
+            if(gm.getPlayer(0).getTile(tileInPlay).getType().equals("tiO") || gm.getPlayer(0).getTile(tileInPlay).getType().equals("tiG"))
+                gm.updateAvaliable(gm.getPlayer(0).getTile(tileInPlay).getType(), gm.getPlayer(0).getTile(tileInPlay), null);
+
+            if(gm.getPlayer(0).getTile(tileInPlay).getType().equals("tiB") || gm.getPlayer(0).getTile(tileInPlay).getType().equals("tiH")){
+                gm.stat = 0;
+                gm.updateAvaliable(gm.getPlayer(0).getTile(tileInPlay).getType(), gm.getPlayer(0).getTile(tileInPlay), null);
+            }
 
         }
 
@@ -254,7 +273,13 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 tileInPlay = 5;
             }
             System.out.println("tile in play:" + tileInPlay);
-            gm.updateAvaliable(gm.getPlayer(1).getTile(tileInPlay).getType(), gm.getPlayer(1).getTile(tileInPlay));
+            if(gm.getPlayer(1).getTile(tileInPlay).getType().equals("tiO") || gm.getPlayer(1).getTile(tileInPlay).getType().equals("tiG"))
+                gm.updateAvaliable(gm.getPlayer(1).getTile(tileInPlay).getType(), gm.getPlayer(1).getTile(tileInPlay), null);
+
+                if(gm.getPlayer(1).getTile(tileInPlay).getType().equals("tiB") || gm.getPlayer(1).getTile(tileInPlay).getType().equals("tiH")){
+                    gm.stat = 0;
+                    gm.updateAvaliable(gm.getPlayer(1).getTile(tileInPlay).getType(), gm.getPlayer(1).getTile(tileInPlay), null);
+                }
         }
 
         if (gm.getCurrPlayer() == 2 && tileSel && x >= 1154 && x <= 1295 && y >= 498 && y <= 672) {
@@ -278,7 +303,13 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 tileInPlay = 5;
             }
             System.out.println("tile in play:" + tileInPlay);
-            gm.updateAvaliable(gm.getPlayer(2).getTile(tileInPlay).getType(), gm.getPlayer(2).getTile(tileInPlay));
+            if(gm.getPlayer(2).getTile(tileInPlay).getType().equals("tiO") || gm.getPlayer(2).getTile(tileInPlay).getType().equals("tiG"))
+                gm.updateAvaliable(gm.getPlayer(2).getTile(tileInPlay).getType(), gm.getPlayer(2).getTile(tileInPlay), null);
+
+                if(gm.getPlayer(2).getTile(tileInPlay).getType().equals("tiB") || gm.getPlayer(2).getTile(tileInPlay).getType().equals("tiH")){
+                    gm.stat = 0;
+                    gm.updateAvaliable(gm.getPlayer(2).getTile(tileInPlay).getType(), gm.getPlayer(2).getTile(tileInPlay), null);
+                }
         }
 
         if (gm.getCurrPlayer() == 3 && tileSel && x >= 1154 && x <= 1296 && y >= 700 && y <= 873) {
@@ -302,7 +333,13 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 tileInPlay = 5;
             }
             System.out.println("tile in play:" + tileInPlay);
-            gm.updateAvaliable(gm.getPlayer(3).getTile(tileInPlay).getType(), gm.getPlayer(3).getTile(tileInPlay));
+            if(gm.getPlayer(3).getTile(tileInPlay).getType().equals("tiO") || gm.getPlayer(3).getTile(tileInPlay).getType().equals("tiG"))
+                gm.updateAvaliable(gm.getPlayer(3).getTile(tileInPlay).getType(), gm.getPlayer(3).getTile(tileInPlay), null);
+            
+                if(gm.getPlayer(3).getTile(tileInPlay).getType().equals("tiB") || gm.getPlayer(3).getTile(tileInPlay).getType().equals("tiH")){
+                    gm.stat = 0;
+                    gm.updateAvaliable(gm.getPlayer(3).getTile(tileInPlay).getType(), gm.getPlayer(3).getTile(tileInPlay), null);
+                }
             repaint();
         }
         // find the new coordinates of
