@@ -57,6 +57,13 @@ public class Game {
 
     }
 
+    public boolean tilesAvaliable(){ //whether any of curr players tiles can be used
+        for(Hex ti: players.get(currPlayer).getAllTiles()){
+            if(ti!= null && ti.getStat() == 1)return true;
+        }
+        return false;
+    }
+    
     public void updateAvaliable(boolean terrain) {
 
         avaliable = new HashSet<Hex>();
