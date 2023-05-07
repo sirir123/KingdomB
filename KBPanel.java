@@ -13,7 +13,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class KBPanel extends JPanel implements MouseListener, Runnable {
-    private BufferedImage startScr, plyPick, mainScr, startTile;
+    private BufferedImage startScr, plyPick, mainScr, startTile, currTiles;
     private BufferedImage lordCd, workCd, discCd, castCd;
     private BufferedImage tFlwr, tGrs, tDes, tFor, tCnyn;
     private BufferedImage sOrcl, sHrse, sFrm, sBt, orcl, hrse, frm, bt;
@@ -104,6 +104,8 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
             colWhite = ImageIO.read(KBPanel.class.getResource("/Pictures/colorWhite.png"));
 
+            currTiles = ImageIO.read(KBPanel.class.getResource("/Pictures/currUsing.png"));
+
         } catch (Exception E) {
             System.out.println("Exception Error in panel");
             return;
@@ -182,6 +184,8 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         // in tile selction mode, players can now choose tiles
         if (x >= 531 && x <= 676 && y >= 106 && y <= 146 && (gm.placed == 0 || gm.placed >= 3)
                 && gm.getPlayer(gm.getCurrPlayer()).getAllTiles().size() > 0) {
+            if (!tileSel)
+                    gm.updateAvaliable(true);
             tileSel = !tileSel;
             tileInPlay = -1;
             System.out.println("tilesel true");
@@ -476,7 +480,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             shadeUseT(g);
 
             if (tileSel && outline) {
-                g.drawImage(plyPick, 522, 102, 157, 42, null);
+                g.drawImage(currTiles, 522, 102, 151, 42, null);
             }
         }
 
