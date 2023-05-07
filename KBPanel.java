@@ -150,7 +150,8 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             System.out.println("LOC: (" + cds[0] + ", " + cds[1] + ") AND " + tileSel);
             if (tileSel && (gm.placed == 3 || gm.placed == 0) && gm.avaliable(cds[1], cds[0], gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay))) {
                 System.out.println("AVALIABLE");
-                gm.updateAvaliable(true);
+                //gm.updateAvaliable(true);
+                gm.updateAvaliable(false);
                 gm.collectTile();
                 if(!gm.tilesAvaliable()){
                     gm.updateAvaliable(true);
@@ -487,7 +488,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             }
             
             //shadeUseT(g);
-            if(gm.getPlayer(gm.getCurrPlayer()).getAllTiles().size() == 0 || !gm.tilesAvaliable()){
+            if(gm.getPlayer(gm.getCurrPlayer()).getAllTiles().size() == 0 || !gm.tilesAvaliable() || (gm.placed >0 && gm.placed <3)){
                 g.drawImage(darken, 520, 100, 150, 45, null);
             }
 

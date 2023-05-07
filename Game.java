@@ -67,28 +67,31 @@ public class Game {
     public void updateAvaliable(boolean terrain) {
 
         avaliable = new HashSet<Hex>();
-        // if (terrain) {
+        if (terrain) {
 
-        if (players.get(currPlayer).getPlaced().size() >= 1) {
+            if (players.get(currPlayer).getPlaced().size() >= 1) {
 
-            for (Hex hx : players.get(currPlayer).getPlaced()) {
+                for (Hex hx : players.get(currPlayer).getPlaced()) {
 
-                for (Hex h : hx.getNeighbors()) {
-                    if (h != null && h.getpNum() == -1
-                            && h.getType().equals(players.get(currPlayer).getChosen().getTerr())) {
-                        avaliable.add(h);
+                    for (Hex h : hx.getNeighbors()) {
+                        if (h != null && h.getpNum() == -1
+                                && h.getType().equals(players.get(currPlayer).getChosen().getTerr())) {
+                            avaliable.add(h);
+                        }
                     }
                 }
             }
-        }
 
-        if (avaliable.size() < 1) {
-            for (Hex hx : bb.getHexes()) {
-                if (hx.getType().equals(players.get(currPlayer).getChosen().getTerr()) && hx.getpNum() == -1) {
-                    avaliable.add(hx);
+            if (avaliable.size() < 1) {
+                for (Hex hx : bb.getHexes()) {
+                    if (hx.getType().equals(players.get(currPlayer).getChosen().getTerr()) && hx.getpNum() == -1) {
+                        avaliable.add(hx);
+                    }
                 }
             }
-        }
+        }else{
+            avaliable = new HashSet<Hex>();
+        }   
     }
 
     public void updateAvaliable(String type, Hex tile){
