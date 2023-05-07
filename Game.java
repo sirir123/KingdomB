@@ -84,63 +84,66 @@ public class Game {
         }
     }
 
-    public void updateAvaliable(String type){
+    public void updateAvaliable(String type, Hex tile){
         System.out.println("update: " + type);
         avaliable = new HashSet<Hex>();
-        if(type == "tiH"){
-            System.out.println("HORSY");
-        }else if(type == "tiO"){
-            System.out.println("OraclY");
-            // if (terrain) {
+        if(tile.getStat() == 1){
+                if(type == "tiH"){
+                System.out.println("HORSY");
+            }else if(type == "tiO"){
+                System.out.println("OraclY");
+                // if (terrain) {
 
-            if (players.get(currPlayer).getPlaced().size() >= 1) {
+                if (players.get(currPlayer).getPlaced().size() >= 1) {
 
-                for (Hex hx : players.get(currPlayer).getPlaced()) {
+                    for (Hex hx : players.get(currPlayer).getPlaced()) {
 
-                    for (Hex h : hx.getNeighbors()) {
-                        if (h != null && h.getpNum() == -1
-                                && h.getType().equals(players.get(currPlayer).getChosen().getTerr())) {
-                            avaliable.add(h);
+                        for (Hex h : hx.getNeighbors()) {
+                            if (h != null && h.getpNum() == -1
+                                    && h.getType().equals(players.get(currPlayer).getChosen().getTerr())) {
+                                avaliable.add(h);
+                            }
                         }
                     }
                 }
-            }
 
-            if (avaliable.size() < 1) {
-                for (Hex hx : bb.getHexes()) {
-                    if (hx.getType().equals(players.get(currPlayer).getChosen().getTerr()) && hx.getpNum() == -1) {
-                        avaliable.add(hx);
-                    }
-                }
-            }
-            System.out.println("AVA: " + avaliable.toString());
-        }else if(type == "tiG"){
-            // if (terrain) {
-                System.out.println("grasY");
-            if (players.get(currPlayer).getPlaced().size() >= 1) {
-
-                for (Hex hx : players.get(currPlayer).getPlaced()) {
-
-                    for (Hex h : hx.getNeighbors()) {
-                        if (h != null && h.getpNum() == -1
-                                && h.getType().equals("grs")) {
-                            avaliable.add(h);
+                if (avaliable.size() < 1) {
+                    for (Hex hx : bb.getHexes()) {
+                        if (hx.getType().equals(players.get(currPlayer).getChosen().getTerr()) && hx.getpNum() == -1) {
+                            avaliable.add(hx);
                         }
                     }
                 }
-            }
+                System.out.println("AVA: " + avaliable.toString());
+            }else if(type == "tiG"){
+                // if (terrain) {
+                    System.out.println("grasY");
+                if (players.get(currPlayer).getPlaced().size() >= 1) {
 
-            if (avaliable.size() < 1) {
-                for (Hex hx : bb.getHexes()) {
-                    if (hx.getType().equals("grs") && hx.getpNum() == -1) {
-                        avaliable.add(hx);
+                    for (Hex hx : players.get(currPlayer).getPlaced()) {
+
+                        for (Hex h : hx.getNeighbors()) {
+                            if (h != null && h.getpNum() == -1
+                                    && h.getType().equals("grs")) {
+                                avaliable.add(h);
+                            }
+                        }
                     }
                 }
+
+                if (avaliable.size() < 1) {
+                    for (Hex hx : bb.getHexes()) {
+                        if (hx.getType().equals("grs") && hx.getpNum() == -1) {
+                            avaliable.add(hx);
+                        }
+                    }
+                }
+                System.out.println("AVA: " + avaliable.toString());
+            }else if(type == "tiB"){
+                System.out.println("Boaty");
             }
-            System.out.println("AVA: " + avaliable.toString());
-        }else if(type == "tiB"){
-            System.out.println("Boaty");
         }
+        
     }
 
     public void updateAvaliable() {
@@ -167,6 +170,24 @@ public class Game {
         }
 
         // updateAvaliable(true);
+        return false;
+    }
+
+    public boolean avaliable(int r, int c, Hex tile) {
+        if (avaliable != null) {
+            for (Hex hx : avaliable) {
+                if (hx.getRow() == r && hx.getCol() == c && tile.getStat() == 1) {
+                    bb.updateHex(r, c, currPlayer);
+                    players.get(currPlayer).setSettlements(players.get(currPlayer).getSettlements() - 1);
+                    collectTile();
+                    tile.statUsed();
+                
+                    return true;
+                }
+            }
+        }
+
+        
         return false;
     }
 
@@ -352,14 +373,13 @@ public class Game {
     }// get existing settlement and jump 2 hexes straight line
 
     public void oracleT(Player p, Hex next, int num) {
-        if (next.getpNum() == -1 && p.getSettlements() > 0 && p.getChosen().getTerr().equals(next.getType())
-                && p.getTile(num).getType().equals("tiO") && p.getTile(num).getStat() == 1) {
-            next.setpNum(players.indexOf(p));
+       // if (p.getSettlements() > 0 && p.getTile(num).getStat() == 1) {
+            //next.setpNum(players.indexOf(p));
             p.useSettlement();
             collectTile();
             p.getTile(num).statUsed();
-            System.out.println("player " + players.indexOf(p) + " used oracleT");
-        }
+            System.out.println("!!!player " + players.indexOf(p) + " used oracleT");
+        //}
     }// place new settlement on terrain as current card
 
     public void farmT(Player p, Hex grass, int num) {

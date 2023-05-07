@@ -130,7 +130,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         int x = e.getX();
         int y = e.getY();
 
-        System.out.println("loc is(" + x + ", " + y + ")");
+        System.out.println("loc is(" + x + ", " + y + ")"); //starting adj
         if (!help && !start && y >= 569 * (getHeight() / 889.0) && y <= 624 * (getHeight() / 889.0)) {
             if (x >= 654 * (getWidth() / 1238.0) && x <= 690 * (getWidth() / 1238.0)) { // for start screen
                 // System.out.println("2");
@@ -144,11 +144,18 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             }
         }
 
+        //selecting tile
         if (start && !help && x >= 258 && x <= 897 && y >= 267 && y <= 787) {
             int[] cds = findCircle(x, y);
             System.out.println("LOC: (" + cds[0] + ", " + cds[1] + ")");
-            if (gm.placed < 3 && gm.avaliable(cds[1], cds[0])) {
+            if (tileSel && (gm.placed < 3 || gm.placed == 0) && gm.avaliable(cds[1], cds[0], gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay))) {
                 // System.out.println("AVALIABLE");
+                gm.updateAvaliable(true);
+                gm.collectTile();
+                repaint();
+            }else if (gm.placed < 3 && gm.avaliable(cds[1], cds[0])) {
+                // System.out.println("AVALIABLE");
+                
                 gm.placed++;
                 gm.updateAvaliable(true);
                 gm.collectTile();
@@ -157,6 +164,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
         }
 
+        //staring game
         if (!help && !start && x >= 516 * (getWidth() / 1238.0) && x <= 730 * (getWidth() / 1238.0)
                 && y >= 665 * (getHeight() / 889.0)
                 && y <= 734 * (getHeight() / 889.0)) {
@@ -172,10 +180,13 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             gm.updateAvaliable(true);
         }
 
+        //help
         if (start && intpoint_inside_circle(x, y, new intPoint(877, 124), 25)) {
             help = !help;
             repaint();
         }
+        
+        //doc
         if (start && help && x >= 576 && x <= 819
                 && y >= 719 && y <= 797) {
             run();
@@ -184,7 +195,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         // in tile selction mode, players can now choose tiles
         if (x >= 531 && x <= 676 && y >= 106 && y <= 146 && (gm.placed == 0 || gm.placed >= 3)
                 && gm.getPlayer(gm.getCurrPlayer()).getAllTiles().size() > 0) {
-            if (!tileSel)
+            if (tileSel)
                     gm.updateAvaliable(true);
             tileSel = !tileSel;
             tileInPlay = -1;
@@ -212,7 +223,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 tileInPlay = 5;
             }
             System.out.println("tile in play:" + tileInPlay);
-            gm.updateAvaliable(gm.getPlayer(0).getTile(tileInPlay).getType());
+            gm.updateAvaliable(gm.getPlayer(0).getTile(tileInPlay).getType(), gm.getPlayer(0).getTile(tileInPlay));
 
         }
 
@@ -237,7 +248,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 tileInPlay = 5;
             }
             System.out.println("tile in play:" + tileInPlay);
-            gm.updateAvaliable(gm.getPlayer(1).getTile(tileInPlay).getType());
+            gm.updateAvaliable(gm.getPlayer(1).getTile(tileInPlay).getType(), gm.getPlayer(1).getTile(tileInPlay));
         }
 
         if (gm.getCurrPlayer() == 2 && tileSel && x >= 1154 && x <= 1295 && y >= 498 && y <= 672) {
@@ -261,7 +272,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 tileInPlay = 5;
             }
             System.out.println("tile in play:" + tileInPlay);
-            gm.updateAvaliable(gm.getPlayer(2).getTile(tileInPlay).getType());
+            gm.updateAvaliable(gm.getPlayer(2).getTile(tileInPlay).getType(), gm.getPlayer(2).getTile(tileInPlay));
         }
 
         if (gm.getCurrPlayer() == 3 && tileSel && x >= 1154 && x <= 1296 && y >= 700 && y <= 873) {
@@ -285,7 +296,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 tileInPlay = 5;
             }
             System.out.println("tile in play:" + tileInPlay);
-            gm.updateAvaliable(gm.getPlayer(3).getTile(tileInPlay).getType());
+            gm.updateAvaliable(gm.getPlayer(3).getTile(tileInPlay).getType(), gm.getPlayer(3).getTile(tileInPlay));
             repaint();
         }
         // find the new coordinates of
