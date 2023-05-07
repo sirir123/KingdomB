@@ -511,4 +511,641 @@ public class Game {
         }
 
     }
+    public void scLords(int numPly){
+        //compare said ints to give out points
+        //add points to index 0 of points arraylist for every player + keep in mind different # of players in a game
+        for(int p=0; p<numPly; p++){
+            for (Hex hx : bb.fullBoard) {
+                    if (hx.getpNum() == p && hx.getSec()==1) {
+                        players.get(p).sec1++;
+                    }
+                    if (hx.getpNum() == p && hx.getSec()==2) {
+                        players.get(p).sec2++;
+                    }
+                    if (hx.getpNum() == p && hx.getSec()==3) {
+                        players.get(p).sec3++;
+                    }
+                    if (hx.getpNum() == p && hx.getSec()==4) {
+                        players.get(p).sec4++;
+                    }
+                    //num of setts in each sector
+                }
+                System.out.println("player " + p + ": " + players.get(p).sec1 + " , " + players.get(p).sec2 + " , " + players.get(p).sec3 + " , " + players.get(p).sec4);
+            }
+       if(numPly==2){
+        for(int s=0; s<4; s++){//iterates through each sector
+        if(players.get(0).getS(s)>players.get(1).getS(s)){
+            //p0 gets 12 && p1 get 6
+            players.get(0).getAllPoints().add(0,12);
+            players.get(1).getAllPoints().add(0,6);
+        }
+        if(players.get(1).getS(s)>players.get(0).getS(s)){
+            //p1 gets 12 && p0 get 6
+            players.get(0).getAllPoints().add(0,6);
+            players.get(1).getAllPoints().add(0,12);
+        }
+        if(players.get(0).getS(s)==players.get(1).getS(s)){
+            //p0 & p1 get 12
+            players.get(0).getAllPoints().add(0,12);
+            players.get(1).getAllPoints().add(0,12);
+        }
+    }
+       }
+
+       if(numPly==3){
+        for(int s=0; s<4; s++){//iterates through each sector
+            if(players.get(0).getS(s)>players.get(1).getS(s) && players.get(0).getS(s)>players.get(2).getS(s)){
+                //p0 gets 12
+                players.get(0).getAllPoints().add(0,12);
+                if(players.get(1).getS(s)>players.get(2).getS(s)){
+                    //p1 gets 6
+                    players.get(1).getAllPoints().add(0,6);
+                }
+                if(players.get(2).getS(s)>players.get(1).getS(s)){
+                    //p2 gets 6
+                    players.get(2).getAllPoints().add(0,6);
+                }
+                if(players.get(1).getS(s)==players.get(2).getS(s)){
+                    //p1 & p2 gets 6
+                    players.get(1).getAllPoints().add(0,6);
+                    players.get(2).getAllPoints().add(0,6);
+                }
+            }
+            else if(players.get(1).getS(s)>players.get(0).getS(s) && players.get(1).getS(s)>players.get(2).getS(s)){
+                //p1 gets 12
+                players.get(1).getAllPoints().add(0,12);
+                if(players.get(2).getS(s)>players.get(0).getS(s)){
+                    //p2 gets 6
+                    players.get(2).getAllPoints().add(0,6);
+                }
+                if(players.get(0).getS(s)>players.get(2).getS(s)){
+                    //p0 gets 6
+                    players.get(0).getAllPoints().add(0,6);
+                }
+                if(players.get(2).getS(s)==players.get(0).getS(s)){
+                    //p0 & p2 gets 6
+                    players.get(0).getAllPoints().add(0,6);
+                    players.get(2).getAllPoints().add(0,6);
+                }
+            }
+            else if(players.get(2).getS(s)>players.get(0).getS(s) && players.get(2).getS(s)>players.get(1).getS(s)){
+                //p2 gets 12
+                players.get(2).getAllPoints().add(0,12);
+                if(players.get(1).getS(s)>players.get(0).getS(s)){
+                    //p1 gets 6
+                    players.get(1).getAllPoints().add(0,6);
+                }
+                if(players.get(0).getS(s)>players.get(1).getS(s)){
+                    //p0 gets 6
+                    players.get(0).getAllPoints().add(0,6);
+                }
+                if(players.get(1).getS(s)==players.get(0).getS(s)){
+                    //p0 & p1 gets 6
+                    players.get(0).getAllPoints().add(0,6);
+                    players.get(1).getAllPoints().add(0,6);
+                }
+            }
+            else if(players.get(0).getS(s)==players.get(1).getS(s)){//0==1
+                if(players.get(1).getS(s)>players.get(2).getS(s)){
+                    //p1 & p0 gets 12
+                    //p2 get 6
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(1).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,6);
+                }
+                if(players.get(1).getS(s)==players.get(2).getS(s)){
+                    //p1 & p0 & p2 gets 12
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(1).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,12);
+                }
+            }
+            else if(players.get(0).getS(s)==players.get(2).getS(s)){//0==2
+                if(players.get(2).getS(s)>players.get(1).getS(s)){
+                    //p2 & p0 gets 12
+                    //p1 get 6
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,12);
+                    players.get(1).getAllPoints().add(0,6);
+                }
+                if(players.get(2).getS(s)==players.get(1).getS(s)){
+                    //p1 & p0 & p2 gets 12
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(1).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,12);
+                }
+            }
+            else if(players.get(1).getS(s)==players.get(2).getS(s)){//1==2
+                if(players.get(2).getS(s)>players.get(0).getS(s)){
+                    //p2 & p1 gets 12
+                    //p0 get 6
+                    players.get(1).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,12);
+                    players.get(0).getAllPoints().add(0,6);
+                }
+                if(players.get(2).getS(s)==players.get(0).getS(s)){
+                    //p1 & p0 & p2 gets 12
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(1).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,12);
+                }
+            }
+        }
+       }
+
+       if(numPly==4){
+        for(int s=0; s<4; s++){//iterates through each sector
+            //if p0 biggest
+            if(players.get(0).getS(s)>players.get(1).getS(s) && players.get(0).getS(s)>players.get(2).getS(s) && players.get(0).getS(s)>players.get(3).getS(s)){
+                //p0 gets 12
+                players.get(0).getAllPoints().add(0,12);
+                if(players.get(1).getS(s)>players.get(2).getS(s) && players.get(1).getS(s)>players.get(3).getS(s)){
+                    //p1 gets 6
+                    players.get(1).getAllPoints().add(0,6);
+                }
+                if(players.get(2).getS(s)>players.get(1).getS(s) && players.get(2).getS(s)>players.get(3).getS(s)){
+                    //p2 gets 6
+                    players.get(2).getAllPoints().add(0,6);
+                }
+                if(players.get(3).getS(s)>players.get(2).getS(s) && players.get(3).getS(s)>players.get(1).getS(s)){
+                    //p3 gets 6
+                    players.get(3).getAllPoints().add(0,6);
+                }
+                if(players.get(1).getS(s)==players.get(2).getS(s)){//p1,p2
+                    //p1 & p2 gets 6
+                    if(players.get(1).getS(s)>players.get(3).getS(s)){
+                    players.get(1).getAllPoints().add(0,6);
+                    players.get(2).getAllPoints().add(0,6);
+                    }
+                    if(players.get(1).getS(s)==players.get(3).getS(s)){
+                        //p3 get 6
+                        players.get(3).getAllPoints().add(0,6);
+                        }
+                }
+                if(players.get(2).getS(s)==players.get(3).getS(s)){//p2,p3
+                    //p2 & p3 gets 6
+                    if(players.get(3).getS(s)>players.get(1).getS(s)){
+                    players.get(3).getAllPoints().add(0,6);
+                    players.get(2).getAllPoints().add(0,6);
+                    }
+                    if(players.get(1).getS(s)==players.get(3).getS(s)){
+                        //p1 get 6
+                        players.get(1).getAllPoints().add(0,6);
+                        }
+                }
+                if(players.get(1).getS(s)==players.get(3).getS(s)){//p1,p3
+                    //p1 & p3 gets 6
+                    if(players.get(3).getS(s)>players.get(2).getS(s)){
+                    players.get(3).getAllPoints().add(0,6);
+                    players.get(1).getAllPoints().add(0,6);
+                    }
+                    if(players.get(1).getS(s)==players.get(2).getS(s)){
+                        //p2 get 6
+                        players.get(2).getAllPoints().add(0,6);
+                        }
+                }
+            }
+
+            //if p1 biggest
+            else if(players.get(1).getS(s)>players.get(0).getS(s) && players.get(1).getS(s)>players.get(2).getS(s) && players.get(1).getS(s)>players.get(3).getS(s)){
+                //p1 gets 12
+                players.get(1).getAllPoints().add(0,12);
+                if(players.get(0).getS(s)>players.get(2).getS(s) && players.get(0).getS(s)>players.get(3).getS(s)){
+                    //p0 gets 6
+                    players.get(0).getAllPoints().add(0,6);
+                }
+                if(players.get(2).getS(s)>players.get(0).getS(s) && players.get(2).getS(s)>players.get(3).getS(s)){
+                    //p2 gets 6
+                    players.get(2).getAllPoints().add(0,6);
+                }
+                if(players.get(3).getS(s)>players.get(2).getS(s) && players.get(3).getS(s)>players.get(0).getS(s)){
+                    //p3 gets 6
+                    players.get(3).getAllPoints().add(0,6);
+                }
+                if(players.get(0).getS(s)==players.get(2).getS(s)){//p0,p2
+                    //p0 & p2 gets 6
+                    if(players.get(0).getS(s)>players.get(3).getS(s)){
+                    players.get(0).getAllPoints().add(0,6);
+                    players.get(2).getAllPoints().add(0,6);
+                    }
+                    if(players.get(0).getS(s)==players.get(3).getS(s)){
+                        //p3 get 6
+                        players.get(3).getAllPoints().add(0,6);
+                        }
+                }
+                if(players.get(2).getS(s)==players.get(3).getS(s)){//p2,p3
+                    //p2 & p3 gets 6
+                    if(players.get(3).getS(s)>players.get(0).getS(s)){
+                    players.get(3).getAllPoints().add(0,6);
+                    players.get(2).getAllPoints().add(0,6);
+                    }
+                    if(players.get(0).getS(s)==players.get(3).getS(s)){
+                        //p0 get 6
+                        players.get(0).getAllPoints().add(0,6);
+                        }
+                }
+                if(players.get(0).getS(s)==players.get(3).getS(s)){//p0,p3
+                    //p0 & p3 gets 6
+                    if(players.get(3).getS(s)>players.get(2).getS(s)){
+                    players.get(3).getAllPoints().add(0,6);
+                    players.get(0).getAllPoints().add(0,6);
+                    }
+                    if(players.get(0).getS(s)==players.get(2).getS(s)){
+                        //p2 get 6
+                        players.get(2).getAllPoints().add(0,6);
+                        }
+                }
+            }
+
+            //if p2 biggest
+            else if(players.get(2).getS(s)>players.get(0).getS(s) && players.get(2).getS(s)>players.get(1).getS(s) && players.get(2).getS(s)>players.get(3).getS(s)){
+                //p2 gets 12
+                players.get(2).getAllPoints().add(0,12);
+                if(players.get(1).getS(s)>players.get(0).getS(s) && players.get(1).getS(s)>players.get(3).getS(s)){
+                    //p1 gets 6
+                    players.get(1).getAllPoints().add(0,6);
+                }
+                if(players.get(0).getS(s)>players.get(1).getS(s) && players.get(0).getS(s)>players.get(3).getS(s)){
+                    //p0 gets 6
+                    players.get(0).getAllPoints().add(0,6);
+                }
+                if(players.get(3).getS(s)>players.get(0).getS(s) && players.get(3).getS(s)>players.get(1).getS(s)){
+                    //p3 gets 6
+                    players.get(3).getAllPoints().add(0,6);
+                }
+                if(players.get(1).getS(s)==players.get(0).getS(s)){//p1,p0
+                    //p1 & p0 gets 6
+                    if(players.get(1).getS(s)>players.get(3).getS(s)){
+                    players.get(1).getAllPoints().add(0,6);
+                    players.get(0).getAllPoints().add(0,6);
+                    }
+                    if(players.get(1).getS(s)==players.get(3).getS(s)){
+                        //p3 get 6
+                        players.get(3).getAllPoints().add(0,6);
+                        }
+                }
+                if(players.get(0).getS(s)==players.get(3).getS(s)){//p0,p3
+                    //p0 & p3 gets 6
+                    if(players.get(3).getS(s)>players.get(1).getS(s)){
+                    players.get(3).getAllPoints().add(0,6);
+                    players.get(0).getAllPoints().add(0,6);
+                    }
+                    if(players.get(1).getS(s)==players.get(3).getS(s)){
+                        //p1 get 6
+                        players.get(1).getAllPoints().add(0,6);
+                        }
+                }
+                if(players.get(1).getS(s)==players.get(3).getS(s)){//p1,p3
+                    //p1 & p3 gets 6
+                    if(players.get(3).getS(s)>players.get(0).getS(s)){
+                    players.get(3).getAllPoints().add(0,6);
+                    players.get(1).getAllPoints().add(0,6);
+                    }
+                    if(players.get(1).getS(s)==players.get(0).getS(s)){
+                        //p2 get 6
+                        players.get(0).getAllPoints().add(0,6);
+                        }
+                }
+            }
+
+            //if p3 biggest
+            else if(players.get(3).getS(s)>players.get(0).getS(s) && players.get(3).getS(s)>players.get(1).getS(s) && players.get(3).getS(s)>players.get(2).getS(s)){
+                //p3 gets 12
+                players.get(3).getAllPoints().add(0,12);
+                if(players.get(1).getS(s)>players.get(2).getS(s) && players.get(1).getS(s)>players.get(0).getS(s)){
+                    //p1 gets 6
+                    players.get(1).getAllPoints().add(0,6);
+                }
+                if(players.get(2).getS(s)>players.get(1).getS(s) && players.get(2).getS(s)>players.get(0).getS(s)){
+                    //p2 gets 6
+                    players.get(2).getAllPoints().add(0,6);
+                }
+                if(players.get(0).getS(s)>players.get(2).getS(s) && players.get(0).getS(s)>players.get(1).getS(s)){
+                    //p0 gets 6
+                    players.get(0).getAllPoints().add(0,6);
+                }
+                if(players.get(1).getS(s)==players.get(2).getS(s)){//p1,p2
+                    //p1 & p2 gets 6
+                    if(players.get(1).getS(s)>players.get(0).getS(s)){
+                    players.get(1).getAllPoints().add(0,6);
+                    players.get(2).getAllPoints().add(0,6);
+                    }
+                    if(players.get(1).getS(s)==players.get(0).getS(s)){
+                        //p0 get 6
+                        players.get(0).getAllPoints().add(0,6);
+                        }
+                }
+                if(players.get(2).getS(s)==players.get(0).getS(s)){//p2,p0
+                    //p2 & p0 gets 6
+                    if(players.get(0).getS(s)>players.get(1).getS(s)){
+                    players.get(0).getAllPoints().add(0,6);
+                    players.get(2).getAllPoints().add(0,6);
+                    }
+                    if(players.get(1).getS(s)==players.get(0).getS(s)){
+                        //p1 get 6
+                        players.get(1).getAllPoints().add(0,6);
+                        }
+                }
+                if(players.get(1).getS(s)==players.get(0).getS(s)){//p1,p0
+                    //p1 & p0 gets 6
+                    if(players.get(0).getS(s)>players.get(2).getS(s)){
+                    players.get(0).getAllPoints().add(0,6);
+                    players.get(1).getAllPoints().add(0,6);
+                    }
+                    if(players.get(1).getS(s)==players.get(2).getS(s)){
+                        //p2 get 6
+                        players.get(2).getAllPoints().add(0,6);
+                        }
+                }
+            }
+            //0==1
+            else if(players.get(0).getS(s)==players.get(1).getS(s)){
+                if(players.get(1).getS(s)>players.get(2).getS(s) && players.get(1).getS(s)>players.get(3).getS(s)){
+                    //p1 & p0 gets 12
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(1).getAllPoints().add(0,12);
+                    if(players.get(2).getS(s)>players.get(3).getS(s)){
+                        //p2 get 6
+                        players.get(2).getAllPoints().add(0,6);
+                    }
+                    if(players.get(3).getS(s)>players.get(2).getS(s)){
+                        //p3 get 6
+                        players.get(3).getAllPoints().add(0,6);
+                    }
+                    
+                }
+                if(players.get(1).getS(s)==players.get(2).getS(s) && players.get(1).getS(s)>players.get(3).getS(s)){
+                    //p1 & p0 & p2 gets 12
+                    //p3 get 6
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(1).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,12);
+                    players.get(3).getAllPoints().add(0,6);
+                }
+                if(players.get(1).getS(s)==players.get(3).getS(s) && players.get(1).getS(s)>players.get(2).getS(s)){
+                    //p1 & p0 & p3 gets 12
+                    //p2 get 6
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(1).getAllPoints().add(0,12);
+                    players.get(3).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,6);
+                }
+                if(players.get(1).getS(s)==players.get(2).getS(s) && players.get(1).getS(s)==players.get(3).getS(s)){
+                    //p1 & p0 & p2 & p3 gets 12
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(1).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,12);
+                    players.get(3).getAllPoints().add(0,12);
+                }
+            }
+
+            //0==2
+            else if(players.get(0).getS(s)==players.get(2).getS(s)){
+                if(players.get(2).getS(s)>players.get(1).getS(s) && players.get(2).getS(s)>players.get(3).getS(s)){
+                    //p2 & p0 gets 12
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,12);
+                    if(players.get(1).getS(s)>players.get(3).getS(s)){
+                        //p1 get 6
+                        players.get(1).getAllPoints().add(0,6);
+                    }
+                    if(players.get(3).getS(s)>players.get(1).getS(s)){
+                        //p3 get 6
+                        players.get(3).getAllPoints().add(0,6);
+                    }
+                    
+                }
+                if(players.get(2).getS(s)==players.get(1).getS(s) && players.get(2).getS(s)>players.get(3).getS(s)){
+                    //p1 & p0 & p2 gets 12
+                    //p3 get 6
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(1).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,12);
+                    players.get(3).getAllPoints().add(0,6);
+                }
+                if(players.get(2).getS(s)==players.get(3).getS(s) && players.get(2).getS(s)>players.get(1).getS(s)){
+                    //p2 & p0 & p3 gets 12
+                    //p1 get 6
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,12);
+                    players.get(3).getAllPoints().add(0,12);
+                    players.get(1).getAllPoints().add(0,6);
+                }
+                if(players.get(2).getS(s)==players.get(1).getS(s) && players.get(2).getS(s)==players.get(3).getS(s)){
+                    //p1 & p0 & p2 & p3 gets 12
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(1).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,12);
+                    players.get(3).getAllPoints().add(0,12);
+                }
+            }
+
+            //0==3
+            else if(players.get(0).getS(s)==players.get(3).getS(s)){
+                if(players.get(3).getS(s)>players.get(1).getS(s) && players.get(3).getS(s)>players.get(2).getS(s)){
+                    //p3 & p0 gets 12
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(3).getAllPoints().add(0,12);
+                    if(players.get(1).getS(s)>players.get(2).getS(s)){
+                        //p1 get 6
+                        players.get(1).getAllPoints().add(0,6);
+                    }
+                    if(players.get(2).getS(s)>players.get(1).getS(s)){
+                        //p2 get 6
+                        players.get(2).getAllPoints().add(0,6);
+                    }
+                    
+                }
+                if(players.get(3).getS(s)==players.get(1).getS(s) && players.get(3).getS(s)>players.get(2).getS(s)){
+                    //p1 & p0 & p3 gets 12
+                    //p2 get 6
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(1).getAllPoints().add(0,12);
+                    players.get(3).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,6);
+                }
+                if(players.get(3).getS(s)==players.get(2).getS(s) && players.get(2).getS(s)>players.get(1).getS(s)){
+                    //p2 & p0 & p3 gets 12
+                    //p1 get 6
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,12);
+                    players.get(3).getAllPoints().add(0,12);
+                    players.get(1).getAllPoints().add(0,6);
+                }
+                if(players.get(3).getS(s)==players.get(1).getS(s) && players.get(3).getS(s)==players.get(2).getS(s)){
+                    //p1 & p0 & p2 & p3 gets 12
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(1).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,12);
+                    players.get(3).getAllPoints().add(0,12);
+                }
+            }
+
+            //1==2
+            else if(players.get(1).getS(s)==players.get(2).getS(s)){
+                if(players.get(2).getS(s)>players.get(0).getS(s) && players.get(2).getS(s)>players.get(3).getS(s)){
+                    //p2 & p1 gets 12
+                    players.get(1).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,12);
+                    if(players.get(0).getS(s)>players.get(3).getS(s)){
+                        //p0 get 6
+                        players.get(0).getAllPoints().add(0,6);
+                    }
+                    if(players.get(3).getS(s)>players.get(0).getS(s)){
+                        //p3 get 6
+                        players.get(3).getAllPoints().add(0,6);
+                    }
+                    
+                }
+                if(players.get(2).getS(s)==players.get(0).getS(s) && players.get(0).getS(s)>players.get(3).getS(s)){
+                    //p1 & p0 & p2 gets 12
+                    //p3 get 6
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(1).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,12);
+                    players.get(3).getAllPoints().add(0,6);
+                }
+                if(players.get(2).getS(s)==players.get(3).getS(s) && players.get(3).getS(s)>players.get(0).getS(s)){
+                    //p2 & p1 & p3 gets 12
+                    //p0 get 6
+                    players.get(1).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,12);
+                    players.get(3).getAllPoints().add(0,12);
+                    players.get(0).getAllPoints().add(0,6);
+                }
+                if(players.get(2).getS(s)==players.get(0).getS(s) && players.get(2).getS(s)==players.get(3).getS(s)){
+                    //p1 & p0 & p2 & p3 gets 12
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(1).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,12);
+                    players.get(3).getAllPoints().add(0,12);
+                }
+            }
+
+
+            //1==3
+            else if(players.get(1).getS(s)==players.get(3).getS(s)){
+                if(players.get(3).getS(s)>players.get(0).getS(s) && players.get(3).getS(s)>players.get(2).getS(s)){
+                    //p3 & p1 gets 12
+                    players.get(1).getAllPoints().add(0,12);
+                    players.get(3).getAllPoints().add(0,12);
+                    if(players.get(0).getS(s)>players.get(2).getS(s)){
+                        //p0 get 6
+                        players.get(0).getAllPoints().add(0,6);
+                    }
+                    if(players.get(2).getS(s)>players.get(0).getS(s)){
+                        //p2 get 6
+                        players.get(2).getAllPoints().add(0,6);
+                    }
+                    
+                }
+                if(players.get(1).getS(s)==players.get(2).getS(s) && players.get(2).getS(s)>players.get(0).getS(s)){
+                    //p1 & p3 & p2 gets 12
+                    //p0 get 6
+                    players.get(3).getAllPoints().add(0,12);
+                    players.get(1).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,12);
+                    players.get(0).getAllPoints().add(0,6);
+                }
+                if(players.get(1).getS(s)==players.get(0).getS(s) && players.get(0).getS(s)>players.get(2).getS(s)){
+                    //p0 & p1 & p3 gets 12
+                    //p2 get 6
+                    players.get(1).getAllPoints().add(0,12);
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(3).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,6);
+                }
+                if(players.get(1).getS(s)==players.get(0).getS(s) && players.get(1).getS(s)==players.get(2).getS(s)){
+                    //p1 & p0 & p2 & p3 gets 12
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(1).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,12);
+                    players.get(3).getAllPoints().add(0,12);
+                }
+            }
+            
+
+            //2==3
+            else if(players.get(2).getS(s)==players.get(3).getS(s)){
+                if(players.get(3).getS(s)>players.get(0).getS(s) && players.get(3).getS(s)>players.get(1).getS(s)){
+                    //p3 & p2 gets 12
+                    players.get(2).getAllPoints().add(0,12);
+                    players.get(3).getAllPoints().add(0,12);
+                    if(players.get(0).getS(s)>players.get(1).getS(s)){
+                        //p0 get 6
+                        players.get(0).getAllPoints().add(0,6);
+                    }
+                    if(players.get(1).getS(s)>players.get(0).getS(s)){
+                        //p1 get 6
+                        players.get(1).getAllPoints().add(0,6);
+                    }
+                    
+                }
+                if(players.get(1).getS(s)==players.get(2).getS(s) && players.get(2).getS(s)>players.get(0).getS(s)){
+                    //p1 & p3 & p2 gets 12
+                    //p0 get 6
+                    players.get(3).getAllPoints().add(0,12);
+                    players.get(1).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,12);
+                    players.get(0).getAllPoints().add(0,6);
+                }
+                if(players.get(3).getS(s)==players.get(0).getS(s) && players.get(0).getS(s)>players.get(1).getS(s)){
+                    //p0 & p2 & p3 gets 12
+                    //p1 get 6
+                    players.get(2).getAllPoints().add(0,12);
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(3).getAllPoints().add(0,12);
+                    players.get(1).getAllPoints().add(0,6);
+                }
+                if(players.get(3).getS(s)==players.get(0).getS(s) && players.get(3).getS(s)==players.get(1).getS(s)){
+                    //p1 & p0 & p2 & p3 gets 12
+                    players.get(0).getAllPoints().add(0,12);
+                    players.get(1).getAllPoints().add(0,12);
+                    players.get(2).getAllPoints().add(0,12);
+                    players.get(3).getAllPoints().add(0,12);
+                }
+            }
+
+            }
+        }
+
+       }
+
+    public void scWorkers(Player p){
+        int pts=0;
+        ArrayList<Hex> pSett= new ArrayList<Hex>();
+        for (Hex hx : bb.fullBoard) {//all of player's settlements on board
+                if (hx.getpNum() == players.indexOf(p)) {
+                    pSett.add(hx);
+                }}
+                for(int q=0; q<pSett.size(); q++){
+                    for(int e=0; e<pSett.get(q).getNeighbors().size(); e++){
+                    if(pSett.get(q).getNeighbors().get(e).getType().equals("cas") || pSett.get(q).getNeighbors().get(e).getType().equals("tiH") 
+                    || pSett.get(q).getNeighbors().get(e).getType().equals("tiG") || pSett.get(q).getNeighbors().get(e).getType().equals("tiB") 
+                    || pSett.get(q).getNeighbors().get(e).getType().equals("tiO")){
+                        pts++;
+                    }
+
+                    }}
+                    p.getAllPoints().add(1, pts);
+                    System.out.println("player " + players.indexOf(p) + " gained " + pts + " from Workers");
+    }
+
+    public void scCas(Player p){
+        int pts=0;
+        ArrayList<Hex> castles= new ArrayList<Hex>();
+        for (Hex hx : bb.fullBoard) {//all of castles on board
+                if (hx.getType().equals("cas")) {
+                    castles.add(hx);
+                }}
+                for(int q=0; q<castles.size();q++){
+                    if(castles.get(q).hasNeighP(players.indexOf(p))){
+                        pts=pts+3;
+                    }
+                    }
+                    p.getAllPoints().add(3, pts);
+                    System.out.println("player " + players.indexOf(p) + " gained " + pts + " from Castles");
+
+    }
+
 }

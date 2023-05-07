@@ -59,6 +59,16 @@ public class Hex {
     }
         return false;
     }
+    public boolean hasNeighP(int num){//does hex have certain player as a neighbor
+        if(neighbors.size()>0){
+            for(int i=0; i<neighbors.size(); i++){
+                if(neighbors.get(i).getpNum()==num){
+                    return true;
+                }
+            }
+        }
+            return false;
+    }
 
     public void setpNum(int p) {
         pNum = p;
