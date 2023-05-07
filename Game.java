@@ -185,6 +185,7 @@ public class Game {
             for (Hex hx : avaliable) {
                 if (hx.getRow() == r && hx.getCol() == c && tile.getStat() == 1) {
                     bb.updateHex(r, c, currPlayer);
+                    players.get(currPlayer).addPlaced(hx);
                     players.get(currPlayer).setSettlements(players.get(currPlayer).getSettlements() - 1);
                     collectTile();
                     tile.statUsed();

@@ -153,6 +153,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 gm.updateAvaliable(true);
                 gm.collectTile();
                 if(!gm.tilesAvaliable()){
+                    gm.updateAvaliable(true);
                     tileSel =false;
                     tileInPlay = -1;
                 } 
