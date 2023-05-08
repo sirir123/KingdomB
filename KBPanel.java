@@ -17,6 +17,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
     private BufferedImage lordCd, workCd, discCd, castCd;
     private BufferedImage tFlwr, tGrs, tDes, tFor, tCnyn;
     private BufferedImage sOrcl, sHrse, sFrm, sBt, orcl, hrse, frm, bt;
+    private BufferedImage scores, endBkg;
     private BufferedImage infoUp, buttonX, darken;
     private BufferedImage currCol, currTile;
     private BufferedImage colWhite, colYel;
@@ -33,7 +34,8 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
     File out = new File(home + "/Downloads/KingdomBuilderInstructions.pdf");
 
     private int numPly; // number of players playing
-    private boolean start, end;
+    private boolean start;
+    private boolean end = false;
     private boolean help = false;
     private Game gm = new Game(-1);
 
@@ -70,9 +72,10 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             tFor = ImageIO.read(KBPanel.class.getResource("Pictures/forest.png"));//
 
             darken = ImageIO.read(KBPanel.class.getResource("/Pictures/dark.png"));//
+            scores = ImageIO.read(KBPanel.class.getResource("/Pictures/scoreSheet.png"));
+            endBkg = ImageIO.read(KBPanel.class.getResource("/Pictures/boardShader.png"));
 
             sOrcl = ImageIO.read(KBPanel.class.getResource("/Pictures/shOracle.png")); //
-
             sHrse = ImageIO.read(KBPanel.class.getResource("/Pictures/shHorse.png"));
             sFrm = ImageIO.read(KBPanel.class.getResource("/Pictures/shFarm.png"));
             sBt = ImageIO.read(KBPanel.class.getResource("/Pictures/shBoat.png"));
@@ -353,7 +356,15 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             tileSel = false;
             tileInPlay = -1;
         }
-
+        boolean turnEnd = false;
+        for ( int i = 0; i < numPly; i++){
+            if (gm.getPlayer(i).getSettlements()==0){
+                turnEnd = true;
+            }
+        }
+        if (gm.getCurrPlayer() == numPly -1  && turnEnd){
+            end = true;
+        }
         repaint();
 
     }
@@ -393,7 +404,21 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
             drawStartScreen(g);
         } else if (end) {
-            // nada
+            // call lords
+            for ( int i = 0; i < numPly; i++){
+                gm.discoverer(gm.getPlayer(i));
+                // call castle + workers
+            }
+            ArrayList<Player> winners = gm.getAllPlayers();
+            for (int i = 0; i < numPly; i++) {
+                for (int j = i + 1; j < numPly; j++) {
+                    if (gm.getPlayer(i).getAllPoints().get(4) < gm.getPlayer(j).getAllPoints().get(4)) {
+                        Collections.swap(winners, i, j);
+                    }
+                }
+            }
+    
+            drawEndScreen(g, winners);
         } else { // rest of game
             g.drawImage(mainScr, 0, 0, getWidth(), getHeight(), null);
             drawPlayers(g);
@@ -438,6 +463,13 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
     }
 
+    public void drawEndScreen(Graphics g, ArrayList<Player> order){
+        g.drawImage(endBkg, 0, 0, getWidth(), getHeight(), null);
+        g.drawImage(scores, 139, 62, 1114, 796, null);
+        g.setFont(new Font("SansSerif", Font.BOLD, (int) (10 * (getWidth() / 1238.0) * (getHeight() / 889.0))));
+      //  g.drawString("Player " + gm.getAllPlayers()
+
+    }
     public void drawStartScreen(Graphics g) {
         // System.out.println("(" + getWidth() + ", " + getHeight() + ")");
         g.drawImage(startScr, 0, 0, getWidth(),

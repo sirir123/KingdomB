@@ -382,6 +382,9 @@ public class Game {
 
     }
 
+    public ArrayList<Player> getAllPlayers(){
+        return players;
+    }
     public void nextTurn() {
         for (int i = 0; i < players.get(currPlayer).getAllTiles().size(); i++) { // set tiles to unused
             players.get(currPlayer).getAllTiles().get(i).statUnused();
@@ -435,6 +438,24 @@ public class Game {
         }
     }
 
+    public void discoverer(Player p){
+        int num = 0;
+        for ( int i = 0; i < players.size(); i++){
+            if (players.get(i) == p){
+                num = i;
+            }
+        }
+        HashSet<Integer> rows = new HashSet<Integer>();
+        int cnt = 0;
+        for (Hex hx: bb.getHexes()){
+            if (hx.getpNum() == num && !rows.contains(hx.getRow())){
+                rows.add(hx.getRow());
+                cnt++;
+            }
+        }
+        p.addPoints(cnt);
+        p.getAllPoints().set(2, cnt);
+    }
     public void checkTile(/*Hex hx, Hex next*/) {
         System.out.println("START");
         boolean nextTo = false;
