@@ -160,16 +160,17 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 if(!gm.tilesAvaliable()){
                     gm.updateAvaliable(true);
                     tileSel =false;
-                    tileInPlay = -1;
+                   // tileInPlay = -1;
                 } 
                 //gm.checkTile();
+                tileInPlay = -1;
                 gm.stat = -1;
                 repaint();
             }else if(tileSel && gm.stat == 0 && (gm.placed == 3 || gm.placed == 0) && gm.avaliable(cds[1], cds[0], gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay))){
                 System.out.println("stage 2");
                 gm.stat = 1;
                 gm.updateAvaliable(gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType(), gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay), gm.org);
-            }else if ((gm.stat == -1) && gm.placed < 3 && gm.avaliable(cds[1], cds[0])) {
+            }else if (gm.getAllPlayers().get(gm.getCurrPlayer()).getSettlements() > 0 && (gm.stat == -1) && gm.placed < 3 && gm.avaliable(cds[1], cds[0])) {
                 // System.out.println("AVALIABLE");
                 
                 gm.placed++;
@@ -446,7 +447,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             }
             
             //shadeUseT(g);
-            if(gm.getPlayer(gm.getCurrPlayer()).getAllTiles().size() == 0 || !gm.tilesAvaliable() || (gm.placed >0 && gm.placed <3)){
+            if(gm.getPlayer(gm.getCurrPlayer()).getAllTiles().size() == 0 || !gm.tilesAvaliable() || ((gm.placed >0 && gm.placed <3)|| gm.getAllPlayers().get(gm.getCurrPlayer()).getSettlements() == 0)){
                 g.drawImage(darken, 520, 100, 150, 45, null);
             }
 
@@ -922,7 +923,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         }
         
         //shadeUseT(g);
-        if (gm.placed < 3) {
+        if (gm.placed < 3 && gm.getAllPlayers().get(gm.getCurrPlayer()).getSettlements() > 0) {
             g.drawImage(darken, 684, 100, 150, 45, null);
         }
     }
