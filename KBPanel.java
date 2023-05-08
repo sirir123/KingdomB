@@ -19,7 +19,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
     private BufferedImage sOrcl, sHrse, sFrm, sBt, orcl, hrse, frm, bt;
     private BufferedImage infoUp, buttonX, darken;
     private BufferedImage currCol, currTile;
-    private BufferedImage colWhite;
+    private BufferedImage colWhite, colYel;
     private ArrayList<BufferedImage> plyRects, settColors;
     private ArrayList<BoardImage> boards;
     private boolean tileSel = false;
@@ -103,6 +103,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             settColors.add(ImageIO.read(KBPanel.class.getResource("/Pictures/settBlue.png")));
 
             colWhite = ImageIO.read(KBPanel.class.getResource("/Pictures/colorWhite.png"));
+            colYel = ImageIO.read(KBPanel.class.getResource("/Pictures/colorYel.png"));
 
             currTiles = ImageIO.read(KBPanel.class.getResource("/Pictures/currUsing.png"));
 
@@ -158,6 +159,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                     tileSel =false;
                     tileInPlay = -1;
                 } 
+                gm.stat = -1;
                 repaint();
             }else if(tileSel && gm.stat == 0 && (gm.placed == 3 || gm.placed == 0) && gm.avaliable(cds[1], cds[0], gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay))){
                 System.out.println("stage 2");
@@ -982,7 +984,16 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             }
         }
 
-
+        if(gm.org!= null){
+            if (gm.org.getRow() % 2 == 0) {
+                g.drawImage(colYel, (int) (271 + 30 * (gm.org.getCol() / 2)), (int) (279 + 25 * gm.org.getRow()), 30, 31,
+                        null);
+            } else {
+                g.drawImage(colYel, (int) (285 + 30 * ((gm.org.getCol() - 1) / 2)), (int) (279 + 25 * gm.org.getRow()),
+                        30, 31,
+                        null);
+            }
+        }
         
         //shadeUseT(g);
         if (gm.placed < 3) {

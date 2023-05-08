@@ -109,21 +109,23 @@ public class Game {
                         avaliable.add(hx);
                     }    
                 }else{
-                    for(Hex hx: players.get(currPlayer).getPlaced()){
-                        if(hx.getCol() == org.getCol() - 2 && hx.getRow() == org.getRow()-2){
+                    System.out.println("horse shit");
+                    for(Hex hx: bb.getHexes()){
+                        if(hx.getpNum() == -1 && !hx.getType().equals("mt") && !hx.getType().equals("mt") && hx.getCol() == (org.getCol() - 2) && hx.getRow() == (org.getRow()-2)){
                             avaliable.add(hx);
-                        }else if (hx.getCol() == org.getCol() + 2 && hx.getRow() == org.getRow() - 2){
+                        }else if (hx.getpNum() == -1 && !hx.getType().equals("mt") && !hx.getType().equals("mt") && hx.getCol() == (org.getCol() + 2) && hx.getRow() == (org.getRow() - 2)){
                             avaliable.add(hx);
-                        }else if (hx.getCol() == org.getCol() + 4 && hx.getRow() == org.getRow()){
+                        }else if (hx.getpNum() == -1 && !hx.getType().equals("mt") && !hx.getType().equals("mt") && hx.getCol() == (org.getCol() + 4) && hx.getRow() == org.getRow()){
                             avaliable.add(hx);
-                        }else if (hx.getCol() == org.getCol() + 2 && hx.getRow() == org.getRow() + 2){
+                        }else if (hx.getpNum() == -1 && !hx.getType().equals("mt") && !hx.getType().equals("mt") && hx.getCol() == (org.getCol() + 2) && hx.getRow() == (org.getRow() + 2)){
                             avaliable.add(hx);
-                        }else if (hx.getCol() == org.getCol() - 2 && hx.getRow() == org.getRow() + 2){
+                        }else if (hx.getpNum() == -1 && !hx.getType().equals("mt") && !hx.getType().equals("mt") && hx.getCol() == (org.getCol() - 2) && hx.getRow() == (org.getRow() + 2)){
                             avaliable.add(hx);
-                        }else if (hx.getCol() == org.getCol() && hx.getRow() == org.getRow() - 4){
+                        }else if (hx.getpNum() == -1 && !hx.getType().equals("mt") && !hx.getType().equals("mt") && hx.getCol() == (org.getCol()-4) && hx.getRow() == (org.getRow())){
                             avaliable.add(hx);
                         }
                     }
+                    System.out.println("AVALIABLE: " + avaliable.toString());
                 }
                 
                 
@@ -224,10 +226,12 @@ public class Game {
                     players.get(currPlayer).setSettlements(players.get(currPlayer).getSettlements() - 1);
                     collectTile();
                     tile.statUsed();
-                
+                    org = null;
                     return true;
                 }else if(stat == 0 && hx.getRow() == r && hx.getCol() == c && tile.getStat() == 1){
+                    System.out.println("org done");
                     org = hx;
+                    return true;
                 }
             }
         }
