@@ -987,13 +987,4 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         }
         return cds;
     }
-
-    // public void shadeUseT(Graphics b) {
-    //     if (gm.getPlayer(gm.getCurrPlayer()).getAllTiles().size() == 0) {
-    //         b.drawImage(darken, 520, 100, 150, 45, null);
-    //     } else if ((gm.placed == 1 || gm.placed == 2)
-    //             || gm.getPlayer(gm.getCurrPlayer()).getAllTiles().get(0).getStat() == 0) {
-    //         b.drawImage(darken, 520, 100, 150, 45, null);
-    //     }
-    // }
 }
