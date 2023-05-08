@@ -181,6 +181,34 @@ public class Game {
                 System.out.println("AVA: " + avaliable.toString());
             }else if(type == "tiB"){
                 System.out.println("Boaty");
+                if(org ==  null){
+                    for(Hex hx: players.get(currPlayer).getPlaced()){
+                        avaliable.add(hx);
+                    }    
+                }else{
+                    System.out.println("boat shit");
+                    if (players.get(currPlayer).getPlaced().size() >= 1) {
+
+                        for (Hex hx : players.get(currPlayer).getPlaced()) {
+    
+                            for (Hex h : hx.getNeighbors()) {
+                                if (h != null && h.getpNum() == -1
+                                        && h.getType().equals("wat")) {
+                                    avaliable.add(h);
+                                }
+                            }
+                        }
+                    }
+    
+                    if (avaliable.size() < 1) {
+                        for (Hex hx : bb.getHexes()) {
+                            if (hx.getType().equals("wat") && hx.getpNum() == -1) {
+                                avaliable.add(hx);
+                            }
+                        }
+                    }
+                    System.out.println("AVALIABLE: " + avaliable.toString());
+                }
             }
         }
         
