@@ -16,7 +16,7 @@ public class Game {
     public Hex org; //storing org tile picked when boat or horse
 
     private ArrayList<Player> players;
-    public ArrayList<Player> plyOrder;
+    //public ArrayList<Player> plyOrder;
     private ArrayList<Card> deck;
     private ArrayList<Card> discard;
     public int discTiles;
@@ -115,17 +115,17 @@ public class Game {
     }
 
     public void updateAvaliable(String type, Hex tile, Hex org){
-        System.out.println("update: " + type);
+        //System.out.println("update: " + type);
         avaliable = new HashSet<Hex>();
         if(tile.getStat() == 1){
                 if(type == "tiH"){
-                System.out.println("HORSY"  );
+                //System.out.println("HORSY"  );
                 if(org ==  null){
                     for(Hex hx: players.get(currPlayer).getPlaced()){
                         avaliable.add(hx);
                     }    
                 }else{
-                    System.out.println("horse shit");
+                    //System.out.println("horse shit");
                     for(Hex hx: bb.getHexes()){
                         if(hx.getpNum() == -1 && !hx.getType().equals("mt") && !hx.getType().equals("wat") && !hx.getType().equals("tiG")&& !hx.getType().equals("tiH")&& !hx.getType().equals("tiO")&& !hx.getType().equals("tiB")&& hx.getCol() == (org.getCol() - 2) && hx.getRow() == (org.getRow()-2)){
                             avaliable.add(hx);
@@ -141,13 +141,13 @@ public class Game {
                             avaliable.add(hx);
                         }
                     }
-                    System.out.println("AVALIABLE: " + avaliable.toString());
+                    //System.out.println("AVALIABLE: " + avaliable.toString());
                 }
                 
                 
 
             }else if(type == "tiO" && players.get(currPlayer).getSettlements() > 0){
-                System.out.println("OraclY");
+                //System.out.println("OraclY");
                 // if (terrain) {
 
                 if (players.get(currPlayer).getPlaced().size() >= 1) {
@@ -170,10 +170,10 @@ public class Game {
                         }
                     }
                 }
-                System.out.println("AVA: " + avaliable.toString());
+                //System.out.println("AVA: " + avaliable.toString());
             }else if(type == "tiG" && players.get(currPlayer).getSettlements() > 0){
                 // if (terrain) {
-                    System.out.println("grasY");
+                    //System.out.println("grasY");
                 if (players.get(currPlayer).getPlaced().size() >= 1) {
 
                     for (Hex hx : players.get(currPlayer).getPlaced()) {
@@ -194,15 +194,15 @@ public class Game {
                         }
                     }
                 }
-                System.out.println("AVA: " + avaliable.toString());
+                //System.out.println("AVA: " + avaliable.toString());
             }else if(type == "tiB"){
-                System.out.println("Boaty");
+                //System.out.println("Boaty");
                 if(org ==  null){
                     for(Hex hx: players.get(currPlayer).getPlaced()){
                         avaliable.add(hx);
                     }    
                 }else{
-                    System.out.println("boat shit");
+                    //System.out.println("boat shit");
                     if (players.get(currPlayer).getPlaced().size() >= 1) {
 
                         for (Hex hx : players.get(currPlayer).getPlaced()) {
@@ -223,7 +223,7 @@ public class Game {
                             }
                         }
                     }
-                    System.out.println("AVALIABLE: " + avaliable.toString());
+                    //System.out.println("AVALIABLE: " + avaliable.toString());
                 }
             }
         }
@@ -288,7 +288,7 @@ public class Game {
                     }
                     return true;
                 }else if(stat == 0 && hx.getRow() == r && hx.getCol() == c && tile.getStat() == 1){
-                    System.out.println("org done");
+                    //System.out.println("org done");
                     org = hx;
                     return true;
                 }
@@ -416,13 +416,14 @@ public class Game {
     }
 
     public void nextTurn() {
-        if(players.get(currPlayer).getSettlements() == 0){
+            if(players.get(currPlayer).getSettlements() == 0){
             //
             if(currPlayer == prevPlayer){
                 end = true;
                 score();
             }else{
-                System.out.println("hiya");
+                stat = -1;
+                //System.out.println("hiya");
                 for (int i = 0; i < players.get(currPlayer).getAllTiles().size(); i++) { // set tiles to unused
                     players.get(currPlayer).getAllTiles().get(i).statUnused();
                 }
@@ -439,6 +440,7 @@ public class Game {
             }
 
         }else{
+            stat = -1;
             for (int i = 0; i < players.get(currPlayer).getAllTiles().size(); i++) { // set tiles to unused
                 players.get(currPlayer).getAllTiles().get(i).statUnused();
             }
@@ -474,7 +476,7 @@ public class Game {
                                     // System.out.println("!"+ p);
                                     players.get(t.getpNum()).addTile(adj);
                                     adj.minusAmount();
-                                    System.out.println("player " + t.getpNum() + " collected tile: " + adj.getType());
+                                    //System.out.println("player " + t.getpNum() + " collected tile: " + adj.getType());
                                 }
                             }
                         }
@@ -486,7 +488,7 @@ public class Game {
                         if (adj.getAmount() > 0) {
                             players.get(t.getpNum()).addTile(adj);
                             adj.minusAmount();
-                            System.out.println("player " + t.getpNum() + " collected tile: " + adj.getType());
+                            //System.out.println("player " + t.getpNum() + " collected tile: " + adj.getType());
                         }
                     }
                 }
@@ -497,7 +499,7 @@ public class Game {
     
 
     public void checkTile() {
-        System.out.println("START");
+        //System.out.println("START");
         boolean nextTo = false;
         for(Hex ti: players.get(currPlayer).getAllTiles()){
             nextTo = false;
@@ -508,7 +510,7 @@ public class Game {
                 } 
             }
             if(!nextTo){
-                System.out.println("Missed: " + ti.toString());
+                //System.out.println("Missed: " + ti.toString());
                 players.get(currPlayer).removeTile(ti);
                 discTiles ++;
                 break;
@@ -520,8 +522,8 @@ public class Game {
 
             // }
         }
-        System.out.println(players.get(currPlayer).getAllTiles().toString());
-        System.out.println("END");
+        // System.out.println(players.get(currPlayer).getAllTiles().toString());
+        // System.out.println("END");
 
 
 
@@ -541,60 +543,40 @@ public void score(){
         
         players.get(i).addPoints(cas(i));
         players.get(i).addPoints(players.get(i).getPoint(0) + players.get(i).getPoint(1) + players.get(i).getPoint(2) + players.get(i).getPoint(3));
-        System.out.println(i + " -- " + players.get(i).getPoint(4));
+        //System.out.println(i + " -- " + players.get(i).getPoint(4));
     }
 
-
+    //order(players);
     //need to order
-    plyOrder = new ArrayList<>();
+    
+    // System.out.println("FUCK " + plyOrder.get(0).getAllPoints().toString());
+    // System.out.println("FUCK " + plyOrder.get(1).getAllPoints().toString());
+    //System.out.println("FUCK " + plyOrder.get(2).getAllPoints().toString());
+    //System.out.println("FUCK " + plyOrder.get(3).getAllPoints().toString());
+}
+
+public ArrayList<Player> order (ArrayList<Player> plys){
+    ArrayList<Player> tempPlys = plys;
+    ArrayList<Player> plyOrder = new ArrayList<>();
     for(int j = 0; j < num; j++){
-        System.out.println(players.size());
+        //System.out.println(tempPlys.size());
         int greatest = -1;
         Player tempPlayer = null;
-        for(int i = players.size()-1; i>= 0; i--){
-            if(players.get(i).getPoint(4) >= greatest){
+        for(int i = tempPlys.size()-1; i>= 0; i--){
+            if(tempPlys.get(i).getPoint(4) >= greatest){
                 
-                greatest = players.get(i).getPoint(4);
-                tempPlayer = players.get(i);
+                greatest = tempPlys.get(i).getPoint(4);
+                tempPlayer = tempPlys.get(i);
                 
             }
            
         }
         //System.out.println(tempPlayer.toString() + " - " + greatest);
         plyOrder.add(tempPlayer);
-        players.remove(tempPlayer);
+        tempPlys.remove(tempPlayer);
         
     }
-    System.out.println("FUCK " + plyOrder.get(0).getAllPoints().toString());
-    System.out.println("FUCK " + plyOrder.get(1).getAllPoints().toString());
-    //System.out.println("FUCK " + plyOrder.get(2).getAllPoints().toString());
-    //System.out.println("FUCK " + plyOrder.get(3).getAllPoints().toString());
-
-
-
-
-
-
-    // ArrayList<Player> tempPlayers = new ArrayList<>();
-    // for(int i = 0; i < players.size(); i++){
-    //     tempPlayers.add(players.get(i));
-    // }
-    // 
-    //     System.out.println("go");
-    //     int greatest = -1;
-    //     Player tempPlayer = null;
-    //     for(int j = tempPlayers.size()-1; j > 0; j--){
-    //             if(tempPlayers.get(j).getAllPoints().get(4) > greatest){
-    //                 tempPlayer = tempPlayers.get(j);
-    //                 greatest = tempPlayer.getAllPoints().get(4);
-    //                 tempPlayers.remove(j);
-    //                 break;
-    //             }
-            
-    //     }
-    //     System.out.println("SLEEP???? " + tempPlayer.getAllPoints().toString());
-    //     plyOrder.add(tempPlayer);
-    // }
+    return plyOrder;
 }
 
 public int lords(int curr){
@@ -611,12 +593,12 @@ public int lords(int curr){
         }
     }
 
-    for(int i = 0; i < totals.length; i++){
-            for(int j = 0; j < totals[i].length; j++){
-                System.out.print(totals[i][j] + ", ");
-            }
-            System.out.println();
-    }
+    // for(int i = 0; i < totals.length; i++){
+    //         for(int j = 0; j < totals[i].length; j++){
+    //             System.out.print(totals[i][j] + ", ");
+    //         }
+    //         System.out.println();
+    // }
     for(int i = 0; i < totals.length; i ++){
         int greatest = 0;
         
@@ -625,7 +607,7 @@ public int lords(int curr){
             if(totals[i][j] > greatest) greatest = totals[i][j];
             if(totals[i][j] < greatest && totals[i][j] > second) second = totals[i][j];
         }
-        System.out.println(greatest + " vs. " + second);
+        //System.out.println(greatest + " vs. " + second);
             if(totals[i][curr] == greatest) points += 12;
             else if(totals[i][curr] == second)points += 6;
         

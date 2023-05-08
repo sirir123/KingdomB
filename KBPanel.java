@@ -21,6 +21,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
     private BufferedImage infoUp, infoUp2, buttonX, darken;
     private BufferedImage currCol, currTile;
     private BufferedImage colWhite, colYel;
+    private BufferedImage blank, viewBack;
     private ArrayList<BufferedImage> plyRects, settColors;
     private ArrayList<BoardImage> boards;
     private boolean tileSel = false;
@@ -35,7 +36,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
     private int numPly; // number of players playing
     private boolean start;
-    //private boolean end = false;
+    private boolean end = false;
     private boolean help = false;
     private Game gm = new Game(-1);
 
@@ -87,7 +88,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             // sHrse = (1040, 93) 54 50, sOrcl = ()
 
             infoUp = ImageIO.read(KBPanel.class.getResource("/Pictures/helpPopUp.png"));
-            infoUp2 = ImageIO.read(KBPanel.class.getResource("/Pictures/helpPopUp2.png"));
+            //infoUp2 = ImageIO.read(KBPanel.class.getResource("/Pictures/helpPopUp2.png"));
             buttonX = ImageIO.read(KBPanel.class.getResource("/Pictures/buttonX.png"));
 
             currCol = ImageIO.read(KBPanel.class.getResource("/Pictures/currentColor.png"));
@@ -109,10 +110,13 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             colWhite = ImageIO.read(KBPanel.class.getResource("/Pictures/colorWhite.png"));
             colYel = ImageIO.read(KBPanel.class.getResource("/Pictures/colorYel.png"));
 
+            blank = ImageIO.read(KBPanel.class.getResource("/Pictures/blacnkOut.png"));
+            viewBack = ImageIO.read(KBPanel.class.getResource("/Pictures/viewingBack.png"));
+
             currTiles = ImageIO.read(KBPanel.class.getResource("/Pictures/currUsing.png"));
 
         } catch (Exception E) {
-            System.out.println("Exception Error in panel");
+            //System.out.println("Exception Error in panel");
             return;
         }
         addMouseListener(this);
@@ -134,17 +138,20 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
     public void mouseClicked(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
-
+        
         System.out.println("loc is(" + x + ", " + y + ")"); //starting adj
+        if(!gm.end){
+
+        
         if (!help && !start && y >= 569 * (getHeight() / 889.0) && y <= 624 * (getHeight() / 889.0)) {
             if (x >= 654 * (getWidth() / 1238.0) && x <= 690 * (getWidth() / 1238.0)) { // for start screen
-                // System.out.println("2");
+                // //System.out.println("2");
                 numPly = 2;
             } else if (x >= 744 * (getWidth() / 1238.0) && x <= 782 * (getWidth() / 1238.0)) {
-                // System.out.println("3");
+                // //System.out.println("3");
                 numPly = 3;
             } else if (x >= 833 * (getWidth() / 1238.0) && x <= 869 * (getWidth() / 1238.0)) {
-                // System.out.println("4");
+                // //System.out.println("4");
                 numPly = 4;
             }
         }
@@ -152,9 +159,9 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         //selecting tile
         if (start && !help && x >= 258 && x <= 897 && y >= 267 && y <= 787) {
             int[] cds = findCircle(x, y);
-            System.out.println("LOC: (" + cds[0] + ", " + cds[1] + ") AND " + tileSel);
+            //System.out.println("LOC: (" + cds[0] + ", " + cds[1] + ") AND " + tileSel);
             if ((gm.stat == -1 || gm.stat == 1) && tileSel && gm.avaliable(cds[1], cds[0], gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay))) {
-                System.out.println("AVALIABLE");
+                //System.out.println("AVALIABLE");
                 //gm.updateAvaliable(true);
                 gm.updateAvaliable(false);
                 gm.collectTile();
@@ -171,11 +178,11 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 gm.stat = -1;
                 repaint();
             }else if(tileSel && gm.stat == 0 && gm.avaliable(cds[1], cds[0], gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay))){
-                System.out.println("stage 2");
+                //System.out.println("stage 2");
                 gm.stat = 1;
                 gm.updateAvaliable(gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType(), gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay), gm.org);
             }else if (gm.getAllPlayers().get(gm.getCurrPlayer()).getSettlements() > 0 && (gm.stat == -1) && gm.placed < 3 && gm.avaliable(cds[1], cds[0])) {
-                // System.out.println("AVALIABLE");
+                // //System.out.println("AVALIABLE");
                 
                 gm.placed++;
                 gm.updateAvaliable(true);
@@ -225,12 +232,12 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                     
             tileSel = !tileSel;
             tileInPlay = -1;
-            System.out.println("tilesel true");
+            //System.out.println("tilesel true");
         }
 
         if (gm.getCurrPlayer() == 0 && tileSel && x >= 1136 && x <= 1281 && y >= 92 && y <= 266) {
             gm.org = null;
-            System.out.println("work0");
+            //System.out.println("work0");
             if (intpoint_inside_circle(x, y, new intPoint(1194, 130), 23)) {
                 tileInPlay = 0;
             }
@@ -249,7 +256,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             if (intpoint_inside_circle(x, y, new intPoint(1255, 236), 23)) {
                 tileInPlay = 5;
             }
-            System.out.println("tile in play:" + tileInPlay);
+            //System.out.println("tile in play:" + tileInPlay);
             if(gm.getPlayer(0).getTile(tileInPlay).getType().equals("tiO") || gm.getPlayer(0).getTile(tileInPlay).getType().equals("tiG"))
                 gm.updateAvaliable(gm.getPlayer(0).getTile(tileInPlay).getType(), gm.getPlayer(0).getTile(tileInPlay), null);
 
@@ -262,7 +269,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
         if (gm.getCurrPlayer() == 1 && tileSel && x >= 1154 && x <= 1296 && y >= 297 && y <= 691) {
             gm.org = null;
-            System.out.println("work1");
+            //System.out.println("work1");
             if (intpoint_inside_circle(x, y, new intPoint(1194, 329), 23)) {
                 tileInPlay = 0;
             }
@@ -281,7 +288,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             if (intpoint_inside_circle(x, y, new intPoint(1255, 435), 23)) {
                 tileInPlay = 5;
             }
-            System.out.println("tile in play:" + tileInPlay);
+            //System.out.println("tile in play:" + tileInPlay);
             if(gm.getPlayer(1).getTile(tileInPlay).getType().equals("tiO") || gm.getPlayer(1).getTile(tileInPlay).getType().equals("tiG"))
                 gm.updateAvaliable(gm.getPlayer(1).getTile(tileInPlay).getType(), gm.getPlayer(1).getTile(tileInPlay), null);
 
@@ -293,7 +300,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
         if (gm.getCurrPlayer() == 2 && tileSel && x >= 1154 && x <= 1295 && y >= 498 && y <= 672) {
             gm.org = null;
-            System.out.println("work2");
+            //System.out.println("work2");
             if (intpoint_inside_circle(x, y, new intPoint(1194, 532), 23)) {
                 tileInPlay = 0;
             }
@@ -312,7 +319,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             if (intpoint_inside_circle(x, y, new intPoint(1255, 638), 23)) {
                 tileInPlay = 5;
             }
-            System.out.println("tile in play:" + tileInPlay);
+            //System.out.println("tile in play:" + tileInPlay);
             if(gm.getPlayer(2).getTile(tileInPlay).getType().equals("tiO") || gm.getPlayer(2).getTile(tileInPlay).getType().equals("tiG"))
                 gm.updateAvaliable(gm.getPlayer(2).getTile(tileInPlay).getType(), gm.getPlayer(2).getTile(tileInPlay), null);
 
@@ -324,7 +331,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
         if (gm.getCurrPlayer() == 3 && tileSel && x >= 1154 && x <= 1296 && y >= 700 && y <= 873) {
             gm.org = null;
-            System.out.println("work3");
+            //System.out.println("work3");
             if (intpoint_inside_circle(x, y, new intPoint(1194, 735), 23)) {
                 tileInPlay = 0;
             }
@@ -343,7 +350,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             if (intpoint_inside_circle(x, y, new intPoint(1255, 841), 23)) {
                 tileInPlay = 5;
             }
-            System.out.println("tile in play:" + tileInPlay);
+            //System.out.println("tile in play:" + tileInPlay);
             if(gm.getPlayer(3).getTile(tileInPlay).getType().equals("tiO") || gm.getPlayer(3).getTile(tileInPlay).getType().equals("tiG"))
                 gm.updateAvaliable(gm.getPlayer(3).getTile(tileInPlay).getType(), gm.getPlayer(3).getTile(tileInPlay), null);
             
@@ -356,11 +363,21 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         
 
         if (start && (gm.placed >= 3 || gm.getAllPlayers().get(gm.getCurrPlayer()).getSettlements() == 0)&& x >= 683 && x <= 827 && y >= 105 && y <= 143) {
-            System.out.println("hi");
+            //System.out.println("hi");
             gm.nextTurn();
+            if(gm.end == true)end = true;
             tileSel = false;
             tileInPlay = -1;
+            gm.org = null;
         }
+    }
+
+    if(gm.end && x >= 928 && x <= 1211 && y >= 764 && y <= 819){
+        end = false;
+    }
+    if(gm.end && x >= 743 && x <= 825 && y >= 103 && y <= 145){
+        end = true;
+    }
         //boolean turnEnd = false;
         // for ( int i = 0; i < numPly; i++){
         //     if (gm.getPlayer(i).getSettlements()==0){
@@ -403,14 +420,12 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
     public void paint(Graphics g) {
         // g.setColor(Color.black);
         g.drawRect(0, 0, getWidth(), getHeight());
-        // System.out.println("Dimensions: (" + getWidth() + ", " + getHeight() + ")");
-        // System.out.println("Start: " + start);
+        // //System.out.println("Dimensions: (" + getWidth() + ", " + getHeight() + ")");
+        // //System.out.println("Start: " + start);
         if (!start) {
 
             drawStartScreen(g);
-        } else if (gm.end) {
-            drawEndScreen(g);
-        } else { // rest of game
+        }else    { // rest of game
             g.drawImage(mainScr, 0, 0, getWidth(), getHeight(), null);
             drawPlayers(g);
             // drawing cards
@@ -450,44 +465,53 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             if (tileSel && gm.tilesAvaliable()) {
                 g.drawImage(currTiles, 522, 102, 151, 42, null);
             }
+            if(gm.end){
+                g.drawImage(viewBack, 249, 95, 840-249, 153-95, null);
+            }
         }
+        if(end){
+            drawEndScreen(g, gm.getAllPlayers());
+
+        }
+
         //g.drawImage(scores, 139, 62, 1114, 796, null);
     }
 
-    public void drawEndScreen(Graphics g/*, ArrayList<Player> order*/){
+    public void drawEndScreen(Graphics g, ArrayList<Player> plyOrder){
              g.drawImage(endBkg, 0, 0, getWidth(), getHeight(), null);
              g.drawImage(scores, 139, 62, 1114, 796, null);
              g.setFont(new Font("SansSerif", Font.BOLD, 20));
              
-             for(int i = 0; i < gm.plyOrder.size(); i ++){
-                System.out.println(gm.plyOrder.get(i).getAllPoints());
-                for(int j = 0; j < gm.plyOrder.get(i).getAllPoints().size(); j ++){
+             for(int i = 0; i < plyOrder.size(); i ++){
+                //System.out.println(plyOrder.get(i).getAllPoints());
+                for(int j = 0; j < plyOrder.get(i).getAllPoints().size(); j ++){
 
                     if(i == 0){
-                        g.drawString(""  + gm.plyOrder.get(i).getPoint(j), 468 + 160*(j), 437-10);
-                        g.drawString("Player " + (gm.plyOrder.get(i).num + 1), 310, 435);
+                        g.drawString(""  + plyOrder.get(i).getPoint(j), 468 + 160*(j), 437-10);
+                        g.drawString("Player " + (plyOrder.get(i).num + 1), 310, 435);
                         g.drawImage(settColors.get(0), 468-200, 400 + 10, 30, 30, null);
                     }else if(i == 1){
-                        g.drawString(""  + gm.plyOrder.get(i).getPoint(j), 468 + 160*(j), 502-10);
-                        g.drawString("Player " + (gm.plyOrder.get(i).num + 1), 310, 440 + 60);
+                        g.drawString(""  + plyOrder.get(i).getPoint(j), 468 + 160*(j), 502-10);
+                        g.drawString("Player " + (plyOrder.get(i).num + 1), 310, 440 + 60);
                         g.drawImage(settColors.get(1), 468-200, 492-17, 30, 30, null);
                     }else if(i == 2){
-                        g.drawString(""  + gm.plyOrder.get(i).getPoint(j), 468 + 160*(j), 567-10);
-                        g.drawString("Player " + (gm.plyOrder.get(i).num + 1), 310, 440 + 120);
+                        g.drawString(""  + plyOrder.get(i).getPoint(j), 468 + 160*(j), 567-10);
+                        g.drawString("Player " + (plyOrder.get(i).num + 1), 310, 440 + 120);
                         g.drawImage(settColors.get(2), 468-200, 557-17, 30, 30, null);
                     }else if(i == 3){
-                        g.drawString(""  + gm.plyOrder.get(i).getPoint(j), 468 + 160*(j), 632-10);
-                        g.drawString("Player " + (gm.plyOrder.get(i).num + 1), 310, 450 + 180);
+                        g.drawString(""  + plyOrder.get(i).getPoint(j), 468 + 160*(j), 632-10);
+                        g.drawString("Player " + (plyOrder.get(i).num + 1), 310, 450 + 180);
                         g.drawImage(settColors.get(3), 468-200, 622-17, 30, 30, null);
                     }
                 }
              }
+             g.drawImage(blank, 400, 662, 1032-400, 710-662, null);
     
 
     }
 
     public void drawStartScreen(Graphics g) {
-        // System.out.println("(" + getWidth() + ", " + getHeight() + ")");
+        // //System.out.println("(" + getWidth() + ", " + getHeight() + ")");
         g.drawImage(startScr, 0, 0, getWidth(),
                 getHeight(), null);
 
@@ -889,7 +913,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
     public void drawBoard(Graphics g) {
         ArrayList<Section> tempSet = gm.getBoards();
-        // System.out.println("SIZE: " + tempSet.size());
+        // //System.out.println("SIZE: " + tempSet.size());
         g.drawImage(tempSet.get(0).getImage(), (int) (244 * (getWidth() / 1238.0)),
                 (int) (254 * (getHeight() / 889.0)), (int) (279 * (getWidth() / 1238.0)),
                 (int) (238 * (getHeight() / 889.0)), null);
@@ -903,7 +927,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 (int) ((254 + 237 - 5) * (getHeight() / 889.0)), (int) (279 * (getWidth() / 1238.0)),
                 (int) (238 * (getHeight() / 889.0)), null);
 
-        System.out.println(gm.bb.fullTiles.size());
+        //System.out.println(gm.bb.fullTiles.size());
         g.setFont(new Font("SansSerif", Font.BOLD, (int) (8 * (getWidth() / 1238.0) * (getHeight() / 889.0))));
         g.setColor(new Color(148, 56, 3));
         for (Hex hx : gm.bb.fullTiles) {
@@ -918,10 +942,10 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
     }
 
     public void drawShaders(Graphics g) {
-        // System.out.println("hello");
+        // //System.out.println("hello");
         if ((gm.placed < 3 && !tileSel) || tileInPlay != -1) {
             for (Hex hx : gm.avaliable) {
-                // System.out.println("hex -- (" + hx.getRow() + ", " + hx.getCol() + ")");
+                // //System.out.println("hex -- (" + hx.getRow() + ", " + hx.getCol() + ")");
                 if (hx.getRow() % 2 == 0) {
                     g.drawImage(colWhite, (int) (271 + 30 * (hx.getCol() / 2)), (int) (279 + 25 * hx.getRow()), 30, 31,
                             null);
@@ -952,7 +976,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
     public void drawSettlements(Graphics g) {
         for (Hex hx : gm.bb.getHexes()) {
-            // System.out.println("hex -- (" + hx.getRow() + ", " + hx.getCol() + ")");
+            // //System.out.println("hex -- (" + hx.getRow() + ", " + hx.getCol() + ")");
             if (hx.getpNum() != -1) {
                 switch (hx.getpNum()) {
                     case 0:
@@ -1006,9 +1030,9 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
     }
 
     public boolean intpoint_inside_circle(int x, int y, intPoint center, int rad) {
-        // System.out.println("please-----");
+        // //System.out.println("please-----");
         int dist = (int) (Math.sqrt(Math.pow(x - center.x, 2) + Math.pow(y - center.y, 2)));
-        // System.out.println(rad + " vs. " + dist);
+        // //System.out.println(rad + " vs. " + dist);
         if (dist <= rad)
             return true;
         return false;
