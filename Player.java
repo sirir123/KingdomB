@@ -1,57 +1,57 @@
 import java.util.ArrayList;
 
 public class Player {
-    private int settlements = 20;
+    private int settlements = 5;
     private Card chosen;
     private ArrayList<Hex> tiles;
     private ArrayList<Integer> points;
     private ArrayList<Hex> placed;
-    public int sec1, sec2, sec3, sec4;
+    //public int sec1, sec2, sec3, sec4;
 
     public Player() {
         tiles = new ArrayList<Hex>();
         placed = new ArrayList<>();
         points = new ArrayList<Integer>();
-        sec1=0;
-        sec2=0;
-        sec3=0;
-        sec4=0;
+        // sec1=0;
+        // sec2=0;
+        // sec3=0;
+        // sec4=0;
 
     }
 
-    public int getS1(){
-        return sec1;
-    }
+    // public int getS1(){
+    //     return sec1;
+    // }
 
-    public int getS2(){
-        return sec2;
-    }
+    // public int getS2(){
+    //     return sec2;
+    // }
 
-    public int getS3(){
-        return sec3;
-    }
+    // public int getS3(){
+    //     return sec3;
+    // }
 
-    public int getS4(){
-        return sec4;
-    }
+    // public int getS4(){
+    //     return sec4;
+    // }
 
-    public int getS(int num){
-        if(num==0){
-            return sec1;
-        }
-        if(num==1){
-            return sec2;
-        }
-        if(num==2){
-            return sec3;
-        }
-        if(num==3){
-            return sec4;
-        }
-        else{
-            return -1;
-        }
-    }
+    // public int getS(int num){
+    //     if(num==0){
+    //         return sec1;
+    //     }
+    //     if(num==1){
+    //         return sec2;
+    //     }
+    //     if(num==2){
+    //         return sec3;
+    //     }
+    //     if(num==3){
+    //         return sec4;
+    //     }
+    //     else{
+    //         return -1;
+    //     }
+    // }
     
     public int getSettlements() {
         return settlements;

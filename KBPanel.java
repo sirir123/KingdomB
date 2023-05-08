@@ -418,7 +418,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             //     }
             // }
     
-            drawEndScreen(g/* , winners*/);
+            //drawEndScreen(g/* , winners*/);
         } else { // rest of game
             g.drawImage(mainScr, 0, 0, getWidth(), getHeight(), null);
             drawPlayers(g);
