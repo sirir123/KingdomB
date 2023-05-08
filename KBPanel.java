@@ -35,7 +35,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
     private int numPly; // number of players playing
     private boolean start;
-    private boolean end = false;
+    //private boolean end = false;
     private boolean help = false;
     private Game gm = new Game(-1);
 
@@ -43,7 +43,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         // plys = new ArrayList<>();
         numPly = 2;
         start = false;
-        end = false;
+        //end = false;
 
         plyRects = new ArrayList<>();
         settColors = new ArrayList<>();
@@ -152,7 +152,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         if (start && !help && x >= 258 && x <= 897 && y >= 267 && y <= 787) {
             int[] cds = findCircle(x, y);
             System.out.println("LOC: (" + cds[0] + ", " + cds[1] + ") AND " + tileSel);
-            if ((gm.stat == -1 || gm.stat == 1) && tileSel && (gm.placed == 3 || gm.placed == 0) && gm.avaliable(cds[1], cds[0], gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay))) {
+            if ((gm.stat == -1 || gm.stat == 1) && tileSel && gm.avaliable(cds[1], cds[0], gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay))) {
                 System.out.println("AVALIABLE");
                 //gm.updateAvaliable(true);
                 gm.updateAvaliable(false);
@@ -162,11 +162,14 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                     tileSel =false;
                    // tileInPlay = -1;
                 } 
+                if(gm.getAllPlayers().get(gm.getCurrPlayer()).getSettlements() == 0){
+                    gm.updateAvaliable(false);
+                }
                 //gm.checkTile();
                 tileInPlay = -1;
                 gm.stat = -1;
                 repaint();
-            }else if(tileSel && gm.stat == 0 && (gm.placed == 3 || gm.placed == 0) && gm.avaliable(cds[1], cds[0], gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay))){
+            }else if(tileSel && gm.stat == 0 && gm.avaliable(cds[1], cds[0], gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay))){
                 System.out.println("stage 2");
                 gm.stat = 1;
                 gm.updateAvaliable(gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType(), gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay), gm.org);
@@ -175,6 +178,9 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 
                 gm.placed++;
                 gm.updateAvaliable(true);
+                if(gm.getAllPlayers().get(gm.getCurrPlayer()).getSettlements() == 0){
+                    gm.updateAvaliable(false);
+                }
                 gm.collectTile();
                 repaint();
             }
@@ -210,8 +216,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         }
 
         // in tile selction mode, players can now choose tiles
-        if (x >= 531 && x <= 676 && y >= 106 && y <= 146 && (gm.placed == 0 || gm.placed >= 3)
-                && gm.getPlayer(gm.getCurrPlayer()).getAllTiles().size() > 0 && gm.tilesAvaliable()) {
+        if (x >= 531 && x <= 676 && y >= 106 && y <= 146 && gm.tilesAvaliable()) {
             if (tileSel){
                 gm.updateAvaliable(true);
                 gm.org = null;
@@ -345,7 +350,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         }
         
 
-        if (gm.placed >= 3 && x >= 683 && x <= 827 && y >= 105 && y <= 143) {
+        if (start && (gm.placed >= 3 || gm.getAllPlayers().get(gm.getCurrPlayer()).getSettlements() == 0)&& x >= 683 && x <= 827 && y >= 105 && y <= 143) {
             System.out.println("hi");
             gm.nextTurn();
             tileSel = false;
@@ -398,22 +403,22 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         if (!start) {
 
             drawStartScreen(g);
-        } else if (end) {
+        } else if (gm.end) {
             // call lords
-            for ( int i = 0; i < numPly; i++){
-                gm.discoverer(gm.getPlayer(i));
-                // call castle + workers
-            }
-            ArrayList<Player> winners = gm.getAllPlayers();
-            for (int i = 0; i < numPly; i++) {
-                for (int j = i + 1; j < numPly; j++) {
-                    if (gm.getPlayer(i).getAllPoints().get(4) < gm.getPlayer(j).getAllPoints().get(4)) {
-                        Collections.swap(winners, i, j);
-                    }
-                }
-            }
+            // for ( int i = 0; i < numPly; i++){
+            //     //gm.discoverer(gm.getPlayer(i));
+            //     // call castle + workers
+            // }
+            // ArrayList<Player> winners = gm.getAllPlayers();
+            // for (int i = 0; i < numPly; i++) {
+            //     for (int j = i + 1; j < numPly; j++) {
+            //         if (gm.getPlayer(i).getAllPoints().get(4) < gm.getPlayer(j).getAllPoints().get(4)) {
+            //             Collections.swap(winners, i, j);
+            //         }
+            //     }
+            // }
     
-            drawEndScreen(g, winners);
+            drawEndScreen(g/* , winners*/);
         } else { // rest of game
             g.drawImage(mainScr, 0, 0, getWidth(), getHeight(), null);
             drawPlayers(g);
@@ -447,7 +452,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             }
             
             //shadeUseT(g);
-            if(gm.getPlayer(gm.getCurrPlayer()).getAllTiles().size() == 0 || !gm.tilesAvaliable() || ((gm.placed >0 && gm.placed <3)|| gm.getAllPlayers().get(gm.getCurrPlayer()).getSettlements() == 0)){
+            if(!gm.tilesAvaliable()){
                 g.drawImage(darken, 520, 100, 150, 45, null);
             }
 
@@ -458,11 +463,11 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
     }
 
-    public void drawEndScreen(Graphics g, ArrayList<Player> order){
-        g.drawImage(endBkg, 0, 0, getWidth(), getHeight(), null);
-        g.drawImage(scores, 139, 62, 1114, 796, null);
-        g.setFont(new Font("SansSerif", Font.BOLD, (int) (10 * (getWidth() / 1238.0) * (getHeight() / 889.0))));
-      //  g.drawString("Player " + gm.getAllPlayers()
+    public void drawEndScreen(Graphics g/*, ArrayList<Player> order*/){
+             g.drawImage(endBkg, 0, 0, getWidth(), getHeight(), null);
+             g.drawImage(scores, 139, 62, 1114, 796, null);
+    //     g.setFont(new Font("SansSerif", Font.BOLD, (int) (10 * (getWidth() / 1238.0) * (getHeight() / 889.0))));
+    //   //  g.drawString("Player " + gm.getAllPlayers()
 
     }
     public void drawStartScreen(Graphics g) {
