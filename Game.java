@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 public class Game {
+    private int num;
     private int currPlayer;
     public int startPlayer;// should be random
     public int prevPlayer;
@@ -15,6 +16,7 @@ public class Game {
     public Hex org; //storing org tile picked when boat or horse
 
     private ArrayList<Player> players;
+    public ArrayList<Player> plyOrder;
     private ArrayList<Card> deck;
     private ArrayList<Card> discard;
     public int discTiles;
@@ -24,6 +26,7 @@ public class Game {
     public boolean end = false;
 
     public Game(int amt) {
+        num = amt;
         bb = new Board();
         currPlayer = (int) (Math.random() * amt);
         startPlayer = currPlayer;
@@ -532,11 +535,66 @@ public void score(){
     for(int i = 0; i < players.size(); i ++){
         players.get(i).addPoints(lords(i));
         players.get(i).addPoints(workers(i));
-        System.out.println(i + " -- " + workers(i));
-        //players.get(i).addPoints(workers(i));
-        //players.get(i).addPoints(lords(i));
-        //players.get(i).addPoints(lords(i));
+        players.get(i).addPoints(discoverer(i));
+
+       // 
+        
+        players.get(i).addPoints(cas(i));
+        players.get(i).addPoints(players.get(i).getPoint(0) + players.get(i).getPoint(1) + players.get(i).getPoint(2) + players.get(i).getPoint(3));
+        System.out.println(i + " -- " + players.get(i).getPoint(4));
     }
+
+
+    //need to order
+    plyOrder = new ArrayList<>();
+    for(int j = 0; j < num; j++){
+        System.out.println(players.size());
+        int greatest = -1;
+        Player tempPlayer = null;
+        for(int i = players.size()-1; i>= 0; i--){
+            if(players.get(i).getPoint(4) >= greatest){
+                
+                greatest = players.get(i).getPoint(4);
+                tempPlayer = players.get(i);
+                
+            }
+           
+        }
+        //System.out.println(tempPlayer.toString() + " - " + greatest);
+        plyOrder.add(tempPlayer);
+        players.remove(tempPlayer);
+        
+    }
+    System.out.println("FUCK " + plyOrder.get(0).getAllPoints().toString());
+    System.out.println("FUCK " + plyOrder.get(1).getAllPoints().toString());
+    //System.out.println("FUCK " + plyOrder.get(2).getAllPoints().toString());
+    //System.out.println("FUCK " + plyOrder.get(3).getAllPoints().toString());
+
+
+
+
+
+
+    // ArrayList<Player> tempPlayers = new ArrayList<>();
+    // for(int i = 0; i < players.size(); i++){
+    //     tempPlayers.add(players.get(i));
+    // }
+    // 
+    //     System.out.println("go");
+    //     int greatest = -1;
+    //     Player tempPlayer = null;
+    //     for(int j = tempPlayers.size()-1; j > 0; j--){
+    //             if(tempPlayers.get(j).getAllPoints().get(4) > greatest){
+    //                 tempPlayer = tempPlayers.get(j);
+    //                 greatest = tempPlayer.getAllPoints().get(4);
+    //                 tempPlayers.remove(j);
+    //                 break;
+    //             }
+            
+    //     }
+    //     System.out.println("SLEEP???? " + tempPlayer.getAllPoints().toString());
+    //     plyOrder.add(tempPlayer);
+    // }
 }
 
 public int lords(int curr){
@@ -592,29 +650,35 @@ public int workers(int curr){
 
 public int discoverer(int curr){
     int points = 0;
-    
+    boolean[] rows = new boolean[20];
+    for(Hex hx: players.get(curr).getPlaced()){
+        rows[hx.getRow()] = true;
+    }
+
+    for(int i = 0; i < rows.length; i ++){
+        if(rows[i])points ++;
+    }
 
     return points;
 }
 
-// public void discoverer(Player p){
-    //     int num = 0;
-    //     for ( int i = 0; i < players.size(); i++){
-    //         if (players.get(i) == p){
-    //             num = i;
-    //         }
-    //     }
-    //     HashSet<Integer> rows = new HashSet<Integer>();
-    //     int cnt = 0;
-    //     for (Hex hx: bb.getHexes()){
-    //         if (hx.getpNum() == num && !rows.contains(hx.getRow())){
-    //             rows.add(hx.getRow());
-    //             cnt++;
-    //         }
-    //     }
-    //     p.addPoints(cnt);
-    //     p.getAllPoints().set(2, cnt);
-    // }
+public int cas(int curr){
+    int points = 0;
+    for (Hex hx : bb.getHexes()) {
+        if(hx.getType().equals("cas")){
+            for (Hex h : hx.getNeighbors()) {
+                if(h.getpNum()== curr){
+                    points += 3;
+                    break;
+            }
+            }
+        }
+        
+    }    
+
+
+    return points;
+}
 
 
     // public void scCas(Player p){

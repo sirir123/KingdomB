@@ -404,21 +404,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
             drawStartScreen(g);
         } else if (gm.end) {
-            // call lords
-            // for ( int i = 0; i < numPly; i++){
-            //     //gm.discoverer(gm.getPlayer(i));
-            //     // call castle + workers
-            // }
-            // ArrayList<Player> winners = gm.getAllPlayers();
-            // for (int i = 0; i < numPly; i++) {
-            //     for (int j = i + 1; j < numPly; j++) {
-            //         if (gm.getPlayer(i).getAllPoints().get(4) < gm.getPlayer(j).getAllPoints().get(4)) {
-            //             Collections.swap(winners, i, j);
-            //         }
-            //     }
-            // }
-    
-            //drawEndScreen(g/* , winners*/);
+            drawEndScreen(g);
         } else { // rest of game
             g.drawImage(mainScr, 0, 0, getWidth(), getHeight(), null);
             drawPlayers(g);
@@ -460,16 +446,33 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 g.drawImage(currTiles, 522, 102, 151, 42, null);
             }
         }
-
+        //g.drawImage(scores, 139, 62, 1114, 796, null);
     }
 
     public void drawEndScreen(Graphics g/*, ArrayList<Player> order*/){
              g.drawImage(endBkg, 0, 0, getWidth(), getHeight(), null);
              g.drawImage(scores, 139, 62, 1114, 796, null);
-    //     g.setFont(new Font("SansSerif", Font.BOLD, (int) (10 * (getWidth() / 1238.0) * (getHeight() / 889.0))));
-    //   //  g.drawString("Player " + gm.getAllPlayers()
+             g.setFont(new Font("SansSerif", Font.BOLD, (int) (10 * (getWidth() / 1238.0) * (getHeight() / 889.0))));
+             
+             for(int i = 0; i < gm.plyOrder.size(); i ++){
+                System.out.println(gm.plyOrder.get(i).getAllPoints());
+                for(int j = 0; j < gm.plyOrder.get(i).getAllPoints().size(); j ++){
+
+                    if(i == 0){
+                        g.drawString(""  + gm.plyOrder.get(i).getPoint(j), 468 + 160*(j), 437-10);
+                    }else if(i == 1){
+                        g.drawString(""  + gm.plyOrder.get(i).getPoint(j), 468 + 160*(j), 502-10);
+                    }else if(i == 2){
+                        g.drawString(""  + gm.plyOrder.get(i).getPoint(j), 468 + 160*(j), 567-10);
+                    }else if(i == 3){
+                        g.drawString(""  + gm.plyOrder.get(i).getPoint(j), 468 + 160*(j), 632-10);
+                    }
+                }
+             }
+    
 
     }
+
     public void drawStartScreen(Graphics g) {
         // System.out.println("(" + getWidth() + ", " + getHeight() + ")");
         g.drawImage(startScr, 0, 0, getWidth(),

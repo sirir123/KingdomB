@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Player {
-    private int settlements = 5;
+    private int settlements = 1;
     private Card chosen;
     private ArrayList<Hex> tiles;
     private ArrayList<Integer> points;
