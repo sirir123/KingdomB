@@ -18,7 +18,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
     private BufferedImage tFlwr, tGrs, tDes, tFor, tCnyn;
     private BufferedImage sOrcl, sHrse, sFrm, sBt, orcl, hrse, frm, bt;
     private BufferedImage scores, endBkg;
-    private BufferedImage infoUp, buttonX, darken;
+    private BufferedImage infoUp, infoUp2, buttonX, darken;
     private BufferedImage currCol, currTile;
     private BufferedImage colWhite, colYel;
     private ArrayList<BufferedImage> plyRects, settColors;
@@ -87,6 +87,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             // sHrse = (1040, 93) 54 50, sOrcl = ()
 
             infoUp = ImageIO.read(KBPanel.class.getResource("/Pictures/helpPopUp.png"));
+            infoUp2 = ImageIO.read(KBPanel.class.getResource("/Pictures/helpPopUp2.png"));
             buttonX = ImageIO.read(KBPanel.class.getResource("/Pictures/buttonX.png"));
 
             currCol = ImageIO.read(KBPanel.class.getResource("/Pictures/currentColor.png"));
