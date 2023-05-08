@@ -13,8 +13,6 @@ public class Game {
     public int stat; //for boat and horse, -1 not used, 0 tile picked, 1 org picked, then back to -1
     public Hex org; //storing org tile picked when boat or horse
 
-    private boolean disc;// this is for tile actions u can ignore
-
     private ArrayList<Player> players;
     private ArrayList<Card> deck;
     private ArrayList<Card> discard;
@@ -30,7 +28,6 @@ public class Game {
         bb = new Board(); // constructor
         deck = new ArrayList<Card>();
         discard = new ArrayList<Card>();
-        disc = false;// this is for tile actions u can ignore
         placed = 0;
         stat = -1;
         //org = new Hex();
@@ -461,76 +458,7 @@ public class Game {
 
 
 
-        // Hex one = null;
-        // Hex two = null;
-        // int occurance = 0;
-
-        // if (hx.indexNeigh("tiG") || hx.indexNeigh("tiO") || hx.indexNeigh("tiH") || hx.indexNeigh("tiB")) {
-        //     for (int i = 0; i < hx.getNeighbors().size(); i++) {
-        //         if (hx.getNeighbors().get(i).getType().equals("tiH") || hx.getNeighbors().get(i).getType().equals("tiO")
-        //                 || hx.getNeighbors().get(i).getType().equals("tiG")
-        //                 || hx.getNeighbors().get(i).getType().equals("tiB")) {
-        //             one = hx.getNeighbors().get(i);// tile neighbor of hex 1
-        //         }
-        //     }
-
-        //     if ((next.indexNeigh("tiG") || next.indexNeigh("tiO") || next.indexNeigh("tiH")
-        //             || next.indexNeigh("tiB"))) {
-        //         for (int p = 0; p < next.getNeighbors().size(); p++) {
-        //             if (next.getNeighbors().get(p).getType().equals("tiH")
-        //                     || next.getNeighbors().get(p).getType().equals("tiO")
-        //                     || next.getNeighbors().get(p).getType().equals("tiG")
-        //                     || next.getNeighbors().get(p).getType().equals("tiB")) {
-        //                 two = next.getNeighbors().get(p);// tile neighbor of hex 2
-        //             }
-        //         }
-        //     }
-        //     // System.out.println(one + " " + two);
-
-        //     if (one != null && two == null) {
-        //         if (players.get(hx.getpNum()).getAllTiles().size() > 0) {
-        //             for (int i = 0; i < one.getNeighbors().size(); i++) {
-        //                 if (one.getNeighbors().get(i).getpNum() == hx.getpNum())
-        //                     occurance++;
-        //             }
-        //             if (occurance == 1) {
-        //                 players.get(hx.getpNum()).getAllTiles().remove(one);
-        //                 discTiles++;
-        //                 disc = true;
-        //             }
-        //         }
-        //     }
-        //     if (two != null) {
-        //         if (one == null) {
-        //             if (two.getAmount() > 0) {
-        //                 players.get(hx.getpNum()).addTile(two);
-        //                 ;
-        //                 two.minusAmount();
-        //             }
-        //         }
-        //         if (one != two) {
-        //             if (players.get(hx.getpNum()).getAllTiles().size() > 0) {
-        //                 for (int i = 0; i < one.getNeighbors().size(); i++) {
-        //                     if (one.getNeighbors().get(i).getpNum() == hx.getpNum())
-        //                         occurance++;
-        //                 }
-        //                 if (occurance == 1) {
-        //                     players.get(hx.getpNum()).getAllTiles().remove(one);
-        //                     discTiles++;
-        //                     disc = true;
-        //                 }
-        //             }
-        //             if (two.getAmount() > 0) {
-        //                 players.get(hx.getpNum()).addTile(two);
-        //                 two.minusAmount();
-        //                 // collectTile();
-        //             }
-        //         }
-        //     } else if (one == null && two == null) {
-        //         System.out.println(" check tile not working");
-        //     }
-
-        // }
+        //Im so sorry the code just wasn't working with how the tiles worked :(((((
 
     }
    
