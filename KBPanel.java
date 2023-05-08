@@ -162,22 +162,13 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                     tileSel =false;
                     tileInPlay = -1;
                 } 
+                //gm.checkTile();
                 gm.stat = -1;
                 repaint();
             }else if(tileSel && gm.stat == 0 && (gm.placed == 3 || gm.placed == 0) && gm.avaliable(cds[1], cds[0], gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay))){
                 System.out.println("stage 2");
                 gm.stat = 1;
                 gm.updateAvaliable(gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType(), gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay), gm.org);
-            }else if(tileSel && gm.stat == 1 && (gm.placed == 3 || gm.placed == 0) && gm.avaliable(cds[1], cds[0], gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay))){
-                gm.stat = -1;
-                gm.updateAvaliable(false);
-                gm.collectTile();
-                if(!gm.tilesAvaliable()){
-                    gm.updateAvaliable(true);
-                    tileSel =false;
-                    tileInPlay = -1;
-                } 
-                gm.checkTile();
             }else if ((gm.stat == -1) && gm.placed < 3 && gm.avaliable(cds[1], cds[0])) {
                 // System.out.println("AVALIABLE");
                 
@@ -220,8 +211,11 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         // in tile selction mode, players can now choose tiles
         if (x >= 531 && x <= 676 && y >= 106 && y <= 146 && (gm.placed == 0 || gm.placed >= 3)
                 && gm.getPlayer(gm.getCurrPlayer()).getAllTiles().size() > 0 && gm.tilesAvaliable()) {
-            if (tileSel)
-                    gm.updateAvaliable(true);
+            if (tileSel){
+                gm.updateAvaliable(true);
+                gm.org = null;
+            }
+                    
             tileSel = !tileSel;
             tileInPlay = -1;
             System.out.println("tilesel true");

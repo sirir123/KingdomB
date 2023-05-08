@@ -385,6 +385,7 @@ public class Game {
     public ArrayList<Player> getAllPlayers(){
         return players;
     }
+
     public void nextTurn() {
         for (int i = 0; i < players.get(currPlayer).getAllTiles().size(); i++) { // set tiles to unused
             players.get(currPlayer).getAllTiles().get(i).statUnused();
@@ -456,7 +457,9 @@ public class Game {
         p.addPoints(cnt);
         p.getAllPoints().set(2, cnt);
     }
-    public void checkTile(/*Hex hx, Hex next*/) {
+
+
+    public void checkTile() {
         System.out.println("START");
         boolean nextTo = false;
         for(Hex ti: players.get(currPlayer).getAllTiles()){
@@ -468,13 +471,19 @@ public class Game {
                 } 
             }
             if(!nextTo){
-                discTiles ++;
+                System.out.println("Missed: " + ti.toString());
                 players.get(currPlayer).removeTile(ti);
-                
-                ti.statDiscard();
-
+                discTiles ++;
+                break;
             }
+            //     
+            //     
+                
+            //     
+
+            // }
         }
+        System.out.println(players.get(currPlayer).getAllTiles().toString());
         System.out.println("END");
 
 

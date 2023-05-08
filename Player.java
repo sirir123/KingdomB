@@ -70,6 +70,7 @@ public class Player {
     }
 
     public void setTileNull(int num) {
+        System.out.println("null");
         tiles.set(num, null);
     }
 
@@ -87,18 +88,18 @@ public class Player {
     }
 
     public void removeTile(Hex t) {
-        for(int i = 0; i < tiles.size()-1; i++){
-            if(tiles.get(i).equals(t))setTileNull(i);
+        System.out.println("TILES: (" + tiles.size() + ")" + tiles.toString());
+        System.out.println();
+        for(int i = 0; i < tiles.size(); i++){
+            if(tiles.get(i).equals(t)){
+                System.out.println("NULLIFY PLEASE");
+                tiles.remove(i);
+            } 
         }
-        ArrayList<Hex> tempTiles = new ArrayList<>(6);
-        int curr = 0;
-        for(int j = 0; j < tiles.size()-1; j++){
-            if(tiles.get(j) != null){
-                tempTiles.set(curr, tiles.get(j));
-                curr++;
-            }
-        }
-        tiles = tempTiles;
+        t.statDiscard();
+        System.out.println("TILES: (" + tiles.size() + ")" + tiles.toString());
+        
+        //tiles = tempTiles;
     }
 
     public ArrayList<Hex> getPlaced() {
