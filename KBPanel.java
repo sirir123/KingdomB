@@ -174,6 +174,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                     tileSel =false;
                     tileInPlay = -1;
                 } 
+                gm.checkTile();
             }else if ((gm.stat == -1) && gm.placed < 3 && gm.avaliable(cds[1], cds[0])) {
                 // System.out.println("AVALIABLE");
                 
@@ -344,108 +345,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                 }
             repaint();
         }
-        // find the new coordinates of
-        // call find circle on the clicking coordinates and pass them in to get an array
-        // with the coordinates of the hex, find that from the board and pass that hex
-        // into the action methods. call the action methods based on the location
-        // clicked and what number tile that should be. if its greater than the tiles
-        // user has, shouldnt do anything.
-        // if (tileSel && gm.getPlayer(gm.getCurrPlayer()).getAllTiles() != null && tileInPlay > -1
-        //         && tileInPlay < gm.getPlayer(gm.getCurrPlayer()).getAllTiles().size() && x >= 271 && x <= 894
-        //         && y >= 280 && y <= 797) {
-        //     if (gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiB")) {
-        //         if (xtemp == 0 && ytemp == 0) {
-        //             xtemp = x;
-        //             ytemp = y;
-        //             int[] cds = findCircle(x, y);
-        //             Hex temp = null;
-        //             for (Hex hx : gm.bb.getHexes()) {
-        //                 if (hx.getRow() == cds[1] && hx.getCol() == cds[0]) {
-        //                     temp = hx;
-        //                 }
-        //             }
-        //             tileTemps.add(temp);
-        //         } else {
-        //             int[] cds = findCircle(x, y);
-        //             Hex temp = null;
-        //             for (Hex hx : gm.bb.getHexes()) {
-        //                 if (hx.getRow() == cds[1] && hx.getCol() == cds[0]) {
-        //                     temp = hx;
-        //                 }
-        //             }
-        //             tileTemps.add(temp);
-        //         }
-        //         if (tileTemps.size() == 2) {
-        //             gm.boatT(gm.getPlayer(gm.getCurrPlayer()), tileTemps.get(0), tileTemps.get(1), tileInPlay);
-        //             tileInPlay = -1;
-        //             System.out.println("boat chosen: " + tileTemps.get(0) + " + " + tileTemps.get(1));
-        //             tileTemps = new ArrayList<Hex>();
-        //         }
-        //     }
-
-        //     if (tileInPlay != -1) {
-        //         if (gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiG")) {
-        //             int[] cds = findCircle(x, y);
-        //             Hex temp = null;
-        //             for (Hex hx : gm.bb.getHexes()) {
-        //                 if (hx.getRow() == cds[1] && hx.getCol() == cds[0]) {
-        //                     temp = hx;
-        //                 }
-        //             }
-        //             System.out.println(" " + temp);
-        //             gm.farmT(gm.getPlayer(gm.getCurrPlayer()), temp, tileInPlay);
-        //             tileInPlay = -1;
-        //             System.out.println("farm  chosen: " + temp);
-        //         }
-        //     }
-        //     if (tileInPlay != -1) {
-        //         if (gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiH")) {
-        //             if (xtemp == 0 && ytemp == 0) {
-        //                 xtemp = x;
-        //                 ytemp = y;
-        //                 int[] cds = findCircle(x, y);
-        //                 Hex temp = null;
-        //                 for (Hex hx : gm.bb.getHexes()) {
-        //                     if (hx.getRow() == cds[1] && hx.getCol() == cds[0]) {
-        //                         temp = hx;
-        //                     }
-        //                 }
-        //                 tileTemps.add(temp);
-        //             } else {
-        //                 int[] cds = findCircle(x, y);
-        //                 Hex temp = null;
-        //                 for (Hex hx : gm.bb.getHexes()) {
-        //                     if (hx.getRow() == cds[1] && hx.getCol() == cds[0]) {
-        //                         temp = hx;
-        //                     }
-        //                 }
-        //                 tileTemps.add(temp);
-        //             }
-
-        //             if (tileTemps.size() == 2) {
-        //                 gm.paddockT(gm.getPlayer(gm.getCurrPlayer()), tileTemps.get(0), tileTemps.get(1), tileInPlay);
-        //                 tileInPlay = -1;
-        //                 System.out.println("horse chosen: " + tileTemps.get(0) + " + " + tileTemps.get(1));
-        //                 tileTemps = new ArrayList<Hex>();
-        //             }
-        //         }
-        //     }
-        //     if (tileInPlay != -1) {
-        //         if (gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiO")) {
-        //             int[] cds = findCircle(x, y);
-        //             Hex temp = null;
-        //             for (Hex hx : gm.bb.getHexes()) {
-        //                 if (hx.getRow() == cds[1] && hx.getCol() == cds[0]) {
-        //                     temp = hx;
-        //                 }
-        //             }
-        //             gm.oracleT(gm.getPlayer(gm.getCurrPlayer()), temp, tileInPlay);
-        //             tileInPlay = -1;
-        //             System.out.println("oracle chosen: " + temp);
-        //         }
-
-        //     }
-        // }
+        
 
         if (gm.placed >= 3 && x >= 683 && x <= 827 && y >= 105 && y <= 143) {
             System.out.println("hi");

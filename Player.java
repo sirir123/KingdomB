@@ -69,6 +69,10 @@ public class Player {
         return tiles.get(num);
     }
 
+    public void setTileNull(int num) {
+        tiles.set(num, null);
+    }
+
     public void addTile(Hex t) {
         t.statStill();
         tiles.add(t);
@@ -80,6 +84,21 @@ public class Player {
 
     public void removePlaced(Hex t) {
         placed.remove(t);
+    }
+
+    public void removeTile(Hex t) {
+        for(int i = 0; i < tiles.size()-1; i++){
+            if(tiles.get(i).equals(t))setTileNull(i);
+        }
+        ArrayList<Hex> tempTiles = new ArrayList<>(6);
+        int curr = 0;
+        for(int j = 0; j < tiles.size()-1; j++){
+            if(tiles.get(j) != null){
+                tempTiles.set(curr, tiles.get(j));
+                curr++;
+            }
+        }
+        tiles = tempTiles;
     }
 
     public ArrayList<Hex> getPlaced() {
