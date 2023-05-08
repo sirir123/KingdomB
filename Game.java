@@ -63,7 +63,7 @@ public class Game {
             }
         }
         for (int i = 0; i < amt; i++) {
-            players.add(new Player());
+            players.add(new Player(i));
         }
         // setting up the boards
         boards = new ArrayList<>();

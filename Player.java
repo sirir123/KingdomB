@@ -1,14 +1,16 @@
 import java.util.ArrayList;
 
 public class Player {
-    private int settlements = 1;
+    public int num;
+    private int settlements = 20;
     private Card chosen;
     private ArrayList<Hex> tiles;
     private ArrayList<Integer> points;
     private ArrayList<Hex> placed;
     //public int sec1, sec2, sec3, sec4;
 
-    public Player() {
+    public Player(int n) {
+        num = n;
         tiles = new ArrayList<Hex>();
         placed = new ArrayList<>();
         points = new ArrayList<Integer>();
