@@ -356,15 +356,15 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             tileSel = false;
             tileInPlay = -1;
         }
-        boolean turnEnd = false;
-        for ( int i = 0; i < numPly; i++){
-            if (gm.getPlayer(i).getSettlements()==0){
-                turnEnd = true;
-            }
-        }
-        if (gm.getCurrPlayer() == numPly -1  && turnEnd){
-            end = true;
-        }
+        //boolean turnEnd = false;
+        // for ( int i = 0; i < numPly; i++){
+        //     if (gm.getPlayer(i).getSettlements()==0){
+        //         turnEnd = true;
+        //     }
+        // }
+        // if (gm.getCurrPlayer() == numPly -1  && turnEnd){
+        //     end = true;
+        // }
         repaint();
 
     }
