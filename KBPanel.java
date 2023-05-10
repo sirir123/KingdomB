@@ -22,6 +22,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
     private BufferedImage currCol, currTile;
     private BufferedImage colWhite, colYel;
     private BufferedImage blank, viewBack;
+    private BufferedImage instrO, instrH, instrB, instrG;
     private ArrayList<BufferedImage> plyRects, settColors;
     private ArrayList<BoardImage> boards;
     private boolean tileSel = false;
@@ -41,6 +42,9 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
     private Game gm = new Game(-1);
 
     public KBPanel() {
+        System.out.println();
+        System.out.println();
+        System.out.println();
         // plys = new ArrayList<>();
         numPly = 2;
         start = false;
@@ -115,6 +119,11 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
             currTiles = ImageIO.read(KBPanel.class.getResource("/Pictures/currUsing.png"));
 
+            instrO = ImageIO.read(KBPanel.class.getResource("/Pictures/intrO.png"));
+            instrH  = ImageIO.read(KBPanel.class.getResource("/Pictures/instrH.png"));
+            instrB  = ImageIO.read(KBPanel.class.getResource("/Pictures/instrB.png"));
+            instrG = ImageIO.read(KBPanel.class.getResource("/Pictures/instrG.png"));
+
         } catch (Exception E) {
             //System.out.println("Exception Error in panel");
             return;
@@ -160,7 +169,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         if (start && !help && x >= 258 && x <= 897 && y >= 267 && y <= 787) {
             int[] cds = findCircle(x, y);
             //System.out.println("LOC: (" + cds[0] + ", " + cds[1] + ") AND " + tileSel);
-            if ((gm.stat == -1 || gm.stat == 1) && tileSel && gm.avaliable(cds[1], cds[0], gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay))) {
+            if (tileSel & (gm.stat == -1 || gm.stat == 1) && gm.avaliable(cds[1], cds[0], gm.getPlayer(gm.getCurrPlayer()).getTile(tileInPlay))) {
                 //System.out.println("AVALIABLE");
                 //gm.updateAvaliable(true);
                 gm.updateAvaliable(false);
@@ -212,10 +221,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         }
 
         //help
-        if (start && intpoint_inside_circle(x, y, new intPoint(877, 124), 25)) {
-            help = !help;
-            repaint();
-        }
+        
         
         //doc
         if (start && help && x >= 576 && x <= 819
@@ -236,24 +242,25 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         }
 
         if (gm.getCurrPlayer() == 0 && tileSel && x >= 1136 && x <= 1281 && y >= 92 && y <= 266) {
+            gm.stat = -1;
             gm.org = null;
             //System.out.println("work0");
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 130), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1184, 130), 23)) {
                 tileInPlay = 0;
             }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 130), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1245, 130), 23)) {
                 tileInPlay = 1;
             }
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 183), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1184, 183), 23)) {
                 tileInPlay = 2;
             }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 183), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1245, 183), 23)) {
                 tileInPlay = 3;
             }
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 236), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1184, 236), 23)) {
                 tileInPlay = 4;
             }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 236), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1245, 236), 23)) {
                 tileInPlay = 5;
             }
             //System.out.println("tile in play:" + tileInPlay);
@@ -268,24 +275,25 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         }
 
         if (gm.getCurrPlayer() == 1 && tileSel && x >= 1154 && x <= 1296 && y >= 297 && y <= 691) {
+            gm.stat = -1;
             gm.org = null;
             //System.out.println("work1");
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 329), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1184, 329), 23)) {
                 tileInPlay = 0;
             }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 329), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1245, 329), 23)) {
                 tileInPlay = 1;
             }
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 382), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1184, 382), 23)) {
                 tileInPlay = 2;
             }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 382), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1245, 382), 23)) {
                 tileInPlay = 3;
             }
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 435), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1184, 435), 23)) {
                 tileInPlay = 4;
             }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 435), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1245, 435), 23)) {
                 tileInPlay = 5;
             }
             //System.out.println("tile in play:" + tileInPlay);
@@ -299,24 +307,25 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         }
 
         if (gm.getCurrPlayer() == 2 && tileSel && x >= 1154 && x <= 1295 && y >= 498 && y <= 672) {
+            gm.stat = -1;
             gm.org = null;
             //System.out.println("work2");
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 532), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1184, 532), 23)) {
                 tileInPlay = 0;
             }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 532), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1245, 532), 23)) {
                 tileInPlay = 1;
             }
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 585), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1184, 585), 23)) {
                 tileInPlay = 2;
             }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 585), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1245, 585), 23)) {
                 tileInPlay = 3;
             }
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 638), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1184, 638), 23)) {
                 tileInPlay = 4;
             }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 638), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1245, 638), 23)) {
                 tileInPlay = 5;
             }
             //System.out.println("tile in play:" + tileInPlay);
@@ -330,24 +339,25 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         }
 
         if (gm.getCurrPlayer() == 3 && tileSel && x >= 1154 && x <= 1296 && y >= 700 && y <= 873) {
+            gm.stat = -1;
             gm.org = null;
             //System.out.println("work3");
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 735), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1184, 735), 23)) {
                 tileInPlay = 0;
             }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 735), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1245, 735), 23)) {
                 tileInPlay = 1;
             }
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 788), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1184, 788), 23)) {
                 tileInPlay = 2;
             }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 788), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1245, 788), 23)) {
                 tileInPlay = 3;
             }
-            if (intpoint_inside_circle(x, y, new intPoint(1194, 841), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1184, 841), 23)) {
                 tileInPlay = 4;
             }
-            if (intpoint_inside_circle(x, y, new intPoint(1255, 841), 23)) {
+            if (intpoint_inside_circle(x, y, new intPoint(1245, 841), 23)) {
                 tileInPlay = 5;
             }
             //System.out.println("tile in play:" + tileInPlay);
@@ -368,8 +378,14 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             if(gm.end == true)end = true;
             tileSel = false;
             tileInPlay = -1;
+            gm.stat = -1;
             gm.org = null;
         }
+    }
+
+    if (start && !end && intpoint_inside_circle(x, y, new intPoint(877, 124), 25)) {
+        help = !help;
+        repaint();
     }
 
     if(gm.end && x >= 928 && x <= 1211 && y >= 764 && y <= 819){
@@ -468,9 +484,22 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
             if(gm.end){
                 g.drawImage(viewBack, 249, 95, 840-249, 153-95, null);
             }
+
+            if(tileInPlay != -1){
+                if(gm.getAllPlayers().get(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiO")){
+                    g.drawImage(instrO, 253, 164, 902-253, 229-154, null);
+                }else if(gm.getAllPlayers().get(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiB")){
+                    g.drawImage(instrB, 253, 164, 902-253, 229-154, null);
+                }else if(gm.getAllPlayers().get(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiG")){
+                    g.drawImage(instrG, 253, 164, 902-253, 229-154, null);
+                }else if(gm.getAllPlayers().get(gm.getCurrPlayer()).getTile(tileInPlay).getType().equals("tiH")){
+                    g.drawImage(instrH, 253, 164, 902-253, 229-154, null);
+                }
+            }
         }
         if(end){
-            drawEndScreen(g, gm.getAllPlayers());
+            System.out.println("DUMBASS");
+            drawEndScreen(g, gm.order(gm.getAllPlayers()));
 
         }
 
@@ -482,26 +511,26 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
              g.drawImage(scores, 139, 62, 1114, 796, null);
              g.setFont(new Font("SansSerif", Font.BOLD, 20));
              
-             for(int i = 0; i < plyOrder.size(); i ++){
+             for(int i = 0; i < plyOrder.size() ; i ++){
                 //System.out.println(plyOrder.get(i).getAllPoints());
                 for(int j = 0; j < plyOrder.get(i).getAllPoints().size(); j ++){
 
-                    if(i == 0){
+                    if(i == plyOrder.size()-1){
                         g.drawString(""  + plyOrder.get(i).getPoint(j), 468 + 160*(j), 437-10);
                         g.drawString("Player " + (plyOrder.get(i).num + 1), 310, 435);
-                        g.drawImage(settColors.get(0), 468-200, 400 + 10, 30, 30, null);
-                    }else if(i == 1){
+                        g.drawImage(settColors.get(plyOrder.get(i).num), 468-200, 400 + 10, 30, 30, null);
+                    }else if(i == plyOrder.size()-2){
                         g.drawString(""  + plyOrder.get(i).getPoint(j), 468 + 160*(j), 502-10);
                         g.drawString("Player " + (plyOrder.get(i).num + 1), 310, 440 + 60);
-                        g.drawImage(settColors.get(1), 468-200, 492-17, 30, 30, null);
-                    }else if(i == 2){
+                        g.drawImage(settColors.get(plyOrder.get(i).num), 468-200, 492-17, 30, 30, null);
+                    }else if(i == plyOrder.size()-3){
                         g.drawString(""  + plyOrder.get(i).getPoint(j), 468 + 160*(j), 567-10);
                         g.drawString("Player " + (plyOrder.get(i).num + 1), 310, 440 + 120);
-                        g.drawImage(settColors.get(2), 468-200, 557-17, 30, 30, null);
-                    }else if(i == 3){
+                        g.drawImage(settColors.get(plyOrder.get(i).num), 468-200, 557-17, 30, 30, null);
+                    }else if(i == plyOrder.size()-4){
                         g.drawString(""  + plyOrder.get(i).getPoint(j), 468 + 160*(j), 632-10);
                         g.drawString("Player " + (plyOrder.get(i).num + 1), 310, 450 + 180);
-                        g.drawImage(settColors.get(3), 468-200, 622-17, 30, 30, null);
+                        g.drawImage(settColors.get(plyOrder.get(i).num), 468-200, 622-17, 30, 30, null);
                     }
                 }
              }
@@ -598,13 +627,13 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
                         for (int x = 0; x < gm.getPlayer(0).getAllTiles().size(); x++) {
                             if (x < 2) {
-                                g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 1159 + (x * 60),
+                                g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 1157 + (x * 60),
                                         104, 50, 48, null);
                             } else if (x < 4) {
-                                g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 1159 + ((x - 2) * 60),
+                                g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 1157 + ((x - 2) * 60),
                                         158, 50, 48, null);
                             } else {
-                                g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 1159 + ((x - 4) * 60),
+                                g.drawImage(getTileImage(gm.getPlayer(0).getTile(x).getType()), 1157 + ((x - 4) * 60),
                                         212,
                                         50, 48, null);
                             }
@@ -620,22 +649,22 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                             if(tileInPlay != -1 && gm.getPlayer(0).getTile(tileInPlay) != null){
                                 switch(tileInPlay){
                                     case 0:
-                                        g.drawImage(currTile, 1159, 104, 50, 48, null);
+                                        g.drawImage(currTile, 1157, 104, 50, 48, null);
                                         break;
                                     case 1:
-                                        g.drawImage(currTile, 1159 + (1 * 60), 104, 50, 48, null);
+                                        g.drawImage(currTile, 1157 + (1 * 60), 104, 50, 48, null);
                                         break;
                                     case 2:
-                                        g.drawImage(currTile, 1159, 158, 50, 48, null);
+                                        g.drawImage(currTile, 1157, 158, 50, 48, null);
                                         break;
                                     case 3:
-                                        g.drawImage(currTile, 1159 + (1 * 60), 158, 50, 48, null);
+                                        g.drawImage(currTile, 1157 + (1 * 60), 158, 50, 48, null);
                                         break;
                                     case 4:
-                                        g.drawImage(currTile, 1159, 212, 50, 48, null);
+                                        g.drawImage(currTile, 1157, 212, 50, 48, null);
                                         break;
                                     case 5:
-                                        g.drawImage(currTile, 1159 + (1 * 60), 212, 50, 48, null);
+                                        g.drawImage(currTile, 1157 + (1 * 60), 212, 50, 48, null);
                                         break;
                                 }
                             }
@@ -647,14 +676,14 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                         || gm.getPlayer(0).getTile(x).getStat() == 0) {
                                     if (x < 2) {
                                         g.drawImage(getTileImage("sh" + gm.getPlayer(0).getTile(x).getType()),
-                                                1159 + (x * 60), 104, 50, 48, null);
+                                                1157 + (x * 60), 104, 50, 48, null);
                                     } else if (x < 4) {
                                         g.drawImage(getTileImage("sh" + gm.getPlayer(0).getTile(x).getType()),
-                                                1159 + ((x - 2) * 60), 158, 50, 48, null);
+                                                1157 + ((x - 2) * 60), 158, 50, 48, null);
                                                    
                                     } else {
                                         g.drawImage(getTileImage("sh" + gm.getPlayer(0).getTile(x).getType()),
-                                                1159 + ((x - 4) * 60), 212, 50, 48, null);
+                                                1157 + ((x - 4) * 60), 212, 50, 48, null);
                                                 
                                     }
 
@@ -678,13 +707,13 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
                         for (int x = 0; x < gm.getPlayer(1).getAllTiles().size(); x++) {
                             if (x < 2) {
-                                g.drawImage(getTileImage(gm.getPlayer(1).getTile(x).getType()), 1159 + (x * 60),
+                                g.drawImage(getTileImage(gm.getPlayer(1).getTile(x).getType()), 1157 + (x * 60),
                                         303, 50, 48, null);
                             } else if (x < 4) {
-                                g.drawImage(getTileImage(gm.getPlayer(1).getTile(x).getType()), 1159 + ((x - 2) * 60),
+                                g.drawImage(getTileImage(gm.getPlayer(1).getTile(x).getType()), 1157 + ((x - 2) * 60),
                                         357, 50, 48, null);
                             } else {
-                                g.drawImage(getTileImage(gm.getPlayer(1).getTile(x).getType()), 1159 + ((x - 4) * 60),
+                                g.drawImage(getTileImage(gm.getPlayer(1).getTile(x).getType()), 1157 + ((x - 4) * 60),
                                         411,
                                         50, 48, null);
                             }
@@ -700,22 +729,22 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                     if(tileInPlay != -1 && gm.getPlayer(1).getTile(tileInPlay) != null){
                                         switch(tileInPlay){
                                             case 0:
-                                                g.drawImage(currTile, 1159, 303, 50, 48, null);
+                                                g.drawImage(currTile, 1157, 303, 50, 48, null);
                                                 break;
                                             case 1:
-                                                g.drawImage(currTile, 1159 + (1 * 60), 303, 50, 48, null);
+                                                g.drawImage(currTile, 1157 + (1 * 60), 303, 50, 48, null);
                                                 break;
                                             case 2:
-                                                g.drawImage(currTile, 1159, 357, 50, 48, null);
+                                                g.drawImage(currTile, 1157, 357, 50, 48, null);
                                                 break;
                                             case 3:
-                                                g.drawImage(currTile, 1159 + (1 * 60), 357, 50, 48, null);
+                                                g.drawImage(currTile, 1157 + (1 * 60), 357, 50, 48, null);
                                                 break;
                                             case 4:
-                                                g.drawImage(currTile, 1159, 411, 50, 48, null);
+                                                g.drawImage(currTile, 1157, 411, 50, 48, null);
                                                 break;
                                             case 5:
-                                                g.drawImage(currTile, 1159 + (1 * 60), 411, 50, 48, null);
+                                                g.drawImage(currTile, 1157 + (1 * 60), 411, 50, 48, null);
                                                 break;
                                         }
                                     }
@@ -725,13 +754,13 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                         || gm.getPlayer(1).getTile(x).getStat() == 0) {
                                     if (x < 2) {
                                         g.drawImage(getTileImage("sh" + gm.getPlayer(1).getTile(x).getType()),
-                                                1159 + (x * 60), 303, 50, 48, null);
+                                                1157 + (x * 60), 303, 50, 48, null);
                                     } else if (x < 4) {
                                         g.drawImage(getTileImage("sh" + gm.getPlayer(1).getTile(x).getType()),
-                                                1159 + ((x - 2) * 60), 357, 50, 48, null);
+                                                1157 + ((x - 2) * 60), 357, 50, 48, null);
                                     } else {
                                         g.drawImage(getTileImage("sh" + gm.getPlayer(1).getTile(x).getType()),
-                                                1159 + ((x - 4) * 60), 411, 50, 48, null);
+                                                1157 + ((x - 4) * 60), 411, 50, 48, null);
                                     }
                                 }
                             }
@@ -753,13 +782,13 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
                         for (int x = 0; x < gm.getPlayer(2).getAllTiles().size(); x++) {
                             if (x < 2) {
-                                g.drawImage(getTileImage(gm.getPlayer(2).getTile(x).getType()), 1159 + (x * 60),
+                                g.drawImage(getTileImage(gm.getPlayer(2).getTile(x).getType()), 1157 + (x * 60),
                                         505, 50, 48, null);
                             } else if (x < 4) {
-                                g.drawImage(getTileImage(gm.getPlayer(2).getTile(x).getType()), 1159 + ((x - 2) * 60),
+                                g.drawImage(getTileImage(gm.getPlayer(2).getTile(x).getType()), 1157 + ((x - 2) * 60),
                                         559, 50, 48, null);
                             } else {
-                                g.drawImage(getTileImage(gm.getPlayer(2).getTile(x).getType()), 1159 + ((x - 4) * 60),
+                                g.drawImage(getTileImage(gm.getPlayer(2).getTile(x).getType()), 1157 + ((x - 4) * 60),
                                         603,
                                         50, 48, null);
                             }
@@ -775,22 +804,22 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                     if(tileInPlay != -1 && gm.getPlayer(2).getTile(tileInPlay) != null){
                                         switch(tileInPlay){
                                             case 0:
-                                                g.drawImage(currTile, 1159, 505, 50, 48, null);
+                                                g.drawImage(currTile, 1157, 505, 50, 48, null);
                                                 break;
                                             case 1:
-                                                g.drawImage(currTile, 1159 + (1 * 60), 505, 50, 48, null);
+                                                g.drawImage(currTile, 1157 + (1 * 60), 505, 50, 48, null);
                                                 break;
                                             case 2:
-                                                g.drawImage(currTile, 1159, 559, 50, 48, null);
+                                                g.drawImage(currTile, 1157, 559, 50, 48, null);
                                                 break;
                                             case 3:
-                                                g.drawImage(currTile, 1159 + (1 * 60), 559, 50, 48, null);
+                                                g.drawImage(currTile, 1157 + (1 * 60), 559, 50, 48, null);
                                                 break;
                                             case 4:
-                                                g.drawImage(currTile, 1159, 603, 50, 48, null);
+                                                g.drawImage(currTile, 1157, 603, 50, 48, null);
                                                 break;
                                             case 5:
-                                                g.drawImage(currTile, 1159 + (1 * 60), 603, 50, 48, null);
+                                                g.drawImage(currTile, 1157 + (1 * 60), 603, 50, 48, null);
                                                 break;
                                         }
                                     }
@@ -800,13 +829,13 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                         || gm.getPlayer(2).getTile(x).getStat() == 0) {
                                     if (x < 2) {
                                         g.drawImage(getTileImage("sh" + gm.getPlayer(2).getTile(x).getType()),
-                                                1159 + (x * 60), 505, 50, 48, null);
+                                                1157 + (x * 60), 505, 50, 48, null);
                                     } else if (x < 4) {
                                         g.drawImage(getTileImage("sh" + gm.getPlayer(2).getTile(x).getType()),
-                                                1159 + ((x - 2) * 60), 559, 50, 48, null);
+                                                1157 + ((x - 2) * 60), 559, 50, 48, null);
                                     } else {
                                         g.drawImage(getTileImage("sh" + gm.getPlayer(2).getTile(x).getType()),
-                                                1159 + ((x - 4) * 60), 603, 50, 48, null);
+                                                1157 + ((x - 4) * 60), 603, 50, 48, null);
                                     }
                                 }
                             }
@@ -827,13 +856,13 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
 
                         for (int x = 0; x < gm.getPlayer(3).getAllTiles().size(); x++) {
                             if (x < 2) {
-                                g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 1159 + (x * 60),
+                                g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 1157 + (x * 60),
                                         706, 50, 48, null);
                             } else if (x < 4) {
-                                g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 1159 + ((x - 2) * 60),
+                                g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 1157 + ((x - 2) * 60),
                                         760, 50, 48, null);
                             } else {
-                                g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 1159 + ((x - 4) * 60),
+                                g.drawImage(getTileImage(gm.getPlayer(3).getTile(x).getType()), 1157 + ((x - 4) * 60),
                                         814,
                                         50, 48, null);
                             }
@@ -848,22 +877,22 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                     if(tileInPlay != -1 && gm.getPlayer(3).getTile(tileInPlay) != null){
                                         switch(tileInPlay){
                                             case 0:
-                                                g.drawImage(currTile, 1159, 706, 50, 48, null);
+                                                g.drawImage(currTile, 1157, 706, 50, 48, null);
                                                 break;
                                             case 1:
-                                                g.drawImage(currTile, 1159 + (1 * 60), 706, 50, 48, null);
+                                                g.drawImage(currTile, 1157 + (1 * 60), 706, 50, 48, null);
                                                 break;
                                             case 2:
-                                                g.drawImage(currTile, 1159, 760, 50, 48, null);
+                                                g.drawImage(currTile, 1157, 760, 50, 48, null);
                                                 break;
                                             case 3:
-                                                g.drawImage(currTile, 1159 + (1 * 60), 760, 50, 48, null);
+                                                g.drawImage(currTile, 1157 + (1 * 60), 760, 50, 48, null);
                                                 break;
                                             case 4:
-                                                g.drawImage(currTile, 1159, 814, 50, 48, null);
+                                                g.drawImage(currTile, 1157, 814, 50, 48, null);
                                                 break;
                                             case 5:
-                                                g.drawImage(currTile, 1159 + (1 * 60), 814, 50, 48, null);
+                                                g.drawImage(currTile, 1157 + (1 * 60), 814, 50, 48, null);
                                                 break;
                                         }
                                     }
@@ -873,15 +902,15 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
                                         || gm.getPlayer(3).getTile(x).getStat() == 0) {
                                     if (x < 2) {
                                         g.drawImage(getTileImage("sh" + gm.getPlayer(3).getTile(x).getType()),
-                                                1159 + (x * 60),
+                                                1157 + (x * 60),
                                                 706, 50, 48, null);
                                     } else if (x < 4) {
                                         g.drawImage(getTileImage("sh" + gm.getPlayer(3).getTile(x).getType()),
-                                                1159 + ((x - 2) * 60),
+                                                1157 + ((x - 2) * 60),
                                                 760, 50, 48, null);
                                     } else {
                                         g.drawImage(getTileImage("sh" + gm.getPlayer(3).getTile(x).getType()),
-                                                1159 + ((x - 4) * 60),
+                                                1157 + ((x - 4) * 60),
                                                 814, 50, 48, null);
                                     }
                                 }
@@ -970,7 +999,7 @@ public class KBPanel extends JPanel implements MouseListener, Runnable {
         
         //shadeUseT(g);
         if (gm.placed < 3 && gm.getAllPlayers().get(gm.getCurrPlayer()).getSettlements() > 0) {
-            g.drawImage(darken, 684, 100, 150, 45, null);
+            g.drawImage(darken, 680, 100, 154, 45, null);
         }
     }
 

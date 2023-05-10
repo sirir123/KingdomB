@@ -34,8 +34,10 @@ public class Game {
         if(startPlayer == 0){
             prevPlayer = amt-1;
         }else{
-            prevPlayer = startPlayer -1;
+            prevPlayer = currPlayer-1;
         }
+        
+
         players = new ArrayList<>();
         bb = new Board(); // constructor
         deck = new ArrayList<Card>();
@@ -127,17 +129,17 @@ public class Game {
                 }else{
                     //System.out.println("horse shit");
                     for(Hex hx: bb.getHexes()){
-                        if(hx.getpNum() == -1 && !hx.getType().equals("mt") && !hx.getType().equals("wat") && !hx.getType().equals("tiG")&& !hx.getType().equals("tiH")&& !hx.getType().equals("tiO")&& !hx.getType().equals("tiB")&& hx.getCol() == (org.getCol() - 2) && hx.getRow() == (org.getRow()-2)){
+                        if(hx.getpNum() == -1 && !hx.getType().equals("cas") &&  !hx.getType().equals("mt") && !hx.getType().equals("wat") && !hx.getType().equals("tiG")&& !hx.getType().equals("tiH")&& !hx.getType().equals("tiO")&& !hx.getType().equals("tiB")&& hx.getCol() == (org.getCol() - 2) && hx.getRow() == (org.getRow()-2)){
                             avaliable.add(hx);
-                        }else if (hx.getpNum() == -1 && !hx.getType().equals("mt") && !hx.getType().equals("wat") && !hx.getType().equals("tiG")&& !hx.getType().equals("tiH")&& !hx.getType().equals("tiO")&& !hx.getType().equals("tiB") && hx.getCol() == (org.getCol() + 2) && hx.getRow() == (org.getRow() - 2)){
+                        }else if (hx.getpNum() == -1 &&  !hx.getType().equals("cas") &&  !hx.getType().equals("mt") && !hx.getType().equals("wat") && !hx.getType().equals("tiG")&& !hx.getType().equals("tiH")&& !hx.getType().equals("tiO")&& !hx.getType().equals("tiB") && hx.getCol() == (org.getCol() + 2) && hx.getRow() == (org.getRow() - 2)){
                             avaliable.add(hx);
-                        }else if (hx.getpNum() == -1 && !hx.getType().equals("mt") && !hx.getType().equals("wat") && !hx.getType().equals("tiG")&& !hx.getType().equals("tiH")&& !hx.getType().equals("tiO")&& !hx.getType().equals("tiB") && hx.getCol() == (org.getCol() + 4) && hx.getRow() == org.getRow()){
+                        }else if (hx.getpNum() == -1 &&  !hx.getType().equals("cas") &&  !hx.getType().equals("mt") && !hx.getType().equals("wat") && !hx.getType().equals("tiG")&& !hx.getType().equals("tiH")&& !hx.getType().equals("tiO")&& !hx.getType().equals("tiB") && hx.getCol() == (org.getCol() + 4) && hx.getRow() == org.getRow()){
                             avaliable.add(hx);
-                        }else if (hx.getpNum() == -1 && !hx.getType().equals("mt") && !hx.getType().equals("wat")  && !hx.getType().equals("tiG")&& !hx.getType().equals("tiH")&& !hx.getType().equals("tiO")&& !hx.getType().equals("tiB")&& hx.getCol() == (org.getCol() + 2) && hx.getRow() == (org.getRow() + 2)){
+                        }else if (hx.getpNum() == -1 &&  !hx.getType().equals("cas") &&  !hx.getType().equals("mt") && !hx.getType().equals("wat")  && !hx.getType().equals("tiG")&& !hx.getType().equals("tiH")&& !hx.getType().equals("tiO")&& !hx.getType().equals("tiB")&& hx.getCol() == (org.getCol() + 2) && hx.getRow() == (org.getRow() + 2)){
                             avaliable.add(hx);
-                        }else if (hx.getpNum() == -1 && !hx.getType().equals("mt") && !hx.getType().equals("wat")  && !hx.getType().equals("tiG")&& !hx.getType().equals("tiH")&& !hx.getType().equals("tiO")&& !hx.getType().equals("tiB")&& hx.getCol() == (org.getCol() - 2) && hx.getRow() == (org.getRow() + 2)){
+                        }else if (hx.getpNum() == -1 &&  !hx.getType().equals("cas") &&  !hx.getType().equals("mt") && !hx.getType().equals("wat")  && !hx.getType().equals("tiG")&& !hx.getType().equals("tiH")&& !hx.getType().equals("tiO")&& !hx.getType().equals("tiB")&& hx.getCol() == (org.getCol() - 2) && hx.getRow() == (org.getRow() + 2)){
                             avaliable.add(hx);
-                        }else if (hx.getpNum() == -1 && !hx.getType().equals("mt") && !hx.getType().equals("wat")  && !hx.getType().equals("tiG")&& !hx.getType().equals("tiH")&& !hx.getType().equals("tiO")&& !hx.getType().equals("tiB")&& hx.getCol() == (org.getCol()-4) && hx.getRow() == (org.getRow())){
+                        }else if (hx.getpNum() == -1 &&  !hx.getType().equals("cas") &&  !hx.getType().equals("mt") && !hx.getType().equals("wat")  && !hx.getType().equals("tiG")&& !hx.getType().equals("tiH")&& !hx.getType().equals("tiO")&& !hx.getType().equals("tiB")&& hx.getCol() == (org.getCol()-4) && hx.getRow() == (org.getRow())){
                             avaliable.add(hx);
                         }
                     }
@@ -412,11 +414,20 @@ public class Game {
     }
 
     public ArrayList<Player> getAllPlayers(){
+
         return players;
     }
 
+    public boolean playerZero(){
+        for(int i = 0; i < players.size(); i++){
+            if(players.get(i).getSettlements() == 0) return true;
+        }
+        return false;
+    }
+
     public void nextTurn() {
-            if(players.get(currPlayer).getSettlements() == 0){
+        if(playerZero()){
+            System.out.println(currPlayer + " vs. " + prevPlayer);
             //
             if(currPlayer == prevPlayer){
                 end = true;
@@ -543,6 +554,7 @@ public void score(){
         
         players.get(i).addPoints(cas(i));
         players.get(i).addPoints(players.get(i).getPoint(0) + players.get(i).getPoint(1) + players.get(i).getPoint(2) + players.get(i).getPoint(3));
+        
         //System.out.println(i + " -- " + players.get(i).getPoint(4));
     }
 
@@ -556,27 +568,42 @@ public void score(){
 }
 
 public ArrayList<Player> order (ArrayList<Player> plys){
+    
     ArrayList<Player> tempPlys = plys;
     ArrayList<Player> plyOrder = new ArrayList<>();
-    for(int j = 0; j < num; j++){
-        //System.out.println(tempPlys.size());
-        int greatest = -1;
-        Player tempPlayer = null;
-        for(int i = tempPlys.size()-1; i>= 0; i--){
-            if(tempPlys.get(i).getPoint(4) >= greatest){
+    
+    // for(int j = 0; j < num; j++){
+    //     //System.out.println(tempPlys.size());
+    //     int greatest = -1;
+    //     Player tempPlayer = null;
+    //     for(int i = tempPlys.size()-1; i>= 0; i--){
+    //         if(tempPlys.get(i).getPoint(4) >= greatest){
                 
-                greatest = tempPlys.get(i).getPoint(4);
-                tempPlayer = tempPlys.get(i);
+    //             greatest = tempPlys.get(i).getPoint(4);
+    //             tempPlayer = tempPlys.get(i);
                 
-            }
+    //         }
            
-        }
-        //System.out.println(tempPlayer.toString() + " - " + greatest);
-        plyOrder.add(tempPlayer);
-        tempPlys.remove(tempPlayer);
+    //     }
+    //     //System.out.println(tempPlayer.toString() + " - " + greatest);
+    //     plyOrder.add(tempPlayer);
+    //     tempPlys.remove(tempPlayer);
         
-    }
-    return plyOrder;
+    // }
+
+        Collections.sort(tempPlys);
+
+        Collections.sort(tempPlys, new Comparator<Player>(){
+            @Override
+            
+            public int compare(Player o1, Player o2){
+                System.out.println("fuck this");
+                return o1.getPoint(4).compareTo(o2.getPoint(4));
+            }
+        });
+
+
+    return tempPlys;
 }
 
 public int lords(int curr){
