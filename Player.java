@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 
-public class Player {
+public class Player implements Comparable<Player>{
     public int num;
     private int settlements = 40;
     private Card chosen;
     private ArrayList<Hex> tiles;
-    private ArrayList<Integer> points;
+    public ArrayList<Integer> points;
     private ArrayList<Hex> placed;
     //public int sec1, sec2, sec3, sec4;
 
@@ -19,6 +19,13 @@ public class Player {
         // sec3=0;
         // sec4=0;
 
+    }
+
+    @Override
+    public int compareTo(Player o) {
+        // usually toString should not be used,
+        // instead one of the attributes or more in a comparator chain
+        return toString().compareTo(o.toString());
     }
 
     // public int getS1(){
@@ -136,6 +143,9 @@ public class Player {
         settlements--;
     }// use one settlement
 
+    public String toString() {
+            return ("(" + num + ": " + settlements + ")");
+        }
     
 
 }
